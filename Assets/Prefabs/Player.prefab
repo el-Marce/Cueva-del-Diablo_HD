@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1964100223950807018}
   - component: {fileID: 1903702658326802229}
   - component: {fileID: 6325703570237245949}
+  - component: {fileID: 3111992813330821321}
   m_Layer: 0
   m_Name: PlayerSystems
   m_TagString: Untagged
@@ -49,6 +50,7 @@ MonoBehaviour:
   breathInterval: 50
   breathWindow: 5
   damagePerSecond: 10
+  breatheCooldown: 1
 --- !u!114 &1903702658326802229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +80,23 @@ MonoBehaviour:
   maxSanity: 100
   currentSanity: 0
   lowSanityThreshold: 30
+--- !u!114 &3111992813330821321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3072592672546736468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81cc5e6aa49406941be345c1730b9ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedDevice: 
+  sensitivity: 100
+  minThreshold: 0.02
+  maxThreshold: 0.15
+  requiredDuration: 0.25
 --- !u!1 &4592615158621688949
 GameObject:
   m_ObjectHideFlags: 0
