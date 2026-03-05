@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class BreathingSystem : MonoBehaviour
 {
@@ -10,13 +11,17 @@ public class BreathingSystem : MonoBehaviour
     private float timer;
     private bool hasBreathed;
 
+    private bool canBreathe = true;
+    public float breatheCooldown = 1f;
+
     public event Action<float> OnBreathTimerChanged;
     public event Action OnBreathMissed;
 
     private HealthSystem healthSystem;
-
+    private MicrophoneInput microphoneInput;
     void Start()
     {
+        microphoneInput = GetComponent<MicrophoneInput>();
         healthSystem = GetComponent<HealthSystem>();
         timer = breathInterval;
     }
@@ -47,8 +52,19 @@ public class BreathingSystem : MonoBehaviour
 
     public void Breathe()
     {
+        if (!canBreathe) return;
+
         Debug.Log("Respirando, temporizador reiniciado");
         timer = breathInterval;
         hasBreathed = true;
+        microphoneInput.PrintDebugs();
+        StartCoroutine(BreatheCooldown());
+    }
+
+    IEnumerator BreatheCooldown()
+    {
+        canBreathe = false;
+        yield return new WaitForSeconds(breatheCooldown);
+        canBreathe = true;
     }
 }
