@@ -26,11 +26,19 @@ public class BreathingSystem : MonoBehaviour
         timer -= Time.deltaTime;
         OnBreathTimerChanged?.Invoke(timer);
 
+        if (timer <= 0 && timer > -breathWindow)
+        {
+            // Zona crítica
+            Debug.Log("Zona crítica: Respira ahora");
+        }
+
         if (timer <= -breathWindow)
         {
             healthSystem.TakeDamage(damagePerSecond * Time.deltaTime);
+            Debug.Log("Perdiendo vida por no respirar");
             OnBreathMissed?.Invoke();
         }
+
         if (Input.GetKeyDown(KeyCode.B))
         {
             Breathe();
@@ -39,6 +47,7 @@ public class BreathingSystem : MonoBehaviour
 
     public void Breathe()
     {
+        Debug.Log("Respirando, temporizador reiniciado");
         timer = breathInterval;
         hasBreathed = true;
     }
