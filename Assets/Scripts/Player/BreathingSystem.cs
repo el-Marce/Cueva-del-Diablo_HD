@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BreathingSystem : MonoBehaviour
 {
-    public float breathInterval = 50f;
+    public float breathInterval = 10f;
     public float breathWindow = 5f;
     public float damagePerSecond = 10f;
 
@@ -19,6 +19,9 @@ public class BreathingSystem : MonoBehaviour
 
     private HealthSystem healthSystem;
     private MicrophoneInput microphoneInput;
+
+    private bool inCriticalWindow = false;
+
     void Start()
     {
         microphoneInput = GetComponent<MicrophoneInput>();
@@ -33,8 +36,15 @@ public class BreathingSystem : MonoBehaviour
 
         if (timer <= 0 && timer > -breathWindow)
         {
-            // Zona crítica
-            Debug.Log("Zona crítica: Respira ahora");
+            if (!inCriticalWindow)
+            {
+                inCriticalWindow = true;
+                Debug.Log("Zona crítica: Respira ahora");
+            }
+        }
+        else
+        {
+            inCriticalWindow = false;
         }
 
         if (timer <= -breathWindow)
@@ -54,10 +64,19 @@ public class BreathingSystem : MonoBehaviour
     {
         if (!canBreathe) return;
 
-        Debug.Log("Respirando, temporizador reiniciado");
+        if (!inCriticalWindow)
+        {
+            Debug.Log("Respiración fuera de tiempo");
+            return;
+        }
+
+        Debug.Log("Respiración correcta");
+
         timer = breathInterval;
         hasBreathed = true;
+
         microphoneInput.PrintDebugs();
+
         StartCoroutine(BreatheCooldown());
     }
 
