@@ -58,7 +58,7 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _Emissive: -13.84
+    - _Emissive: 0.1
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
@@ -82,7 +82,7 @@ Material:
     - _StencilWriteMaskMV: 43
     - _SupportDecals: 1
     - _SurfaceType: 0
-    - _Thickness: 0.025
+    - _Thickness: 0
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -98,7 +98,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 1, g: 0.91456765, b: 0, a: 0}
+    - _OutlineColor: {r: 1, g: 0.9130912, b: 0.4009434, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3578663329038286274
 MonoBehaviour:

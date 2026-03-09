@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    public float interactDistance = 1f;
+    public float interactDistance = 1.5f;
     public GameObject interactUI;
 
     IInteractable currentInteractable;
@@ -10,7 +10,7 @@ public class PlayerInteraction : MonoBehaviour
     Renderer currentRenderer;
     Material currentOutlineMat;
 
-    float outlineOn = 0.025f;
+    float outlineOn = 0.015f;
     float outlineOff = 0f;
 
     void Update()
