@@ -7,6 +7,12 @@ public class PlayerInteraction : MonoBehaviour
 
     IInteractable currentInteractable;
 
+    Renderer currentRenderer;
+    Material currentOutlineMat;
+
+    float outlineOn = 0.025f;
+    float outlineOff = 0f;
+
     void Update()
     {
         CheckInteraction();
@@ -27,18 +33,36 @@ public class PlayerInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, interactDistance))
         {
-            //if (hit.collider.CompareTag("Player"))
-              //  return;
-
             IInteractable interactable = hit.collider.GetComponent<IInteractable>();
 
             if (interactable != null)
             {
                 currentInteractable = interactable;
                 interactUI.SetActive(true);
+
+                Renderer rend = hit.collider.GetComponent<Renderer>();
+
+                if (rend != null)
+                {
+                    Material[] mats = rend.materials;
+
+                    if (mats.Length > 1) // asegúrate de que tenga outline
+                    {
+                        if (currentRenderer != rend)
+                        {
+                            ClearOutline();
+
+                            currentRenderer = rend;
+                            currentOutlineMat = mats[1];
+                            currentOutlineMat.SetFloat("_Thickness", outlineOn);
+                        }
+                    }
+                }
+
                 return;
             }
         }
+
         ClearInteraction();
     }
 
@@ -46,5 +70,16 @@ public class PlayerInteraction : MonoBehaviour
     {
         currentInteractable = null;
         interactUI.SetActive(false);
+        ClearOutline();
+    }
+
+    void ClearOutline()
+    {
+        if (currentOutlineMat != null)
+        {
+            currentOutlineMat.SetFloat("_Thickness", outlineOff);
+            currentOutlineMat = null;
+            currentRenderer = null;
+        }
     }
 }
