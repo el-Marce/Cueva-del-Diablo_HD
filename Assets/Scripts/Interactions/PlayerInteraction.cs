@@ -15,6 +15,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
+        if (GameState.InMenu) return;
+
         CheckInteraction();
 
         if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)

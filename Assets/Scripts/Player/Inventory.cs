@@ -6,6 +6,16 @@ public class Inventory : MonoBehaviour
     public List<string> items = new List<string>();
     public List<string> scrolls = new List<string>();
 
+    public int selectedIndex = 0;
+
+    public enum Tab
+    {
+        Items,
+        Scrolls
+    }
+
+    public Tab currentTab = Tab.Items;
+
     public void AddItem(string itemName)
     {
         items.Add(itemName);
@@ -23,22 +33,17 @@ public class Inventory : MonoBehaviour
         return items.Contains(itemName);
     }
 
-    public void ShowScrollList()
+    public int GetCount()
     {
-        Debug.Log("---- PERGAMINOS ----");
-
-        for (int i = 0; i < scrolls.Count; i++)
-        {
-            Debug.Log((i + 1) + " - Pergamino " + (i + 1));
-        }
+        if (currentTab == Tab.Items) return items.Count;
+        else return scrolls.Count;
     }
 
-    public void ReadScroll(int index)
+    public string GetSelected()
     {
-        if (index >= 0 && index < scrolls.Count)
-        {
-            Debug.Log("----- PERGAMINO -----");
-            Debug.Log(scrolls[index]);
-        }
+        if (currentTab == Tab.Items)
+            return items[selectedIndex];
+
+        return scrolls[selectedIndex];
     }
 }

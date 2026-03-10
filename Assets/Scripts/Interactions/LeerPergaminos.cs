@@ -1,4 +1,4 @@
-using UnityEngine;
+/*using UnityEngine;
 
 public class LeerPergaminos : MonoBehaviour
 {
@@ -65,4 +65,4 @@ public class LeerPergaminos : MonoBehaviour
             inventory.ReadScroll(4);
         }
     }
-}
+}*/

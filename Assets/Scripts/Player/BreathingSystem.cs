@@ -50,7 +50,7 @@ public class BreathingSystem : MonoBehaviour
         if (timer <= -breathWindow)
         {
             healthSystem.TakeDamage(damagePerSecond * Time.deltaTime);
-            Debug.Log("Perdiendo vida por no respirar");
+            //Debug.Log("Perdiendo vida por no respirar");
             OnBreathMissed?.Invoke();
         }
 

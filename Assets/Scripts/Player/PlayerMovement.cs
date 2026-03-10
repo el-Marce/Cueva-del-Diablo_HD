@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (GameState.InMenu) return;
+
         Move();
         ApplyGravity();
     }
