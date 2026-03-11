@@ -35,7 +35,7 @@ public class HealthSystem : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Jugador muerto");
+        //Debug.Log("Jugador muerto");
         OnPlayerDeath?.Invoke();
     }
 

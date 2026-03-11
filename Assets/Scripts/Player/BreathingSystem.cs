@@ -31,6 +31,8 @@ public class BreathingSystem : MonoBehaviour
 
     void Update()
     {
+        if (GameState.InMenu) return;
+
         timer -= Time.deltaTime;
         OnBreathTimerChanged?.Invoke(timer);
 

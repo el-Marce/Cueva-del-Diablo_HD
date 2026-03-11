@@ -1,11 +1,22 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryMenu : MonoBehaviour
 {
     Inventory inventory;
 
+    public GameObject inventoryPanel;
+
+    public TMP_Text tabText;
+
+    public TMP_Text[] itemTexts;
+
     bool menuOpen = false;
 
+    public TMP_Text descriptionText;
+
+    public int columns = 4;
     void Start()
     {
         inventory = GetComponent<Inventory>();
@@ -31,60 +42,129 @@ public class InventoryMenu : MonoBehaviour
 
         GameState.InMenu = menuOpen;
 
+        inventoryPanel.SetActive(menuOpen);
+
         if (menuOpen)
         {
-            Debug.Log("Inventario abierto");
             PrintMenu();
-        }
-        else
-        {
-            Debug.Log("Inventario cerrado");
         }
     }
 
     void Navigate()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        int count = inventory.GetCount();
+
+        int row = inventory.selectedIndex / columns;
+        int col = inventory.selectedIndex % columns;
+
+        int totalRows = Mathf.CeilToInt((float)count / columns);
+
+        // DERECHA
+        if (Input.GetKeyDown(KeyCode.D))
         {
-            inventory.selectedIndex--;
+            col++;
 
-            if (inventory.selectedIndex < 0)
-                inventory.selectedIndex = inventory.GetCount() - 1;
+            if (col >= columns || row * columns + col >= count)
+                col = 0;
 
+            inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
 
+        // IZQUIERDA
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            col--;
+
+            if (col < 0)
+            {
+                col = columns - 1;
+
+                if (row * columns + col >= count)
+                    col = (count - 1) % columns;
+            }
+
+            inventory.selectedIndex = row * columns + col;
+            PrintMenu();
+        }
+
+        // ABAJO
         if (Input.GetKeyDown(KeyCode.S))
         {
-            inventory.selectedIndex++;
+            row++;
 
-            if (inventory.selectedIndex >= inventory.GetCount())
-                inventory.selectedIndex = 0;
+            if (row >= totalRows || row * columns + col >= count)
+                row = 0;
 
+            inventory.selectedIndex = row * columns + col;
+            PrintMenu();
+        }
+
+        // ARRIBA
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            row--;
+
+            if (row < 0)
+            {
+                row = totalRows - 1;
+
+                if (row * columns + col >= count)
+                    row--;
+            }
+
+            inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
     }
 
     void ChangeTab()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.currentTab = Inventory.Tab.Items;
+            if (inventory.currentTab == Inventory.Tab.Items)
+                inventory.currentTab = Inventory.Tab.Scrolls;
+            else
+                inventory.currentTab = Inventory.Tab.Items;
+
             inventory.selectedIndex = 0;
             PrintMenu();
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.currentTab = Inventory.Tab.Scrolls;
+            if (inventory.currentTab == Inventory.Tab.Scrolls)
+                inventory.currentTab = Inventory.Tab.Items;
+            else
+                inventory.currentTab = Inventory.Tab.Scrolls;
+
             inventory.selectedIndex = 0;
             PrintMenu();
         }
     }
 
+    void UpdateDescription()
+    {
+        if (inventory.GetCount() == 0)
+        {
+            descriptionText.text = "No hay objetos";
+            return;
+        }
+
+        string selected = inventory.GetSelected();
+
+        if (inventory.currentTab == Inventory.Tab.Scrolls)
+        {
+            descriptionText.text = selected;
+        }
+        else
+        {
+            descriptionText.text = "Objeto: " + selected;
+        }
+    }
     void Select()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             string selected = inventory.GetSelected();
 
@@ -92,16 +172,28 @@ public class InventoryMenu : MonoBehaviour
             {
                 Debug.Log("LEYENDO PERGAMINO:");
                 Debug.Log(selected);
+                descriptionText.text = selected;
             }
             else
             {
                 Debug.Log("USANDO ITEM: " + selected);
+                descriptionText.text = "Usaste: " + selected;
             }
         }
     }
 
     void PrintMenu()
     {
+        if (inventory.currentTab == Inventory.Tab.Items)
+        {
+            tabText.text = "(Q) < Items > (E)";
+        }
+        else
+        {
+            tabText.text = "(Q) < Pergaminos > (E)";
+        }
+
+
         Debug.Log("------ INVENTARIO ------");
         Debug.Log("TAB: " + inventory.currentTab);
 
@@ -121,5 +213,29 @@ public class InventoryMenu : MonoBehaviour
             else
                 Debug.Log(text);
         }
+
+        for (int i = 0; i < itemTexts.Length; i++)
+        {
+            if (i >= count)
+            {
+                itemTexts[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            itemTexts[i].gameObject.SetActive(true);
+
+            string text;
+
+            if (inventory.currentTab == Inventory.Tab.Items)
+                text = inventory.items[i];
+            else
+                text = "Pergamino " + (i + 1);
+
+            if (i == inventory.selectedIndex)
+                itemTexts[i].text = "<b>[" + text + "]</b>";
+            else
+                itemTexts[i].text = text;
+        }
+        UpdateDescription();
     }
 }
