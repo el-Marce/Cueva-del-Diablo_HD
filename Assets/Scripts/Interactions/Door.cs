@@ -31,7 +31,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (isOpen) return;
 
-        transform.Rotate(0, 90, 0);
+        transform.Rotate(0, -90, 0);
         isOpen = true;
     }
 
@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, IInteractable
 
     void CloseDoor()
     {
-        transform.Rotate(0, -90, 0);
+        transform.Rotate(0, 90, 0);
         isOpen = false;
     }
 }
