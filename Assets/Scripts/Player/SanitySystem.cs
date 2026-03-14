@@ -8,6 +8,7 @@ public class SanitySystem : MonoBehaviour
 
     public event Action<float> OnSanityChanged;
     public event Action OnSanityLow;
+    public event Action OnSanityBreak;
 
     public float lowSanityThreshold = 30f;
 
@@ -15,7 +16,6 @@ public class SanitySystem : MonoBehaviour
     {
         currentSanity = maxSanity;
     }
-
     public void DecreaseSanity(float amount)
     {
         currentSanity -= amount;
@@ -25,8 +25,10 @@ public class SanitySystem : MonoBehaviour
 
         if (currentSanity <= lowSanityThreshold)
             OnSanityLow?.Invoke();
-    }
 
+        if (currentSanity <= 0)
+            OnSanityBreak?.Invoke();
+    }
     public void RestoreSanity(float amount)
     {
         currentSanity += amount;
