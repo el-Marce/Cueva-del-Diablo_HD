@@ -3,6 +3,7 @@ using UnityEngine;
 public class Pueblerino : MonoBehaviour
 {
     EnemyVision vision;
+    EnemyHearing hearing;
     EnemyNavigation navigation;
     EnemyStats stats;
 
@@ -29,6 +30,7 @@ public class Pueblerino : MonoBehaviour
     enum State
     {
         Patrol,
+        Investigate,
         Chase,
         Attack
     }
@@ -38,6 +40,7 @@ public class Pueblerino : MonoBehaviour
     void Start()
     {
         vision = GetComponent<EnemyVision>();
+        hearing = GetComponent<EnemyHearing>();
         navigation = GetComponent<EnemyNavigation>();
         stats = GetComponent<EnemyStats>();
 
@@ -95,6 +98,10 @@ public class Pueblerino : MonoBehaviour
                 UpdatePatrol();
                 break;
 
+            case State.Investigate:
+                UpdateInvestigate();
+                break;
+
             case State.Chase:
                 UpdateChase();
                 break;
@@ -110,6 +117,12 @@ public class Pueblerino : MonoBehaviour
         if (vision.CanSeePlayer())
         {
             currentState = State.Chase;
+            return;
+        }
+
+        if (hearing.HasHeardSomething())
+        {
+            currentState = State.Investigate;
             return;
         }
 
@@ -181,6 +194,27 @@ public class Pueblerino : MonoBehaviour
         }
     }
 
+    void UpdateInvestigate()
+    {
+        Vector3 noisePos = hearing.GetNoisePosition();
+
+        navigation.MoveTo(noisePos);
+
+        float distance = Vector3.Distance(transform.position, noisePos);
+
+        if (distance < 1.5f)
+        {
+            GeneratePatrolPoints(transform.position);
+            currentState = State.Patrol;
+        }
+
+        if (vision.CanSeePlayer())
+        {
+            currentState = State.Chase;
+        }
+
+        Debug.Log("Investigando ruido");
+    }
     void OnDrawGizmos()
     {
         if (patrolPoints == null) return;

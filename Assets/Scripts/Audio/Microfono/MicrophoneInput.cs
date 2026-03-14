@@ -19,11 +19,12 @@ public class MicrophoneInput : MonoBehaviour
     float loudnessChange = 0f;
 
     private BreathingSystem breathingSystem;
+    NoiseEmitter noiseEmitter;
 
     void Start()
     {
         breathingSystem = GetComponent<BreathingSystem>();
-
+        noiseEmitter = GetComponent<NoiseEmitter>();
         if (Microphone.devices.Length > 0)
         {
             selectedDevice = Microphone.devices[0];
@@ -44,6 +45,11 @@ public class MicrophoneInput : MonoBehaviour
 
         loudnessChange = smoothedLoudness - previousLoudness;
         previousLoudness = smoothedLoudness;
+
+        if (smoothedLoudness > maxThreshold)
+        {
+            noiseEmitter.EmitNoise(smoothedLoudness);
+        }
 
         //loudnessChange > 0.001;
         if (smoothedLoudness > minThreshold && smoothedLoudness < maxThreshold)

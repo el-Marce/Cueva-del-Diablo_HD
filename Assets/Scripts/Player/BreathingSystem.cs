@@ -21,11 +21,14 @@ public class BreathingSystem : MonoBehaviour
     private MicrophoneInput microphoneInput;
 
     private bool inCriticalWindow = false;
+    NoiseEmitter noiseEmitter;
 
     void Start()
     {
         microphoneInput = GetComponent<MicrophoneInput>();
         healthSystem = GetComponent<HealthSystem>();
+        noiseEmitter = GetComponent<NoiseEmitter>();
+
         timer = breathInterval;
     }
 
@@ -64,6 +67,8 @@ public class BreathingSystem : MonoBehaviour
 
     public void Breathe()
     {
+        noiseEmitter.EmitNoise(0.1f);
+
         if (!canBreathe) return;
 
         if (!inCriticalWindow)
