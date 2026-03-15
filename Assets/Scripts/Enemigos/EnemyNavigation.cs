@@ -4,7 +4,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyNavigation : MonoBehaviour
 {
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     EnemyStats stats;
 
     void Start()

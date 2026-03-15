@@ -9,12 +9,16 @@ public class SanitySystem : MonoBehaviour
     public event Action<float> OnSanityChanged;
     public event Action OnSanityLow;
     public event Action OnSanityBreak;
-
+    HealthSystem healthSystem;
     public float lowSanityThreshold = 30f;
 
     void Awake()
     {
         currentSanity = maxSanity;
+    }
+    private void Start()
+    {
+        healthSystem = GetComponent<HealthSystem>();
     }
     public void DecreaseSanity(float amount)
     {
@@ -27,7 +31,10 @@ public class SanitySystem : MonoBehaviour
             OnSanityLow?.Invoke();
 
         if (currentSanity <= 0)
+        {
+            healthSystem.Die();
             OnSanityBreak?.Invoke();
+        }
     }
     public void RestoreSanity(float amount)
     {

@@ -27,9 +27,14 @@ public class Pueblerino : MonoBehaviour
 
     public float minDistanceBetweenPoints = 4f;
 
+    float alertTimer = 0f;
+    public float alertDelay = 1f;
+
+    State nextState;
     enum State
     {
         Patrol,
+        Alert,
         Investigate,
         Chase,
         Attack
@@ -98,6 +103,10 @@ public class Pueblerino : MonoBehaviour
                 UpdatePatrol();
                 break;
 
+            case State.Alert:
+                UpdateAlert();
+                break;
+
             case State.Investigate:
                 UpdateInvestigate();
                 break;
@@ -116,13 +125,24 @@ public class Pueblerino : MonoBehaviour
     {
         if (vision.CanSeePlayer())
         {
-            currentState = State.Chase;
+            nextState = State.Chase;
+
+            float distanceDetect = Vector3.Distance(transform.position, player.position);
+            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
+
+            currentState = State.Alert;
             return;
         }
 
         if (hearing.HasHeardSomething())
         {
-            currentState = State.Investigate;
+            nextState = State.Investigate;
+
+            Vector3 noisePos = hearing.GetNoisePosition();
+            float distanceDetect = Vector3.Distance(transform.position, noisePos);
+            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
+
+            currentState = State.Alert;
             return;
         }
 
@@ -143,6 +163,17 @@ public class Pueblerino : MonoBehaviour
         }
     }
 
+    void UpdateAlert()
+    {
+        navigation.StopMoving();
+
+        alertTimer -= Time.deltaTime;
+
+        if (alertTimer <= 0f)
+        {
+            currentState = nextState;
+        }
+    }
     void UpdateChase()
     {
         navigation.MoveTo(player.position);
