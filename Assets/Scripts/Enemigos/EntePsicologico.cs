@@ -7,6 +7,8 @@ public class EntePsicologico : MonoBehaviour
     FloatMotion floatMotion;
     Transform player;
 
+    NoiseEmitter noiseEmitter;
+
     SanitySystem playerSanity;
 
     float floatTimer = 0.1f;
@@ -19,6 +21,16 @@ public class EntePsicologico : MonoBehaviour
 
     float alertTimer = 0f;
     public float alertDelay = 1f;
+
+    bool alertNoiseEmitted = false;
+
+    enum AlertType
+    {
+        Vision,
+        Sound
+    }
+
+    AlertType alertType;
 
     State nextState;
     enum State
@@ -37,8 +49,8 @@ public class EntePsicologico : MonoBehaviour
         vision = GetComponent<EnemyVision>();
         hearing = GetComponent<EnemyHearing>();
         navigation = GetComponent<EnemyNavigation>();
-
         floatMotion = GetComponent<FloatMotion>();
+        noiseEmitter = GetComponent<NoiseEmitter>();
 
         floatMotion.enabled = false;
 
@@ -105,6 +117,11 @@ public class EntePsicologico : MonoBehaviour
             float distanceDetect = Vector3.Distance(transform.position, player.position);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
 
+            alertType = AlertType.Vision;
+            alertNoiseEmitted = false;
+
+            Debug.Log("Ente ha VISTO al jugador -> ALERTA VISUAL");
+
             currentState = State.Alert;
         }
 
@@ -116,6 +133,10 @@ public class EntePsicologico : MonoBehaviour
             float distanceDetect = Vector3.Distance(transform.position, noisePos);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
 
+            alertType = AlertType.Sound;
+
+            Debug.Log("Ente ha ESCUCHADO un ruido -> ALERTA SONORA");
+
             currentState = State.Alert;
         }
     }
@@ -123,6 +144,15 @@ public class EntePsicologico : MonoBehaviour
     void UpdateAlert()
     {
         navigation.StopMoving();
+
+        if (alertType == AlertType.Vision && !alertNoiseEmitted)
+        {
+            Debug.Log("ENTE EMITE RUIDO DE ALERTA PSICOLÓGICA");
+
+            noiseEmitter.EmitNoise(2f);
+
+            alertNoiseEmitted = true;
+        }
 
         alertTimer -= Time.deltaTime;
 
@@ -151,7 +181,7 @@ public class EntePsicologico : MonoBehaviour
         {
             currentState = State.Chase;
         }
-        Debug.Log("Investigando ruido");
+        Debug.Log("Ente Investigando ruido");
     }
     void UpdateChase()
     {

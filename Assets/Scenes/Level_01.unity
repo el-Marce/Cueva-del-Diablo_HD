@@ -711,6 +711,7 @@ GameObject:
   - component: {fileID: 162382171}
   - component: {fileID: 162382170}
   - component: {fileID: 162382180}
+  - component: {fileID: 162382181}
   m_Layer: 0
   m_Name: Pueblerino_Test
   m_TagString: Untagged
@@ -916,6 +917,20 @@ MonoBehaviour:
   patrolRadius: 6
   patrolPointsAmount: 3
   minDistanceBetweenPoints: 4
+  alertDelay: 1
+--- !u!114 &162382181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162382169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b106df27471b740a54356ec187ccd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseRadius: 8
 --- !u!1 &202365592
 GameObject:
   m_ObjectHideFlags: 0
@@ -4924,6 +4939,7 @@ GameObject:
   - component: {fileID: 2130266644}
   - component: {fileID: 2130266645}
   - component: {fileID: 2130266646}
+  - component: {fileID: 2130266647}
   m_Layer: 0
   m_Name: EnteFantasma_Test
   m_TagString: Untagged
@@ -5111,6 +5127,7 @@ MonoBehaviour:
   effectDistance: 6
   wanderInterval: 5
   wanderRadius: 30
+  alertDelay: 1
 --- !u!114 &2130266645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5142,6 +5159,19 @@ MonoBehaviour:
   speed: 1
   transitionSpeed: 1
   oscillationEnabled: 1
+--- !u!114 &2130266647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130266633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b106df27471b740a54356ec187ccd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseRadius: 8
 --- !u!1001 &1828159358843932485
 PrefabInstance:
   m_ObjectHideFlags: 0

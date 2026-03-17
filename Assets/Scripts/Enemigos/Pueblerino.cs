@@ -7,6 +7,8 @@ public class Pueblerino : MonoBehaviour
     EnemyNavigation navigation;
     EnemyStats stats;
 
+    NoiseEmitter noiseEmitter;
+
     Transform player;
     HealthSystem playerHealth;
 
@@ -30,6 +32,16 @@ public class Pueblerino : MonoBehaviour
     float alertTimer = 0f;
     public float alertDelay = 1f;
 
+    bool alertNoiseEmitted = false;
+
+    enum AlertType
+    {
+        Vision,
+        Sound
+    }
+
+    AlertType alertType;
+
     State nextState;
     enum State
     {
@@ -49,12 +61,187 @@ public class Pueblerino : MonoBehaviour
         navigation = GetComponent<EnemyNavigation>();
         stats = GetComponent<EnemyStats>();
 
+        noiseEmitter = GetComponent<NoiseEmitter>();
+
         player = vision.player;
         playerHealth = player.GetComponentInChildren<HealthSystem>();
 
         currentState = State.Patrol;
 
         GeneratePatrolPoints(transform.position);
+    }
+    void Update()
+    {
+        attackTimer -= Time.deltaTime;
+
+        switch (currentState)
+        {
+            case State.Patrol:
+                UpdatePatrol();
+                break;
+
+            case State.Alert:
+                UpdateAlert();
+                break;
+
+            case State.Investigate:
+                UpdateInvestigate();
+                break;
+
+            case State.Chase:
+                UpdateChase();
+                break;
+
+            case State.Attack:
+                UpdateAttack();
+                break;
+        }
+    }
+    
+    
+
+    void UpdatePatrol()
+    {
+        if (vision.CanSeePlayer())
+        {
+            nextState = State.Chase;
+
+            float distanceDetect = Vector3.Distance(transform.position, player.position);
+            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
+
+            alertType = AlertType.Vision;
+            alertNoiseEmitted = false;
+
+            Debug.Log("Pueblerino ha VISTO al jugador -> entrando en ALERTA VISUAL");
+
+            currentState = State.Alert;
+            return;
+        }
+
+        if (hearing.HasHeardSomething())
+        {
+            nextState = State.Investigate;
+
+            Vector3 noisePos = hearing.GetNoisePosition();
+            float distanceDetect = Vector3.Distance(transform.position, noisePos);
+            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
+
+            alertType = AlertType.Sound;
+
+            Debug.Log("Pueblerino ha ESCUCHADO un ruido -> entrando en ALERTA SONORA");
+
+            currentState = State.Alert;
+            return;
+        }
+
+        Vector3 target = patrolPoints[currentPatrolIndex];
+
+        navigation.MoveTo(target);
+
+        float distance = Vector3.Distance(transform.position, target);
+
+        if (distance < pointReachedDistance)
+        {
+            currentPatrolIndex++;
+
+            if (currentPatrolIndex >= patrolPoints.Length)
+            {
+                currentPatrolIndex = 0;
+            }
+        }
+    }
+
+    void UpdateAlert()
+    {
+        navigation.StopMoving();
+
+        if (alertType == AlertType.Vision && !alertNoiseEmitted)
+        {
+            Debug.Log("Pueblerino EMITE GRITO DE ALERTA (ruido detectado por enemigos)");
+
+            noiseEmitter.EmitNoise(2f);
+
+            alertNoiseEmitted = true;
+        }
+
+        alertTimer -= Time.deltaTime;
+
+        if (alertTimer <= 0f)
+        {
+            currentState = nextState;
+        }
+    }
+
+    void UpdateInvestigate()
+    {
+        Vector3 noisePos = hearing.GetNoisePosition();
+
+        navigation.MoveTo(noisePos);
+
+        float distance = Vector3.Distance(transform.position, noisePos);
+
+        if (distance < 1.5f)
+        {
+            GeneratePatrolPoints(transform.position);
+            currentState = State.Patrol;
+        }
+
+        if (vision.CanSeePlayer())
+        {
+            currentState = State.Chase;
+        }
+
+        Debug.Log("Pueblerino Investigando ruido");
+    }
+
+    void UpdateChase()
+    {
+        navigation.MoveTo(player.position);
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance <= attackDistance)
+        {
+            currentState = State.Attack;
+        }
+
+        if (!vision.CanSeePlayer())
+        {
+            GeneratePatrolPoints(transform.position);
+            currentState = State.Patrol;
+        }
+    }
+
+    void UpdateAttack()
+    {
+        navigation.StopMoving();
+
+        transform.LookAt(player);
+
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        if (distance > attackDistance)
+        {
+            currentState = State.Chase;
+            return;
+        }
+
+        if (attackTimer <= 0)
+        {
+            Attack();
+            attackTimer = attackCooldown;
+        }
+    }
+
+    void Attack()
+    {
+        Debug.Log("El pueblerino golpea al jugador");
+
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(stats.damage);
+            Debug.Log("Jugador recibe daño: " + stats.damage + ": Vida restante: " + playerHealth.currentHealth);
+        }
     }
 
     void GeneratePatrolPoints(Vector3 center)
@@ -92,159 +279,6 @@ public class Pueblerino : MonoBehaviour
         }
 
         currentPatrolIndex = 0;
-    }
-    void Update()
-    {
-        attackTimer -= Time.deltaTime;
-
-        switch (currentState)
-        {
-            case State.Patrol:
-                UpdatePatrol();
-                break;
-
-            case State.Alert:
-                UpdateAlert();
-                break;
-
-            case State.Investigate:
-                UpdateInvestigate();
-                break;
-
-            case State.Chase:
-                UpdateChase();
-                break;
-
-            case State.Attack:
-                UpdateAttack();
-                break;
-        }
-    }
-
-    void UpdatePatrol()
-    {
-        if (vision.CanSeePlayer())
-        {
-            nextState = State.Chase;
-
-            float distanceDetect = Vector3.Distance(transform.position, player.position);
-            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
-
-            currentState = State.Alert;
-            return;
-        }
-
-        if (hearing.HasHeardSomething())
-        {
-            nextState = State.Investigate;
-
-            Vector3 noisePos = hearing.GetNoisePosition();
-            float distanceDetect = Vector3.Distance(transform.position, noisePos);
-            alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
-
-            currentState = State.Alert;
-            return;
-        }
-
-        Vector3 target = patrolPoints[currentPatrolIndex];
-
-        navigation.MoveTo(target);
-
-        float distance = Vector3.Distance(transform.position, target);
-
-        if (distance < pointReachedDistance)
-        {
-            currentPatrolIndex++;
-
-            if (currentPatrolIndex >= patrolPoints.Length)
-            {
-                currentPatrolIndex = 0;
-            }
-        }
-    }
-
-    void UpdateAlert()
-    {
-        navigation.StopMoving();
-
-        alertTimer -= Time.deltaTime;
-
-        if (alertTimer <= 0f)
-        {
-            currentState = nextState;
-        }
-    }
-    void UpdateChase()
-    {
-        navigation.MoveTo(player.position);
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance <= attackDistance)
-        {
-            currentState = State.Attack;
-        }
-
-        if (!vision.CanSeePlayer())
-        {
-            GeneratePatrolPoints(transform.position);
-
-            currentState = State.Patrol;
-        }
-    }
-
-    void UpdateAttack()
-    {
-        navigation.StopMoving();
-
-        transform.LookAt(player);
-
-        float distance = Vector3.Distance(transform.position, player.position);
-
-        if (distance > attackDistance)
-        {
-            currentState = State.Chase;
-            return;
-        }
-
-        if (attackTimer <= 0)
-        {
-            Attack();
-            attackTimer = attackCooldown;
-        }
-    }
-
-    void Attack()
-    {
-        Debug.Log("El pueblerino golpea al jugador");
-
-        if (playerHealth != null)
-        {
-            playerHealth.TakeDamage(stats.damage);
-            Debug.Log("Jugador recibe daño: " + stats.damage + ": Vida restante: " + playerHealth.currentHealth);
-        }
-    }
-
-    void UpdateInvestigate()
-    {
-        Vector3 noisePos = hearing.GetNoisePosition();
-
-        navigation.MoveTo(noisePos);
-
-        float distance = Vector3.Distance(transform.position, noisePos);
-
-        if (distance < 1.5f)
-        {
-            GeneratePatrolPoints(transform.position);
-            currentState = State.Patrol;
-        }
-
-        if (vision.CanSeePlayer())
-        {
-            currentState = State.Chase;
-        }
-
-        Debug.Log("Investigando ruido");
     }
     void OnDrawGizmos()
     {
