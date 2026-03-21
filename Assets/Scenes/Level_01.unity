@@ -731,7 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe0d3ec4db3e614b984bda743bbd899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionDistance: 10
+  visionDistance: 15
   visionAngle: 60
   player: {fileID: 1828159358843932486}
 --- !u!114 &162382171
@@ -918,6 +918,7 @@ MonoBehaviour:
   patrolPointsAmount: 3
   minDistanceBetweenPoints: 4
   alertDelay: 1
+  shareInterval: 0.3
 --- !u!114 &162382181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5128,6 +5129,7 @@ MonoBehaviour:
   wanderInterval: 5
   wanderRadius: 30
   alertDelay: 1
+  shareInterval: 0.3
 --- !u!114 &2130266645
 MonoBehaviour:
   m_ObjectHideFlags: 0

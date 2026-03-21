@@ -15,6 +15,21 @@ public class EnemyNavigation : MonoBehaviour
         agent.speed = stats.moveSpeed;
     }
 
+    public void Pause()
+    {
+        if (agent != null)
+        {
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero; //corte inmediato
+        }
+    }
+
+    public void Resume()
+    {
+        if (agent != null)
+            agent.isStopped = false;
+    }
+
     public void MoveTo(Vector3 target)
     {
         agent.SetDestination(target);

@@ -24,6 +24,12 @@ public class EntePsicologico : MonoBehaviour
 
     bool alertNoiseEmitted = false;
 
+    Vector3 currentTarget;
+    bool hasExactPlayerPosition = false;
+
+    float shareTimer = 0f;
+    public float shareInterval = 0.3f;
+
     enum AlertType
     {
         Vision,
@@ -62,6 +68,16 @@ public class EntePsicologico : MonoBehaviour
 
     void Update()
     {
+        if (GameState.InMenu)
+        {
+            navigation.Pause();
+            return;
+        }
+        else
+        {
+            navigation.Resume();
+        }
+
         if (!floatMotion.enabled)
         {
             floatTimer -= Time.deltaTime;
@@ -125,12 +141,24 @@ public class EntePsicologico : MonoBehaviour
             currentState = State.Alert;
         }
 
-        if (hearing.HasHeardSomething())
+        if (hearing.HasSharedPlayerPosition())
+        {
+            currentTarget = hearing.GetSharedPlayerPosition();
+            hasExactPlayerPosition = true;
+
+            navigation.MoveTo(currentTarget);
+            currentState = State.HuntSound;
+
+            Debug.Log(name + " investiga ALERTA de otro enemigo");
+        }
+        else if (hearing.HasHeardSomething())
         {
             nextState = State.HuntSound;
 
-            Vector3 noisePos = hearing.GetNoisePosition();
-            float distanceDetect = Vector3.Distance(transform.position, noisePos);
+            currentTarget = hearing.GetNoisePosition();
+            hasExactPlayerPosition = false;
+
+            float distanceDetect = Vector3.Distance(transform.position, currentTarget);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
 
             alertType = AlertType.Sound;
@@ -149,7 +177,7 @@ public class EntePsicologico : MonoBehaviour
         {
             Debug.Log("ENTE EMITE RUIDO DE ALERTA PSICOLÓGICA");
 
-            noiseEmitter.EmitNoise(2f);
+            noiseEmitter.EmitNoise(2f, player.position);
 
             alertNoiseEmitted = true;
         }
@@ -166,14 +194,15 @@ public class EntePsicologico : MonoBehaviour
         floatMotion.SetOffset(1f);
         floatMotion.EnableOscillation(true);
 
-        Vector3 noisePos = hearing.GetNoisePosition();
+        navigation.MoveTo(currentTarget);
 
-        navigation.MoveTo(noisePos);
-
-        float distance = Vector3.Distance(transform.position, noisePos);
+        float distance = Vector3.Distance(transform.position, currentTarget);
 
         if (distance < 2f)
         {
+            if (hearing.HasSharedPlayerPosition()) hearing.GetSharedPlayerPosition();
+            if (hearing.HasHeardSomething()) hearing.GetNoisePosition();
+
             currentState = State.Idle;
         }
 
@@ -192,9 +221,28 @@ public class EntePsicologico : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
+        if (vision.CanSeePlayer())
+        {
+            shareTimer -= Time.deltaTime;
+
+            if (shareTimer <= 0f)
+            {
+                noiseEmitter.EmitNoise(1f, player.position);
+                shareTimer = shareInterval;
+            }
+        }
+
         if (distance <= effectDistance)
         {
             currentState = State.AffectMind;
+        }
+
+        if (!vision.CanSeePlayer())
+        {
+            currentTarget = player.position;
+            hasExactPlayerPosition = true;
+
+            currentState = State.HuntSound;
         }
     }
 

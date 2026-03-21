@@ -34,6 +34,9 @@ public class Pueblerino : MonoBehaviour
 
     bool alertNoiseEmitted = false;
 
+    float shareTimer = 0f;
+    public float shareInterval = 0.3f;
+
     enum AlertType
     {
         Vision,
@@ -54,6 +57,8 @@ public class Pueblerino : MonoBehaviour
 
     State currentState;
 
+    Vector3 currentTarget;
+    bool hasExactPlayerPosition = false;
     void Start()
     {
         vision = GetComponent<EnemyVision>();
@@ -72,6 +77,16 @@ public class Pueblerino : MonoBehaviour
     }
     void Update()
     {
+        if (GameState.InMenu)
+        {
+            navigation.Pause();
+            return;
+        }
+        else
+        {
+            navigation.Resume();
+        }
+
         attackTimer -= Time.deltaTime;
 
         switch (currentState)
@@ -118,12 +133,26 @@ public class Pueblerino : MonoBehaviour
             return;
         }
 
+        if (hearing.HasSharedPlayerPosition())
+        {
+            currentTarget = hearing.GetSharedPlayerPosition();
+            hasExactPlayerPosition = true;
+
+            navigation.MoveTo(currentTarget);
+            currentState = State.Investigate;
+
+            Debug.Log(name + " investiga ALERTA de otro enemigo");
+            return;
+        }
+
         if (hearing.HasHeardSomething())
         {
             nextState = State.Investigate;
 
-            Vector3 noisePos = hearing.GetNoisePosition();
-            float distanceDetect = Vector3.Distance(transform.position, noisePos);
+            currentTarget = hearing.GetNoisePosition();
+            hasExactPlayerPosition = false;
+
+            float distanceDetect = Vector3.Distance(transform.position, currentTarget);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
 
             alertType = AlertType.Sound;
@@ -158,9 +187,9 @@ public class Pueblerino : MonoBehaviour
         if (alertType == AlertType.Vision && !alertNoiseEmitted)
         {
             Debug.Log("Pueblerino EMITE GRITO DE ALERTA (ruido detectado por enemigos)");
+            Debug.Log("Posicion enviada por el Pueblerino: " + player.position);
 
-            noiseEmitter.EmitNoise(2f);
-
+            noiseEmitter.EmitNoise(2f, player.position);
             alertNoiseEmitted = true;
         }
 
@@ -174,15 +203,16 @@ public class Pueblerino : MonoBehaviour
 
     void UpdateInvestigate()
     {
-        Vector3 noisePos = hearing.GetNoisePosition();
+        navigation.MoveTo(currentTarget);
 
-        navigation.MoveTo(noisePos);
-
-        float distance = Vector3.Distance(transform.position, noisePos);
+        float distance = Vector3.Distance(transform.position, currentTarget);
 
         if (distance < 1.5f)
         {
-            GeneratePatrolPoints(transform.position);
+            if (hearing.HasSharedPlayerPosition()) hearing.GetSharedPlayerPosition();
+            if (hearing.HasHeardSomething()) hearing.GetNoisePosition();
+
+            GeneratePatrolPoints(currentTarget);
             currentState = State.Patrol;
         }
 
@@ -200,6 +230,17 @@ public class Pueblerino : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
+        if (vision.CanSeePlayer())
+        {
+            shareTimer -= Time.deltaTime;
+
+            if (shareTimer <= 0f)
+            {
+                noiseEmitter.EmitNoise(1f, player.position);
+                shareTimer = shareInterval;
+            }
+        }
+
         if (distance <= attackDistance)
         {
             currentState = State.Attack;
@@ -207,6 +248,9 @@ public class Pueblerino : MonoBehaviour
 
         if (!vision.CanSeePlayer())
         {
+            currentTarget = player.position;
+            hasExactPlayerPosition = true;
+
             GeneratePatrolPoints(transform.position);
             currentState = State.Patrol;
         }
