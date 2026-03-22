@@ -37,6 +37,9 @@ public class Pueblerino : MonoBehaviour
     float shareTimer = 0f;
     public float shareInterval = 0.3f;
 
+    float wanderTimer;
+    public float wanderInterval = 3f;
+
     enum AlertType
     {
         Vision,
@@ -163,20 +166,14 @@ public class Pueblerino : MonoBehaviour
             return;
         }
 
-        Vector3 target = patrolPoints[currentPatrolIndex];
+        wanderTimer -= Time.deltaTime;
 
-        navigation.MoveTo(target);
-
-        float distance = Vector3.Distance(transform.position, target);
-
-        if (distance < pointReachedDistance)
+        if (wanderTimer <= 0f)
         {
-            currentPatrolIndex++;
+            Vector3 randomPoint = GetRandomNavPoint(patrolRadius);
+            navigation.MoveTo(randomPoint);
 
-            if (currentPatrolIndex >= patrolPoints.Length)
-            {
-                currentPatrolIndex = 0;
-            }
+            wanderTimer = wanderInterval;
         }
     }
 
@@ -324,6 +321,22 @@ public class Pueblerino : MonoBehaviour
 
         currentPatrolIndex = 0;
     }
+
+    Vector3 GetRandomNavPoint(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+
+        UnityEngine.AI.NavMeshHit hit;
+
+        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, UnityEngine.AI.NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+
+        return transform.position;
+    }
+
     void OnDrawGizmos()
     {
         if (patrolPoints == null) return;

@@ -3,18 +3,17 @@ using UnityEngine;
 public class Door : MonoBehaviour, IInteractable
 {
     public string requiredKey;
-
+    public bool isLocked = false;
     bool isOpen = false;
-
-    Transform playerCamera;
-
-    void Start()
-    {
-        playerCamera = Camera.main.transform;
-    }
 
     public void Interact()
     {
+        if (isLocked)
+        {
+            Debug.Log("La puerta está bloqueada.");
+            return;
+        }
+
         Inventory inventory = FindObjectOfType<Inventory>();
 
         if (inventory.HasItem(requiredKey))
@@ -23,11 +22,11 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("Necesitas la llave");
+            Debug.Log("Necesitas: " + requiredKey);
         }
     }
 
-    void OpenDoor()
+    public void OpenDoor()
     {
         if (isOpen) return;
 
@@ -35,22 +34,16 @@ public class Door : MonoBehaviour, IInteractable
         isOpen = true;
     }
 
-    void Update()
+    public void CloseDoor()
     {
         if (!isOpen) return;
 
-        Vector3 dir = transform.position - playerCamera.position;
-        float dot = Vector3.Dot(playerCamera.forward, dir.normalized);
-
-        if (dot < 0)
-        {
-            CloseDoor();
-        }
-    }
-
-    void CloseDoor()
-    {
         transform.Rotate(0, 90, 0);
         isOpen = false;
+    }
+
+    public bool IsOpen()
+    {
+        return isOpen;
     }
 }
