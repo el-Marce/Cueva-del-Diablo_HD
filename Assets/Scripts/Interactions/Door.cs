@@ -22,7 +22,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
-            Debug.Log("Necesitas: " + requiredKey);
+            Debug.Log("Puerta cerrada. Necesitas: " + requiredKey);
         }
     }
 

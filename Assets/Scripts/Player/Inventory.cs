@@ -19,13 +19,13 @@ public class Inventory : MonoBehaviour
     public void AddItem(string itemName)
     {
         items.Add(itemName);
-        Debug.Log("Recogiste: " + itemName);
+        Debug.Log("Recogiste: " + itemName + ". Pulsa TAB para ver tus objetos");
     }
 
     public void AddScroll(string scrollText)
     {
         scrolls.Add(scrollText);
-        Debug.Log("Pergamino guardado");
+        Debug.Log("Pergamino guardado. Pulsa TAB para leerlo");
     }
 
     public bool HasItem(string itemName)

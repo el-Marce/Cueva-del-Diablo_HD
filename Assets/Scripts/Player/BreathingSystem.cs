@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
-
+using TMPro;
 public class BreathingSystem : MonoBehaviour
 {
     public float breathInterval = 10f;
@@ -22,6 +22,9 @@ public class BreathingSystem : MonoBehaviour
 
     private bool inCriticalWindow = false;
     NoiseEmitter noiseEmitter;
+
+    public TextMeshProUGUI breathWarningText;
+    private Coroutine blinkCoroutine;
 
     void Start()
     {
@@ -44,12 +47,24 @@ public class BreathingSystem : MonoBehaviour
             if (!inCriticalWindow)
             {
                 inCriticalWindow = true;
-                Debug.Log("Zona crítica: Respira ahora");
+                //Debug.Log("Zona crítica: Respira ahora");
+
+                if (blinkCoroutine == null)
+                {
+                    blinkCoroutine = StartCoroutine(BlinkText());
+                }
             }
         }
         else
         {
             inCriticalWindow = false;
+
+            if (blinkCoroutine != null)
+            {
+                StopCoroutine(blinkCoroutine);
+                blinkCoroutine = null;
+                breathWarningText.gameObject.SetActive(false);
+            }
         }
 
         if (timer <= -breathWindow)
@@ -73,7 +88,7 @@ public class BreathingSystem : MonoBehaviour
 
         if (!inCriticalWindow)
         {
-            Debug.Log("Respiración fuera de tiempo");
+            //Debug.Log("Respiración fuera de tiempo");
             return;
         }
 
@@ -92,5 +107,14 @@ public class BreathingSystem : MonoBehaviour
         canBreathe = false;
         yield return new WaitForSeconds(breatheCooldown);
         canBreathe = true;
+    }
+
+    IEnumerator BlinkText()
+    {
+        while (true)
+        {
+            breathWarningText.gameObject.SetActive(!breathWarningText.gameObject.activeSelf);
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 }

@@ -6,7 +6,7 @@ public class NoiseEmitter : MonoBehaviour
 
     public void EmitNoise(float loudness, Vector3 playerPosition = default)
     {
-        Debug.Log("Position utilizada por NoiseEmitter: " + playerPosition);
+        //Debug.Log("Position utilizada por NoiseEmitter: " + playerPosition);
         float radius = noiseRadius * loudness;
         NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition);
     }

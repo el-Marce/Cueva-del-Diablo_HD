@@ -194,25 +194,25 @@ public class InventoryMenu : MonoBehaviour
         }
 
 
-        Debug.Log("------ INVENTARIO ------");
-        Debug.Log("TAB: " + inventory.currentTab);
+        //Debug.Log("------ INVENTARIO ------");
+        //Debug.Log("TAB: " + inventory.currentTab);
 
         int count = inventory.GetCount();
 
-        for (int i = 0; i < count; i++)
-        {
-            string text;
+        //for (int i = 0; i < count; i++)
+        //{
+        //    string text;
 
-            if (inventory.currentTab == Inventory.Tab.Items)
-                text = inventory.items[i];
-            else
-                text = "Pergamino " + (i + 1);
+        //    if (inventory.currentTab == Inventory.Tab.Items)
+        //        text = inventory.items[i];
+        //    else
+        //        text = "Pergamino " + (i + 1);
 
-            if (i == inventory.selectedIndex)
-                Debug.Log("> " + text);
-            else
-                Debug.Log(text);
-        }
+        //    if (i == inventory.selectedIndex)
+        //        Debug.Log("> " + text);
+        //    else
+        //        Debug.Log(text);
+        //}
 
         for (int i = 0; i < itemTexts.Length; i++)
         {

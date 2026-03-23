@@ -16,7 +16,7 @@ public class NoiseSystem : MonoBehaviour
         foreach (EnemyHearing enemy in enemies)
         {
             enemy.HearNoise(position, radius, playerPosition);
-            Debug.Log("Posicion recibida por el noise System: " + playerPosition);
+            //Debug.Log("Posicion recibida por el noise System: " + playerPosition);
         }
     }
 }

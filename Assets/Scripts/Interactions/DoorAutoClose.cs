@@ -4,8 +4,10 @@ public class DoorAutoClose : MonoBehaviour
 {
     Door door;
     DoorLockCondition lockCondition;
+    Transform player;
+
     bool playerInside = false;
-    float entryZ = 0f;
+    float entryDot = 0f;
 
     public float delayBeforeClose = 1.5f;
     float timer = 0f;
@@ -15,6 +17,7 @@ public class DoorAutoClose : MonoBehaviour
     {
         door = GetComponentInParent<Door>();
         lockCondition = GetComponentInParent<DoorLockCondition>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
@@ -40,8 +43,8 @@ public class DoorAutoClose : MonoBehaviour
 
         playerInside = true;
 
-        Vector3 localPos = door.transform.InverseTransformPoint(other.transform.position);
-        entryZ = localPos.x;
+        Vector3 dir = player.position - door.transform.position;
+        entryDot = Vector3.Dot(door.transform.forward, dir);
     }
 
     void OnTriggerExit(Collider other)
@@ -50,14 +53,15 @@ public class DoorAutoClose : MonoBehaviour
 
         playerInside = false;
 
-        Vector3 localPos = door.transform.InverseTransformPoint(other.transform.position);
-        float exitZ = localPos.x;
+        Vector3 dir = player.position - door.transform.position;
+        float exitDot = Vector3.Dot(door.transform.forward, dir);
 
-        if (entryZ < 0 && exitZ > 0 || entryZ > 0 && exitZ < 0)
+        if (entryDot > 0 && exitDot < 0)
         {
             shouldClose = true;
             timer = 0f;
-            if(lockCondition != null)
+
+            if (lockCondition != null)
                 lockCondition.enabled = true;
         }
     }

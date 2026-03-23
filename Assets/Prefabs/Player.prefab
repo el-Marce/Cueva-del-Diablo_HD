@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ee3a6da68fcf44a84f79e6bca25949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
+  moveSpeed: 10
   gravity: -9.81
 --- !u!114 &8934563051483889156
 MonoBehaviour:
@@ -215,6 +215,7 @@ MonoBehaviour:
   breathWindow: 5
   damagePerSecond: 10
   breatheCooldown: 1
+  breathWarningText: {fileID: 0}
 --- !u!114 &5697650769045682279
 MonoBehaviour:
   m_ObjectHideFlags: 0
