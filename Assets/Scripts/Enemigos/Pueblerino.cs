@@ -6,59 +6,49 @@ public class Pueblerino : MonoBehaviour
     EnemyHearing hearing;
     EnemyNavigation navigation;
     EnemyStats stats;
-
     NoiseEmitter noiseEmitter;
 
     Transform player;
     HealthSystem playerHealth;
 
+    [Header("Combate")]
     public float attackDistance = 1.8f;
     public float attackCooldown = 2f;
-
     float attackTimer = 0;
 
     [Header("Patrulla")]
-
     public float patrolRadius = 6f;
     public int patrolPointsAmount = 3;
+    public float minDistanceBetweenPoints = 4f;
+    public float wanderInterval = 3f;
 
     Vector3[] patrolPoints;
     int currentPatrolIndex = 0;
+    float wanderTimer;
 
-    float pointReachedDistance = 1.2f;
+    [Header("Memoria")]
+    public float lostPlayerDuration = 3f;
+    float lostPlayerTimer = 0f;
 
-    public float minDistanceBetweenPoints = 4f;
-
-    float alertTimer = 0f;
+    [Header("Alerta")]
     public float alertDelay = 1f;
-
+    float alertTimer = 0f;
     bool alertNoiseEmitted = false;
 
-    float shareTimer = 0f;
+    [Header("Comunicación")]
     public float shareInterval = 0.3f;
+    float shareTimer = 0f;
 
-    float wanderTimer;
-    public float wanderInterval = 3f;
+    [Header("Velocidad")]
+    public float chaseSpeedMultiplier;
+    public float investigateSpeedMultiplier;
 
-    enum AlertType
-    {
-        Vision,
-        Sound
-    }
+    enum AlertType { Vision, Sound }
+    enum State { Patrol, Alert, Investigate, Chase, Attack }
 
     AlertType alertType;
-
-    State nextState;
-    enum State
-    {
-        Patrol,
-        Alert,
-        Investigate,
-        Chase,
-        Attack
-    }
-
     State currentState;
+    State nextState;
 
     Vector3 currentTarget;
     bool hasExactPlayerPosition = false;
@@ -116,10 +106,10 @@ public class Pueblerino : MonoBehaviour
         }
     }
     
-    
-
     void UpdatePatrol()
     {
+        navigation.ResetSpeed();
+
         if (vision.CanSeePlayer())
         {
             nextState = State.Chase;
@@ -129,8 +119,6 @@ public class Pueblerino : MonoBehaviour
 
             alertType = AlertType.Vision;
             alertNoiseEmitted = false;
-
-            Debug.Log("Pueblerino ha VISTO al jugador -> entrando en ALERTA VISUAL");
 
             currentState = State.Alert;
             return;
@@ -143,8 +131,6 @@ public class Pueblerino : MonoBehaviour
 
             navigation.MoveTo(currentTarget);
             currentState = State.Investigate;
-
-            Debug.Log(name + " investiga ALERTA de otro enemigo");
             return;
         }
 
@@ -160,8 +146,6 @@ public class Pueblerino : MonoBehaviour
 
             alertType = AlertType.Sound;
 
-            Debug.Log("Pueblerino ha ESCUCHADO un ruido -> entrando en ALERTA SONORA");
-
             currentState = State.Alert;
             return;
         }
@@ -170,22 +154,19 @@ public class Pueblerino : MonoBehaviour
 
         if (wanderTimer <= 0f)
         {
-            Vector3 randomPoint = GetRandomNavPoint(patrolRadius);
-            navigation.MoveTo(randomPoint);
-
+            navigation.MoveTo(GetRandomNavPoint(patrolRadius));
             wanderTimer = wanderInterval;
         }
     }
 
     void UpdateAlert()
     {
+        navigation.ResetSpeed();
+
         navigation.StopMoving();
 
         if (alertType == AlertType.Vision && !alertNoiseEmitted)
         {
-            Debug.Log("Pueblerino EMITE GRITO DE ALERTA (ruido detectado por enemigos)");
-            Debug.Log("Posicion enviada por el Pueblerino: " + player.position);
-
             noiseEmitter.EmitNoise(2f, player.position);
             alertNoiseEmitted = true;
         }
@@ -193,68 +174,90 @@ public class Pueblerino : MonoBehaviour
         alertTimer -= Time.deltaTime;
 
         if (alertTimer <= 0f)
-        {
             currentState = nextState;
-        }
     }
 
     void UpdateInvestigate()
     {
+        navigation.SetSpeedMultiplier(investigateSpeedMultiplier);
+
+        if (hearing.HasHeardSomething())
+        {
+            currentTarget = hearing.GetNoisePosition();
+            hasExactPlayerPosition = false;
+
+            navigation.MoveTo(currentTarget);
+
+            return;
+        }
+
+        if (hearing.HasSharedPlayerPosition())
+        {
+            currentTarget = hearing.GetSharedPlayerPosition();
+            hasExactPlayerPosition = true;
+
+            navigation.MoveTo(currentTarget);
+
+            return;
+        }
+
         navigation.MoveTo(currentTarget);
 
         float distance = Vector3.Distance(transform.position, currentTarget);
 
         if (distance < 1.5f)
         {
-            if (hearing.HasSharedPlayerPosition()) hearing.GetSharedPlayerPosition();
-            if (hearing.HasHeardSomething()) hearing.GetNoisePosition();
-
             GeneratePatrolPoints(currentTarget);
             currentState = State.Patrol;
         }
 
         if (vision.CanSeePlayer())
-        {
             currentState = State.Chase;
-        }
-
-        Debug.Log("Pueblerino Investigando ruido");
     }
 
     void UpdateChase()
     {
-        navigation.MoveTo(player.position);
+        navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
 
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (vision.CanSeePlayer())
         {
-            shareTimer -= Time.deltaTime;
+            lostPlayerTimer = lostPlayerDuration;
 
+            navigation.MoveTo(player.position);
+
+            shareTimer -= Time.deltaTime;
             if (shareTimer <= 0f)
             {
                 noiseEmitter.EmitNoise(1f, player.position);
                 shareTimer = shareInterval;
             }
         }
+        else
+        {
+            lostPlayerTimer -= Time.deltaTime;
+
+            if (lostPlayerTimer > 0f)
+            {
+                navigation.MoveTo(player.position);
+            }
+            else
+            {
+                GeneratePatrolPoints(transform.position);
+                currentState = State.Patrol;
+                return;
+            }
+        }
 
         if (distance <= attackDistance)
-        {
             currentState = State.Attack;
-        }
-
-        if (!vision.CanSeePlayer())
-        {
-            currentTarget = player.position;
-            hasExactPlayerPosition = true;
-
-            GeneratePatrolPoints(transform.position);
-            currentState = State.Patrol;
-        }
     }
 
     void UpdateAttack()
     {
+        navigation.ResetSpeed();
+
         navigation.StopMoving();
 
         transform.LookAt(player);
@@ -276,8 +279,6 @@ public class Pueblerino : MonoBehaviour
 
     void Attack()
     {
-        Debug.Log("El pueblerino golpea al jugador");
-
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(stats.damage);
@@ -324,15 +325,10 @@ public class Pueblerino : MonoBehaviour
 
     Vector3 GetRandomNavPoint(float radius)
     {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
+        Vector3 random = Random.insideUnitSphere * radius + transform.position;
 
-        UnityEngine.AI.NavMeshHit hit;
-
-        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out hit, radius, UnityEngine.AI.NavMesh.AllAreas))
-        {
+        if (UnityEngine.AI.NavMesh.SamplePosition(random, out var hit, radius, UnityEngine.AI.NavMesh.AllAreas))
             return hit.position;
-        }
 
         return transform.position;
     }

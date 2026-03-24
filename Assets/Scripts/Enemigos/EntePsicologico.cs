@@ -30,6 +30,9 @@ public class EntePsicologico : MonoBehaviour
     float shareTimer = 0f;
     public float shareInterval = 0.3f;
 
+    [Header("Velocidad")]
+    public float chaseSpeedMultiplier;
+    public float investigateSpeedMultiplier;
     enum AlertType
     {
         Vision,
@@ -114,6 +117,8 @@ public class EntePsicologico : MonoBehaviour
 
     void UpdateIdle()
     {
+        navigation.ResetSpeed();
+
         floatMotion.SetOffset(5f);
         floatMotion.EnableOscillation(true);
 
@@ -171,6 +176,8 @@ public class EntePsicologico : MonoBehaviour
 
     void UpdateAlert()
     {
+        navigation.ResetSpeed();
+
         navigation.StopMoving();
 
         if (alertType == AlertType.Vision && !alertNoiseEmitted)
@@ -191,8 +198,30 @@ public class EntePsicologico : MonoBehaviour
     }
     void UpdateHuntSound()
     {
+        navigation.SetSpeedMultiplier(investigateSpeedMultiplier);
+
         floatMotion.SetOffset(1f);
         floatMotion.EnableOscillation(true);
+
+        if (hearing.HasSharedPlayerPosition())
+        {
+            currentTarget = hearing.GetSharedPlayerPosition();
+            hasExactPlayerPosition = true;
+
+            navigation.MoveTo(currentTarget);
+
+            return;
+        }
+
+        if (hearing.HasHeardSomething())
+        {
+            currentTarget = hearing.GetNoisePosition();
+            hasExactPlayerPosition = false;
+
+            navigation.MoveTo(currentTarget);
+
+            return;
+        }
 
         navigation.MoveTo(currentTarget);
 
@@ -200,9 +229,6 @@ public class EntePsicologico : MonoBehaviour
 
         if (distance < 2f)
         {
-            if (hearing.HasSharedPlayerPosition()) hearing.GetSharedPlayerPosition();
-            if (hearing.HasHeardSomething()) hearing.GetNoisePosition();
-
             currentState = State.Idle;
         }
 
@@ -214,6 +240,8 @@ public class EntePsicologico : MonoBehaviour
     }
     void UpdateChase()
     {
+        navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
+
         floatMotion.SetOffset(1f);
         floatMotion.EnableOscillation(true);
 
@@ -248,6 +276,8 @@ public class EntePsicologico : MonoBehaviour
 
     void UpdateAffectMind()
     {
+        navigation.ResetSpeed();
+
         floatMotion.SetOffset(2.5f);
         floatMotion.EnableOscillation(false);
 

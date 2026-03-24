@@ -15,18 +15,19 @@ public class EnemyHearing : MonoBehaviour
         float distance = Vector3.Distance(transform.position, noisePosition);
 
         //Debug.Log("Distancia: " + distance + " | Umbral: " + hearingDistance);
-        if (distance <= hearingDistance)
+        if (distance <= radius + hearingDistance)
         {
             heardSomething = true;
             lastHeardPosition = noisePosition;
             Debug.Log(name + "ha escuchado el sonido");
-        }
-        if (playerPosition != Vector3.zero)
-        {
-            knowsPlayerPosition = true;
-            sharedPlayerPosition = playerPosition;
 
-            //Debug.Log(name + " recibió la POSICIÓN DEL JUGADOR por alerta: " + playerPosition);
+            if (playerPosition != Vector3.zero)
+            {
+                knowsPlayerPosition = true;
+                sharedPlayerPosition = playerPosition;
+
+                //Debug.Log(name + " recibió la POSICIÓN DEL JUGADOR por alerta: " + playerPosition);
+            }
         }
     }
 
@@ -52,7 +53,7 @@ public class EnemyHearing : MonoBehaviour
         return sharedPlayerPosition;
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, hearingDistance);

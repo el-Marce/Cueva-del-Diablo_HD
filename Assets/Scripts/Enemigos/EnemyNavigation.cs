@@ -7,6 +7,7 @@ public class EnemyNavigation : MonoBehaviour
     public NavMeshAgent agent;
     EnemyStats stats;
 
+    float currentMultiplier = 1f;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -38,5 +39,21 @@ public class EnemyNavigation : MonoBehaviour
     public void StopMoving()
     {
         agent.ResetPath();
+
+    }
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        if (currentMultiplier == multiplier) return;
+
+        currentMultiplier = multiplier;
+        agent.speed = stats.moveSpeed * multiplier;
+    }
+
+    public void ResetSpeed()
+    {
+        if (currentMultiplier == 1f) return;
+
+        currentMultiplier = 1f;
+        agent.speed = stats.moveSpeed;
     }
 }
