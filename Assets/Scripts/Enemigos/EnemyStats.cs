@@ -6,9 +6,11 @@ public class EnemyStats : MonoBehaviour
     public float damage = 10f;
     public float moveSpeed;
 
+    public System.Action OnHit;
     public void TakeDamage(float amount)
     {
         health -= amount;
+        OnHit?.Invoke();
 
         if (health <= 0)
         {

@@ -14,7 +14,14 @@ public class Pueblerino : MonoBehaviour
     [Header("Combate")]
     public float attackDistance = 1.8f;
     public float attackCooldown = 2f;
+    public float attackWindUp = 0.6f;
     float attackTimer = 0;
+    float attackWindUpTimer = 0f;
+    bool isPreparingAttack = false;
+
+    float lookAtTimer = 0f;
+    public float lookAtDuration = 0.2f;
+    bool isLookingAtPlayer = false;
 
     [Header("Patrulla")]
     public float patrolRadius = 6f;
@@ -43,6 +50,10 @@ public class Pueblerino : MonoBehaviour
     public float chaseSpeedMultiplier;
     public float investigateSpeedMultiplier;
 
+    [Header("Stagger")]
+    public float staggerDuration = 0.5f;
+    float staggerTimer = 0f;
+
     enum AlertType { Vision, Sound }
     enum State { Patrol, Alert, Investigate, Chase, Attack }
 
@@ -58,6 +69,8 @@ public class Pueblerino : MonoBehaviour
         hearing = GetComponent<EnemyHearing>();
         navigation = GetComponent<EnemyNavigation>();
         stats = GetComponent<EnemyStats>();
+
+        stats.OnHit += OnHit;
 
         noiseEmitter = GetComponent<NoiseEmitter>();
 
@@ -105,8 +118,14 @@ public class Pueblerino : MonoBehaviour
                 break;
         }
     }
-    
-    void UpdatePatrol()
+
+    void OnHit()
+    {
+        staggerTimer = staggerDuration;
+        ForceChase();
+    }
+
+        void UpdatePatrol()
     {
         navigation.ResetSpeed();
 
@@ -164,6 +183,12 @@ public class Pueblerino : MonoBehaviour
         navigation.ResetSpeed();
 
         navigation.StopMoving();
+
+        if (staggerTimer > 0)
+        {
+            staggerTimer -= Time.deltaTime;
+            return;
+        }
 
         if (alertType == AlertType.Vision && !alertNoiseEmitted)
         {
@@ -251,7 +276,11 @@ public class Pueblerino : MonoBehaviour
         }
 
         if (distance <= attackDistance)
+        {
             currentState = State.Attack;
+            isPreparingAttack = true;
+            attackWindUpTimer = attackWindUp;
+        }
     }
 
     void UpdateAttack()
@@ -260,7 +289,22 @@ public class Pueblerino : MonoBehaviour
 
         navigation.StopMoving();
 
-        transform.LookAt(player);
+        if (isLookingAtPlayer)
+        {
+            Vector3 target = player.position;
+            // si quieres mantener el "cabezazo", NO limites el eje Y
+            // si quieres solo rotación horizontal, descomenta la siguiente línea:
+            // target.y = transform.position.y;
+
+            transform.LookAt(target);
+
+            lookAtTimer -= Time.deltaTime;
+
+            if (lookAtTimer <= 0f)
+            {
+                isLookingAtPlayer = false;
+            }
+        }
 
         float distance = Vector3.Distance(transform.position, player.position);
 
@@ -270,10 +314,28 @@ public class Pueblerino : MonoBehaviour
             return;
         }
 
+        if (isPreparingAttack)
+        {
+            attackWindUpTimer -= Time.deltaTime;
+
+            if (attackWindUpTimer <= 0f)
+            {
+                isPreparingAttack = false;
+            }
+
+            return;
+        }
+
         if (attackTimer <= 0)
         {
+            isLookingAtPlayer = true;
+            lookAtTimer = lookAtDuration;
+
             Attack();
             attackTimer = attackCooldown;
+
+            isPreparingAttack = true;
+            attackWindUpTimer = attackWindUp; ;
         }
     }
 
@@ -323,6 +385,20 @@ public class Pueblerino : MonoBehaviour
         currentPatrolIndex = 0;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            Debug.Log("Contactu");
+            ForceChase();
+        }
+    }
+
+    public void OnPushed()
+    {
+        ForceChase();
+    }
+
     Vector3 GetRandomNavPoint(float radius)
     {
         Vector3 random = Random.insideUnitSphere * radius + transform.position;
@@ -331,6 +407,20 @@ public class Pueblerino : MonoBehaviour
             return hit.position;
 
         return transform.position;
+    }
+    void ForceChase()
+    {
+        alertType = AlertType.Vision;
+        nextState = State.Chase;
+
+        alertTimer = 0.1f;
+        alertNoiseEmitted = false;
+
+        navigation.StopMoving();
+
+        isPreparingAttack = false;
+
+        currentState = State.Alert;
     }
 
     void OnDrawGizmos()

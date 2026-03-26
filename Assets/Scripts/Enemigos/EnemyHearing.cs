@@ -19,7 +19,6 @@ public class EnemyHearing : MonoBehaviour
         {
             heardSomething = true;
             lastHeardPosition = noisePosition;
-            Debug.Log(name + "ha escuchado el sonido");
 
             if (playerPosition != Vector3.zero)
             {

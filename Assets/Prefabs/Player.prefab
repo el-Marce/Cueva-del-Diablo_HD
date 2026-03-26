@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 8934563051483889156}
   - component: {fileID: 772965691360533526}
   - component: {fileID: 7348819158839489651}
+  - component: {fileID: 2295143409455369292}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -163,6 +164,27 @@ MonoBehaviour:
   - {fileID: 0}
   descriptionText: {fileID: 0}
   columns: 4
+--- !u!114 &2295143409455369292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473348665417721412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a224b2ea65e4fa14abf711f8d53ec020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackRange: 2
+  pushForce: 5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  fistDamage: 5
+  stickDamage: 15
+  rockDamage: 10
+  currentWeapon: Fists
 --- !u!1 &5403918989994967683
 GameObject:
   m_ObjectHideFlags: 0

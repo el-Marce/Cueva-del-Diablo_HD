@@ -141,8 +141,6 @@ public class EntePsicologico : MonoBehaviour
             alertType = AlertType.Vision;
             alertNoiseEmitted = false;
 
-            Debug.Log("Ente ha VISTO al jugador -> ALERTA VISUAL");
-
             currentState = State.Alert;
         }
 
@@ -153,8 +151,6 @@ public class EntePsicologico : MonoBehaviour
 
             navigation.MoveTo(currentTarget);
             currentState = State.HuntSound;
-
-            Debug.Log(name + " investiga ALERTA de otro enemigo");
         }
         else if (hearing.HasHeardSomething())
         {
@@ -168,8 +164,6 @@ public class EntePsicologico : MonoBehaviour
 
             alertType = AlertType.Sound;
 
-            Debug.Log("Ente ha ESCUCHADO un ruido -> ALERTA SONORA");
-
             currentState = State.Alert;
         }
     }
@@ -182,8 +176,6 @@ public class EntePsicologico : MonoBehaviour
 
         if (alertType == AlertType.Vision && !alertNoiseEmitted)
         {
-            Debug.Log("ENTE EMITE RUIDO DE ALERTA PSICOLÓGICA");
-
             noiseEmitter.EmitNoise(2f, player.position);
 
             alertNoiseEmitted = true;
@@ -236,7 +228,7 @@ public class EntePsicologico : MonoBehaviour
         {
             currentState = State.Chase;
         }
-        Debug.Log("Ente Investigando ruido");
+        //Debug.Log("Ente Investigando ruido");
     }
     void UpdateChase()
     {
