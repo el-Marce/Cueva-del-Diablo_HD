@@ -16,6 +16,8 @@ public class InventoryMenu : MonoBehaviour
 
     public TMP_Text descriptionText;
 
+    public GameObject lecturaPanel;
+
     public int columns = 4;
     void Start()
     {
@@ -24,9 +26,28 @@ public class InventoryMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
-            ToggleMenu();
+            // Si está leyendo pergamino → cerrar lectura
+            if (lecturaPanel.activeSelf)
+            {
+                lecturaPanel.SetActive(false);
+                GameState.InMenu = false;
+                return;
+            }
+
+            // Si inventario está abierto → cerrarlo
+            if (menuOpen)
+            {
+                ToggleMenu();
+                return;
+            }
+
+            // Si no hay UI → abrir inventario SOLO con TAB
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                ToggleMenu();
+            }
         }
 
         if (!menuOpen) return;

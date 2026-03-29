@@ -14,6 +14,12 @@ public class Door : MonoBehaviour, IInteractable
             return;
         }
 
+        if (string.IsNullOrEmpty(requiredKey))
+        {
+            OpenDoor();
+            return;
+        }
+
         Inventory inventory = FindObjectOfType<Inventory>();
 
         if (inventory.HasItem(requiredKey))

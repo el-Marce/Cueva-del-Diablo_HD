@@ -119,6 +119,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df509b6fa3aff9f46a384005e78c2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: "DIARIO GUARDIA SANDERS.-\nEse codigo de color de las puertas me enloquece,
-    es tan absurdo: Puerta verde llave verde, puerta amarilla llave amarilla. \xBFAcaso
-    nos toman por tontos?\nEspero acabar mi turno pronto, no soporto estar aqu\xED"
+  text: Texto
+  scrollPanel: {fileID: 0}
+  scrollText: {fileID: 0}
