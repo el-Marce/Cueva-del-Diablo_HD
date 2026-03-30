@@ -27,42 +27,59 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckInteraction()
     {
-        Vector3 origin = Camera.main.transform.position + Camera.main.transform.forward * 0.2f;
-        Ray ray = new Ray(origin, Camera.main.transform.forward);
-        RaycastHit hit;
+        Camera cam = Camera.main;
+        Vector3 origin = cam.transform.position;
+        Vector3 forward = cam.transform.forward;
 
-        Debug.DrawRay(origin, Camera.main.transform.forward * interactDistance, Color.green);
+        Collider[] hits = Physics.OverlapSphere(origin, interactDistance);
 
-        if (Physics.Raycast(ray, out hit, interactDistance))
+        IInteractable bestInteractable = null;
+        Renderer bestRenderer = null;
+
+        float bestAngle = 999f;
+
+        foreach (Collider col in hits)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+            IInteractable interactable = col.GetComponent<IInteractable>();
+            if (interactable == null) continue;
 
-            if (interactable != null)
+            Vector3 dirToTarget = (col.bounds.center - origin).normalized;
+            float angle = Vector3.Angle(forward, dirToTarget);
+
+            if (angle < 35f)
             {
-                currentInteractable = interactable;
-                interactUI.SetActive(true);
-
-                Renderer rend = hit.collider.GetComponent<Renderer>();
-
-                if (rend != null)
+                if (angle < bestAngle)
                 {
-                    Material[] mats = rend.materials;
+                    bestAngle = angle;
+                    bestInteractable = interactable;
+                    bestRenderer = col.GetComponent<Renderer>();
+                }
+            }
+        }
 
-                    if (mats.Length > 1) // asegúrate de que tenga outline
+        if (bestInteractable != null)
+        {
+            currentInteractable = bestInteractable;
+            interactUI.SetActive(true);
+
+            if (bestRenderer != null)
+            {
+                Material[] mats = bestRenderer.materials;
+
+                if (mats.Length > 1)
+                {
+                    if (currentRenderer != bestRenderer)
                     {
-                        if (currentRenderer != rend)
-                        {
-                            ClearOutline();
+                        ClearOutline();
 
-                            currentRenderer = rend;
-                            currentOutlineMat = mats[1];
-                            currentOutlineMat.SetFloat("_Thickness", outlineOn);
-                        }
+                        currentRenderer = bestRenderer;
+                        currentOutlineMat = mats[1];
+                        currentOutlineMat.SetFloat("_Thickness", outlineOn);
                     }
                 }
-
-                return;
             }
+
+            return;
         }
 
         ClearInteraction();
