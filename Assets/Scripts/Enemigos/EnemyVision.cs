@@ -7,6 +7,18 @@ public class EnemyVision : MonoBehaviour
 
     public Transform player;
 
+    void Awake()
+    {
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+            if (player == null)
+            {
+                Debug.LogError("EnemyVision: No se encontró el Player");
+            }
+        }
+    }
     public bool CanSeePlayer()
     {
         Vector3 dirToPlayer = player.position - transform.position;

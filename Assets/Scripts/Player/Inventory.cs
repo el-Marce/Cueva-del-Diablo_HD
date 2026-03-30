@@ -46,4 +46,13 @@ public class Inventory : MonoBehaviour
 
         return scrolls[selectedIndex];
     }
+
+    public void RemoveItem(string itemName)
+    {
+        if (items.Contains(itemName))
+        {
+            items.Remove(itemName);
+            Debug.Log("Usaste: " + itemName);
+        }
+    }
 }
