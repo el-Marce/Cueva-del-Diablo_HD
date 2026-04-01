@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-
 public class PlayerCameraEffects : MonoBehaviour
 {
     Vector3 originalLocalPos;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 public class Pueblerino : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Pueblerino : MonoBehaviour
 
     Transform player;
     HealthSystem playerHealth;
+
+    CinemachineImpulseSource impulseSource;
 
     [Header("Combate")]
     public float attackDistance = 1.8f;
@@ -26,7 +29,7 @@ public class Pueblerino : MonoBehaviour
     [Header("Impacto")]
     public float hitPushForce = 4f;
     public float upwardForce = 1.5f;
-    public float cameraShakeIntensity = 0.15f;
+    public float cameraShakeIntensity = 1.2f;
     public float cameraShakeDuration = 0.2f;
 
     [Header("Patrulla")]
@@ -82,6 +85,8 @@ public class Pueblerino : MonoBehaviour
 
         player = vision.player;
         playerHealth = player.GetComponentInChildren<HealthSystem>();
+
+        impulseSource = GetComponent<CinemachineImpulseSource>();
 
         currentState = State.Patrol;
 
@@ -365,13 +370,18 @@ public class Pueblerino : MonoBehaviour
             playerRb.AddForce(force, ForceMode.Impulse);
         }
 
-        // Efecto de cámara (si existe)
-        PlayerCameraEffects camEffects = player.GetComponentInChildren<PlayerCameraEffects>();
-
-        if (camEffects != null)
+        if (impulseSource != null)
         {
-            Vector3 hitDir = player.position - transform.position;
-            camEffects.HitImpact(hitDir, cameraShakeIntensity, cameraShakeDuration);
+            Vector3 hitDir = (player.position - transform.position).normalized;
+
+            // Dirección lateral tipo cachetada
+            Vector3 sideDir = Vector3.Cross(Vector3.up, hitDir).normalized;
+
+            // Aleatorio izquierda/derecha
+            if (Random.value > 0.5f)
+                sideDir *= -1f;
+
+            impulseSource.GenerateImpulse(sideDir * cameraShakeIntensity);
         }
     }
 
