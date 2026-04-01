@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerCombat : MonoBehaviour
 {
@@ -8,10 +9,22 @@ public class PlayerCombat : MonoBehaviour
     public float hitForce = 2f;
     public LayerMask enemyLayer;
 
+    [Header("Weapon Timing")]
+    public float fistWindUp = 0.1f;
+    public float fistCooldown = 0.5f;
+
+    public float stickWindUp = 0.3f;
+    public float stickCooldown = 0.8f;
+
+    public float rockWindUp = 0.5f;
+    public float rockCooldown = 1.2f;
+
+    private bool isAttacking = false;
+
     [Header("Damage")]
     public float fistDamage = 5f;
-    public float stickDamage = 15f;
-    public float rockDamage = 10f;
+    public float stickDamage = 12f;
+    public float rockDamage = 20f;
 
     public enum WeaponType
     {
@@ -39,7 +52,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Attack();
+            TryAttack();
         }
 
         if (Input.GetMouseButtonDown(1))
@@ -48,7 +61,30 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    void Attack()
+    void TryAttack()
+    {
+        if (isAttacking) return;
+
+        StartCoroutine(AttackRoutine());
+    }
+
+    IEnumerator AttackRoutine()
+    {
+        isAttacking = true;
+
+        float windUp = GetWindUp();
+        float cooldown = GetCooldown();
+
+        yield return new WaitForSeconds(windUp);
+
+        PerformAttack();
+
+        yield return new WaitForSeconds(cooldown);
+
+        isAttacking = false;
+    }
+
+    void PerformAttack()
     {
         float damage = GetCurrentDamage();
 
@@ -70,7 +106,7 @@ public class PlayerCombat : MonoBehaviour
 
             if (rb != null)
             {
-                ApplyForce(rb, hitForce);
+                ApplyForce(rb, hitForce * GetForceMultiplier());
             }
         }
     }
@@ -106,6 +142,36 @@ public class PlayerCombat : MonoBehaviour
 
         rb.AddForce(forceDir.normalized * forceAmount, ForceMode.Impulse);
         rb.angularVelocity = Vector3.zero;
+    }
+
+    float GetWindUp()
+    {
+        switch (currentWeapon)
+        {
+            case WeaponType.Stick: return stickWindUp;
+            case WeaponType.Rock: return rockWindUp;
+            default: return fistWindUp;
+        }
+    }
+
+    float GetCooldown()
+    {
+        switch (currentWeapon)
+        {
+            case WeaponType.Stick: return stickCooldown;
+            case WeaponType.Rock: return rockCooldown;
+            default: return fistCooldown;
+        }
+    }
+
+    float GetForceMultiplier()
+    {
+        switch (currentWeapon)
+        {
+            case WeaponType.Stick: return 1.2f;
+            case WeaponType.Rock: return 1.5f;
+            default: return 1f;
+        }
     }
 
     public void EquipWeapon(WeaponType weapon, int durability)

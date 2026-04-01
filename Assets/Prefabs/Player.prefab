@@ -65,7 +65,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3096755433197964904}
   - {fileID: 6322043011890950451}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ee3a6da68fcf44a84f79e6bca25949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 5
   gravity: -9.81
 --- !u!114 &8934563051483889156
 MonoBehaviour:
@@ -163,6 +163,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   descriptionText: {fileID: 0}
+  lecturaPanel: {fileID: 0}
   columns: 4
 --- !u!114 &2295143409455369292
 MonoBehaviour:
@@ -178,13 +179,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   pushForce: 5
+  hitForce: 2
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
+  fistWindUp: 0.1
+  fistCooldown: 0.5
+  stickWindUp: 0.3
+  stickCooldown: 0.8
+  rockWindUp: 0.5
+  rockCooldown: 1.2
   fistDamage: 5
-  stickDamage: 15
-  rockDamage: 10
-  currentWeapon: Fists
+  stickDamage: 12
+  rockDamage: 20
+  currentWeapon: 0
 --- !u!1 &5403918989994967683
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +401,7 @@ GameObject:
   - component: {fileID: 4461766410284490685}
   - component: {fileID: 356939880790695507}
   - component: {fileID: 6213239621553740489}
+  - component: {fileID: 4476008082499835440}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -492,7 +501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b175ea28c7c4345b3f1e78c7c7eceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 150
+  mouseSensitivity: 100
   playerBody: {fileID: 8565350585085730176}
 --- !u!114 &6213239621553740489
 MonoBehaviour:
@@ -623,3 +632,15 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &4476008082499835440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8180571203625312895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b361568c807018439f5f25710d5766e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

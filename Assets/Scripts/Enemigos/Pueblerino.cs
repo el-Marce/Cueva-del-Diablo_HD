@@ -23,6 +23,12 @@ public class Pueblerino : MonoBehaviour
     public float lookAtDuration = 0.2f;
     bool isLookingAtPlayer = false;
 
+    [Header("Impacto")]
+    public float hitPushForce = 4f;
+    public float upwardForce = 1.5f;
+    public float cameraShakeIntensity = 0.15f;
+    public float cameraShakeDuration = 0.2f;
+
     [Header("Patrulla")]
     public float patrolRadius = 6f;
     public int patrolPointsAmount = 3;
@@ -345,6 +351,27 @@ public class Pueblerino : MonoBehaviour
         {
             playerHealth.TakeDamage(stats.damage);
             Debug.Log("Jugador recibe daño: " + stats.damage + ": Vida restante: " + playerHealth.currentHealth);
+        }
+
+        Rigidbody playerRb = player.GetComponent<Rigidbody>();
+
+        if (playerRb != null)
+        {
+            Vector3 dir = (player.position - transform.position).normalized;
+            dir.y = 0f;
+
+            Vector3 force = dir * hitPushForce + Vector3.up * upwardForce;
+
+            playerRb.AddForce(force, ForceMode.Impulse);
+        }
+
+        // Efecto de cámara (si existe)
+        PlayerCameraEffects camEffects = player.GetComponentInChildren<PlayerCameraEffects>();
+
+        if (camEffects != null)
+        {
+            Vector3 hitDir = player.position - transform.position;
+            camEffects.HitImpact(hitDir, cameraShakeIntensity, cameraShakeDuration);
         }
     }
 

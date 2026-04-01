@@ -2,14 +2,18 @@ using UnityEngine;
 using System;
 using System.Collections;
 using TMPro;
+
 public class BreathingSystem : MonoBehaviour
 {
+    [Header("Timing")]
     public float breathInterval = 10f;
     public float breathWindow = 5f;
     public float damagePerSecond = 10f;
 
     private float timer;
-    private bool hasBreathed;
+
+    private bool inWarningWindow = false;
+    private bool inDamageState = false;
 
     private bool canBreathe = true;
     public float breatheCooldown = 1f;
@@ -18,17 +22,13 @@ public class BreathingSystem : MonoBehaviour
     public event Action OnBreathMissed;
 
     private HealthSystem healthSystem;
-    private MicrophoneInput microphoneInput;
-
-    private bool inCriticalWindow = false;
-    NoiseEmitter noiseEmitter;
+    private NoiseEmitter noiseEmitter;
 
     public TextMeshProUGUI breathWarningText;
     private Coroutine blinkCoroutine;
 
     void Start()
     {
-        microphoneInput = GetComponent<MicrophoneInput>();
         healthSystem = GetComponent<HealthSystem>();
         noiseEmitter = GetComponent<NoiseEmitter>();
 
@@ -44,10 +44,9 @@ public class BreathingSystem : MonoBehaviour
 
         if (timer <= 0 && timer > -breathWindow)
         {
-            if (!inCriticalWindow)
+            if (!inWarningWindow)
             {
-                inCriticalWindow = true;
-                //Debug.Log("Zona crítica: Respira ahora");
+                inWarningWindow = true;
 
                 if (blinkCoroutine == null)
                 {
@@ -57,21 +56,27 @@ public class BreathingSystem : MonoBehaviour
         }
         else
         {
-            inCriticalWindow = false;
-
-            if (blinkCoroutine != null)
-            {
-                StopCoroutine(blinkCoroutine);
-                blinkCoroutine = null;
-                breathWarningText.gameObject.SetActive(false);
-            }
+            inWarningWindow = false;
         }
 
         if (timer <= -breathWindow)
         {
+            if (!inDamageState)
+            {
+                inDamageState = true;
+
+                if (blinkCoroutine == null)
+                {
+                    blinkCoroutine = StartCoroutine(BlinkText());
+                }
+            }
+
             healthSystem.TakeDamage(damagePerSecond * Time.deltaTime);
-            //Debug.Log("Perdiendo vida por no respirar");
             OnBreathMissed?.Invoke();
+        }
+        else
+        {
+            inDamageState = false;
         }
 
         if (Input.GetKeyDown(KeyCode.B))
@@ -86,18 +91,24 @@ public class BreathingSystem : MonoBehaviour
 
         if (!canBreathe) return;
 
-        if (!inCriticalWindow)
+        if (!(inWarningWindow || inDamageState))
         {
-            //Debug.Log("Respiración fuera de tiempo");
             return;
         }
 
         Debug.Log("Respiración correcta");
 
         timer = breathInterval;
-        hasBreathed = true;
+        inWarningWindow = false;
+        inDamageState = false;
 
-        microphoneInput.PrintDebugs();
+        if (blinkCoroutine != null)
+        {
+            StopCoroutine(blinkCoroutine);
+            blinkCoroutine = null;
+        }
+
+        breathWarningText.gameObject.SetActive(false);
 
         StartCoroutine(BreatheCooldown());
     }
