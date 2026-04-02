@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class AltarUI : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class AltarUI : MonoBehaviour
 
     [Header("Texto principal")]
     public TMP_Text titleText;
+
+    [Header("Timing")]
+    public float offerDelay = 2f;
 
     int selectedIndex = 0;
     bool ritualDone = false;
@@ -105,9 +109,42 @@ public class AltarUI : MonoBehaviour
     {
         if (ritualDone) return;
 
+        StartCoroutine(OfferRoutine());
+
+        //bool completed = altar.OfferNextItem();
+
+        //UpdateItemStatus();
+
+        //if (completed)
+        //{
+        //    ritualDone = true;
+
+        //    gameObject.SetActive(false);
+        //    GameState.InMenu = false;
+
+        //    StartRitual();
+        //    return;
+        //}
+
+        //UpdateTitle();
+    }
+
+    IEnumerator OfferRoutine()
+    {
+        if (ritualDone) yield break;
+
+        // Bloquear input mientras ocurre el evento
+        enabled = false;
+
         bool completed = altar.OfferNextItem();
 
         UpdateItemStatus();
+
+        altar.HideUI();
+
+        //AQUÍ METES TU CINEMÁTICA / SONIDO / ANIMACIÓN
+        yield return new WaitForSeconds(offerDelay);
+        //yield return new WaitUntil(() => cinematicFinished);
 
         if (completed)
         {
@@ -117,12 +154,15 @@ public class AltarUI : MonoBehaviour
             GameState.InMenu = false;
 
             StartRitual();
-            return;
         }
+        else
+        {
+            altar.ShowUI();
 
-        UpdateTitle();
+            UpdateTitle();
+            enabled = true; // volver a permitir input
+        }
     }
-
     void StartRitual()
     {
         door.CloseDoor();

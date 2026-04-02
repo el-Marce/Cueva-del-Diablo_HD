@@ -3,6 +3,7 @@ using UnityEngine;
 public class AltarRitual : MonoBehaviour, IInteractable
 {
     public GameObject altarUI;
+    bool ritualCompleted = false;
 
     Inventory inventory;
 
@@ -27,6 +28,8 @@ public class AltarRitual : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (ritualCompleted) return;
+
         altarUI.SetActive(true);
         GameState.InMenu = true;
     }
@@ -56,11 +59,33 @@ public class AltarRitual : MonoBehaviour, IInteractable
         {
             inventory.RemoveItem("sullu");
             sulluEntregado = true;
+            ritualCompleted = true;
+            DisableInteraction();
             Debug.Log("Entregaste sullu");
             return true;
         }
 
+        void DisableInteraction()
+        {
+            // Opción 1: desactivar collider (RECOMENDADO)
+            Collider col = GetComponent<Collider>();
+            if (col != null)
+                col.enabled = false;
+
+            // Opción 2 (extra segura): desactivar este script
+            this.enabled = false;
+        }
+
         Debug.Log("No tienes el siguiente objeto requerido");
         return false;
+    }
+    public void HideUI()
+    {
+        altarUI.SetActive(false);
+    }
+
+    public void ShowUI()
+    {
+        altarUI.SetActive(true);
     }
 }
