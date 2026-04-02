@@ -12,7 +12,7 @@ public class RitualDoor : MonoBehaviour
     public string item3 = "sullu";
 
     [Header("Timing")]
-    public float openDelay = 3f;
+    public float openDelay = 2f;
 
     [Header("Cinemática")]
     public GameObject cinematicCamera;
