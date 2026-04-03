@@ -3,6 +3,17 @@ using Cinemachine;
 
 public class Pueblerino : MonoBehaviour
 {
+
+    /*=====================================================
+     
+        COMPONENTES Y REFERENCIAS
+
+    =====================================================*/
+
+    Renderer rend;
+    Material defaultMat;
+    public Material windUpMat;
+
     EnemyVision vision;
     EnemyHearing hearing;
     EnemyNavigation navigation;
@@ -14,23 +25,48 @@ public class Pueblerino : MonoBehaviour
 
     CinemachineImpulseSource impulseSource;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - COMBATE
+
+    =====================================================*/
+
     [Header("Combate")]
     public float attackDistance = 1.8f;
     public float attackCooldown = 2f;
     public float attackWindUp = 0.6f;
+
     float attackTimer = 0;
-    float attackWindUpTimer = 0f;
-    bool isPreparingAttack = false;
+    public float attackWindUpTimer = 0f;
+
+    public bool isPreparingAttack = false;
+    bool wasPreparingAttack = false;
 
     float lookAtTimer = 0f;
     public float lookAtDuration = 0.2f;
     bool isLookingAtPlayer = false;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - IMPACTO
+
+    =====================================================*/
+
     [Header("Impacto")]
     public float hitPushForce = 4f;
     public float upwardForce = 1.5f;
+
     public float cameraShakeIntensity = 1.2f;
     public float cameraShakeDuration = 0.2f;
+
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - PATRULLA
+
+    =====================================================*/
 
     [Header("Patrulla")]
     public float patrolRadius = 6f;
@@ -42,26 +78,69 @@ public class Pueblerino : MonoBehaviour
     int currentPatrolIndex = 0;
     float wanderTimer;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - MEMORIA
+
+    =====================================================*/
+
     [Header("Memoria")]
     public float lostPlayerDuration = 3f;
     float lostPlayerTimer = 0f;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - ALERTA
+
+    =====================================================*/
+
     [Header("Alerta")]
     public float alertDelay = 1f;
+
     float alertTimer = 0f;
     bool alertNoiseEmitted = false;
+
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - COMUNICACIÓN
+
+    =====================================================*/
 
     [Header("Comunicación")]
     public float shareInterval = 0.3f;
     float shareTimer = 0f;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - VELOCIDAD
+
+    =====================================================*/
+
     [Header("Velocidad")]
     public float chaseSpeedMultiplier;
     public float investigateSpeedMultiplier;
 
+
+    /*=====================================================
+     
+        CONFIGURACIÓN - STAGGER
+
+    =====================================================*/
+
     [Header("Stagger")]
     public float staggerDuration = 0.5f;
     float staggerTimer = 0f;
+
+
+    /*=====================================================
+     
+        ENUMS DE LA IA
+
+    =====================================================*/
 
     enum AlertType { Vision, Sound }
     enum State { Patrol, Alert, Investigate, Chase, Attack }
@@ -70,10 +149,29 @@ public class Pueblerino : MonoBehaviour
     State currentState;
     State nextState;
 
+
+    /*=====================================================
+     
+        VARIABLES DE ESTADO
+
+    =====================================================*/
+
     Vector3 currentTarget;
     bool hasExactPlayerPosition = false;
+
+
+
+    /*=====================================================
+     
+        UNITY LIFECYCLE
+
+    =====================================================*/
+
     void Start()
     {
+        rend = GetComponent<Renderer>();
+        defaultMat = rend.material;
+
         vision = GetComponent<EnemyVision>();
         hearing = GetComponent<EnemyHearing>();
         navigation = GetComponent<EnemyNavigation>();
@@ -92,8 +190,11 @@ public class Pueblerino : MonoBehaviour
 
         GeneratePatrolPoints(transform.position);
     }
+
+
     void Update()
     {
+
         if (GameState.InMenu)
         {
             navigation.Pause();
@@ -104,10 +205,25 @@ public class Pueblerino : MonoBehaviour
             navigation.Resume();
         }
 
-        attackTimer -= Time.deltaTime;
+        //Debug.Log(currentState);
+
+        if (isPreparingAttack && !wasPreparingAttack)
+        {
+            Debug.Log("ENTER WIND-UP");
+            rend.material = windUpMat;
+        }
+
+        if (!isPreparingAttack && wasPreparingAttack)
+        {
+            Debug.Log("EXIT WIND-UP");
+            rend.material = defaultMat;
+        }
+
+        wasPreparingAttack = isPreparingAttack;
 
         switch (currentState)
         {
+
             case State.Patrol:
                 UpdatePatrol();
                 break;
@@ -130,13 +246,44 @@ public class Pueblerino : MonoBehaviour
         }
     }
 
+
+
+    /*=====================================================
+     
+        EVENTOS
+
+    =====================================================*/
+
     void OnHit()
     {
         staggerTimer = staggerDuration;
+        if (currentState != State.Attack)
+            ForceChase();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            //Debug.Log("Contactu");
+            ForceChase();
+        }
+    }
+
+    public void OnPushed()
+    {
         ForceChase();
     }
 
-        void UpdatePatrol()
+
+
+    /*=====================================================
+     
+        STATE MACHINE
+
+    =====================================================*/
+
+    void UpdatePatrol()
     {
         navigation.ResetSpeed();
 
@@ -189,6 +336,7 @@ public class Pueblerino : MonoBehaviour
         }
     }
 
+
     void UpdateAlert()
     {
         navigation.ResetSpeed();
@@ -212,6 +360,7 @@ public class Pueblerino : MonoBehaviour
         if (alertTimer <= 0f)
             currentState = nextState;
     }
+
 
     void UpdateInvestigate()
     {
@@ -251,6 +400,7 @@ public class Pueblerino : MonoBehaviour
             currentState = State.Chase;
     }
 
+
     void UpdateChase()
     {
         navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
@@ -289,13 +439,34 @@ public class Pueblerino : MonoBehaviour
         if (distance <= attackDistance)
         {
             currentState = State.Attack;
-            isPreparingAttack = true;
-            attackWindUpTimer = attackWindUp;
+            attackTimer = 0.5f;
         }
     }
 
+
+
+    /*=====================================================
+     
+        SISTEMA DE ATAQUE
+     
+        Flujo del ataque:
+        Chase -> Attack
+        Attack inicia el wind-up
+        Cuando termina el wind-up se ejecuta Attack()
+        Luego entra en cooldown
+
+    =====================================================*/
+
     void UpdateAttack()
     {
+        attackTimer -= Time.deltaTime;
+
+        if (attackTimer <= 0f && !isPreparingAttack)
+        {
+            attackWindUpTimer = attackWindUp;
+            isPreparingAttack = true;
+        }
+
         navigation.ResetSpeed();
 
         navigation.StopMoving();
@@ -303,6 +474,7 @@ public class Pueblerino : MonoBehaviour
         if (isLookingAtPlayer)
         {
             Vector3 target = player.position;
+
             // si quieres mantener el "cabezazo", NO limites el eje Y
             // si quieres solo rotación horizontal, descomenta la siguiente línea:
             // target.y = transform.position.y;
@@ -332,23 +504,34 @@ public class Pueblerino : MonoBehaviour
             if (attackWindUpTimer <= 0f)
             {
                 isPreparingAttack = false;
+
+                // EL ATAQUE OCURRE EXACTAMENTE AQUÍ
+
+                isLookingAtPlayer = true;
+                lookAtTimer = lookAtDuration;
+
+                Attack();
+                attackTimer = attackCooldown;
+
+                return; // IMPORTANTE: corta el frame aquí
             }
-
-            return;
         }
 
-        if (attackTimer <= 0)
-        {
-            isLookingAtPlayer = true;
-            lookAtTimer = lookAtDuration;
 
-            Attack();
-            attackTimer = attackCooldown;
 
-            isPreparingAttack = true;
-            attackWindUpTimer = attackWindUp; ;
-        }
+        //if (attackTimer <= 0)
+        //{
+        //    isLookingAtPlayer = true;
+        //    lookAtTimer = lookAtDuration;
+        //
+        //    Attack();
+        //    attackTimer = attackCooldown;
+        //
+        //    isPreparingAttack = true;
+        //    attackWindUpTimer = attackWindUp; ;
+        //}
     }
+
 
     void Attack()
     {
@@ -374,16 +557,22 @@ public class Pueblerino : MonoBehaviour
         {
             Vector3 hitDir = (player.position - transform.position).normalized;
 
-            // Dirección lateral tipo cachetada
             Vector3 sideDir = Vector3.Cross(Vector3.up, hitDir).normalized;
 
-            // Aleatorio izquierda/derecha
             if (Random.value > 0.5f)
                 sideDir *= -1f;
 
             impulseSource.GenerateImpulse(sideDir * cameraShakeIntensity);
         }
     }
+
+
+
+    /*=====================================================
+     
+        SISTEMA DE PATRULLA
+
+    =====================================================*/
 
     void GeneratePatrolPoints(Vector3 center)
     {
@@ -422,19 +611,13 @@ public class Pueblerino : MonoBehaviour
         currentPatrolIndex = 0;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("Player"))
-        {
-            Debug.Log("Contactu");
-            ForceChase();
-        }
-    }
 
-    public void OnPushed()
-    {
-        ForceChase();
-    }
+
+    /*=====================================================
+     
+        UTILIDADES
+
+    =====================================================*/
 
     Vector3 GetRandomNavPoint(float radius)
     {
@@ -445,6 +628,8 @@ public class Pueblerino : MonoBehaviour
 
         return transform.position;
     }
+
+
     void ForceChase()
     {
         alertType = AlertType.Vision;
@@ -459,6 +644,14 @@ public class Pueblerino : MonoBehaviour
 
         currentState = State.Alert;
     }
+
+
+
+    /*=====================================================
+     
+        DEBUG
+
+    =====================================================*/
 
     void OnDrawGizmos()
     {

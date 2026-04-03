@@ -21,6 +21,10 @@ public class PlayerCombat : MonoBehaviour
 
     private bool isAttacking = false;
 
+    [Header("Push")]
+    public float pushCooldown = 3f;
+    float pushTimer = 0f;
+
     [Header("Damage")]
     public float fistDamage = 5f;
     public float stickDamage = 12f;
@@ -49,6 +53,8 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         if (GameState.InMenu) return;
+
+        pushTimer -= Time.deltaTime;
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -113,25 +119,31 @@ public class PlayerCombat : MonoBehaviour
 
     void Push()
     {
+        if (pushTimer > 0f) return;
+
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, attackRange, enemyLayer))
         {
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
-
-            if (rb != null)
-            {
-                ApplyForce(rb, pushForce);
-                Debug.Log("Empujaste al enemigo");
-            }
-
             Pueblerino enemy = hit.collider.GetComponent<Pueblerino>();
 
-            if (enemy != null)
+            if (enemy != null && enemy.isPreparingAttack && enemy.attackWindUpTimer <= enemy.attackWindUp * 0.5f)
             {
-                enemy.OnPushed();
+                Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    ApplyForce(rb, pushForce);
+                    Debug.Log("Empujaste | isPreparingAttack: " + enemy.isPreparingAttack);
+                }
+
+                if (enemy != null)
+                {
+                    enemy.OnPushed();
+                }
             }
+            pushTimer = pushCooldown;
         }
     }
 

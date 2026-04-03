@@ -388,9 +388,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be22233d196ecb34dab4d9c68e9fffc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDistance: 1.8
+  windUpMat: {fileID: 2100000, guid: 529f46886e7652948923cfa967642f63, type: 2}
+  attackDistance: 2.5
   attackCooldown: 2
   attackWindUp: 0.6
+  attackWindUpTimer: 0
+  isPreparingAttack: 0
   lookAtDuration: 0.2
   hitPushForce: 4
   upwardForce: 1.5

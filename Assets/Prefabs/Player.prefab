@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b175ea28c7c4345b3f1e78c7c7eceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 35
+  mouseSensitivity: 69
   playerBody: {fileID: 8565350585085730176}
 --- !u!1 &1473348665417721412
 GameObject:
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ee3a6da68fcf44a84f79e6bca25949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 5
   gravity: -9.81
 --- !u!114 &8934563051483889156
 MonoBehaviour:
@@ -193,9 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a224b2ea65e4fa14abf711f8d53ec020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 2
+  attackRange: 2.5
   pushForce: 5
-  hitForce: 2
+  hitForce: 1
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
