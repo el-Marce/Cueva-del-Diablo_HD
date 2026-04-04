@@ -128,7 +128,7 @@ public class PlayerCombat : MonoBehaviour
         {
             Pueblerino enemy = hit.collider.GetComponent<Pueblerino>();
 
-            if (enemy != null && enemy.isPreparingAttack && enemy.attackWindUpTimer <= enemy.attackWindUp * 0.5f)
+            if (enemy != null && enemy.isPreparingAttack && enemy.attackWindUpTimer <= enemy.attackWindUp * 1f)
             {
                 Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
 

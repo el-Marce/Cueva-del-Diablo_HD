@@ -4,16 +4,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
-    public float moveSpeed = 4f;
+    public float moveSpeed;
+    public float sprintMultiplier = 2f;
     public float gravity = -9.81f;
 
     private CharacterController controller;
+    NoiseEmitter noiseEmitter;
     private Vector3 velocity;
 
+    public float speed => moveSpeed * (Input.GetKey(KeyCode.LeftShift) ? sprintMultiplier : 1f);
     void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        noiseEmitter = GetComponent<NoiseEmitter>();
     }
 
     void Update()
@@ -30,7 +34,12 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        controller.Move(move * speed * Time.deltaTime);
+
+        bool isMoving = move.magnitude > 0.1f;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
+        if (isMoving && isSprinting)
+            noiseEmitter.EmitNoise(1f);
     }
 
     void ApplyGravity()

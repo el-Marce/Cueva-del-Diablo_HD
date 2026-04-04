@@ -63,21 +63,17 @@ public class AltarRitual : MonoBehaviour, IInteractable
             DisableInteraction();
             Debug.Log("Entregaste sullu");
             return true;
-        }
-
-        void DisableInteraction()
-        {
-            // Opción 1: desactivar collider (RECOMENDADO)
-            Collider col = GetComponent<Collider>();
-            if (col != null)
-                col.enabled = false;
-
-            // Opción 2 (extra segura): desactivar este script
-            this.enabled = false;
-        }
+        }        
 
         Debug.Log("No tienes el siguiente objeto requerido");
         return false;
+    }
+
+    void DisableInteraction()
+    {
+        Collider col = GetComponent<Collider>();
+        if (col != null)
+            col.enabled = false;
     }
     public void HideUI()
     {

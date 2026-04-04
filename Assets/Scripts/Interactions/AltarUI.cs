@@ -43,7 +43,7 @@ public class AltarUI : MonoBehaviour
 
         Navigate();
         Select();
-    }
+    }   
 
     void Navigate()
     {
@@ -150,10 +150,9 @@ public class AltarUI : MonoBehaviour
         {
             ritualDone = true;
 
+            StartRitual();
             gameObject.SetActive(false);
             GameState.InMenu = false;
-
-            StartRitual();
         }
         else
         {
@@ -167,15 +166,15 @@ public class AltarUI : MonoBehaviour
     {
         door.CloseDoor();
         door.isLocked = true;
-
         NPC.Possess();
 
         Debug.Log("RITUAL ACTIVADO");
     }
-
+    
     void Close()
     {
-        gameObject.SetActive(false);
+        altar.HideUI();
+        //gameObject.SetActive(false);
         GameState.InMenu = false;
     }
 }

@@ -63,6 +63,7 @@ GameObject:
   - component: {fileID: 772965691360533526}
   - component: {fileID: 7348819158839489651}
   - component: {fileID: 2295143409455369292}
+  - component: {fileID: 4332087294220951615}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  sprintMultiplier: 2
   gravity: -9.81
 --- !u!114 &8934563051483889156
 MonoBehaviour:
@@ -205,10 +207,24 @@ MonoBehaviour:
   stickCooldown: 0.8
   rockWindUp: 0.5
   rockCooldown: 1.2
+  pushCooldown: 3
   fistDamage: 5
   stickDamage: 12
   rockDamage: 20
   currentWeapon: 0
+--- !u!114 &4332087294220951615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473348665417721412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b106df27471b740a54356ec187ccd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseRadius: 8
 --- !u!1 &1537687229058459088
 GameObject:
   m_ObjectHideFlags: 0

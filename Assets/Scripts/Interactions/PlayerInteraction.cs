@@ -22,6 +22,8 @@ public class PlayerInteraction : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
         {
             currentInteractable.Interact();
+
+            ClearInteraction();
         }
     }
 
