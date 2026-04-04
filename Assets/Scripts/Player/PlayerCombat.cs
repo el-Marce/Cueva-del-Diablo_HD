@@ -105,7 +105,7 @@ public class PlayerCombat : MonoBehaviour
             if (enemy != null)
             {
                 enemy.TakeDamage(damage);
-                Debug.Log("Golpeaste con " + currentWeapon + " e hiciste " + damage);
+                Debug.Log("Golpeaste con " + currentWeapon + " | Daño: " + damage + " | Salud enemigo: " + enemy.health);
 
                 UseDurability();
             }

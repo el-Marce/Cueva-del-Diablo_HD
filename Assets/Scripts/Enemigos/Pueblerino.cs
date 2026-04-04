@@ -119,17 +119,17 @@ public class Pueblerino : MonoBehaviour
             navigation.Resume();
         }
 
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
 
         if (isPreparingAttack && !wasPreparingAttack)
         {
-            Debug.Log("ENTER WIND-UP");
+            //Debug.Log("ENTER WIND-UP");
             rend.material = windUpMat;
         }
 
         if (!isPreparingAttack && wasPreparingAttack)
         {
-            Debug.Log("EXIT WIND-UP");
+            //Debug.Log("EXIT WIND-UP");
             rend.material = defaultMat;
         }
 
@@ -179,7 +179,7 @@ public class Pueblerino : MonoBehaviour
 
     public void OnPushed()
     {
-        staggerTimer = staggerDuration * 3f;
+        staggerTimer = staggerDuration * 2f;
         ForceChase();
     }
 
@@ -336,7 +336,7 @@ public class Pueblerino : MonoBehaviour
         if (distance <= attackDistance)
         {
             currentState = State.Attack;
-            attackTimer = 0f;
+            attackTimer = 0.2f;
             return;
         }
     }
@@ -346,12 +346,12 @@ public class Pueblerino : MonoBehaviour
         if (!isPreparingAttack)
         {
             attackTimer -= Time.deltaTime;
-            //Debug.Log(attackTimer);
+            //Debug.Log("Cooldown: " + attackTimer);
 
             if (attackTimer <= 0f)
-            {
-                attackWindUpTimer = attackWindUp;
+            {                
                 isPreparingAttack = true;
+                attackWindUpTimer = attackWindUp;
                 //Debug.Log("Wind-up iniciado. attackWindUp vale: " + attackWindUp);
             }
         }
@@ -401,7 +401,7 @@ public class Pueblerino : MonoBehaviour
             if (attackWindUpTimer <= 0f)
             {
                 attackTimer = attackCooldown;
-                Debug.Log("Nuevo Timer: " + attackTimer);
+                //Debug.Log("Nuevo Timer: " + attackTimer);
                 Attack();
 
                 isPreparingAttack = false;

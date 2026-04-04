@@ -108,7 +108,8 @@ public class NPC_Controller : MonoBehaviour
     IEnumerator PossessDelay()
     {
         yield return new WaitForSeconds(3f);
-        GameObject zombie = Instantiate(zombiePrefab, transform.position, transform.rotation); 
+        GameObject zombie = Instantiate(zombiePrefab, transform.position, transform.rotation);
+        zombie.AddComponent<TriggerNivelDos>();
         zombie.GetComponent<NoiseEmitter>().EmitNoise(999f, player.position);
         Destroy(gameObject);
     }

@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerInteraction : MonoBehaviour
 {
     public float interactDistance = 1.5f;
-    public GameObject interactUI;
+    GameObject interactUI;
 
     IInteractable currentInteractable;
 
@@ -12,6 +13,22 @@ public class PlayerInteraction : MonoBehaviour
 
     float outlineOn = 0.015f;
     float outlineOff = 0f;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject ui = GameObject.Find("UI");
+        interactUI = ui.transform.Find("Canvas/InteractUI").gameObject;
+    }
 
     void Update()
     {

@@ -6,7 +6,13 @@ public class NoiseSystem : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void MakeNoise(Vector3 position, float radius, Vector3 playerPosition)

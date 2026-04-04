@@ -390,8 +390,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windUpMat: {fileID: 2100000, guid: 529f46886e7652948923cfa967642f63, type: 2}
   attackDistance: 2.5
-  attackCooldown: 2
-  attackWindUp: 1
+  attackCooldown: 1.5
+  attackWindUp: 0.5
   attackWindUpTimer: 0
   isPreparingAttack: 0
   lookAtDuration: 0.2

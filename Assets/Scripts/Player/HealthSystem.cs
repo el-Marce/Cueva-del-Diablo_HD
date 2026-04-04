@@ -13,6 +13,13 @@ public class HealthSystem : MonoBehaviour
 
     void Awake()
     {
+        if (FindObjectsOfType<HealthSystem>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(transform.root.gameObject);
         currentHealth = maxHealth;
     }
 
@@ -20,6 +27,9 @@ public class HealthSystem : MonoBehaviour
     {
         if (transform.position.y < -2f && currentHealth > 0)
             TakeDamage(currentHealth);
+
+        if (Input.GetKeyDown(KeyCode.N))
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void TakeDamage(float amount)
@@ -50,7 +60,7 @@ public class HealthSystem : MonoBehaviour
 
     IEnumerator RestartLevel()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }

@@ -11,8 +11,8 @@ public class PlayerLook : MonoBehaviour
     {
         if (GameState.InMenu) return;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime / Screen.width * 1000f;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime / Screen.height * 1000f;
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
