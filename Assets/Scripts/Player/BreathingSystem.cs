@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BreathingSystem : MonoBehaviour
 {
@@ -26,6 +27,25 @@ public class BreathingSystem : MonoBehaviour
 
     public TextMeshProUGUI breathWarningText;
     private Coroutine blinkCoroutine;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StopAllCoroutines();  // cancela BlinkText que usa la referencia vieja
+        blinkCoroutine = null;
+
+        GameObject ui = GameObject.Find("UI");
+        breathWarningText = ui.transform.Find("Canvas/BreathWarningText").GetComponent<TextMeshProUGUI>();
+    }
 
     void Start()
     {

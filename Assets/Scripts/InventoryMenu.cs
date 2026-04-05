@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 public class InventoryMenu : MonoBehaviour
 {
     Inventory inventory;
@@ -19,6 +19,40 @@ public class InventoryMenu : MonoBehaviour
     public GameObject lecturaPanel;
 
     public int columns = 4;
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        menuOpen = false;
+        GameState.InMenu = false;
+
+        Transform canvas = GameObject.Find("UI").transform.Find("Canvas");
+
+        inventoryPanel = canvas.Find("InventoryPanel").gameObject;
+        lecturaPanel = canvas.Find("LecturaPanel").gameObject;
+
+        tabText = canvas.Find("InventoryPanel/TabsText").GetComponent<TMP_Text>();
+        descriptionText = canvas.Find("InventoryPanel/DescripcionText").GetComponent<TMP_Text>();
+
+        itemTexts = new TMP_Text[]
+        {
+        canvas.Find("InventoryPanel/Grid/Item0").GetComponent<TMP_Text>(),
+        canvas.Find("InventoryPanel/Grid/Item1").GetComponent<TMP_Text>(),
+        canvas.Find("InventoryPanel/Grid/Item2").GetComponent<TMP_Text>(),
+        canvas.Find("InventoryPanel/Grid/Item3").GetComponent<TMP_Text>(),
+        canvas.Find("InventoryPanel/Grid/Item4").GetComponent<TMP_Text>()
+        };
+    }
+
     void Start()
     {
         inventory = GetComponent<Inventory>();

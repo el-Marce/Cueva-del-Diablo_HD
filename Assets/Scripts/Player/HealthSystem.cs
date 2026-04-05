@@ -5,27 +5,49 @@ using System.Collections;
 
 public class HealthSystem : MonoBehaviour
 {
+    static HealthSystem Instance;
+
     public float maxHealth = 100f;
     public float currentHealth;
 
     public event Action<float> OnHealthChanged;
     public event Action OnPlayerDeath;
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        GameObject spawn = GameObject.Find("PlayerSpawn");
+        if (spawn != null)
+        {
+            transform.root.position = spawn.transform.position;
+            transform.root.rotation = spawn.transform.rotation;
+        }
+    }
+
     void Awake()
     {
-        if (FindObjectsOfType<HealthSystem>().Length > 1)
+        if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
-
+        Instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
         currentHealth = maxHealth;
     }
 
     private void Update()
     {
-        if (transform.position.y < -2f && currentHealth > 0)
+        if (transform.position.y < -5f && currentHealth > 0)
             TakeDamage(currentHealth);
 
         if (Input.GetKeyDown(KeyCode.N))
@@ -61,7 +83,8 @@ public class HealthSystem : MonoBehaviour
     IEnumerator RestartLevel()
     {
         yield return new WaitForSeconds(3f);
-
+        Instance = null;  // <- permite que el nuevo Player de la escena tome el control
+        Destroy(transform.root.gameObject); // <- destruye el Player muerto
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

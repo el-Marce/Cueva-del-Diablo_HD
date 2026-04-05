@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat")]
@@ -45,6 +45,20 @@ public class PlayerCombat : MonoBehaviour
 
     Camera cam;
 
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        cam = Camera.main;
+    }
     void Start()
     {
         cam = Camera.main;
