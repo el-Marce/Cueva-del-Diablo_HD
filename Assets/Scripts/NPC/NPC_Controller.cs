@@ -28,6 +28,8 @@ public class NPC_Controller : MonoBehaviour
     enum State { Explore, Follow }
     State currentState;
 
+    bool possessed = false;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -98,6 +100,13 @@ public class NPC_Controller : MonoBehaviour
         return transform.position;
     }
 
+    public void PrepareForPossession()
+    {
+        possessed = true;
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
+    }
+
     // --- POSESIÓN ---
     public GameObject zombiePrefab;
 
@@ -110,7 +119,10 @@ public class NPC_Controller : MonoBehaviour
         yield return new WaitForSeconds(3f);
         GameObject zombie = Instantiate(zombiePrefab, transform.position, transform.rotation);
         zombie.AddComponent<TriggerNivelDos>();
-        zombie.GetComponent<NoiseEmitter>().EmitNoise(999f, player.position);
+
+        yield return null; 
+        zombie.GetComponent<EnemyHearing>().HearNoise(player.position, 999f, player.position);
+
         Destroy(gameObject);
     }
 }

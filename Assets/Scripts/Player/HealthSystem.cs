@@ -37,7 +37,7 @@ public class HealthSystem : MonoBehaviour
     {
         if (Instance != null)
         {
-            Destroy(gameObject);
+            Destroy(transform.root.gameObject);
             return;
         }
         Instance = this;

@@ -166,6 +166,7 @@ public class AltarUI : MonoBehaviour
     {
         door.CloseDoor();
         door.isLocked = true;
+        NPC.PrepareForPossession();
         NPC.Possess();
 
         Debug.Log("RITUAL ACTIVADO");
