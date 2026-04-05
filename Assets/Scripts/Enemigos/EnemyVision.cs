@@ -9,15 +9,9 @@ public class EnemyVision : MonoBehaviour
 
     void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player")?.transform;
-
-            if (player == null)
-            {
-                Debug.LogError("EnemyVision: No se encontró el Player");
-            }
-        }
+            Debug.LogError("EnemyVision: No se encontró el Player");
     }
     public bool CanSeePlayer()
     {

@@ -10,6 +10,8 @@ public class NoiseEmitter : MonoBehaviour
     {
         //Debug.Log("Position utilizada por NoiseEmitter: " + playerPosition);
         float radius = noiseRadius * loudness;
+
+        //NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition, gameObject);
         NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition);
 
         lastNoiseRadius = radius;

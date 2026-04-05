@@ -204,5 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89b0af7ecd6e50c468ff59d868d7e669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredKey: Llave Amarilla
+  requiredKey: 
   isLocked: 0
+  openDuration: 1.5
+  closeDuration: 1
