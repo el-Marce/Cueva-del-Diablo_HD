@@ -721,18 +721,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &675618369 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5968388766321642365, guid: e638bab745d554e43b8a00f5c8ab9a54,
-    type: 3}
-  m_PrefabInstance: {fileID: 2640512139020492869}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8805f32c361ced4d8918f4b67b437c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &810126210
 GameObject:
   m_ObjectHideFlags: 0
@@ -41074,6 +41062,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 578acbd6b08a7154f8028cab1bbd2f6a, type: 3}
+--- !u!1 &1821049478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
+    type: 3}
+  m_PrefabInstance: {fileID: 2640512139020492869}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1821049483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821049478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8805f32c361ced4d8918f4b67b437c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  altarUI: {fileID: 530309634078527096}
+  cocaEntregada: 0
+  alcoholEntregado: 0
+  sulluEntregado: 0
 --- !u!43 &1826147323
 Mesh:
   m_ObjectHideFlags: 0
@@ -41549,7 +41559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f53c525c8c48742924b44f23ef784f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  altar: {fileID: 675618369}
+  altar: {fileID: 1821049483}
   door: {fileID: 1677594150}
   NPC: {fileID: 1023265420}
   optionsText:
@@ -41740,7 +41750,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1821049483}
   m_SourcePrefab: {fileID: 100100000, guid: e638bab745d554e43b8a00f5c8ab9a54, type: 3}
 --- !u!114 &2677010617349665837
 MonoBehaviour:

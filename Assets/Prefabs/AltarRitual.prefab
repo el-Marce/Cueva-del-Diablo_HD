@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2335726581386907540}
   - component: {fileID: 7782873929807997738}
   - component: {fileID: 8941393278402291817}
-  - component: {fileID: 5968388766321642365}
   m_Layer: 0
   m_Name: AltarRitual
   m_TagString: Untagged
@@ -109,19 +108,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5968388766321642365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8466944895675130568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8805f32c361ced4d8918f4b67b437c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  altarUI: {fileID: 0}
-  cocaEntregada: 0
-  alcoholEntregado: 0
-  sulluEntregado: 0

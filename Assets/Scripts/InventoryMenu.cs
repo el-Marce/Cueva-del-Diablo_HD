@@ -78,7 +78,7 @@ public class InventoryMenu : MonoBehaviour
             }
 
             // Si no hay UI → abrir inventario SOLO con TAB
-            if (Input.GetKeyDown(KeyCode.Tab))
+            if (Input.GetKeyDown(KeyCode.Tab) && !GameState.InMenu)
             {
                 ToggleMenu();
             }

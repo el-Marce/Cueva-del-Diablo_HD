@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AltarCondition_Item : AltarCondition
 {
-    public string itemName = "agua bendita";
+    public string itemName = "Agua Bendita";
     Inventory inventory;
 
     void Awake()
@@ -18,7 +18,7 @@ public class AltarCondition_Item : AltarCondition
     public override string GetStatusText()
     {
         bool has = inventory.HasItem(itemName);
-        return "Ofrecer " + itemName + ": " + (has ? "1" : "0");
+        return itemName + " en inventario : " + (has ? "Y" : "N");
     }
 
     public override void OnFulfill()

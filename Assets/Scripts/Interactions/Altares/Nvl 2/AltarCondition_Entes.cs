@@ -13,7 +13,7 @@ public class AltarCondition_Entes : AltarCondition
 
     public override string GetStatusText()
     {
-        return "Cantidad de almas a ofrecer: " + CountEntes() + "/" + requiredCount;
+        return "Almas cercanas: " + CountEntes() + "/" + requiredCount;
     }
 
     public override void OnFulfill() { } // los entes no se "consumen", solo se verifica
@@ -21,9 +21,13 @@ public class AltarCondition_Entes : AltarCondition
     int CountEntes()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, enteLayer);
+        Debug.Log("[Altar] Colliders detectados: " + hits.Length);
         int count = 0;
         foreach (Collider hit in hits)
+        {
+            Debug.Log("[Altar] Hit: " + hit.name + " tiene EntePsicologico: " + (hit.GetComponent<EntePsicologico>() != null));
             if (hit.GetComponent<EntePsicologico>() != null) count++;
+        }
         return count;
     }
 
