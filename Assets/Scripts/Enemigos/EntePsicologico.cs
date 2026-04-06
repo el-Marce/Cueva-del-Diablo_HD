@@ -86,6 +86,14 @@ public class EntePsicologico : MonoBehaviour
             navigation.Resume();
         }
 
+        Debug.Log("Estado: " + currentState + ". Current target: " + currentTarget);
+
+        if (currentState == State.Repelled)
+        {
+            UpdateRepelled();
+            return;
+        }
+
         if (!floatMotion.enabled)
         {
             floatTimer -= Time.deltaTime;
@@ -118,8 +126,8 @@ public class EntePsicologico : MonoBehaviour
                 UpdateAffectMind();
                 break;
 
-            case State.Repelled: 
-                UpdateRepelled(); 
+            case State.Repelled:
+                UpdateRepelled();
                 break;
         }
     }
@@ -323,23 +331,27 @@ public class EntePsicologico : MonoBehaviour
         return transform.position;
     }
 
-    Vector3 savedFleeDir; // <- añadir variable
-
     public void Repel()
     {
-        // Guardar dirección opuesta al jugador en el momento del impacto
-        Vector3 myPos = new Vector3(navigation.agent.nextPosition.x, 0f, navigation.agent.nextPosition.z);
-        Vector3 playerPos = new Vector3(player.position.x, 0f, player.position.z);
-
-        savedFleeDir = (myPos - playerPos).normalized;
-
-        // Si está encima del jugador, usar dirección aleatoria
-        if (savedFleeDir.magnitude < 0.1f)
-            savedFleeDir = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
-
         repelTimer = repelDuration;
         currentState = State.Repelled;
-        Debug.Log("[Ente] Repelido | fleeDir guardado: " + savedFleeDir);
+
+        Vector3 bestPoint = transform.position;
+        float bestDistance = 0f;
+
+        for (int i = 0; i < 20; i++)
+        {
+            Vector3 candidate = GetRandomNavPoint(wanderRadius);
+            float distFromPlayer = Vector3.Distance(candidate, player.position);
+            if (distFromPlayer > bestDistance)
+            {
+                bestDistance = distFromPlayer;
+                bestPoint = candidate;
+            }
+        }
+
+        currentTarget = bestPoint;
+        navigation.MoveTo(currentTarget);
     }
 
     void UpdateRepelled()
@@ -348,25 +360,22 @@ public class EntePsicologico : MonoBehaviour
         floatMotion.SetOffset(5f);
         floatMotion.EnableOscillation(true);
 
-        Vector3 agentPos = new Vector3(
-            navigation.agent.nextPosition.x, 0f,
-            navigation.agent.nextPosition.z
-        );
-
-        Vector3 fleeTarget = agentPos + savedFleeDir * 15f;
-
-        if (UnityEngine.AI.NavMesh.SamplePosition(fleeTarget, out UnityEngine.AI.NavMeshHit hit, 15f, UnityEngine.AI.NavMesh.AllAreas))
-            currentTarget = hit.position;
-        else
-            currentTarget = fleeTarget;
-
-        navigation.MoveTo(currentTarget);
-
         repelTimer -= Time.deltaTime;
         if (repelTimer <= 0f)
         {
             currentState = State.Idle;
-            Debug.Log("[Ente] Repulsión terminada -> Idle");
+            return;
+        }
+
+        float distanceToTarget = Vector3.Distance(transform.position, currentTarget);
+        if (distanceToTarget < 2f)
+        {
+            Vector3 newPoint = GetRandomNavPoint(wanderRadius);
+            float distFromPlayer = Vector3.Distance(newPoint, player.position);
+            if (distFromPlayer > Vector3.Distance(transform.position, player.position))
+                currentTarget = newPoint;
+
+            navigation.MoveTo(currentTarget);
         }
     }
 }

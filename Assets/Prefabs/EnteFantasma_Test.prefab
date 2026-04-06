@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7733225454636705809}
   - component: {fileID: 1924146621595031302}
   - component: {fileID: 520721712859228405}
-  - component: {fileID: 1509041593223400554}
   - component: {fileID: 4315248079487850954}
   - component: {fileID: 4821561859990690140}
   - component: {fileID: 7648385654333686717}
@@ -165,18 +164,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 0}
---- !u!114 &1509041593223400554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3968043200976870209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d66132903e489d8438d7a5bc05bc32dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4315248079487850954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +199,7 @@ MonoBehaviour:
   shareInterval: 0.3
   chaseSpeedMultiplier: 3
   investigateSpeedMultiplier: 2
+  repelDuration: 10
 --- !u!114 &7648385654333686717
 MonoBehaviour:
   m_ObjectHideFlags: 0

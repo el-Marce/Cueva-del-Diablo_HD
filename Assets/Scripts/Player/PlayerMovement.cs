@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
+        if (Input.GetMouseButton(1)) return;
+
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 

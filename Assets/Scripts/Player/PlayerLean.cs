@@ -19,12 +19,17 @@ public class PlayerLean : MonoBehaviour
     {
         if (GameState.InMenu) return;
 
-        if (Input.GetKey(KeyCode.Q))
-            targetX = leanAmount;
-        else if (Input.GetKey(KeyCode.E))
-            targetX = -leanAmount;
+        if (Input.GetMouseButton(1))
+        {
+            if (Input.GetKey(KeyCode.A))
+                targetX = leanAmount;
+            else if (Input.GetKey(KeyCode.D))
+                targetX = -leanAmount;
+        }
         else
+        {
             targetX = 0f;
+        }
 
         var offset = follow.ShoulderOffset;
         offset.x = Mathf.Lerp(offset.x, targetX, Time.deltaTime * leanSpeed);
