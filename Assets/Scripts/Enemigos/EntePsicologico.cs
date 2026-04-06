@@ -30,6 +30,10 @@ public class EntePsicologico : MonoBehaviour
     float shareTimer = 0f;
     public float shareInterval = 0.3f;
 
+    [Header("Memoria")]
+    public float chaseMemoryDuration = 2.5f;
+    float chaseMemoryTimer = 0f;
+
     [Header("Velocidad")]
     public float chaseSpeedMultiplier;
     public float investigateSpeedMultiplier;
@@ -261,10 +265,11 @@ public class EntePsicologico : MonoBehaviour
 
         navigation.MoveTo(player.position);
 
-        float distance = Vector3.Distance(transform.position, player.position);
-
         if (vision.CanSeePlayer())
         {
+            chaseMemoryTimer = chaseMemoryDuration;
+            navigation.MoveTo(player.position);
+
             shareTimer -= Time.deltaTime;
 
             if (shareTimer <= 0f)
@@ -273,6 +278,22 @@ public class EntePsicologico : MonoBehaviour
                 shareTimer = shareInterval;
             }
         }
+        else
+        {
+            navigation.MoveTo(player.position); // sigue yendo a la última posición conocida
+            chaseMemoryTimer -= Time.deltaTime;
+
+            if (chaseMemoryTimer <= 0f)
+            {
+                Debug.Log("[Ente] Perdió al jugador -> HuntSound");
+                currentTarget = player.position;
+                hasExactPlayerPosition = true;
+                currentState = State.HuntSound;
+                return;
+            }
+        }
+
+        float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance <= effectDistance)
         {

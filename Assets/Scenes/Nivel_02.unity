@@ -198,10 +198,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3968043200976870209, guid: cae0a6d788c047e4b9a30a234db5adbb,
         type: 3}
       propertyPath: m_Name
@@ -511,6 +507,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5968388766321642365, guid: e638bab745d554e43b8a00f5c8ab9a54,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6123797559192724989, guid: e638bab745d554e43b8a00f5c8ab9a54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -574,8 +575,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1036441711}
   m_SourcePrefab: {fileID: 100100000, guid: e638bab745d554e43b8a00f5c8ab9a54, type: 3}
+--- !u!1 &1036441710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
+    type: 3}
+  m_PrefabInstance: {fileID: 1036441709}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1036441711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036441710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da577aa0e9ce3c479c93e97ed0fe7b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1615455832}
+  requiredItem: Agua Bendita
+  requiredEnteCount: 1
+  enteDetectionRadius: 10
+  enteLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  activationDelay: 2
+  altarUI: {fileID: 0}
+  statusText: {fileID: 0}
 --- !u!1001 &1122171613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1044,12 +1077,12 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 10.36574
+      value: 11.530849
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.0809
+      value: 5.1
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -1059,7 +1092,7 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 23.3654
+      value: 23.32
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -1111,6 +1144,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42c66d54381e8ad46b5f1e230a9ab113, type: 3}
+--- !u!114 &1615455832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 168870545802702057, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+    type: 3}
+  m_PrefabInstance: {fileID: 1615455831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b0af7ecd6e50c468ff59d868d7e669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1652690428
 PrefabInstance:
   m_ObjectHideFlags: 0

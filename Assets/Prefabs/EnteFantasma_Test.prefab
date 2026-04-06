@@ -20,9 +20,9 @@ GameObject:
   - component: {fileID: 7648385654333686717}
   - component: {fileID: 4657052600749082139}
   - component: {fileID: 4732742837202516522}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: EnteFantasma_Test
-  m_TagString: Enemigo
+  m_TagString: EnemigoEnte
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   wanderRadius: 30
   alertDelay: 1
   shareInterval: 0.3
+  chaseMemoryDuration: 2.5
   chaseSpeedMultiplier: 3
   investigateSpeedMultiplier: 2
   repelDuration: 10
