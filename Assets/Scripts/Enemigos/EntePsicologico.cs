@@ -33,6 +33,10 @@ public class EntePsicologico : MonoBehaviour
     [Header("Velocidad")]
     public float chaseSpeedMultiplier;
     public float investigateSpeedMultiplier;
+
+    [Header("Repulsión")]
+    public float repelDuration = 10f;
+    float repelTimer = 0f;
     enum AlertType
     {
         Vision,
@@ -48,7 +52,8 @@ public class EntePsicologico : MonoBehaviour
         Alert,
         HuntSound,
         Chase,
-        AffectMind
+        AffectMind,
+        Repelled
     }
 
     State currentState;
@@ -112,6 +117,10 @@ public class EntePsicologico : MonoBehaviour
             case State.AffectMind:
                 UpdateAffectMind();
                 break;
+
+            case State.Repelled: 
+                UpdateRepelled(); 
+                break;
         }
     }
 
@@ -133,6 +142,7 @@ public class EntePsicologico : MonoBehaviour
 
         if (vision.CanSeePlayer())
         {
+            Debug.Log("[Ente] Ve al jugador -> Alert -> Chase");
             nextState = State.Chase;
 
             float distanceDetect = Vector3.Distance(transform.position, player.position);
@@ -146,6 +156,7 @@ public class EntePsicologico : MonoBehaviour
 
         if (hearing.HasSharedPlayerPosition())
         {
+            Debug.Log("[Ente] Escucha posición compartida -> HuntSound");
             currentTarget = hearing.GetSharedPlayerPosition();
             hasExactPlayerPosition = true;
 
@@ -154,6 +165,7 @@ public class EntePsicologico : MonoBehaviour
         }
         else if (hearing.HasHeardSomething())
         {
+            Debug.Log("[Ente] Escucha ruido -> Alert -> HuntSound");
             nextState = State.HuntSound;
 
             currentTarget = hearing.GetNoisePosition();
@@ -221,11 +233,13 @@ public class EntePsicologico : MonoBehaviour
 
         if (distance < 2f)
         {
+            Debug.Log("[Ente] Llegó al objetivo, vuelve a Idle");
             currentState = State.Idle;
         }
 
         if (vision.CanSeePlayer())
         {
+            Debug.Log("[Ente] Ve al jugador desde HuntSound -> Chase");
             currentState = State.Chase;
         }
         //Debug.Log("Ente Investigando ruido");
@@ -254,11 +268,13 @@ public class EntePsicologico : MonoBehaviour
 
         if (distance <= effectDistance)
         {
+            Debug.Log("[Ente] En rango -> AffectMind");
             currentState = State.AffectMind;
         }
 
         if (!vision.CanSeePlayer())
         {
+            Debug.Log("[Ente] Perdió al jugador -> HuntSound");
             currentTarget = player.position;
             hasExactPlayerPosition = true;
 
@@ -279,6 +295,7 @@ public class EntePsicologico : MonoBehaviour
 
         if (distance > effectDistance)
         {
+            Debug.Log("[Ente] Jugador escapó -> Chase");
             currentState = State.Chase;
             return;
         }
@@ -304,5 +321,52 @@ public class EntePsicologico : MonoBehaviour
         }
 
         return transform.position;
+    }
+
+    Vector3 savedFleeDir; // <- añadir variable
+
+    public void Repel()
+    {
+        // Guardar dirección opuesta al jugador en el momento del impacto
+        Vector3 myPos = new Vector3(navigation.agent.nextPosition.x, 0f, navigation.agent.nextPosition.z);
+        Vector3 playerPos = new Vector3(player.position.x, 0f, player.position.z);
+
+        savedFleeDir = (myPos - playerPos).normalized;
+
+        // Si está encima del jugador, usar dirección aleatoria
+        if (savedFleeDir.magnitude < 0.1f)
+            savedFleeDir = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f)).normalized;
+
+        repelTimer = repelDuration;
+        currentState = State.Repelled;
+        Debug.Log("[Ente] Repelido | fleeDir guardado: " + savedFleeDir);
+    }
+
+    void UpdateRepelled()
+    {
+        navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
+        floatMotion.SetOffset(5f);
+        floatMotion.EnableOscillation(true);
+
+        Vector3 agentPos = new Vector3(
+            navigation.agent.nextPosition.x, 0f,
+            navigation.agent.nextPosition.z
+        );
+
+        Vector3 fleeTarget = agentPos + savedFleeDir * 15f;
+
+        if (UnityEngine.AI.NavMesh.SamplePosition(fleeTarget, out UnityEngine.AI.NavMeshHit hit, 15f, UnityEngine.AI.NavMesh.AllAreas))
+            currentTarget = hit.position;
+        else
+            currentTarget = fleeTarget;
+
+        navigation.MoveTo(currentTarget);
+
+        repelTimer -= Time.deltaTime;
+        if (repelTimer <= 0f)
+        {
+            currentState = State.Idle;
+            Debug.Log("[Ente] Repulsión terminada -> Idle");
+        }
     }
 }

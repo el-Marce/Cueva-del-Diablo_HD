@@ -221,18 +221,16 @@ public class InventoryMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            string selected = inventory.GetSelected();
-
             if (inventory.currentTab == Inventory.Tab.Scrolls)
             {
+                string selected = inventory.GetSelected();
                 Debug.Log("LEYENDO PERGAMINO:");
-                Debug.Log(selected);
                 descriptionText.text = selected;
             }
             else
             {
-                Debug.Log("USANDO ITEM: " + selected);
-                descriptionText.text = "Usaste: " + selected;
+                inventory.EquipSelected();
+                PrintMenu(); // refresca para mostrar el equipado
             }
         }
     }
@@ -240,19 +238,16 @@ public class InventoryMenu : MonoBehaviour
     void PrintMenu()
     {
         if (inventory.currentTab == Inventory.Tab.Items)
-        {
             tabText.text = "(Q) < Items > (E)";
-        }
         else
-        {
             tabText.text = "(Q) < Pergaminos > (E)";
-        }
 
+        int count = inventory.GetCount();
 
         //Debug.Log("------ INVENTARIO ------");
         //Debug.Log("TAB: " + inventory.currentTab);
 
-        int count = inventory.GetCount();
+
 
         //for (int i = 0; i < count; i++)
         //{
@@ -282,7 +277,12 @@ public class InventoryMenu : MonoBehaviour
             string text;
 
             if (inventory.currentTab == Inventory.Tab.Items)
-                text = inventory.items[i];
+            {
+                string itemName = inventory.items[i].name;
+                string uses = " x" + inventory.items[i].uses;
+                bool isEquipped = inventory.equippedItem == itemName;
+                text = (isEquipped ? "★ " : "") + itemName + uses;
+            }
             else
                 text = "Pergamino " + (i + 1);
 

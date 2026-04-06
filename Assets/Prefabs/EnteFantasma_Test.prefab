@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionDistance: 30
-  visionAngle: 120
+  visionAngle: 60
   player: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45, type: 3}
 --- !u!114 &4821561859990690140
 MonoBehaviour:
