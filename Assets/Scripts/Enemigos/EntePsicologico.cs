@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 public class EntePsicologico : MonoBehaviour
 {
     EnemyVision vision;
@@ -41,6 +43,9 @@ public class EntePsicologico : MonoBehaviour
     [Header("Repulsión")]
     public float repelDuration = 10f;
     float repelTimer = 0f;
+
+    [Header("Muerte")]
+    public GameObject shockwaveEffect;
     enum AlertType
     {
         Vision,
@@ -398,5 +403,67 @@ public class EntePsicologico : MonoBehaviour
 
             navigation.MoveTo(currentTarget);
         }
+    }
+    public void Die()
+    {
+        StartCoroutine(DeathSequence());
+    }
+
+    IEnumerator DeathSequence()
+    {
+        // Desactiva comportamiento
+        currentState = State.Idle;
+        navigation.Pause();
+        hearing.enabled = false;
+        vision.enabled = false;
+        this.enabled = false; // para el Update
+
+        // Desactiva colisión para que no interfiera
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        float duration = 1.8f;
+        float elapsed = 0f;
+
+        Vector3 startPos = transform.position;
+        Vector3 endPos = startPos + Vector3.up * 4f;
+
+        Renderer[] renderers = GetComponentsInChildren<Renderer>();
+
+        // Guarda colores originales
+        Color[] originalColors = new Color[renderers.Length];
+        for (int i = 0; i < renderers.Length; i++)
+        {
+            if (renderers[i].material.HasProperty("_Color"))
+                originalColors[i] = renderers[i].material.color;
+        }
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+
+            // Sube suavemente
+            transform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0f, 1f, t));
+
+            // Se desvanece
+            foreach (Renderer r in renderers)
+            {
+                if (r.material.HasProperty("_Color"))
+                {
+                    Color c = r.material.color;
+                    c.a = Mathf.Lerp(1f, 0f, t);
+                    r.material.color = c;
+                }
+            }
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Dispara efecto de onda en el punto más alto
+        if (shockwaveEffect != null)
+            Instantiate(shockwaveEffect, transform.position, Quaternion.identity);
+
+        Destroy(gameObject);
     }
 }

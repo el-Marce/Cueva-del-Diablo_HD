@@ -57,7 +57,30 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         door.isLocked = false;
         door.OpenDoor();
 
+        KillNearbyEntes();
+
         GetComponent<Collider>().enabled = false;
         Debug.Log("[Altar] Ritual completado.");
+    }
+    void KillNearbyEntes()
+    {
+        // Reutiliza el radio de la condición de entes si existe
+        AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
+        if (enteCondition == null) return;
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            enteCondition.detectionRadius,
+            enteCondition.enteLayer
+        );
+
+        foreach (Collider hit in hits)
+        {
+            EntePsicologico ente = hit.GetComponent<EntePsicologico>();
+            if (ente != null)
+            {
+                ente.Die();
+            }
+        }
     }
 }
