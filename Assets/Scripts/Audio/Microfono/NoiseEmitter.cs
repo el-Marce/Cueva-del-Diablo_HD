@@ -12,7 +12,7 @@ public class NoiseEmitter : MonoBehaviour
         float radius = noiseRadius * loudness;
 
         //NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition, gameObject);
-        NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition);
+        NoiseSystem.Instance.MakeNoise(transform.position, radius, playerPosition, gameObject);
 
         lastNoiseRadius = radius;
         gizmoTimer = 5f;

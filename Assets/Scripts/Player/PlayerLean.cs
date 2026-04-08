@@ -25,6 +25,8 @@ public class PlayerLean : MonoBehaviour
                 targetX = leanAmount;
             else if (Input.GetKey(KeyCode.D))
                 targetX = -leanAmount;
+            else
+                targetX = 0f;
         }
         else
         {

@@ -108,9 +108,9 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -197,10 +197,11 @@ MonoBehaviour:
   wanderRadius: 30
   alertDelay: 1
   shareInterval: 0.3
-  chaseMemoryDuration: 2.5
-  chaseSpeedMultiplier: 3
-  investigateSpeedMultiplier: 2
+  chaseSpeedMultiplier: 2
+  investigateSpeedMultiplier: 1.5
   repelDuration: 10
+  shockwaveEffect: {fileID: 9169810840826366299, guid: b2fbe575419068f4dbd0a135e0d97b83,
+    type: 3}
 --- !u!114 &7648385654333686717
 MonoBehaviour:
   m_ObjectHideFlags: 0

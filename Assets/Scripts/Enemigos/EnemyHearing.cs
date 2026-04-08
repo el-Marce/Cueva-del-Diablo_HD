@@ -10,22 +10,19 @@ public class EnemyHearing : MonoBehaviour
     bool knowsPlayerPosition = false;
     Vector3 sharedPlayerPosition;
 
-    public void HearNoise(Vector3 noisePosition, float radius, Vector3 playerPosition)
+    public void HearNoise(Vector3 noisePosition, float radius, Vector3 playerPosition, GameObject source = null)
     {
-        float distance = Vector3.Distance(transform.position, noisePosition);
+        if (source != null && source == gameObject) return;
 
-        //Debug.Log("Distancia: " + distance + " | Umbral: " + hearingDistance);
+        float distance = Vector3.Distance(transform.position, noisePosition);
         if (distance <= radius + hearingDistance)
         {
             heardSomething = true;
             lastHeardPosition = noisePosition;
-
             if (playerPosition != Vector3.zero)
             {
                 knowsPlayerPosition = true;
                 sharedPlayerPosition = playerPosition;
-
-                //Debug.Log(name + " recibió la POSICIÓN DEL JUGADOR por alerta: " + playerPosition);
             }
         }
     }

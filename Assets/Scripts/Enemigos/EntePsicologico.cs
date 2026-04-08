@@ -162,6 +162,9 @@ public class EntePsicologico : MonoBehaviour
             Debug.Log("[Ente] Ve al jugador -> Alert -> Chase");
             nextState = State.Chase;
 
+            currentTarget = player.position;
+            chaseMemoryTimer = chaseMemoryDuration;
+
             float distanceDetect = Vector3.Distance(transform.position, player.position);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
 
@@ -264,19 +267,17 @@ public class EntePsicologico : MonoBehaviour
     void UpdateChase()
     {
         navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
-
         floatMotion.SetOffset(1f);
         floatMotion.EnableOscillation(true);
 
-        navigation.MoveTo(player.position);
-
         if (vision.CanSeePlayer())
         {
+            currentTarget = player.position;
             chaseMemoryTimer = chaseMemoryDuration;
+
             navigation.MoveTo(player.position);
 
             shareTimer -= Time.deltaTime;
-
             if (shareTimer <= 0f)
             {
                 noiseEmitter.EmitNoise(1f, player.position);
@@ -285,34 +286,48 @@ public class EntePsicologico : MonoBehaviour
         }
         else
         {
-            navigation.MoveTo(player.position); // sigue yendo a la última posición conocida
             chaseMemoryTimer -= Time.deltaTime;
+
+            float distToTarget = Vector3.Distance(transform.position, currentTarget);
+
+            if (distToTarget > 2f)
+            {
+                // Todavía no llegó al último punto conocido, sigue yendo
+                navigation.MoveTo(currentTarget);
+            }
+            else
+            {
+                // Llegó al punto, busca alrededor con wander local
+                wanderTimer -= Time.deltaTime;
+                if (wanderTimer <= 0f)
+                {
+                    Vector3 searchPoint = GetRandomNavPoint(wanderRadius * 0.5f);
+                    navigation.MoveTo(searchPoint);
+                    wanderTimer = wanderInterval * 0.5f; // busca más rápido que idle
+                }
+            }
 
             if (chaseMemoryTimer <= 0f)
             {
-                Debug.Log("[Ente] Perdió al jugador -> HuntSound");
-                currentTarget = player.position;
-                hasExactPlayerPosition = true;
-                currentState = State.HuntSound;
+                if (hearing.HasSharedPlayerPosition() || hearing.HasHeardSomething())
+                {
+                    Debug.Log("[Ente] Memoria agotada -> HuntSound");
+                    currentState = State.HuntSound;
+                }
+                else
+                {
+                    Debug.Log("[Ente] Memoria agotada, sin ruidos -> Idle");
+                    currentState = State.Idle;
+                }
                 return;
             }
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
-
         if (distance <= effectDistance)
         {
             Debug.Log("[Ente] En rango -> AffectMind");
             currentState = State.AffectMind;
-        }
-
-        if (!vision.CanSeePlayer())
-        {
-            Debug.Log("[Ente] Perdió al jugador -> HuntSound");
-            currentTarget = player.position;
-            hasExactPlayerPosition = true;
-
-            currentState = State.HuntSound;
         }
     }
 
@@ -411,14 +426,12 @@ public class EntePsicologico : MonoBehaviour
 
     IEnumerator DeathSequence()
     {
-        // Desactiva comportamiento
         currentState = State.Idle;
         navigation.Pause();
         hearing.enabled = false;
         vision.enabled = false;
-        this.enabled = false; // para el Update
+        this.enabled = false;
 
-        // Desactiva colisión para que no interfiera
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
@@ -430,29 +443,22 @@ public class EntePsicologico : MonoBehaviour
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
 
-        // Guarda colores originales
-        Color[] originalColors = new Color[renderers.Length];
-        for (int i = 0; i < renderers.Length; i++)
-        {
-            if (renderers[i].material.HasProperty("_Color"))
-                originalColors[i] = renderers[i].material.color;
-        }
-
         while (elapsed < duration)
         {
             float t = elapsed / duration;
 
-            // Sube suavemente
             transform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0f, 1f, t));
 
-            // Se desvanece
             foreach (Renderer r in renderers)
             {
-                if (r.material.HasProperty("_Color"))
+                foreach (Material mat in r.materials)
                 {
-                    Color c = r.material.color;
-                    c.a = Mathf.Lerp(1f, 0f, t);
-                    r.material.color = c;
+                    if (mat.HasProperty("_BaseColor"))
+                    {
+                        Color c = mat.GetColor("_BaseColor");
+                        c.a = Mathf.Lerp(1f, 0f, t);
+                        mat.SetColor("_BaseColor", c);
+                    }
                 }
             }
 
@@ -460,9 +466,15 @@ public class EntePsicologico : MonoBehaviour
             yield return null;
         }
 
-        // Dispara efecto de onda en el punto más alto
         if (shockwaveEffect != null)
-            Instantiate(shockwaveEffect, transform.position, Quaternion.identity);
+        {
+            Renderer mainRenderer = GetComponentInChildren<Renderer>();
+            Vector3 spawnPos = mainRenderer != null
+                ? mainRenderer.bounds.center
+                : transform.position;
+
+            Instantiate(shockwaveEffect, spawnPos, Quaternion.identity);
+        }
 
         Destroy(gameObject);
     }
