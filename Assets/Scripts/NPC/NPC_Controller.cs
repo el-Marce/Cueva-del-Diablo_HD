@@ -34,6 +34,12 @@ public class NPC_Controller : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         currentState = State.Explore;
+
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 

@@ -1228,6 +1228,14 @@ MonoBehaviour:
   door: {fileID: 1615455832}
   altarUI: {fileID: 1342857744}
   activationDelay: 2
+  npcPrefab: {fileID: 6201917694836467527, guid: 408cbc42a423137479d05f60b0a20463,
+    type: 3}
+  entePrefab: {fileID: 3968043200976870209, guid: afb388b1381964641aab5e0dca7a61e2,
+    type: 3}
+  liberationDelay: 0
+  pueblerinoLayer:
+    serializedVersion: 2
+    m_Bits: 64
   conditions: []
 --- !u!1001 &1122171613
 PrefabInstance:

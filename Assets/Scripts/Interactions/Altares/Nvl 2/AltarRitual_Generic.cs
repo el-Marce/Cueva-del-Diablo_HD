@@ -13,6 +13,12 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     [Header("Timing")]
     public float activationDelay = 2f;
 
+    [Header("Liberación")]
+    public GameObject npcPrefab;
+    public GameObject entePrefab;
+    public float liberationDelay = 0f;
+    public LayerMask pueblerinoLayer;
+
     [HideInInspector] public List<AltarCondition> conditions = new List<AltarCondition>();
 
     bool activated = false;
@@ -58,6 +64,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         door.OpenDoor();
 
         KillNearbyEntes();
+        LiberateNearbyPueblerinos();
 
         GetComponent<Collider>().enabled = false;
         Debug.Log("[Altar] Ritual completado.");
@@ -82,5 +89,48 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
                 ente.Die();
             }
         }
+    }
+    void LiberateNearbyPueblerinos()
+    {
+        AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
+        if (enteCondition == null) return;
+
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position,
+            enteCondition.detectionRadius,
+            pueblerinoLayer  //usa su propio layer
+        );
+
+        int index = 0;
+        foreach (Collider hit in hits)
+        {
+            Pueblerino pueblerino = hit.GetComponent<Pueblerino>();
+            if (pueblerino != null)
+            {
+                StartCoroutine(LiberateRoutine(pueblerino));
+                index++;
+            }
+        }
+    }
+
+    IEnumerator LiberateRoutine(Pueblerino pueblerino)
+    {
+        yield return new WaitForSeconds(liberationDelay);
+
+        if (pueblerino == null) yield break; // ya fue destruido
+
+        Vector3 spawnPos = pueblerino.transform.position;
+        Quaternion spawnRot = pueblerino.transform.rotation;
+
+        if (entePrefab != null)
+        {
+            if (entePrefab!= null)
+                Instantiate(entePrefab, spawnPos, spawnRot);
+        }
+
+        Destroy(pueblerino.gameObject);
+
+        if (npcPrefab != null)
+            Instantiate(npcPrefab, spawnPos, spawnRot);
     }
 }
