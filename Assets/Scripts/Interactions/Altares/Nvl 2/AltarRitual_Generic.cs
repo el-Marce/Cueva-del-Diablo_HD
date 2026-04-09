@@ -19,7 +19,10 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     public float liberationDelay = 0f;
     public LayerMask pueblerinoLayer;
 
-    AltarCondition_Entes enteCondition;
+    [Header("Radio de efecto")]
+    public float effectRadius = 10f;
+    public LayerMask enteLayer;
+    //AltarCondition_Entes enteCondition;
 
     [HideInInspector] public List<AltarCondition> conditions = new List<AltarCondition>();
 
@@ -32,7 +35,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     }
     void Start()
     {
-        enteCondition = GetComponent<AltarCondition_Entes>();
+        //enteCondition = GetComponent<AltarCondition_Entes>();
     }
 
     public void Interact()
@@ -64,7 +67,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
         altarUI.Close();
 
-        FreezeNearbyEnemies(enteCondition);
+        FreezeNearbyEnemies();
 
         // Aquí tu cinemática / sonido
         yield return new WaitForSeconds(activationDelay);
@@ -78,67 +81,45 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         GetComponent<Collider>().enabled = false;
         Debug.Log("[Altar] Ritual completado.");
     }
-    void FreezeNearbyEnemies(AltarCondition_Entes enteCondition)
+    void KillNearbyEntes()
     {
-        Collider[] entes = Physics.OverlapSphere(
-            transform.position, enteCondition.detectionRadius, enteCondition.enteLayer);
+        Collider[] hits = Physics.OverlapSphere(transform.position, effectRadius, enteLayer);
+        foreach (Collider hit in hits)
+        {
+            EntePsicologico ente = hit.GetComponent<EntePsicologico>();
+            if (ente != null) ente.Die();
+        }
+    }
 
+    void LiberateNearbyPueblerinos()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, effectRadius, pueblerinoLayer);
+        int index = 0;
+        foreach (Collider hit in hits)
+        {
+            Pueblerino p = hit.GetComponent<Pueblerino>() ?? hit.GetComponentInParent<Pueblerino>();
+            if (p != null)
+            {
+                StartCoroutine(LiberateRoutine(p));
+                index++;
+            }
+        }
+    }
+
+    void FreezeNearbyEnemies()
+    {
+        Collider[] entes = Physics.OverlapSphere(transform.position, effectRadius, enteLayer);
         foreach (Collider hit in entes)
         {
             EntePsicologico ente = hit.GetComponent<EntePsicologico>();
             if (ente != null) ente.Freeze();
         }
 
-        Collider[] pueblerinos = Physics.OverlapSphere(
-            transform.position, enteCondition.detectionRadius, pueblerinoLayer);
-
+        Collider[] pueblerinos = Physics.OverlapSphere(transform.position, effectRadius, pueblerinoLayer);
         foreach (Collider hit in pueblerinos)
         {
             Pueblerino p = hit.GetComponent<Pueblerino>();
             if (p != null) p.Freeze();
-        }
-    }
-    void KillNearbyEntes()
-    {
-        // Reutiliza el radio de la condición de entes si existe
-        //AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
-        if (enteCondition == null) return;
-
-        Collider[] hits = Physics.OverlapSphere(
-            transform.position,
-            enteCondition.detectionRadius,
-            enteCondition.enteLayer
-        );
-
-        foreach (Collider hit in hits)
-        {
-            EntePsicologico ente = hit.GetComponent<EntePsicologico>();
-            if (ente != null)
-            {
-                ente.Die();
-            }
-        }
-    }
-    void LiberateNearbyPueblerinos()
-    {
-        //AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
-        if (enteCondition == null) return;
-
-        Collider[] hits = Physics.OverlapSphere(
-            transform.position,
-            enteCondition.detectionRadius,
-            pueblerinoLayer  //usa su propio layer
-        );
-
-        int index = 0;
-        foreach (Collider hit in hits)
-        {
-            Pueblerino pueblerino = hit.GetComponent<Pueblerino>();
-            if (pueblerino != null)
-            {
-                StartCoroutine(LiberateRoutine(pueblerino));
-                index++;
-            }
         }
     }
 

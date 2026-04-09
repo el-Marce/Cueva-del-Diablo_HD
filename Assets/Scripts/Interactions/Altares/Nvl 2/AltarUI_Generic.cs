@@ -12,6 +12,9 @@ public class AltarUI_Generic : MonoBehaviour
     public TMP_Text conditionsText;
     public TMP_Text[] optionsText;
 
+    [Header("Ritmo")]
+    public RitmoUI ritmoUI;
+
     string[] baseOptions = { "Ofrecer", "Cerrar" };
     int selectedIndex = 0;
     AltarRitual_Generic currentAltar;
@@ -106,6 +109,18 @@ public class AltarUI_Generic : MonoBehaviour
 
         if (!currentAltar.AllConditionsMet())
         {
+            // Verifica si solo falta el ritmo y las demás están cumplidas
+            AltarCondition_RhythmChallenge rhythm =
+                currentAltar.GetComponent<AltarCondition_RhythmChallenge>();
+
+            if (rhythm != null && !rhythm.IsMet() && ritmoUI != null)
+            {
+                // Abre panel de ritmo en lugar de cerrar
+                ritmoUI.Open(currentAltar, rhythm);
+                busy = false;
+                yield break;
+            }
+
             Debug.Log("[AltarUI] Condiciones no cumplidas.");
             altarPanel.SetActive(true);
             busy = false;
