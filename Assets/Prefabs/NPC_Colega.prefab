@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4534428576150973529}
   - component: {fileID: 4957052193779775824}
   - component: {fileID: 8902146847651127575}
+  - component: {fileID: -4568967331456498982}
   m_Layer: 0
   m_Name: NPC_Colega
   m_TagString: Untagged
@@ -134,7 +135,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!195 &8902146847651127575
 NavMeshAgent:
@@ -158,3 +159,19 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &-4568967331456498982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6201917694836467527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb32e0f0dd2a82840a9b80f23d763e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSanity: {fileID: 0}
+  sanityRestore: 7
+  thankEvent: 
+  disappearDelay: 2

@@ -20,7 +20,8 @@ public class MicrophoneInput : MonoBehaviour
 
     private BreathingSystem breathingSystem;
     NoiseEmitter noiseEmitter;
-
+    public AltarCondition_RhythmChallenge rhythmCondition;
+    bool pulseDetected = false;
     void Start()
     {
         breathingSystem = GetComponent<BreathingSystem>();
@@ -65,6 +66,25 @@ public class MicrophoneInput : MonoBehaviour
         else
         {
             breathTimer = 0f;
+        }
+
+        // Detectar pulso (como click)
+        if (smoothedLoudness > minThreshold && !pulseDetected)
+        {
+            pulseDetected = true;
+
+            if (rhythmCondition != null)
+                rhythmCondition.RegisterPulse();
+        }
+
+        if (smoothedLoudness < minThreshold)
+        {
+            pulseDetected = false;
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Debug.Log("[Ritmo] Pulso manual");
+            rhythmCondition?.RegisterPulse();
         }
     }
 

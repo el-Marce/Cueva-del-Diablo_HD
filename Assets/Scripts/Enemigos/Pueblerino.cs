@@ -522,4 +522,13 @@ public class Pueblerino : MonoBehaviour
             Gizmos.DrawSphere(point, 0.3f);
         }
     }
+
+    public void Freeze()
+    {
+        currentState = State.Patrol;
+        navigation.Pause();
+        hearing.enabled = false;
+        vision.enabled = false;
+        this.enabled = false;
+    }
 }

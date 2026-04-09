@@ -19,6 +19,8 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     public float liberationDelay = 0f;
     public LayerMask pueblerinoLayer;
 
+    AltarCondition_Entes enteCondition;
+
     [HideInInspector] public List<AltarCondition> conditions = new List<AltarCondition>();
 
     bool activated = false;
@@ -27,6 +29,10 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     {
         // Recoge automáticamente todas las condiciones en este GameObject
         conditions.AddRange(GetComponents<AltarCondition>());
+    }
+    void Start()
+    {
+        enteCondition = GetComponent<AltarCondition_Entes>();
     }
 
     public void Interact()
@@ -51,11 +57,14 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     IEnumerator ActivationSequence()
     {
         activated = true;
+        //var enteCondition = GetComponent<AltarCondition_Entes>();
 
         foreach (var c in conditions)
             c.OnFulfill();
 
         altarUI.Close();
+
+        FreezeNearbyEnemies(enteCondition);
 
         // Aquí tu cinemática / sonido
         yield return new WaitForSeconds(activationDelay);
@@ -69,10 +78,30 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         GetComponent<Collider>().enabled = false;
         Debug.Log("[Altar] Ritual completado.");
     }
+    void FreezeNearbyEnemies(AltarCondition_Entes enteCondition)
+    {
+        Collider[] entes = Physics.OverlapSphere(
+            transform.position, enteCondition.detectionRadius, enteCondition.enteLayer);
+
+        foreach (Collider hit in entes)
+        {
+            EntePsicologico ente = hit.GetComponent<EntePsicologico>();
+            if (ente != null) ente.Freeze();
+        }
+
+        Collider[] pueblerinos = Physics.OverlapSphere(
+            transform.position, enteCondition.detectionRadius, pueblerinoLayer);
+
+        foreach (Collider hit in pueblerinos)
+        {
+            Pueblerino p = hit.GetComponent<Pueblerino>();
+            if (p != null) p.Freeze();
+        }
+    }
     void KillNearbyEntes()
     {
         // Reutiliza el radio de la condición de entes si existe
-        AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
+        //AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
         if (enteCondition == null) return;
 
         Collider[] hits = Physics.OverlapSphere(
@@ -92,7 +121,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     }
     void LiberateNearbyPueblerinos()
     {
-        AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
+        //AltarCondition_Entes enteCondition = GetComponent<AltarCondition_Entes>();
         if (enteCondition == null) return;
 
         Collider[] hits = Physics.OverlapSphere(

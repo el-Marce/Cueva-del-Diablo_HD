@@ -3,42 +3,65 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EntePsicologico : MonoBehaviour
 {
+    // --- Componentes ---
     EnemyVision vision;
     EnemyHearing hearing;
     EnemyNavigation navigation;
     FloatMotion floatMotion;
-    Transform player;
-
     NoiseEmitter noiseEmitter;
-
+    Transform player;
     SanitySystem playerSanity;
 
-    float floatTimer = 0.1f;
-    public float sanityDamagePerSecond;
-    public float effectDistance;
+    // --- Estado ---
+    enum State 
+    { 
+        Idle, 
+        Alert, 
+        HuntSound, 
+        Chase, 
+        AffectMind, 
+        Repelled 
+    }
+    enum AlertType 
+    { 
+        Vision, 
+        Sound 
+    }
 
-    float wanderTimer;
-    public float wanderInterval;
+    State currentState;
+    State nextState;
+    AlertType alertType;
+
+    [Header("Flotación")]
     public float wanderRadius;
-
-    float alertTimer = 0f;
-    public float alertDelay = 1f;
-
-    bool alertNoiseEmitted = false;
-
-    Vector3 currentTarget;
-    bool hasExactPlayerPosition = false;
-
-    float shareTimer = 0f;
-    public float shareInterval = 0.3f;
-
-    [Header("Memoria")]
-    public float chaseMemoryDuration = 2.5f;
-    float chaseMemoryTimer = 0f;
+    public float wanderInterval;
+    float wanderTimer;
+    float floatTimer = 0.1f;
 
     [Header("Velocidad")]
     public float chaseSpeedMultiplier;
     public float investigateSpeedMultiplier;
+
+    [Header("Alerta")]
+    public float alertDelay = 1f;
+    float alertTimer = 0f;
+    bool alertNoiseEmitted = false;
+
+    [Header("Comunicación")]
+    public float shareInterval = 0.3f;
+    float shareTimer = 0f;
+
+    [Header("Memoria")]
+    public float chaseMemoryDuration = 2.5f;
+    float chaseMemoryTimer = 0f;
+    Vector3 currentTarget;
+    bool hasExactPlayerPosition = false;
+
+    [Header("Daño Mental")]
+    public float effectDistance;
+    public float sanityDamagePerSecond;
+    public float damageDelay = 2f;
+    float damageDelayTimer = 0f;
 
     [Header("Repulsión")]
     public float repelDuration = 10f;
@@ -46,26 +69,6 @@ public class EntePsicologico : MonoBehaviour
 
     [Header("Muerte")]
     public GameObject shockwaveEffect;
-    enum AlertType
-    {
-        Vision,
-        Sound
-    }
-
-    AlertType alertType;
-
-    State nextState;
-    enum State
-    {
-        Idle,
-        Alert,
-        HuntSound,
-        Chase,
-        AffectMind,
-        Repelled
-    }
-
-    State currentState;
 
     void Start()
     {
@@ -95,7 +98,7 @@ public class EntePsicologico : MonoBehaviour
             navigation.Resume();
         }
 
-        Debug.Log("Estado: " + currentState + ". Current target: " + currentTarget);
+        //Debug.Log("Estado: " + currentState + ". Current target: " + currentTarget);
 
         if (currentState == State.Repelled)
         {
@@ -159,7 +162,7 @@ public class EntePsicologico : MonoBehaviour
 
         if (vision.CanSeePlayer())
         {
-            Debug.Log("[Ente] Ve al jugador -> Alert -> Chase");
+            //Debug.Log("[Ente] Ve al jugador -> Alert -> Chase");
             nextState = State.Chase;
 
             currentTarget = player.position;
@@ -176,7 +179,7 @@ public class EntePsicologico : MonoBehaviour
 
         if (hearing.HasSharedPlayerPosition())
         {
-            Debug.Log("[Ente] Escucha posición compartida -> HuntSound");
+            //Debug.Log("[Ente] Escucha posición compartida -> HuntSound");
             currentTarget = hearing.GetSharedPlayerPosition();
             hasExactPlayerPosition = true;
 
@@ -185,7 +188,7 @@ public class EntePsicologico : MonoBehaviour
         }
         else if (hearing.HasHeardSomething())
         {
-            Debug.Log("[Ente] Escucha ruido -> Alert -> HuntSound");
+            //Debug.Log("[Ente] Escucha ruido -> Alert -> HuntSound");
             nextState = State.HuntSound;
 
             currentTarget = hearing.GetNoisePosition();
@@ -253,13 +256,13 @@ public class EntePsicologico : MonoBehaviour
 
         if (distance < 2f)
         {
-            Debug.Log("[Ente] Llegó al objetivo, vuelve a Idle");
+            //Debug.Log("[Ente] Llegó al objetivo, vuelve a Idle");
             currentState = State.Idle;
         }
 
         if (vision.CanSeePlayer())
         {
-            Debug.Log("[Ente] Ve al jugador desde HuntSound -> Chase");
+            //Debug.Log("[Ente] Ve al jugador desde HuntSound -> Chase");
             currentState = State.Chase;
         }
         //Debug.Log("Ente Investigando ruido");
@@ -311,12 +314,12 @@ public class EntePsicologico : MonoBehaviour
             {
                 if (hearing.HasSharedPlayerPosition() || hearing.HasHeardSomething())
                 {
-                    Debug.Log("[Ente] Memoria agotada -> HuntSound");
+                    //Debug.Log("[Ente] Memoria agotada -> HuntSound");
                     currentState = State.HuntSound;
                 }
                 else
                 {
-                    Debug.Log("[Ente] Memoria agotada, sin ruidos -> Idle");
+                    //Debug.Log("[Ente] Memoria agotada, sin ruidos -> Idle");
                     currentState = State.Idle;
                 }
                 return;
@@ -326,7 +329,7 @@ public class EntePsicologico : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
         if (distance <= effectDistance)
         {
-            Debug.Log("[Ente] En rango -> AffectMind");
+            //Debug.Log("[Ente] En rango -> AffectMind");
             currentState = State.AffectMind;
         }
     }
@@ -334,28 +337,55 @@ public class EntePsicologico : MonoBehaviour
     void UpdateAffectMind()
     {
         navigation.ResetSpeed();
-
         floatMotion.SetOffset(2.5f);
         floatMotion.EnableOscillation(false);
-
         navigation.StopMoving();
 
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (distance > effectDistance)
         {
-            Debug.Log("[Ente] Jugador escapó -> Chase");
+            //Debug.Log("[Ente] Jugador escapó -> Chase");
+            damageDelayTimer = 0f;
             currentState = State.Chase;
             return;
         }
 
-        AffectSanity();
+        damageDelayTimer += Time.deltaTime;
+
+        damageDelayTimer += Time.deltaTime;
+
+        if (damageDelayTimer >= damageDelay)
+        {
+            playerSanity.DecreaseSanity(sanityDamagePerSecond * Time.deltaTime);
+        }
     }
 
-    void AffectSanity()
-    {
-        playerSanity.DecreaseSanity(sanityDamagePerSecond * Time.deltaTime);
-    }
+    //void UpdateAffectMind()
+    //{
+    //    navigation.ResetSpeed();
+
+    //    floatMotion.SetOffset(2.5f);
+    //    floatMotion.EnableOscillation(false);
+
+    //    navigation.StopMoving();
+
+    //    float distance = Vector3.Distance(transform.position, player.position);
+
+    //    if (distance > effectDistance)
+    //    {
+    //        Debug.Log("[Ente] Jugador escapó -> Chase");
+    //        currentState = State.Chase;
+    //        return;
+    //    }
+
+    //    AffectSanity();
+    //}
+
+    //void AffectSanity()
+    //{
+    //    playerSanity.DecreaseSanity(sanityDamagePerSecond * Time.deltaTime);
+    //}
 
     Vector3 GetRandomNavPoint(float radius)
     {
@@ -477,5 +507,14 @@ public class EntePsicologico : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void Freeze()
+    {
+        currentState = State.Idle;
+        navigation.Pause();
+        hearing.enabled = false;
+        vision.enabled = false;
+        this.enabled = false;
     }
 }
