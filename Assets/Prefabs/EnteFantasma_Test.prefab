@@ -191,14 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4a45f8853b625848a9ee7899cbe9433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sanityDamagePerSecond: 10
-  effectDistance: 6
-  wanderInterval: 5
   wanderRadius: 30
-  alertDelay: 1
-  shareInterval: 0.3
+  wanderInterval: 5
   chaseSpeedMultiplier: 2
   investigateSpeedMultiplier: 1.5
+  alertDelay: 1
+  shareInterval: 0.3
+  chaseMemoryDuration: 5
+  effectDistance: 6
+  sanityDamagePerSecond: 10
+  damageDelay: 2
   repelDuration: 10
   shockwaveEffect: {fileID: 9169810840826366299, guid: b2fbe575419068f4dbd0a135e0d97b83,
     type: 3}

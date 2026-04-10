@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class EntePsicologico : MonoBehaviour
 {
-    // --- Componentes ---
     EnemyVision vision;
     EnemyHearing hearing;
     EnemyNavigation navigation;
@@ -12,7 +11,6 @@ public class EntePsicologico : MonoBehaviour
     Transform player;
     SanitySystem playerSanity;
 
-    // --- Estado ---
     enum State 
     { 
         Idle, 
