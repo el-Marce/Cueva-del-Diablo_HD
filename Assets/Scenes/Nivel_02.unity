@@ -3009,6 +3009,11 @@ PrefabInstance:
       propertyPath: rhythmCondition
       value: 
       objectReference: {fileID: 1759462150}
+    - target: {fileID: 5478917832717643419, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: rhythmThreshold
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_LocalPosition.x
