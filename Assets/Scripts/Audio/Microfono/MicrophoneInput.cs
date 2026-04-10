@@ -18,10 +18,15 @@ public class MicrophoneInput : MonoBehaviour
     float previousLoudness = 0f;
     float loudnessChange = 0f;
 
+    [Header("Ritmo")]
+    public float rhythmThreshold = 1f;
+
     private BreathingSystem breathingSystem;
     NoiseEmitter noiseEmitter;
     public AltarCondition_RhythmChallenge rhythmCondition;
     bool pulseDetected = false;
+    private float lastPulseTime = -999f;
+    public float pulseCooldown = 0.3f;
     void Start()
     {
         breathingSystem = GetComponent<BreathingSystem>();
@@ -69,18 +74,31 @@ public class MicrophoneInput : MonoBehaviour
         }
 
         // Detectar pulso (como click)
-        if (smoothedLoudness > minThreshold && !pulseDetected)
-        {
-            pulseDetected = true;
+        //if (smoothedLoudness > rhythmThreshold && !pulseDetected)
+        //{
+        //    pulseDetected = true;
 
-            if (rhythmCondition != null)
-                rhythmCondition.RegisterPulse();
+        //    if (rhythmCondition != null)
+        //        rhythmCondition.RegisterPulse();
+        //}
+        bool cooldownReady = (Time.time - lastPulseTime) >= pulseCooldown;
+        if (smoothedLoudness > rhythmThreshold)
+        {
+            Debug.Log("[Ritmo] Threshold superado: " + smoothedLoudness + " > " + rhythmThreshold + " | CooldownReady: " + cooldownReady);
+
+            if (cooldownReady)
+            {
+                lastPulseTime = Time.time;
+                Debug.Log("[Ritmo] Pulso forzado por micrófono");
+                rhythmCondition?.RegisterPulse();
+            }
         }
 
         if (smoothedLoudness < minThreshold)
         {
             pulseDetected = false;
         }
+
         if (Input.GetKeyDown(KeyCode.I))
         {
             Debug.Log("[Ritmo] Pulso manual");

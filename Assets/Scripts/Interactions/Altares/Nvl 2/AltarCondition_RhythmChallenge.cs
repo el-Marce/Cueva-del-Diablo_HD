@@ -1,6 +1,7 @@
-using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class AltarCondition_RhythmChallenge : AltarCondition
 {
@@ -19,6 +20,7 @@ public class AltarCondition_RhythmChallenge : AltarCondition
     float lastPulseTime = 0f;
     List<float> pulseTimes = new List<float>();
     AltarRitual_Generic altar;
+    bool onCooldown = false;
 
     public bool acceptingInput = false;
 
@@ -53,7 +55,7 @@ public class AltarCondition_RhythmChallenge : AltarCondition
 
     public void RegisterPulse()
     {
-        if (solved || !PreviousConditionsMet() || !acceptingInput) return;
+        if (solved || !PreviousConditionsMet() || !acceptingInput || onCooldown) return;
 
         float now = Time.time;
 
@@ -161,5 +163,18 @@ public class AltarCondition_RhythmChallenge : AltarCondition
             if (match) return true;
         }
         return false;
+    }
+
+    public void StartCooldown(float duration)
+    {
+        StartCoroutine(CooldownRoutine(duration));
+    }
+
+    IEnumerator CooldownRoutine(float duration)
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(duration);
+        onCooldown = false;
+        pulseTimes.Clear();
     }
 }

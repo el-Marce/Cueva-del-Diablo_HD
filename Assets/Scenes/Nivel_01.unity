@@ -40551,16 +40551,6 @@ PrefabInstance:
       propertyPath: closeDuration
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
-        type: 3}
-      propertyPath: m_Size.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
-        type: 3}
-      propertyPath: m_Center.z
-      value: -0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalScale.x

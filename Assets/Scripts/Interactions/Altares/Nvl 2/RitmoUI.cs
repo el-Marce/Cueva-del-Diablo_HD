@@ -66,12 +66,13 @@ public class RitmoUI : MonoBehaviour
 
     void OnFail()
     {
+        rhythmCondition.StartCooldown(0.6f);
         StartCoroutine(FailRoutine());
     }
 
     void OnSolved()
     {
-        // Ilumina todos por si quedó alguno
+        rhythmCondition.StartCooldown(2f);
         foreach (var c in circulos)
             c.color = colorEncendido;
 
@@ -100,7 +101,10 @@ public class RitmoUI : MonoBehaviour
 
     IEnumerator CloseAfterDelay()
     {
+
+        Debug.Log("[Ritmo] CloseAfterDelay iniciado");
         yield return new WaitForSeconds(1.2f);
+        Debug.Log("[Ritmo] Cerrando panel y activando altar");
         Close();
         altar.TryActivate();
     }

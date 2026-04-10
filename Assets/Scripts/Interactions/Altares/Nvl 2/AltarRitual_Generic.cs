@@ -53,6 +53,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
     public void TryActivate()
     {
+        Debug.Log("[Altar] TryActivate - activated: " + activated + " | AllMet: " + AllConditionsMet());
         if (activated || !AllConditionsMet()) return;
         StartCoroutine(ActivationSequence());
     }
