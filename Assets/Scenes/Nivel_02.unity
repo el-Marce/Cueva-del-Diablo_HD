@@ -1298,6 +1298,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &716317479
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1153382766454099248, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: itemName
+      value: Coca
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 46.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97946984
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.20159078
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 23.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600009871978072138, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Agua Bendita
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453474310252735655, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 476ea6b33ed86454c982e190d2b01395, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 578acbd6b08a7154f8028cab1bbd2f6a, type: 3}
 --- !u!1 &746384408
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,7 +1701,7 @@ PrefabInstance:
     - target: {fileID: 1153382766454099248, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
         type: 3}
       propertyPath: itemName
-      value: Agua Bendita
+      value: Libro
       objectReference: {fileID: 0}
     - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
         type: 3}
@@ -1678,13 +1756,13 @@ PrefabInstance:
     - target: {fileID: 4600009871978072138, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
         type: 3}
       propertyPath: m_Name
-      value: AguaBendita (1)
+      value: Libro
       objectReference: {fileID: 0}
     - target: {fileID: 7453474310252735655, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 4c92fd5f639ae144e8fa31ab46fca2a3, type: 2}
+      objectReference: {fileID: 2100000, guid: 69751cf4b8cafda47bc24567f957afb7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1795,6 +1873,84 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -40.409, z: 0}
+--- !u!1001 &1002449497
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1153382766454099248, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: itemName
+      value: Agua Bendita
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 63.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.97946984
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.20159078
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 23.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1928911915239053332, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600009871978072138, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Agua Bendita
+      objectReference: {fileID: 0}
+    - target: {fileID: 7453474310252735655, guid: 578acbd6b08a7154f8028cab1bbd2f6a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4c92fd5f639ae144e8fa31ab46fca2a3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 578acbd6b08a7154f8028cab1bbd2f6a, type: 3}
 --- !u!1 &1029013367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2173,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1036441718}
+    - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1036441711}
   m_SourcePrefab: {fileID: 100100000, guid: e638bab745d554e43b8a00f5c8ab9a54, type: 3}
 --- !u!1 &1036441710 stripped
@@ -2054,6 +2214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayText: 
   itemName: Agua Bendita
+  requiredAmount: 1
 --- !u!114 &1036441713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2082,6 +2243,126 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   conditions: []
+--- !u!114 &1036441718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036441710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5fb49c3e7b06345ab1e6716acbb8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: 
+  itemName: Libro
+  requiredAmount: 1
+--- !u!1 &1095629720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1095629724}
+  - component: {fileID: 1095629723}
+  - component: {fileID: 1095629722}
+  - component: {fileID: 1095629721}
+  m_Layer: 8
+  m_Name: Cube (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1095629721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095629720}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &1095629722
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095629720}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1095629723
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095629720}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1095629724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095629720}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.72073174, z: -0, w: 0.6932141}
+  m_LocalPosition: {x: 10.36, y: 1.67, z: 11.58}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -92.23, z: 0}
 --- !u!1001 &1122171613
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3032,6 +3313,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -1.62
+      objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalScale.z
@@ -3040,7 +3326,7 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 56.46035
+      value: 57.06
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3050,12 +3336,12 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2271049
+      value: 6.3
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.00560477
+      value: -0.99983704
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3065,7 +3351,7 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9999843
+      value: 0.018054688
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3080,7 +3366,7 @@ PrefabInstance:
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -180.642
+      value: -362.069
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3096,6 +3382,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PuertaCafe
+      objectReference: {fileID: 0}
+    - target: {fileID: 7323225334417233549, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8828498021644772465, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3123,7 +3414,7 @@ PrefabInstance:
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43.81
+      value: 61.96
       objectReference: {fileID: 0}
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
@@ -3133,7 +3424,7 @@ PrefabInstance:
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.09
+      value: 8.29
       objectReference: {fileID: 0}
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
@@ -3491,7 +3782,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1759462152}
+      addedObject: {fileID: 1759462158}
     - targetCorrespondingSourceObject: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
         type: 3}
       insertIndex: -1
@@ -3526,20 +3817,6 @@ MonoBehaviour:
   - 0.5
   - 1
   acceptingInput: 0
---- !u!114 &1759462152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1759462149}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5fb49c3e7b06345ab1e6716acbb8a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayText: Probando Item
-  itemName: Agua Bendita
 --- !u!114 &1759462153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3562,12 +3839,27 @@ MonoBehaviour:
   liberationDelay: 0
   pueblerinoLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   effectRadius: 10
   enteLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   conditions: []
+--- !u!114 &1759462158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759462149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5fb49c3e7b06345ab1e6716acbb8a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayText: 
+  itemName: Coca
+  requiredAmount: 1
 --- !u!1 &1935841680
 GameObject:
   m_ObjectHideFlags: 0
@@ -4312,6 +4604,7 @@ SceneRoots:
   - {fileID: 976972769}
   - {fileID: 406449783}
   - {fileID: 442513247}
+  - {fileID: 1095629724}
   - {fileID: 904244868}
   - {fileID: 1935841684}
   - {fileID: 1960847563}
@@ -4323,6 +4616,8 @@ SceneRoots:
   - {fileID: 1493346159}
   - {fileID: 1122171613}
   - {fileID: 972176839}
+  - {fileID: 1002449497}
+  - {fileID: 716317479}
   - {fileID: 645077544}
   - {fileID: 143294121}
   - {fileID: 1520024819}
