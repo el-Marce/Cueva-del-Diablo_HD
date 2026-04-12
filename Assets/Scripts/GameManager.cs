@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
 
     public void NuevoJuego()
     {
-        savedSceneIndex = -1;
-        SceneManager.LoadScene("Nivel_01");
+        if (SceneTransition.Instance != null)
+            SceneTransition.Instance.TransitionTo("Nivel_01");
+        else
+            SceneManager.LoadScene("Nivel_01");
     }
 
     public void CargarPartida(int sceneIndex)

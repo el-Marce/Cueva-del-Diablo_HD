@@ -1,30 +1,50 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
-using TMPro;
 
 public class PantallaInicio : MonoBehaviour
 {
-    public TMP_Text promptText; // "Presiona cualquier tecla"
-    public float blinkInterval = 0.8f;
+    [Header("Referencias")]
+    public Image logoImage;
+
+    [Header("Timing")]
+    public float fadeDuration = 1.5f;
+    public float displayDuration = 2f;
 
     void Start()
     {
-        StartCoroutine(BlinkText());
+        StartCoroutine(IntroSequence());
     }
 
-    void Update()
+    IEnumerator IntroSequence()
     {
-        if (Input.anyKeyDown)
-            SceneManager.LoadScene("MenuPrincipal");
+        // Fade in
+        yield return StartCoroutine(Fade(0f, 1f, fadeDuration));
+
+        // Mostrar logo
+        yield return new WaitForSeconds(displayDuration);
+
+        // Fade out
+        yield return StartCoroutine(Fade(1f, 0f, fadeDuration));
+
+        SceneManager.LoadScene("PantallaPortada");
     }
 
-    IEnumerator BlinkText()
+    IEnumerator Fade(float from, float to, float duration)
     {
-        while (true)
+        float elapsed = 0f;
+        Color c = logoImage.color;
+
+        while (elapsed < duration)
         {
-            promptText.enabled = !promptText.enabled;
-            yield return new WaitForSeconds(blinkInterval);
+            elapsed += Time.deltaTime;
+            c.a = Mathf.Lerp(from, to, elapsed / duration);
+            logoImage.color = c;
+            yield return null;
         }
+
+        c.a = to;
+        logoImage.color = c;
     }
 }
