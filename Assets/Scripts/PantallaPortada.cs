@@ -33,10 +33,31 @@ public class PantallaPortada : MonoBehaviour
         if (Input.anyKeyDown)
         {
             if (promptActive)
-                SceneManager.LoadScene("MenuPrincipal");
+                StartCoroutine(SalirConFade());
             else
                 skipped = true;
         }
+    }
+
+    IEnumerator SalirConFade()
+    {
+        // Evita múltiples llamadas
+        promptActive = false;
+
+        // Fade out del fondo
+        float elapsed = 0f;
+        Color c = fondoImage.color;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            c.a = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            fondoImage.color = c;
+            SetPromptAlpha(c.a); // desvanece el prompt junto al fondo
+            yield return null;
+        }
+
+        SceneManager.LoadScene("MenuPrincipal");
     }
 
     IEnumerator PortadaSequence()

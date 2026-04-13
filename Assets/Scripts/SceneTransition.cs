@@ -12,6 +12,7 @@ public class SceneTransition : MonoBehaviour
 
     [Header("Timing")]
     public float fadeDuration = 0.8f;
+    public bool IsTransitioning { get; private set; }
 
     void Awake()
     {
@@ -25,7 +26,28 @@ public class SceneTransition : MonoBehaviour
 
         SetAlpha(0f);
     }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Cada vez que carga una escena nueva hace fade in automático
+        StartCoroutine(FadeIn());
+    }
+
+    IEnumerator FadeIn()
+    {
+        IsTransitioning = true;
+        yield return StartCoroutine(Fade(1f, 0f));
+        IsTransitioning = false;
+    }
     public void TransitionTo(string sceneName, float delay = 0f)
     {
         StartCoroutine(TransitionRoutine(sceneName, delay));
@@ -33,18 +55,19 @@ public class SceneTransition : MonoBehaviour
 
     IEnumerator TransitionRoutine(string sceneName, float delay)
     {
+        IsTransitioning = true;
+
         yield return new WaitForSeconds(delay);
         yield return StartCoroutine(Fade(0f, 1f));
 
-        // Mantiene el panel opaco durante la carga
         SetAlpha(1f);
-
         SceneManager.LoadScene(sceneName);
 
-        // Espera un frame para que la escena cargue
         yield return null;
 
         yield return StartCoroutine(Fade(1f, 0f));
+
+        IsTransitioning = false;
     }
 
     IEnumerator Fade(float from, float to)

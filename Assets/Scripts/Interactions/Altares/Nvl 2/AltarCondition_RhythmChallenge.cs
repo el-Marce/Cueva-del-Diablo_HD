@@ -53,25 +53,56 @@ public class AltarCondition_RhythmChallenge : AltarCondition
 
     public override void OnFulfill() { }
 
+    //public void RegisterPulse()
+    //{
+    //    if (solved || !PreviousConditionsMet() || !acceptingInput || onCooldown) return;
+
+    //    float now = Time.time;
+
+    //    if (lastPulseTime > 0 && now - lastPulseTime > resetInterval)
+    //    {
+    //        if (pulseTimes.Count > 0)
+    //            OnPatternFailed?.Invoke();
+    //        pulseTimes.Clear();
+    //    }
+
+    //    pulseTimes.Add(now);
+    //    lastPulseTime = now;
+
+    //    if (pulseTimes.Count <= pattern.Length + 1)
+    //        OnPulseRegistered?.Invoke();
+
+    //    if (pulseTimes.Count == pattern.Length + 1)
+    //    {
+    //        if (CheckPattern())
+    //        {
+    //            solved = true;
+    //            OnPatternSolved?.Invoke();
+    //        }
+    //        else
+    //        {
+    //            OnPatternFailed?.Invoke();
+    //            pulseTimes.Clear();
+    //        }
+    //        return;
+    //    }
+
+    //    if (pulseTimes.Count > pattern.Length + 1)
+    //    {
+    //        OnPatternFailed?.Invoke();
+    //        pulseTimes.Clear();
+    //    }
+    //}
+
     public void RegisterPulse()
     {
         if (solved || !PreviousConditionsMet() || !acceptingInput || onCooldown) return;
 
-        float now = Time.time;
+        pulseTimes.Add(Time.time);
 
-        if (lastPulseTime > 0 && now - lastPulseTime > resetInterval)
-        {
-            pulseTimes.Clear();
-        }
-
-        pulseTimes.Add(now);
-        lastPulseTime = now;
-
-        // Dispara pulso visual siempre que no se haya completado el patrón
         if (pulseTimes.Count <= pattern.Length + 1)
             OnPulseRegistered?.Invoke();
 
-        // Evalúa solo cuando se completaron exactamente los pasos necesarios
         if (pulseTimes.Count == pattern.Length + 1)
         {
             if (CheckPattern())
@@ -87,60 +118,12 @@ public class AltarCondition_RhythmChallenge : AltarCondition
             return;
         }
 
-        // Si hay más pulsos de los necesarios, resetea
         if (pulseTimes.Count > pattern.Length + 1)
         {
             OnPatternFailed?.Invoke();
             pulseTimes.Clear();
         }
     }
-
-    //public void RegisterPulse()
-    //{
-    //    if (solved || !PreviousConditionsMet() || !acceptingInput) return;
-
-    //    float now = Time.time;
-
-    //    if (lastPulseTime > 0 && now - lastPulseTime > resetInterval)
-    //    {
-    //        if (pulseTimes.Count > 0)
-    //            OnPatternFailed?.Invoke();
-    //        pulseTimes.Clear();
-    //    }
-
-    //    pulseTimes.Add(now);
-    //    lastPulseTime = now;
-
-    //    if (pulseTimes.Count >= 2)
-    //    {
-    //        // Valida el último intervalo contra el paso correspondiente del patrón
-    //        int step = pulseTimes.Count - 2; // índice del intervalo actual
-
-    //        if (step < pattern.Length)
-    //        {
-    //            float expected = pattern[step] * beatDuration;
-    //            float actual = pulseTimes[pulseTimes.Count - 1] - pulseTimes[pulseTimes.Count - 2];
-
-    //            if (Mathf.Abs(actual - expected) > tolerance)
-    //            {
-    //                // Intervalo incorrecto — falla inmediatamente
-    //                OnPatternFailed?.Invoke();
-    //                pulseTimes.Clear();
-    //                return;
-    //            }
-    //        }
-    //    }
-
-    //    if (CheckPattern())
-    //    {
-    //        solved = true;
-    //        OnPatternSolved?.Invoke();
-    //    }
-    //    else
-    //    {
-    //        OnPulseRegistered?.Invoke(); // pulso correcto
-    //    }
-    //}
 
     bool CheckPattern()
     {

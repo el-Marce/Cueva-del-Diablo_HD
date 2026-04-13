@@ -27,6 +27,22 @@ public class MenuPrincipal : MonoBehaviour
     void Start()
     {
         VolverAlMenu();
+        StartCoroutine(EntradaSequence());
+    }
+
+    IEnumerator EntradaSequence()
+    {
+        // Oculta botones durante el fade
+        foreach (var tmp in botonesTexto)
+            tmp.alpha = 0f;
+
+        if (SceneTransition.Instance != null)
+            yield return new WaitUntil(() => !SceneTransition.Instance.IsTransitioning);
+
+        // Hace visibles y anima
+        foreach (var tmp in botonesTexto)
+            tmp.alpha = 1f;
+
         StartCoroutine(AnimarBotones());
     }
 

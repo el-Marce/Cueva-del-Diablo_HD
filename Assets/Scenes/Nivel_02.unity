@@ -3315,8 +3315,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
+      propertyPath: m_Size.x
+      value: 3.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+        type: 3}
       propertyPath: m_Center.x
-      value: -1.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
@@ -3624,10 +3629,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3575470178835784901, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: breathInterval
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5478917832717643419, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: sensitivity
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5478917832717643419, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
