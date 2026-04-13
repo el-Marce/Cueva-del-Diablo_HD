@@ -47,8 +47,8 @@ public class HealthSystem : MonoBehaviour
 
     private void Update()
     {
-        if (transform.position.y < -5f && currentHealth > 0)
-            TakeDamage(currentHealth);
+        //if (transform.position.y < -5f && currentHealth > 0)
+        //    TakeDamage(currentHealth);
 
         if (Input.GetKeyDown(KeyCode.N))
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
