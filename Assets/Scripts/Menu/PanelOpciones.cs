@@ -22,22 +22,18 @@ public class PanelOpciones : MonoBehaviour
 
     void Start()
     {
-        // Carga valores guardados
         sliderMusica.value = PlayerPrefs.GetFloat("VolMusica", 1f);
         sliderSFX.value = PlayerPrefs.GetFloat("VolSFX", 1f);
 
         sliderMusica.onValueChanged.AddListener(v => PlayerPrefs.SetFloat("VolMusica", v));
         sliderSFX.onValueChanged.AddListener(v => PlayerPrefs.SetFloat("VolSFX", v));
 
-        // Resoluciones desde Inspector
         dropdownResolucion.ClearOptions();
         dropdownResolucion.AddOptions(new System.Collections.Generic.List<string>(resoluciones));
 
-        // Texto controles desde Inspector
         textControles.text = textoControles;
     }
 
-    // Llamable desde Inspector del Dropdown
     public void OnResolucionChanged(int index)
     {
         string[] partes = resoluciones[index].Split('x');
@@ -53,5 +49,5 @@ public class PanelOpciones : MonoBehaviour
     public void OnVolMusicaChanged(float value) => PlayerPrefs.SetFloat("VolMusica", value);
     public void OnVolSFXChanged(float value) => PlayerPrefs.SetFloat("VolSFX", value);
 
-    public void VolverAlMenu() { } // asigna desde Inspector al btnVolver
+    public void VolverAlMenu() { }
 }

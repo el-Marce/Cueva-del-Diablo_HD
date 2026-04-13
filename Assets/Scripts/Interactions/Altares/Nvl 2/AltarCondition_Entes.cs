@@ -21,10 +21,10 @@ public class AltarCondition_Entes : AltarCondition
 
     int CountEntes()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, altar.enteLayer);
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectionRadius, altar.pueblerinoLayer);
         int count = 0;
         foreach (Collider hit in hits)
-            if (hit.GetComponent<EntePsicologico>() != null) count++;
+            if (hit.GetComponent<Pueblerino>() != null) count++;
         return count;
     }
 

@@ -22,7 +22,7 @@ public class TriggerInteriorCueva : MonoBehaviour
 
             companion.Possess();
 
-            Debug.Log("Puerta sellada.");
+            //Debug.Log("Puerta sellada.");
         }
     }
 }

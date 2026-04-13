@@ -41,7 +41,7 @@ public class AltarRitual : MonoBehaviour, IInteractable
         {
             inventory.RemoveItem("coca");
             cocaEntregada = true;
-            Debug.Log("Entregaste coca");
+            //Debug.Log("Entregaste coca");
             return false;
         }
 
@@ -50,7 +50,7 @@ public class AltarRitual : MonoBehaviour, IInteractable
         {
             inventory.RemoveItem("alcohol");
             alcoholEntregado = true;
-            Debug.Log("Entregaste alcohol");
+            //Debug.Log("Entregaste alcohol");
             return false;
         }
 
@@ -61,11 +61,11 @@ public class AltarRitual : MonoBehaviour, IInteractable
             sulluEntregado = true;
             ritualCompleted = true;
             DisableInteraction();
-            Debug.Log("Entregaste sullu");
+            //Debug.Log("Entregaste sullu");
             return true;
         }        
 
-        Debug.Log("No tienes el siguiente objeto requerido");
+        //Debug.Log("No tienes el siguiente objeto requerido");
         return false;
     }
 

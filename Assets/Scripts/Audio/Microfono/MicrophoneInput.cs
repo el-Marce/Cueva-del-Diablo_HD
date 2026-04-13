@@ -84,12 +84,12 @@ public class MicrophoneInput : MonoBehaviour
         bool cooldownReady = (Time.time - lastPulseTime) >= pulseCooldown;
         if (smoothedLoudness > rhythmThreshold)
         {
-            Debug.Log("[Ritmo] Threshold superado: " + smoothedLoudness + " > " + rhythmThreshold + " | CooldownReady: " + cooldownReady);
+            //Debug.Log("[Ritmo] Threshold superado: " + smoothedLoudness + " > " + rhythmThreshold + " | CooldownReady: " + cooldownReady);
 
             if (cooldownReady)
             {
                 lastPulseTime = Time.time;
-                Debug.Log("[Ritmo] Pulso forzado por micrófono");
+                //Debug.Log("[Ritmo] Pulso forzado por micrófono");
                 rhythmCondition?.RegisterPulse();
             }
         }
@@ -101,7 +101,7 @@ public class MicrophoneInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
-            Debug.Log("[Ritmo] Pulso manual");
+            //Debug.Log("[Ritmo] Pulso manual");
             rhythmCondition?.RegisterPulse();
         }
     }

@@ -102,9 +102,9 @@ public class RitmoUI : MonoBehaviour
     IEnumerator CloseAfterDelay()
     {
 
-        Debug.Log("[Ritmo] CloseAfterDelay iniciado");
+        //Debug.Log("[Ritmo] CloseAfterDelay iniciado");
         yield return new WaitForSeconds(1.2f);
-        Debug.Log("[Ritmo] Cerrando panel y activando altar");
+        //Debug.Log("[Ritmo] Cerrando panel y activando altar");
         Close();
         altar.TryActivate();
     }

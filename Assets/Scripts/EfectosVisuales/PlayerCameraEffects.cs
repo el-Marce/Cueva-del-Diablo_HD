@@ -22,15 +22,12 @@ public class PlayerCameraEffects : MonoBehaviour
     {
         float timer = 0f;
 
-        // Convertimos la dirección del golpe a espacio local de la cámara
         Vector3 localDir = transform.InverseTransformDirection(hitDirection);
-        localDir.y = 0f; // evitar movimientos verticales raros
+        localDir.y = 0f; 
         localDir.Normalize();
 
-        // Dirección lateral (como cachetada)
         Vector3 offset = localDir * intensity;
 
-        // Fase 1: golpe rápido
         float hitTime = duration * 0.3f;
 
         while (timer < hitTime)
@@ -42,7 +39,6 @@ public class PlayerCameraEffects : MonoBehaviour
             yield return null;
         }
 
-        // Fase 2: retorno suave
         timer = 0f;
         float returnTime = duration * 0.7f;
 

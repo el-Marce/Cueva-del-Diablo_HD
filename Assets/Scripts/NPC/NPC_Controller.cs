@@ -47,13 +47,11 @@ public class NPC_Controller : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // Decidir estado
         if (distance > followDistance)
             SetState(State.Follow);
         else
             SetState(State.Explore);
 
-        // Ejecutar estado
         if (currentState == State.Explore)
             UpdateExplore();
         else
@@ -73,7 +71,7 @@ public class NPC_Controller : MonoBehaviour
         else
         {
             agent.stoppingDistance = 0f;
-            exploreTimer = 0f; // fuerza nuevo destino inmediato
+            exploreTimer = 0f;
         }
     }
 

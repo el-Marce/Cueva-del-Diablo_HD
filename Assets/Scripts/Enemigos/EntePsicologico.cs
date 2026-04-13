@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 public class EntePsicologico : MonoBehaviour
@@ -356,6 +357,8 @@ public class EntePsicologico : MonoBehaviour
         if (damageDelayTimer >= damageDelay)
         {
             playerSanity.DecreaseSanity(sanityDamagePerSecond * Time.deltaTime);
+
+            Debug.Log("Jugador recibe daño psicologico, Vida restante: " + playerSanity.currentSanity);
         }
     }
 

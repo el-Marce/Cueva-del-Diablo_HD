@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PanelCargar : MonoBehaviour
 {
     [Header("Slots")]
-    public SlotUI[] slots;  // asigna los 3 SlotUI desde Inspector
+    public SlotUI[] slots;
 
     [Header("Navegación")]
     public MenuPrincipal menu;

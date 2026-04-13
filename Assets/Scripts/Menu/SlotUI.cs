@@ -10,8 +10,8 @@ public class SlotUI : MonoBehaviour
     public TMP_Text dateText;
     public Button btnCargar;
     public Button btnBorrar;
-    public GameObject emptyLabel;   // "Vacío"
-    public GameObject dataGroup;    // grupo con sceneNameText y dateText
+    public GameObject emptyLabel;
+    public GameObject dataGroup;
 
     int slotIndex;
     PanelCargar panelCargar;
@@ -50,7 +50,7 @@ public class SlotUI : MonoBehaviour
             emptyLabel.SetActive(true);
             dataGroup.SetActive(false);
             btnCargar.interactable = false;
-            btnBorrar.interactable = true; // borrar siempre visible aunque vacío
+            btnBorrar.interactable = true;
         }
     }
 }

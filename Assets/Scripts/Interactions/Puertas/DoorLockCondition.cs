@@ -27,7 +27,7 @@ public class DoorLockCondition : MonoBehaviour
         if (door.isLocked && inventory.HasItem(requiredItemToUnlock))
         {
             door.isLocked = false;
-            Debug.Log("Puerta desbloqueada");
+            //Debug.Log("Puerta desbloqueada");
         }
     }
 }

@@ -53,7 +53,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
     public void TryActivate()
     {
-        Debug.Log("[Altar] TryActivate - activated: " + activated + " | AllMet: " + AllConditionsMet());
+        //Debug.Log("[Altar] TryActivate - activated: " + activated + " | AllMet: " + AllConditionsMet());
         if (activated || !AllConditionsMet()) return;
         StartCoroutine(ActivationSequence());
     }
@@ -80,7 +80,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         LiberateNearbyPueblerinos();
 
         GetComponent<Collider>().enabled = false;
-        Debug.Log("[Altar] Ritual completado.");
+        //Debug.Log("[Altar] Ritual completado.");
     }
     void KillNearbyEntes()
     {
@@ -128,7 +128,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(liberationDelay);
 
-        if (pueblerino == null) yield break; // ya fue destruido
+        if (pueblerino == null) yield break;
 
         Vector3 spawnPos = pueblerino.transform.position;
         Quaternion spawnRot = pueblerino.transform.rotation;

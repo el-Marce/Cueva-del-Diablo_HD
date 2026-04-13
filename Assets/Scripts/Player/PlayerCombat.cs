@@ -149,7 +149,7 @@ public class PlayerCombat : MonoBehaviour
                 if (rb != null)
                 {
                     ApplyForce(rb, pushForce);
-                    Debug.Log("Empujaste | isPreparingAttack: " + enemy.isPreparingAttack);
+                    //Debug.Log("Empujaste | isPreparingAttack: " + enemy.isPreparingAttack);
                 }
 
                 if (enemy != null)

@@ -107,21 +107,43 @@ public class AltarUI_Generic : MonoBehaviour
         busy = true;
         altarPanel.SetActive(false);
 
+        AltarCondition_RhythmChallenge rhythm =
+            currentAltar.GetComponent<AltarCondition_RhythmChallenge>();
+
+        // Verifica condiciones no-ritmo primero
+        bool previasCumplidas = true;
+        foreach (var c in currentAltar.conditions)
+        {
+            if (c == rhythm) continue; // ignora el ritmo en esta evaluación
+            if (!c.IsMet())
+            {
+                previasCumplidas = false;
+                break;
+            }
+        }
+
+        if (!previasCumplidas)
+        {
+            //Debug.Log("[AltarUI] Condiciones previas no cumplidas.");
+            altarPanel.SetActive(true);
+            busy = false;
+            yield break;
+        }
+
+        // Previas cumplidas — abre ritmo si existe y no está resuelto
+        if (rhythm != null && !rhythm.IsMet() && ritmoUI != null)
+        {
+            MicrophoneInput mic = FindObjectOfType<MicrophoneInput>();
+            if (mic != null) mic.rhythmCondition = rhythm;
+
+            ritmoUI.Open(currentAltar, rhythm);
+            busy = false;
+            yield break;
+        }
+
+        // Todo cumplido incluyendo ritmo
         if (!currentAltar.AllConditionsMet())
         {
-            // Verifica si solo falta el ritmo y las demás están cumplidas
-            AltarCondition_RhythmChallenge rhythm =
-                currentAltar.GetComponent<AltarCondition_RhythmChallenge>();
-
-            if (rhythm != null && !rhythm.IsMet() && ritmoUI != null)
-            {
-                // Abre panel de ritmo en lugar de cerrar
-                ritmoUI.Open(currentAltar, rhythm);
-                busy = false;
-                yield break;
-            }
-
-            Debug.Log("[AltarUI] Condiciones no cumplidas.");
             altarPanel.SetActive(true);
             busy = false;
             yield break;
