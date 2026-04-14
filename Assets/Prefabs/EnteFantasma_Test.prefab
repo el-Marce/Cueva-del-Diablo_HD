@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fa6d97092778a40a7a6fe7f5bff207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hearingDistance: 30
+  hearingDistance: 25
 --- !u!114 &520721712859228405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fe0d3ec4db3e614b984bda743bbd899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionDistance: 30
+  visionDistance: 20
   visionAngle: 60
   player: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45, type: 3}
 --- !u!114 &4821561859990690140
@@ -198,7 +198,7 @@ MonoBehaviour:
   alertDelay: 1
   shareInterval: 0.3
   chaseMemoryDuration: 5
-  effectDistance: 6
+  effectDistance: 4
   sanityDamagePerSecond: 10
   damageDelay: 2
   repelDuration: 10

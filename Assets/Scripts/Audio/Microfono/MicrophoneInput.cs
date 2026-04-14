@@ -13,13 +13,13 @@ public class MicrophoneInput : MonoBehaviour
     public float requiredDuration = 0.25f;
 
     float breathTimer = 0f;
-    float smoothedLoudness = 0f;
+    public float smoothedLoudness = 0f;
 
     float previousLoudness = 0f;
     float loudnessChange = 0f;
 
     [Header("Ritmo")]
-    public float rhythmThreshold = 1f;
+    public float rhythmThreshold = 0.75f;
 
     private BreathingSystem breathingSystem;
     NoiseEmitter noiseEmitter;
@@ -106,16 +106,16 @@ public class MicrophoneInput : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(20, 20, 300, 20), "Loudness: " + smoothedLoudness);
-        //GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
-        //GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
-        //GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
-        //GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
+    //void OnGUI()
+    //{
+    //    GUI.Label(new Rect(20, 20, 300, 20), "Loudness: " + smoothedLoudness);
+    //    GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
+    //    GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
+    //    GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
+    //    GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
 
-        GUI.Box(new Rect(20, 40, smoothedLoudness * 300, 20), "");
-    }
+    //    GUI.Box(new Rect(20, 40, smoothedLoudness * 300, 20), "");
+    //}
 
     float GetLoudnessFromMicrophone()
     {
