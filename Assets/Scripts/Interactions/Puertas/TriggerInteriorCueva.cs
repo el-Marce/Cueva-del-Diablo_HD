@@ -5,7 +5,7 @@ using UnityEngine;
 public class TriggerInteriorCueva : MonoBehaviour
 {
     public Door door;
-    public NPC_Controller companion;
+    //public NPC_Controller companion;
 
     bool triggered = false;
 
@@ -20,7 +20,8 @@ public class TriggerInteriorCueva : MonoBehaviour
             door.CloseDoor();
             door.isLocked = true;
 
-            companion.Possess();
+            Debug.Log("Jugador Detectado");
+            //companion.Possess();
 
             //Debug.Log("Puerta sellada.");
         }

@@ -5,7 +5,7 @@ public class Door : MonoBehaviour, IInteractable
 {
     public string requiredKey;
     public bool isLocked = false;
-    bool isOpen = false;
+    public bool isOpen = false;
 
     [Header("Animación")]
     public float openDuration = 1.5f;
@@ -17,8 +17,16 @@ public class Door : MonoBehaviour, IInteractable
 
     void Start()
     {
-        closedRotation = transform.rotation;
-        openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, -90, 0));
+        if (!isOpen)
+        {
+            closedRotation = transform.rotation;
+            openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, -90, 0));
+        }
+        else
+        {
+            closedRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, +90, 0));
+            openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, -90, 0));
+        }
     }
 
     public void Interact()

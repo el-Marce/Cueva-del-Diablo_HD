@@ -26,6 +26,9 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
     [HideInInspector] public List<AltarCondition> conditions = new List<AltarCondition>();
 
+    [Header("Teletransporte")]
+    public Transform teleportTarget;
+
     bool activated = false;
 
     void Awake()
@@ -78,6 +81,11 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
         KillNearbyEntes();
         LiberateNearbyPueblerinos();
+
+        if (teleportTarget != null)
+        {
+            TeleportPlayer();
+        }
 
         GetComponent<Collider>().enabled = false;
         //Debug.Log("[Altar] Ritual completado.");
@@ -143,5 +151,15 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
         if (npcPrefab != null)
             Instantiate(npcPrefab, spawnPos, spawnRot);
+    }
+    void TeleportPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            player.transform.position = teleportTarget.position;
+            player.transform.rotation = teleportTarget.rotation;
+        }
     }
 }

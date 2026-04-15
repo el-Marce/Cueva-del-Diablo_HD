@@ -18,6 +18,8 @@ public class MicrophoneInput : MonoBehaviour
     float previousLoudness = 0f;
     float loudnessChange = 0f;
 
+    bool micActive = true;
+
     [Header("Ritmo")]
     public float rhythmThreshold = 0.75f;
 
@@ -44,6 +46,11 @@ public class MicrophoneInput : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M))
+            ToggleMic();
+
+        if (!micActive) return;
+
         float loudness = GetLoudnessFromMicrophone() * sensitivity;
 
         // suavizado de señal
@@ -106,16 +113,16 @@ public class MicrophoneInput : MonoBehaviour
         }
     }
 
-    //void OnGUI()
-    //{
-    //    GUI.Label(new Rect(20, 20, 300, 20), "Loudness: " + smoothedLoudness);
-    //    GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
-    //    GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
-    //    GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
-    //    GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
+    void OnGUI()
+    {
+        GUI.Label(new Rect(20, 50, 300, 20), "Loudness: " + smoothedLoudness);
+        //GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
+        //GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
+        //GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
+        //GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
 
-    //    GUI.Box(new Rect(20, 40, smoothedLoudness * 300, 20), "");
-    //}
+        GUI.Box(new Rect(20, 70, smoothedLoudness * 300, 20), "");
+    }
 
     float GetLoudnessFromMicrophone()
     {
@@ -134,6 +141,24 @@ public class MicrophoneInput : MonoBehaviour
 
         return total / sampleWindow;
     }
+
+    public void ToggleMic()
+    {
+        micActive = !micActive;
+
+        if (micActive)
+        {
+            micClip = Microphone.Start(selectedDevice, true, 1, 44100);
+            Debug.Log("[Mic] Activado");
+        }
+        else
+        {
+            Microphone.End(selectedDevice);
+            smoothedLoudness = 0f; // resetea para que el HUD vuelva a cero
+            Debug.Log("[Mic] Desactivado");
+        }
+    }
+
     public void PrintDebugs()
     {
         Debug.Log(
