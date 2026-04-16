@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     public void NuevoJuego()
     {
         if (SceneTransition.Instance != null)
-            SceneTransition.Instance.TransitionTo("Nivel_01");
+            SceneTransition.Instance.TransitionTo("Cinematica");
         else
-            SceneManager.LoadScene("Nivel_01");
+            SceneManager.LoadScene("Cinematica");
     }
 
     public void CargarPartida(int sceneIndex)
