@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 9970b9d92f61f404aa8cced87956dd55, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Si como lo oiste, no tienen maiz
+  subtitulo: "Se cre\xEDa que era una puerta de conexi\xF3n entre distintos planos
+    del muno y que una presencia poderosa habitaba la cueva, fu\xE9 as\xED que el
+    lugar fue ganando un aura de respeto y de temor"
   velocidadEscritura: 0.04
-  duracionMinima: 2

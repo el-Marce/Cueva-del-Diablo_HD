@@ -15,6 +15,8 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 3b6f829d46749d8448a815bcecb6bcee, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Acoso crees que no podr\xEDa acabar contigo?! >:v"
+  subtitulo: "Al ver la imagen de San Bartolom\xE9, la criatura no pudo soportar
+    la presencia sagrada y retrocedi\xF3,\nIntent\xF3 escapar por la quebrada mientras
+    rug\xEDa de ira y en su huida, choc\xF3 violentamente contra una de las paredes
+    rocosas del ca\xF1\xF3n."
   velocidadEscritura: 0.04
-  duracionMinima: 2

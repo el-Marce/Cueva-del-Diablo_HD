@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 846e2ea464982184f89fad34bf174fb7, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Centro de la ciudad, en la plaza principal
+  subtitulo: "Una imagen de San Bartolome fue llevada en procesi\xF3n hasta el lugar.
+    Los fieles avanzaron por el camino que conduc\xEDa a la quebrada mientras rezaban
+    y entonaban c\xE1nticos religiosos."
   velocidadEscritura: 0.04
-  duracionMinima: 2

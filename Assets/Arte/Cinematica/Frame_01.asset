@@ -15,8 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: fb8531783fe158641a35c228e5c568ac, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: 'Hola Mundo
-
-    Sabian que los elotes no tienen maiz'
+  subtitulo: "En el siglo XVI, una quebrada llamada en ese entonces como \"Mullu
+    Punku\", era un lugar de adoroci\xF3n para la gente del lugar en busca de protecci\xF3n,
+    para los duros trabajos en el interior de la mina."
   velocidadEscritura: 0.04
-  duracionMinima: 2

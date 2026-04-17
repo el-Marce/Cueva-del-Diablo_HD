@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 537824d2d31bf124c8381d122d53d645, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: 'Ahi nos encontramos si tienes huevos '
+  subtitulo: "La presencia de los sacerdotes con la imagen del Santo provoc\xF3 una
+    reacci\xF3n inmediata en la criatura que habitaba en la caverna.\nUna figura
+    gigantesca, oscura y terrible, lanzaba bramidos que resonaron por toda la quebrada."
   velocidadEscritura: 0.04
-  duracionMinima: 2

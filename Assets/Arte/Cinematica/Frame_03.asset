@@ -15,6 +15,9 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 945f0adb960151744b12ac74bf59ffe5, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: No la crees no?, bien sonso eres
+  subtitulo: "Pero con la llegada de los espa\xF1oles el relato fu\xE9 distinto.\nA
+    medida que la poblaci\xF3n crec\xEDa, aumentaban los relatos de gente que o\xEDa
+    llamados desde la cueva, algunos desaparec\xEDas, otros enloquec\xEDan, los animales
+    ten\xEDan comportamientos extra\xF1os y mataban a sus propios due\xF1os e incluso
+    los cerros se cerraban aplast\xE1ndolos."
   velocidadEscritura: 0.04
-  duracionMinima: 2
