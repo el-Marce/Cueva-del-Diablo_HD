@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: d757099280992f242aa83434e2755b55, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Ahi nos chekardos, no me hagas esperar prro
+  subtitulo: "Derrotados, la Compa\xF1\xEDa de Jes\xFAs puso sus \xFAltimas esperanzas
+    en su miembro mas novicio, una prueba de f\xE9 y una misi\xF3n que solo unos
+    pocos podr\xEDan llevar a cabo: Los Elegidos"
   velocidadEscritura: 0.04
-  duracionMinima: 2

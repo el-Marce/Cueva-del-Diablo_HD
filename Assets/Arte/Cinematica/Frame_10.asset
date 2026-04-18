@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 1a2e58a6e12dacd4090c6be514e61c86, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Vos dime nomas, yo me animo donde me digas
+  subtitulo: "Los jesuitas bajo el nombre de la \"Compa\xF1\xEDa de Jes\xFAs\" dieron
+    su palabra para mantener limpia la cueva, custodiando que nadie despierte el
+    poder que a\xFAn podr\xEDa permanecer en el lugar"
   velocidadEscritura: 0.04
-  duracionMinima: 2

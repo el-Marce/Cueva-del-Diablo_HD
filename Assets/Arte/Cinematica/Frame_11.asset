@@ -15,6 +15,5 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: e1ff06602c16ccc42aed361950eb9d30, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Pero no te equivoques gil, que no andamos con mamadas
+  subtitulo: "Pero el compromiso de los jesuitas ser\xEDa puesto a prueba"
   velocidadEscritura: 0.04
-  duracionMinima: 2

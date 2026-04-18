@@ -15,5 +15,6 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 5a2a4dd90dfca5148befc9f6b166d52c, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: 'Posteriormente los jesuitas intentaron '
+  subtitulo: Los jesuitas intentaron sellar la entrada a la cueva erigiendo una puerta
+    hecha de piedra
   velocidadEscritura: 0.04

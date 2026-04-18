@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 5bb4c8fa2c170144e856e632da5eac6d, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Bueno lokura, asi quedamos entonces
+  subtitulo: "El sello llegar\xEDa a romperse y el poder de aquellas fuerzas ser\xEDa
+    liberado nuevamente, provocando la ir\xE1 de lo que ellos conoc\xEDan como entes
+    del inframundo"
   velocidadEscritura: 0.04
-  duracionMinima: 2
