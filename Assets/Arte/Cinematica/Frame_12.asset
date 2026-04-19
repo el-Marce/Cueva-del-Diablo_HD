@@ -15,7 +15,6 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 5bb4c8fa2c170144e856e632da5eac6d, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "El sello llegar\xEDa a romperse y el poder de aquellas fuerzas ser\xEDa
-    liberado nuevamente, provocando la ir\xE1 de lo que ellos conoc\xEDan como entes
-    del inframundo"
+  subtitulo: "El sello se romper\xEDa, el muro que se hab\xEDa construido cay\xF3,
+    aquella presencia se negaba a ser derrotada."
   velocidadEscritura: 0.04

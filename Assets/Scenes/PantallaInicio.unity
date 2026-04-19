@@ -827,8 +827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   logoImage: {fileID: 1612867151}
-  fadeDuration: 3
-  displayDuration: 2
+  fadeDuration: 1.5
+  displayDuration: 1.5
 --- !u!4 &2146757552
 Transform:
   m_ObjectHideFlags: 0

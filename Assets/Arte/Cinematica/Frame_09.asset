@@ -15,6 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 5a2a4dd90dfca5148befc9f6b166d52c, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: Los jesuitas intentaron sellar la entrada a la cueva erigiendo una puerta
-    hecha de piedra
+  subtitulo: Una puerta de piedras fue construida para sellar la entrada a la cueva,
+    con el objetivo de evitar que las personas pudieran seguir invocando su magia
+    permitiendo su regreso al pueblo.
   velocidadEscritura: 0.04

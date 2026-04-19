@@ -15,9 +15,10 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 945f0adb960151744b12ac74bf59ffe5, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Pero con la llegada de los espa\xF1oles el relato fu\xE9 distinto.\nA
-    medida que la poblaci\xF3n crec\xEDa, aumentaban los relatos de gente que o\xEDa
-    llamados desde la cueva, algunos desaparec\xEDas, otros enloquec\xEDan, los animales
-    ten\xEDan comportamientos extra\xF1os y mataban a sus propios due\xF1os e incluso
-    los cerros se cerraban aplast\xE1ndolos."
+  subtitulo: "Con la llegada de los espa\xF1oles aquella narrativa no hizo m\xE1s
+    que intensificarse, a medida que m\xE1s gente se quedaba a vivir en el lugar,
+    aumentaban los relatos relacionados a fen\xF3menos alrededor de la cueva. gente
+    que desde adentro era llamada por su nombre, otos desaparec\xEDan, otros que
+    enloquec\xEDan, algunos restos hac\xEDan parecer que sus propios animales perd\xEDan
+    el control y los mataban, o que los cerros se cerraban sobre ellos apl\xE1standolos."
   velocidadEscritura: 0.04

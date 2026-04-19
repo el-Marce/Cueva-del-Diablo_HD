@@ -15,7 +15,6 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 92062b7047d54294f8e39df53c0c3a46, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Una marca verdosa oscura permanece como remanente de aquel episodio,
-    marcando la hu\xEDda del diablo de la cueva, la cual nunca m\xE1s volvi\xF3 a
-    habitar."
+  subtitulo: Una mancha verdosa oscura permanece como remanente de aquel episodio,
+    prueba de la victoria de Natanael sobre el poder maligno ene se lugar.
   velocidadEscritura: 0.04

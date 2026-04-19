@@ -15,7 +15,8 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 5a337b2d61a13304b826d65fe2ae4d86, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Ante esta situaci\xF3n, los jesuitas decidieron hacer algo al respecto,
-    saliendo en procesi\xF3n religiosa hacia la quebrada con el prop\xF3sito de expulsar
-    la presencia maligna que se dec\xEDa habitaba en la cueva."
+  subtitulo: "Un grupo de jesuitas, bajo el nombre de \u201CLa Compa\xF1\xEDa de
+    Jes\xFAs\u201D decidieron tomar cartas en el asunto, y salieron en procesi\xF3n
+    hacia la quebrada, con el objetivo de erradicar las presencias oscuras que all\xED
+    pudiesen habitar"
   velocidadEscritura: 0.04

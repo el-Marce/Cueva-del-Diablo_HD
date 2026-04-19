@@ -15,5 +15,6 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: e1ff06602c16ccc42aed361950eb9d30, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Pero el compromiso de los jesuitas ser\xEDa puesto a prueba"
+  subtitulo: "Pero el hombre es corrupto, no tardar\xEDa mucho hasta que uno de ellos
+    desviar\xEDa su prop\xF3sito."
   velocidadEscritura: 0.04

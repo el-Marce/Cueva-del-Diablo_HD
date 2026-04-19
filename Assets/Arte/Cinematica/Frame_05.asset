@@ -15,7 +15,8 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 846e2ea464982184f89fad34bf174fb7, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Una imagen de San Bartolome fue llevada en procesi\xF3n hasta el lugar.
-    Los fieles avanzaron por el camino que conduc\xEDa a la quebrada mientras rezaban
-    y entonaban c\xE1nticos religiosos."
+  subtitulo: "Llevando una imagen del ap\xF3stol San Bartolom\xE9, mencionado en
+    la Biblia como \u201CNatanael\u201D a qui\xE9n la religi\xF3n le otorga la haza\xF1a
+    de haber visitado el infierno y haber desafiado al mism\xEDsimo Lucifer cara
+    a cara, y que incluso lo habr\xEDa vencido."
   velocidadEscritura: 0.04
