@@ -25,6 +25,7 @@ public class NPC_Controller : MonoBehaviour
     NavMeshAgent agent;
     float exploreTimer;
 
+    Animator anim;
     enum State { Explore, Follow }
     State currentState;
 
@@ -40,6 +41,7 @@ public class NPC_Controller : MonoBehaviour
             player = GameObject.FindWithTag("Player").transform;
         }
 
+        anim = GetComponentInChildren<Animator>();
         playerMovement = player.GetComponent<PlayerMovement>();
     }
 
@@ -56,6 +58,11 @@ public class NPC_Controller : MonoBehaviour
             UpdateExplore();
         else
             UpdateFollow();
+
+        if (agent.velocity.magnitude < 0.1f)
+            anim.SetBool("isIdle", true);
+        else
+            anim.SetBool("isIdle", false);
     }
 
     void SetState(State newState)
@@ -67,11 +74,17 @@ public class NPC_Controller : MonoBehaviour
         if (currentState == State.Follow)
         {
             agent.stoppingDistance = followStoppingDistance;
+
+            anim.SetBool("Siguiendo", true);
+            anim.SetBool("Explorando", false);
         }
         else
         {
             agent.stoppingDistance = 0f;
             exploreTimer = 0f;
+
+            anim.SetBool("Siguiendo", false);
+            anim.SetBool("Explorando", true);
         }
     }
 
