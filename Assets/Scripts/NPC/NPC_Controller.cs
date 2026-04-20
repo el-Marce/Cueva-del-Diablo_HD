@@ -17,10 +17,19 @@ public class NPC_Controller : MonoBehaviour
     [Header("Movimiento")]
     public float followStoppingDistance = 1.5f;
 
+    [Header("Velocidad")]
+    public float exploreSpeedMultiplier = 0.5f;
+    public float followSpeedMultiplier = 1f;
+    public float baseSpeed = 5f;
+
     [Header("Reacción")]
     public float reactionTime = 0.3f;
     float targetSpeed;
     float speedVelocity;
+
+    [Header("Rotación")]
+    public float rotationSpeed = 5f;
+    public float rotationThreshold = 10f;
 
     NavMeshAgent agent;
     float exploreTimer;
@@ -37,9 +46,7 @@ public class NPC_Controller : MonoBehaviour
         currentState = State.Explore;
 
         if (player == null)
-        {
             player = GameObject.FindWithTag("Player").transform;
-        }
 
         anim = GetComponentInChildren<Animator>();
         playerMovement = player.GetComponent<PlayerMovement>();
@@ -47,8 +54,9 @@ public class NPC_Controller : MonoBehaviour
 
     void Update()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        if (possessed) return;
 
+        float distance = Vector3.Distance(transform.position, player.position);
         if (distance > followDistance)
             SetState(State.Follow);
         else
@@ -59,44 +67,37 @@ public class NPC_Controller : MonoBehaviour
         else
             UpdateFollow();
 
-        if (agent.velocity.magnitude < 0.1f)
-            anim.SetBool("isIdle", true);
-        else
-            anim.SetBool("isIdle", false);
+        UpdateAnimations();
     }
 
     void SetState(State newState)
     {
         if (currentState == newState) return;
-
         currentState = newState;
-
         if (currentState == State.Follow)
         {
             agent.stoppingDistance = followStoppingDistance;
-
-            anim.SetBool("Siguiendo", true);
-            anim.SetBool("Explorando", false);
         }
         else
         {
             agent.stoppingDistance = 0f;
             exploreTimer = 0f;
-
-            anim.SetBool("Siguiendo", false);
-            anim.SetBool("Explorando", true);
         }
     }
 
     void UpdateFollow()
     {
-        targetSpeed = Mathf.SmoothDamp(targetSpeed, playerMovement.speed, ref speedVelocity, reactionTime);
+        float targetSpeedGoal = baseSpeed * followSpeedMultiplier *
+                               (playerMovement != null ? playerMovement.speed / playerMovement.moveSpeed : 1f);
+
+        targetSpeed = Mathf.SmoothDamp(targetSpeed, targetSpeedGoal, ref speedVelocity, reactionTime);
         agent.speed = targetSpeed;
         agent.SetDestination(player.position);
     }
 
     void UpdateExplore()
     {
+        agent.speed = baseSpeed * exploreSpeedMultiplier;
         exploreTimer -= Time.deltaTime;
 
         if (exploreTimer <= 0f)
@@ -104,6 +105,65 @@ public class NPC_Controller : MonoBehaviour
             agent.SetDestination(GetRandomPointNearSelf());
             exploreTimer = exploreInterval;
         }
+
+        if (agent.hasPath && !IsFacingTarget(agent.steeringTarget))
+        {
+            RotateTowards(agent.steeringTarget);
+            agent.velocity = Vector3.zero;
+        }
+    }
+
+    void UpdateAnimations()
+    {
+        bool isMoving = agent.velocity.magnitude > 0.1f;
+        bool isFollowing = currentState == State.Follow;
+        bool needsRotation = false;
+
+        Vector3 targetPos = isFollowing ? player.position :
+                            (agent.hasPath ? agent.steeringTarget : transform.position);
+
+        Vector3 dir = targetPos - transform.position;
+        dir.y = 0f;
+
+        float turnAngle = 0f;
+        if (dir.magnitude > 0.1f)
+        {
+            float angle = Vector3.SignedAngle(transform.forward, dir.normalized, Vector3.up);
+            turnAngle = Mathf.Clamp(angle / 180f, -1f, 1f);
+            needsRotation = Mathf.Abs(angle) > rotationThreshold;
+        }
+
+        anim.SetFloat("TurnAngle", turnAngle, 0.1f, Time.deltaTime);
+
+        if (needsRotation && !isMoving)
+        {
+            anim.SetBool("Idle", true);
+            anim.SetBool("Siguiendo", false);
+            anim.SetBool("Explorando", false);
+        }
+        else
+        {
+            anim.SetBool("Idle", !isMoving);
+            anim.SetBool("Siguiendo", isFollowing && isMoving);
+            anim.SetBool("Explorando", !isFollowing && isMoving);
+        }
+    }
+
+    bool IsFacingTarget(Vector3 target)
+    {
+        Vector3 dir = (target - transform.position).normalized;
+        dir.y = 0f;
+        float angle = Vector3.Angle(transform.forward, dir);
+        return angle < rotationThreshold;
+    }
+
+    void RotateTowards(Vector3 target)
+    {
+        Vector3 dir = (target - transform.position).normalized;
+        dir.y = 0f;
+        if (dir == Vector3.zero) return;
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
     }
 
     Vector3 GetRandomPointNearSelf()
@@ -124,20 +184,20 @@ public class NPC_Controller : MonoBehaviour
         agent.velocity = Vector3.zero;
     }
 
-    // --- POSESIÓN ---
     public GameObject zombiePrefab;
 
     public void Possess()
-    {       
+    {
         StartCoroutine(PossessDelay());
     }
+
     IEnumerator PossessDelay()
     {
         yield return new WaitForSeconds(3f);
         GameObject zombie = Instantiate(zombiePrefab, transform.position, transform.rotation);
         zombie.AddComponent<TriggerNivelDos>();
 
-        yield return null; 
+        yield return null;
         zombie.GetComponent<EnemyHearing>().HearNoise(player.position, 999f, player.position);
 
         Destroy(gameObject);
