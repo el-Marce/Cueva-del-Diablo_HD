@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PanelCargar : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class PanelCargar : MonoBehaviour
 
     [Header("Navegación")]
     public MenuPrincipal menu;
+    public Button btnVolver;
 
-    public UnityEngine.UI.Button btnVolver;
+    [Header("Panel selección")]
+    public SlotPanel slotPanel;
 
     void Awake()
     {
@@ -20,6 +23,11 @@ public class PanelCargar : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
             slots[i].Setup(i, this);
+    }
+
+    public void AbrirSlotPanel(int slotIndex)
+    {
+        slotPanel.Abrir(slotIndex, this);
     }
 
     public void CargarSlot(int slot)
