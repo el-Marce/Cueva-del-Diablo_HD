@@ -199,6 +199,7 @@ public class NPC_Controller : MonoBehaviour
 
         yield return null;
         zombie.GetComponent<EnemyHearing>().HearNoise(player.position, 999f, player.position);
+        zombie.GetComponent<EnemyStats>().health = 100;
 
         Destroy(gameObject);
     }

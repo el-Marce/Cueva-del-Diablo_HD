@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class TriggerNivelDos : MonoBehaviour
 {
@@ -14,6 +15,16 @@ public class TriggerNivelDos : MonoBehaviour
     void CheckDeath()
     {
         if (stats.health <= 0)
+            StartCoroutine(TransicionNivelDos());
+    }
+
+    IEnumerator TransicionNivelDos()
+    {
+        yield return new WaitForSeconds(5f); // ajusta según duración de la animación de muerte
+
+        if (SceneTransition.Instance != null)
+            SceneTransition.Instance.TransitionTo("Nivel_02");
+        else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

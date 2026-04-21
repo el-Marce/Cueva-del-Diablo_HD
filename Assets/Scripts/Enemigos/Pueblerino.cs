@@ -195,9 +195,6 @@ public class Pueblerino : MonoBehaviour
             navigation.agent.isStopped = true;
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
             GetComponent<CapsuleCollider>().enabled = false;
-            //navigation.agent.velocity = Vector3.zero;
-            //navigation.agent.updatePosition = false;
-            //navigation.agent.updateRotation = false;
         }
 
         vision.enabled = false;
