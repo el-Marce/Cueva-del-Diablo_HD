@@ -18,6 +18,8 @@ public class Pueblerino : MonoBehaviour
 
     CinemachineImpulseSource impulseSource;
 
+    Animator anim;
+    
     [Header("Combate")]
     public float attackDistance = 1.8f;
     public float attackCooldown = 2f;
@@ -72,6 +74,9 @@ public class Pueblerino : MonoBehaviour
     public float staggerDuration = 0.5f;
     float staggerTimer = 0f;
 
+    [Header("Rotación")]
+    public float rotationSpeed = 8f;
+        
     enum AlertType { Vision, Sound }
     enum State { Patrol, Alert, Investigate, Chase, Attack }
 
@@ -91,6 +96,7 @@ public class Pueblerino : MonoBehaviour
         hearing = GetComponent<EnemyHearing>();
         navigation = GetComponent<EnemyNavigation>();
         stats = GetComponent<EnemyStats>();
+        anim = GetComponentInChildren<Animator>();
 
         stats.OnHit += OnHit;
 
@@ -104,6 +110,8 @@ public class Pueblerino : MonoBehaviour
         currentState = State.Patrol;
 
         GeneratePatrolPoints(transform.position);
+        if (anim != null)
+            anim.speed = stats.animationSpeed;
     }
 
     void Update()
@@ -124,6 +132,8 @@ public class Pueblerino : MonoBehaviour
         if (isPreparingAttack && !wasPreparingAttack)
         {
             //Debug.Log("ENTER WIND-UP");
+
+            anim.SetBool("Attack", true);
             rend.material = windUpMat;
         }
 
@@ -131,6 +141,7 @@ public class Pueblerino : MonoBehaviour
         {
             //Debug.Log("EXIT WIND-UP");
             rend.material = defaultMat;
+            anim.SetBool("Attack", false);
         }
 
         wasPreparingAttack = isPreparingAttack;
@@ -185,7 +196,10 @@ public class Pueblerino : MonoBehaviour
 
     void UpdatePatrol()
     {
-        navigation.ResetSpeed();
+        //navigation.ResetSpeed();
+        navigation.agent.speed = stats.patrolSpeed;
+        if (navigation.agent.hasPath)
+            RotateTowards(navigation.agent.steeringTarget);
 
         if (vision.CanSeePlayer())
         {
@@ -195,6 +209,7 @@ public class Pueblerino : MonoBehaviour
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
 
             alertType = AlertType.Vision;
+            anim.SetInteger("AlertType", 1);
             alertNoiseEmitted = false;
 
             currentState = State.Alert;
@@ -222,7 +237,7 @@ public class Pueblerino : MonoBehaviour
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
 
             alertType = AlertType.Sound;
-
+            anim.SetInteger("AlertType", 2);
             currentState = State.Alert;
             return;
         }
@@ -257,12 +272,18 @@ public class Pueblerino : MonoBehaviour
         alertTimer -= Time.deltaTime;
 
         if (alertTimer <= 0f)
+        {
+            anim.SetInteger("AlertType", 0); // <- resetear al salir
             currentState = nextState;
+        }
     }
 
     void UpdateInvestigate()
     {
         navigation.SetSpeedMultiplier(investigateSpeedMultiplier);
+
+        if (navigation.agent.hasPath)
+            RotateTowards(navigation.agent.steeringTarget);
 
         if (hearing.HasHeardSomething())
         {
@@ -301,7 +322,7 @@ public class Pueblerino : MonoBehaviour
     void UpdateChase()
     {
         navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
-
+        RotateTowardsPlayer();
         float distance = Vector3.Distance(transform.position, player.position);
 
         if (vision.CanSeePlayer())
@@ -368,7 +389,7 @@ public class Pueblerino : MonoBehaviour
             // solo rotación horizontal, descomenta la siguiente línea:
             // target.y = transform.position.y;
 
-            transform.LookAt(target);
+            RotateTowardsPlayer();
 
             lookAtTimer -= Time.deltaTime;
 
@@ -400,6 +421,7 @@ public class Pueblerino : MonoBehaviour
             //Debug.Log("WindUp timer: " + attackWindUpTimer);
             if (attackWindUpTimer <= 0f)
             {
+
                 attackTimer = attackCooldown;
                 //Debug.Log("Nuevo Timer: " + attackTimer);
                 Attack();
@@ -522,7 +544,22 @@ public class Pueblerino : MonoBehaviour
             Gizmos.DrawSphere(point, 0.3f);
         }
     }
-
+    void RotateTowardsPlayer()
+    {
+        Vector3 dir = (player.position - transform.position);
+        dir.y = 0f;
+        if (dir == Vector3.zero) return;
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
+    }
+    void RotateTowards(Vector3 target)
+    {
+        Vector3 dir = (target - transform.position);
+        dir.y = 0f;
+        if (dir == Vector3.zero) return;
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
+    }
     public void Freeze()
     {
         currentState = State.Patrol;

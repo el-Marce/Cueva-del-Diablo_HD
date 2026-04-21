@@ -14,6 +14,7 @@ public class EnemyNavigation : MonoBehaviour
         stats = GetComponent<EnemyStats>();
 
         agent.speed = stats.moveSpeed;
+        agent.updateRotation = false;
     }
 
     public void Pause()
