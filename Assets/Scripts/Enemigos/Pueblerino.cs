@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections;
 
 public class Pueblerino : MonoBehaviour
 {
@@ -76,7 +77,8 @@ public class Pueblerino : MonoBehaviour
 
     [Header("Rotación")]
     public float rotationSpeed = 8f;
-        
+    bool isDying = false;
+
     enum AlertType { Vision, Sound }
     enum State { Patrol, Alert, Investigate, Chase, Attack }
 
@@ -116,7 +118,13 @@ public class Pueblerino : MonoBehaviour
 
     void Update()
     {
+        if (stats.IsDead)
+        {
+            if (!isDying)
+                StartCoroutine(HandleDeath());
 
+            return;
+        }
         if (GameState.InMenu)
         {
             navigation.Pause();
@@ -132,7 +140,7 @@ public class Pueblerino : MonoBehaviour
         if (isPreparingAttack && !wasPreparingAttack)
         {
             //Debug.Log("ENTER WIND-UP");
-
+            anim.ResetTrigger("IsPushed");
             anim.SetBool("Attack", true);
             rend.material = windUpMat;
         }
@@ -171,6 +179,30 @@ public class Pueblerino : MonoBehaviour
         }
     }
 
+    IEnumerator HandleDeath()
+    {
+        isDying = true;
+
+        anim.SetTrigger("IsDead");
+
+        yield return null;
+
+        float deathDuration = anim.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(deathDuration + 1);
+
+        if (navigation.agent.enabled && navigation.agent.isOnNavMesh)
+        {
+            navigation.agent.isStopped = true;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            GetComponent<CapsuleCollider>().enabled = false;
+            //navigation.agent.velocity = Vector3.zero;
+            //navigation.agent.updatePosition = false;
+            //navigation.agent.updateRotation = false;
+        }
+
+        vision.enabled = false;
+        hearing.enabled = false;
+    }
     void OnHit()
     {
         staggerTimer = staggerDuration;
@@ -190,6 +222,7 @@ public class Pueblerino : MonoBehaviour
 
     public void OnPushed()
     {
+        anim.SetTrigger("IsPushed");
         staggerTimer = staggerDuration * 2f;
         ForceChase();
     }
@@ -274,6 +307,12 @@ public class Pueblerino : MonoBehaviour
         if (alertTimer <= 0f)
         {
             anim.SetInteger("AlertType", 0); // <- resetear al salir
+
+            if (nextState == State.Chase)
+                anim.SetBool("IsChasing", true);
+            else if (nextState == State.Investigate)
+                anim.SetBool("IsInvestigating", true);
+
             currentState = nextState;
         }
     }
@@ -311,12 +350,17 @@ public class Pueblerino : MonoBehaviour
 
         if (distance < 1.5f)
         {
+            anim.SetBool("IsInvestigating", false);
             GeneratePatrolPoints(currentTarget);
             currentState = State.Patrol;
         }
 
         if (vision.CanSeePlayer())
+        {
+            anim.SetBool("IsInvestigating", false);
+            anim.SetBool("IsChasing", true);
             currentState = State.Chase;
+        }
     }
 
     void UpdateChase()
@@ -349,6 +393,7 @@ public class Pueblerino : MonoBehaviour
             else
             {
                 GeneratePatrolPoints(transform.position);
+                anim.SetBool("IsChasing", false);
                 currentState = State.Patrol;
                 return;
             }
@@ -356,6 +401,7 @@ public class Pueblerino : MonoBehaviour
 
         if (distance <= attackDistance)
         {
+            anim.SetBool("IsChasing", false);
             currentState = State.Attack;
             attackTimer = 0.2f;
             return;
@@ -401,8 +447,12 @@ public class Pueblerino : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
 
+        anim.SetFloat("AttackDistance", distance);
+
         if (distance > attackDistance)
         {
+            anim.SetBool("Attack", false);
+            anim.SetBool("IsChasing", true);
             isPreparingAttack = false;
             currentState = State.Chase;
             return;
@@ -520,6 +570,10 @@ public class Pueblerino : MonoBehaviour
 
     void ForceChase()
     {
+        anim.SetBool("IsInvestigating", false);
+        anim.SetBool("IsChasing", true); 
+        anim.SetInteger("AlertType", 0);
+
         alertType = AlertType.Vision;
         nextState = State.Chase;
 
