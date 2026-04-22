@@ -49,6 +49,7 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public void OnPointerEnter(PointerEventData eventData)
     {
         SetOutline(outlineThickness);
+        UIAudio.Instance?.PlayHover();
 
         if (hoverImage != null)
         {

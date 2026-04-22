@@ -1,5 +1,158 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8387157460588358563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/click
+  m_EditorClassIdentifier: 
+  Path: event:/UI/click
+  Guid:
+    Data1: -142576231
+    Data2: 1273093545
+    Data3: 424926107
+    Data4: 2101332433
+  Banks:
+  - {fileID: -6078326942949849766}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-8107758160121505591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Nivel02.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Nivel02.bank
+  Name: Nivel02
+  StudioPath: bank:/Nivel02
+  lastModified: 639124456585166938
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-6078326942949849766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/UI.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/UI.bank
+  Name: UI
+  StudioPath: bank:/UI
+  lastModified: 639124503388207545
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4247042192413012017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Enemigos.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
+  Name: Enemigos
+  StudioPath: bank:/Enemigos
+  lastModified: 639124456584988752
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-2943633009321672613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Gameplay.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
+  Name: Gameplay
+  StudioPath: bank:/Gameplay
+  lastModified: 639124456584933609
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-1634142530328707768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/back
+  m_EditorClassIdentifier: 
+  Path: event:/UI/back
+  Guid:
+    Data1: 43029945
+    Data2: 1244542146
+    Data3: -1738495818
+    Data4: -77064174
+  Banks:
+  - {fileID: -6078326942949849766}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-515608353073494714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/hover
+  m_EditorClassIdentifier: 
+  Path: event:/UI/hover
+  Guid:
+    Data1: 1695652404
+    Data2: 1322890304
+    Data3: 120937362
+    Data4: -1084035808
+  Banks:
+  - {fileID: -6078326942949849766}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-365857060993439915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +168,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639080578299041496
+  lastModified: 639124503386752818
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -33,15 +186,98 @@ MonoBehaviour:
   EditorBanks:
   - {fileID: 4336407426305081004}
   - {fileID: -365857060993439915}
-  EditorEvents: []
+  - {fileID: 3791001437229431716}
+  - {fileID: 3822517588516723737}
+  - {fileID: -4247042192413012017}
+  - {fileID: -2943633009321672613}
+  - {fileID: 6443872550757378877}
+  - {fileID: 7889449137568548799}
+  - {fileID: -8107758160121505591}
+  - {fileID: -6078326942949849766}
+  EditorEvents:
+  - {fileID: -515608353073494714}
+  - {fileID: 3587035075930067318}
+  - {fileID: -8387157460588358563}
+  - {fileID: -1634142530328707768}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639080578299136533
-  SerializableEventsDict: []
+  cacheTime: 639124503388207545
+  SerializableEventsDict:
+  - key: event:/UI/hover
+    index: 0
+  - key: event:/UI/newGame
+    index: 1
+  - key: event:/UI/click
+    index: 2
+  - key: event:/UI/back
+    index: 3
+--- !u!114 &3587035075930067318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/newGame
+  m_EditorClassIdentifier: 
+  Path: event:/UI/newGame
+  Guid:
+    Data1: -1165236655
+    Data2: 1292930246
+    Data3: 220624259
+    Data4: -1086993682
+  Banks:
+  - {fileID: -6078326942949849766}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &3791001437229431716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Ambiente.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
+  Name: Ambiente
+  StudioPath: 
+  lastModified: 639124456585044096
+  FileSizes: []
+  Exists: 1
+--- !u!114 &3822517588516723737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Cinematica.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Cinematica.bank
+  Name: Cinematica
+  StudioPath: bank:/Cinematica
+  lastModified: 639124456585217858
+  FileSizes: []
+  Exists: 1
 --- !u!114 &4336407426305081004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,8 +293,44 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639080578299136533
+  lastModified: 639124503386817960
   FileSizes:
   - Name: 
-    Value: 724
+    Value: 1224
+  Exists: 1
+--- !u!114 &6443872550757378877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Musica.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Musica.bank
+  Name: Musica
+  StudioPath: bank:/Musica
+  lastModified: 639124456585278224
+  FileSizes: []
+  Exists: 1
+--- !u!114 &7889449137568548799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Nivel01.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Plugins/FMOD/Banks/Desktop/Nivel01.bank
+  Name: Nivel01
+  StudioPath: bank:/Nivel01
+  lastModified: 639124456585119389
+  FileSizes: []
   Exists: 1

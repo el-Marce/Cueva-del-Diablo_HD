@@ -342,7 +342,15 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
-  Banks: []
+  Banks:
+  - Ambiente
+  - Cinematica
+  - Enemigos
+  - Gameplay
+  - Musica
+  - Nivel01
+  - Nivel02
+  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
