@@ -1,5 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9208115110330432712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PantallaPortada/Portada
+  m_EditorClassIdentifier: 
+  Path: event:/PantallaPortada/Portada
+  Guid:
+    Data1: -1618540385
+    Data2: 1313290353
+    Data3: 1558595222
+    Data4: -949562923
+  Banks:
+  - {fileID: 6443872550757378877}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 77825
 --- !u!114 &-8387157460588358563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,10 +41,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/click
   Guid:
-    Data1: -142576231
-    Data2: 1273093545
-    Data3: 424926107
-    Data4: 2101332433
+    Data1: 43029945
+    Data2: 1244542146
+    Data3: -1738495818
+    Data4: -77064174
   Banks:
   - {fileID: -6078326942949849766}
   IsStream: 0
@@ -60,7 +87,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 639124503388207545
+  lastModified: 639126179334655569
   FileSizes: []
   Exists: 1
 --- !u!114 &-4247042192413012017
@@ -81,6 +108,33 @@ MonoBehaviour:
   lastModified: 639124456584988752
   FileSizes: []
   Exists: 1
+--- !u!114 &-3346193204899738348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/UI/borrar
+  m_EditorClassIdentifier: 
+  Path: event:/UI/borrar
+  Guid:
+    Data1: -611483288
+    Data2: 1219889552
+    Data3: -6530675
+    Data4: -630498171
+  Banks:
+  - {fileID: -6078326942949849766}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-2943633009321672613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +167,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/UI/back
   Guid:
-    Data1: 43029945
-    Data2: 1244542146
-    Data3: -1738495818
-    Data4: -77064174
+    Data1: -142576231
+    Data2: 1273093545
+    Data3: 424926107
+    Data4: 2101332433
   Banks:
   - {fileID: -6078326942949849766}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1407315786429920210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/PantallaPortada/ClicBass
+  m_EditorClassIdentifier: 
+  Path: event:/PantallaPortada/ClicBass
+  Guid:
+    Data1: 1638783054
+    Data2: 1095768366
+    Data3: -422834012
+    Data4: -897090860
+  Banks:
+  - {fileID: -365857060993439915}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -168,7 +249,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639124503386752818
+  lastModified: 639126248958156287
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -199,13 +280,17 @@ MonoBehaviour:
   - {fileID: 3587035075930067318}
   - {fileID: -8387157460588358563}
   - {fileID: -1634142530328707768}
+  - {fileID: -3346193204899738348}
+  - {fileID: -9208115110330432712}
+  - {fileID: -1407315786429920210}
+  - {fileID: 2299121388873248599}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639124503388207545
+  cacheTime: 639126249031775243
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -215,6 +300,41 @@ MonoBehaviour:
     index: 2
   - key: event:/UI/back
     index: 3
+  - key: event:/UI/borrar
+    index: 4
+  - key: event:/PantallaPortada/Portada
+    index: 5
+  - key: event:/PantallaPortada/ClicBass
+    index: 6
+  - key: event:/Cinematicas/MusicBack
+    index: 7
+--- !u!114 &2299121388873248599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Cinematicas/MusicBack
+  m_EditorClassIdentifier: 
+  Path: event:/Cinematicas/MusicBack
+  Guid:
+    Data1: -1093396348
+    Data2: 1219648863
+    Data3: 806430645
+    Data4: 23402158
+  Banks:
+  - {fileID: 6443872550757378877}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 257195
 --- !u!114 &3587035075930067318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,10 +413,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639124503386817960
+  lastModified: 639126248958236574
   FileSizes:
   - Name: 
-    Value: 1224
+    Value: 1440
   Exists: 1
 --- !u!114 &6443872550757378877
 MonoBehaviour:
@@ -313,7 +433,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Musica.bank
   Name: Musica
   StudioPath: bank:/Musica
-  lastModified: 639124456585278224
+  lastModified: 639126249031775243
   FileSizes: []
   Exists: 1
 --- !u!114 &7889449137568548799

@@ -48,12 +48,12 @@ public class SceneTransition : MonoBehaviour
         yield return StartCoroutine(Fade(1f, 0f));
         IsTransitioning = false;
     }
-    public void TransitionTo(string sceneName, float delay = 0f)
+    public void TransitionTo(string sceneName, float delay = 0f, float holdDuration = 0f)
     {
-        StartCoroutine(TransitionRoutine(sceneName, delay));
+        StartCoroutine(TransitionRoutine(sceneName, delay, holdDuration));
     }
 
-    IEnumerator TransitionRoutine(string sceneName, float delay)
+    IEnumerator TransitionRoutine(string sceneName, float delay, float holdDuration = 0f)
     {
         IsTransitioning = true;
 
@@ -61,6 +61,7 @@ public class SceneTransition : MonoBehaviour
         yield return StartCoroutine(Fade(0f, 1f));
 
         SetAlpha(1f);
+        yield return new WaitForSeconds(holdDuration);
         SceneManager.LoadScene(sceneName);
 
         yield return null;

@@ -16,8 +16,8 @@ public class SlotUI : MonoBehaviour
     private void Start()
     {
         //SaveSystem.SaveSlotData(0, 1, "Nivel1");
-        //SaveSystem.SaveSlotData(1, 2, "Nivel2");
-        //SaveSystem.SaveSlotData(2, 3, "Nivel3");
+        SaveSystem.SaveSlotData(1, 2, "Nivel2");
+        SaveSystem.SaveSlotData(2, 3, "Nivel3");
     }
     public void Setup(int index, PanelCargar panel)
     {

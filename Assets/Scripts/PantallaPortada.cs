@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using TMPro;
+using FMODUnity;
 
 public class PantallaPortada : MonoBehaviour
 {
@@ -17,7 +18,10 @@ public class PantallaPortada : MonoBehaviour
     public float waitBeforePrompt = 1f;
 
     [Header("Blink del prompt")]
-    public float blinkFadeDuration = 0.4f; // velocidad del fade in/out
+    public float blinkFadeDuration = 0.4f;
+
+    [Header("SonidoClic")]
+    public EventReference clicBass;
 
     bool skipped = false;
     bool promptActive = false;
@@ -26,6 +30,8 @@ public class PantallaPortada : MonoBehaviour
     {
         SetPromptAlpha(0f);
         StartCoroutine(PortadaSequence());
+
+        AudioManager.Instance.PlayMusica("event:/PantallaPortada/Portada");
     }
 
     void Update()
@@ -33,7 +39,10 @@ public class PantallaPortada : MonoBehaviour
         if (Input.anyKeyDown)
         {
             if (promptActive)
+            {
+                AudioManager.Instance.Play(clicBass);
                 StartCoroutine(SalirConFade());
+            }
             else
                 skipped = true;
         }

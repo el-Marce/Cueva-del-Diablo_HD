@@ -9,7 +9,7 @@ public class UIAudio : MonoBehaviour
     public EventReference hover;
     public EventReference click;
     public EventReference back;
-    //public EventReference transition;
+    public EventReference borrar;
     public EventReference newGame;
 
     void Awake()
@@ -22,5 +22,6 @@ public class UIAudio : MonoBehaviour
     public void PlayHover() => AudioManager.Instance.Play(hover);
     public void PlayClick() => AudioManager.Instance.Play(click);
     public void PlayBack() => AudioManager.Instance.Play(back);
-    //public void PlayTransition() => AudioManager.Instance.Play(transition);
+    public void PlayNewGame() {AudioManager.Instance.Play(newGame); AudioManager.Instance.StopMusica();} 
+    public void PlayBorrar() => AudioManager.Instance.Play(borrar);
 }

@@ -30,7 +30,7 @@ public class CinematicaManager : MonoBehaviour
     {
         // Carga el primer frame directamente
         CinematicaFrame frame = frames[0];
-
+        AudioManager.Instance.PlayMusica("event:/Cinematicas/MusicBack");
         if (frame.videoAnimado != null)
         {
             //videoPlayer.clip = frame.videoAnimado;
@@ -124,7 +124,10 @@ public class CinematicaManager : MonoBehaviour
         if (currentFrame >= frames.Length)
         {
             if (SceneTransition.Instance != null)
-                SceneTransition.Instance.TransitionTo(escenaSiguiente);
+            {
+                AudioManager.Instance.StopMusica();
+                SceneTransition.Instance.TransitionTo(escenaSiguiente, holdDuration: 3f);
+            }
             else
             {
                 // Fallback directo si no hay SceneTransition

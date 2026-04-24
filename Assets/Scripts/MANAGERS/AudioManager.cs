@@ -33,6 +33,17 @@ public class AudioManager : MonoBehaviour
         musicaActual.start();
     }
 
+    public void StopMusica(bool fadeOut = true)
+    {
+        if (!musicaActual.isValid()) return;
+
+        musicaActual.stop(
+            fadeOut ? FMOD.Studio.STOP_MODE.ALLOWFADEOUT
+                    : FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        musicaActual.release();
+    }
+
     public void SetMusicaParametro(string parametro, float valor)
     {
         if (musicaActual.isValid())

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public void NuevoJuego()
     {
         if (SceneTransition.Instance != null)
-            SceneTransition.Instance.TransitionTo("Cinematica");
+            SceneTransition.Instance.TransitionTo("Cinematica", holdDuration: 10f);
         else
             SceneManager.LoadScene("Cinematica");
     }
