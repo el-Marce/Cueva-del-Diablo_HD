@@ -9,9 +9,11 @@ public class PlayerInteraction : MonoBehaviour
     IInteractable currentInteractable;
 
     Renderer currentRenderer;
-    Material currentOutlineMat;
+    Material[] originalMaterials;
+    public Material highlightMaterial;
+    //Material currentOutlineMat;
 
-    float outlineOn = 0.15f;
+    float outlineOn = 0.015f;
     float outlineOff = 0f;
 
     void OnEnable()
@@ -92,8 +94,17 @@ public class PlayerInteraction : MonoBehaviour
                         ClearOutline();
 
                         currentRenderer = bestRenderer;
-                        currentOutlineMat = mats[1];
-                        currentOutlineMat.SetFloat("_Thickness", outlineOn);
+
+                        originalMaterials = bestRenderer.materials;
+
+                        Material[] highlightArray = new Material[originalMaterials.Length];
+
+                        for (int i = 0; i < highlightArray.Length; i++)
+                        {
+                            highlightArray[i] = highlightMaterial;
+                        }
+
+                        bestRenderer.materials = highlightArray;
                     }
                 }
             }
@@ -113,11 +124,15 @@ public class PlayerInteraction : MonoBehaviour
 
     void ClearOutline()
     {
-        if (currentOutlineMat != null)
+        if (currentRenderer != null)
         {
-            currentOutlineMat.SetFloat("_Thickness", outlineOff);
-            currentOutlineMat = null;
+            if (originalMaterials != null)
+            {
+                currentRenderer.materials = originalMaterials;
+            }
+
             currentRenderer = null;
+            originalMaterials = null;
         }
     }
 }
