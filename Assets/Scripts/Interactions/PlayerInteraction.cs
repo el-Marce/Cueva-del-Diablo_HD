@@ -11,7 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     Renderer currentRenderer;
     Material currentOutlineMat;
 
-    float outlineOn = 0.015f;
+    float outlineOn = 0.15f;
     float outlineOff = 0f;
 
     void OnEnable()
