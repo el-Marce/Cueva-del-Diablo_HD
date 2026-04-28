@@ -8208,7 +8208,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df509b6fa3aff9f46a384005e78c2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Primer pergamino con material Yeii!!
+  text: "El que desea cruzar el umbral, tres ofrendas le son requeridas:\n\n- La
+    hoja pura y sagrada que la tierra provee.\n- El esp\xEDritu que se derrama en
+    copa de cristal, embriaga la carne pero no sacia el alma\n- La bestia que cae
+    sobre el altar no clama por su sangre, pues su silencio es m\xE1s elocuente que
+    mil palabras\n\nLa sangre que a\xFAn humea sobre la piedra no ha terminado de
+    contar su historia, pues lo que fue vida un momento antes, ahora habla un lenguaje
+    que solo el cielo sabe leer"
   scrollPanel: {fileID: 0}
   scrollText: {fileID: 0}
 --- !u!1001 &122996553025432532

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 168441739714165742}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.779, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactDistance: 1.5
+  highlightMaterial: {fileID: 2100000, guid: 2725aa638718cc848acbed7fd98af6db, type: 2}
 --- !u!114 &772965691360533526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,6 +265,7 @@ GameObject:
   - component: {fileID: 7236949807668828051}
   - component: {fileID: 7865965504305212451}
   - component: {fileID: 7953748133859866620}
+  - component: {fileID: 3630432085096399802}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -280,7 +282,7 @@ Transform:
   m_GameObject: {fileID: 1537687229058459088}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00000033527613, y: 1.1899999, z: -0.27000117}
+  m_LocalPosition: {x: 0.0000011374553, y: 0.7933334, z: -0.18000023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -348,6 +350,36 @@ MonoBehaviour:
   virtualCamera: {fileID: 7865965504305212451}
   leanAmount: 1
   leanSpeed: 5
+--- !u!114 &3630432085096399802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537687229058459088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e501d18bb52cf8c40b1853ca4904654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CollideAgainst:
+    serializedVersion: 2
+    m_Bits: 256
+  m_IgnoreTag: Player
+  m_TransparentLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_MinimumDistanceFromTarget: 0.1
+  m_AvoidObstacles: 1
+  m_DistanceLimit: 0
+  m_MinimumOcclusionTime: 0
+  m_CameraRadius: 0.5
+  m_Strategy: 1
+  m_MaximumEffort: 4
+  m_SmoothingTime: 0.1
+  m_Damping: 0
+  m_DampingWhenOccluded: 0
+  m_OptimalTargetDistance: 0
 --- !u!1 &4726091405804414649
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +548,10 @@ MonoBehaviour:
   minThreshold: 0.02
   maxThreshold: 0.15
   requiredDuration: 0.25
+  smoothedLoudness: 0
+  rhythmThreshold: 0.75
+  rhythmCondition: {fileID: 0}
+  pulseCooldown: 0.3
 --- !u!114 &5072848989872559061
 MonoBehaviour:
   m_ObjectHideFlags: 0
