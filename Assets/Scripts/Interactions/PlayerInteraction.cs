@@ -87,7 +87,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 Material[] mats = bestRenderer.materials;
 
-                if (mats.Length > 1)
+                if (mats.Length >= 1)
                 {
                     if (currentRenderer != bestRenderer)
                     {
