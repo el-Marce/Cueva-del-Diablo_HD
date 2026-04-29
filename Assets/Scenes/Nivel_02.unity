@@ -11881,11 +11881,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3575470178835784901, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: breathInterval
-      value: 40
-      objectReference: {fileID: 0}
     - target: {fileID: 5478917832717643419, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: sensitivity
@@ -11969,11 +11964,6 @@ PrefabInstance:
     - target: {fileID: 8934563051483889156, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: currentOutlineMat
-      value: 
-      objectReference: {fileID: 2100000, guid: 2725aa638718cc848acbed7fd98af6db, type: 2}
-    - target: {fileID: 8934563051483889156, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: highlightMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 2725aa638718cc848acbed7fd98af6db, type: 2}
     - target: {fileID: 8934563051483889156, guid: b49c8089cb89298438c78be398f39f45,
