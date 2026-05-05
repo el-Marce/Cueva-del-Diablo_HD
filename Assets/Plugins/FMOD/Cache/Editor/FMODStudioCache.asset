@@ -150,7 +150,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639124456584933609
+  lastModified: 639135825096636750
   FileSizes: []
   Exists: 1
 --- !u!114 &-1634142530328707768
@@ -249,7 +249,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639126248958156287
+  lastModified: 639135825097219744
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -284,13 +284,14 @@ MonoBehaviour:
   - {fileID: -9208115110330432712}
   - {fileID: -1407315786429920210}
   - {fileID: 2299121388873248599}
+  - {fileID: 7850595472114368337}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639126249031775243
+  cacheTime: 639135825097246192
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -308,6 +309,8 @@ MonoBehaviour:
     index: 6
   - key: event:/Cinematicas/MusicBack
     index: 7
+  - key: event:/Player/Pasos
+    index: 8
 --- !u!114 &2299121388873248599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,10 +416,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639126248958236574
+  lastModified: 639135825097246192
   FileSizes:
   - Name: 
-    Value: 1440
+    Value: 1494
   Exists: 1
 --- !u!114 &6443872550757378877
 MonoBehaviour:
@@ -436,6 +439,33 @@ MonoBehaviour:
   lastModified: 639126249031775243
   FileSizes: []
   Exists: 1
+--- !u!114 &7850595472114368337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Pasos
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Pasos
+  Guid:
+    Data1: -546651521
+    Data2: 1172026867
+    Data3: 1323888294
+    Data4: -1244199808
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18500
 --- !u!114 &7889449137568548799
 MonoBehaviour:
   m_ObjectHideFlags: 0

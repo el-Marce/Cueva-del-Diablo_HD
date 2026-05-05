@@ -4609,6 +4609,16 @@ PrefabInstance:
       propertyPath: requiredKey
       value: Evangelio de Natanael
       objectReference: {fileID: 0}
+    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 779152177969063388, guid: 42c66d54381e8ad46b5f1e230a9ab113,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -1.53
+      objectReference: {fileID: 0}
     - target: {fileID: 5371615225278894563, guid: 42c66d54381e8ad46b5f1e230a9ab113,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7439,11 +7449,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7782873929807997738, guid: e638bab745d554e43b8a00f5c8ab9a54,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 7b0d9d6680d6fd8489e57ef09e215712, type: 2}
     - target: {fileID: 8466944895675130568, guid: e638bab745d554e43b8a00f5c8ab9a54,
         type: 3}
       propertyPath: m_Name
