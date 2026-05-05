@@ -123,14 +123,16 @@ public class CinematicaManager : MonoBehaviour
 
         if (currentFrame >= frames.Length)
         {
+
+            AudioManager.Instance.StopMusica();
             if (SceneTransition.Instance != null)
             {
-                AudioManager.Instance.StopMusica();
+                Debug.Log("Transición hecha con SceneTransition");
                 SceneTransition.Instance.TransitionTo(escenaSiguiente, holdDuration: 3f);
             }
             else
             {
-                // Fallback directo si no hay SceneTransition
+                Debug.Log("Transición hecha con Fallback");
                 UnityEngine.SceneManagement.SceneManager.LoadScene(escenaSiguiente);
             }
             yield break;

@@ -70,11 +70,13 @@ public class MenuPrincipal : MonoBehaviour
 
     public void OnNuevoJuego()
     {
+        foreach (Button btn in GetComponentsInChildren<Button>()) btn.enabled = false;
         StartCoroutine(NuevoJuegoRoutine());
     }
 
     IEnumerator NuevoJuegoRoutine()
     {
+
         if (btnNuevoJuegoHover != null)
             yield return StartCoroutine(btnNuevoJuegoHover.BlinkOutline(blinkTimes, blinkSpeed));
 
