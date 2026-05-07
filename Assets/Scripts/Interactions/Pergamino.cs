@@ -1,5 +1,6 @@
-using UnityEngine;
+using FMODUnity;
 using TMPro;
+using UnityEngine;
 public class Pergamino : MonoBehaviour, IInteractable
 {
     [TextArea]
@@ -7,12 +8,16 @@ public class Pergamino : MonoBehaviour, IInteractable
 
     public GameObject scrollPanel;
     public TMP_Text scrollText;
+
+    public EventReference pergaminoSound;
+
     public void Interact()
     {
         Inventory inventory = FindObjectOfType<Inventory>();
 
         if (inventory != null)
         {
+            AudioManager.Instance.Play(pergaminoSound);
             inventory.AddScroll(text);
         }
 

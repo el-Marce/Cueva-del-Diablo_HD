@@ -20,6 +20,8 @@ public class InventoryMenu : MonoBehaviour
 
     public int columns = 4;
 
+    public Image[] selectors;
+    public Image[] itemIcons;
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -45,11 +47,50 @@ public class InventoryMenu : MonoBehaviour
 
         itemTexts = new TMP_Text[]
         {
-        canvas.Find("InventoryPanel/Grid/Item0").GetComponent<TMP_Text>(),
-        canvas.Find("InventoryPanel/Grid/Item1").GetComponent<TMP_Text>(),
-        canvas.Find("InventoryPanel/Grid/Item2").GetComponent<TMP_Text>(),
-        canvas.Find("InventoryPanel/Grid/Item3").GetComponent<TMP_Text>(),
-        canvas.Find("InventoryPanel/Grid/Item4").GetComponent<TMP_Text>()
+            canvas.Find("InventoryPanel/Grid/Item0/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item1/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item2/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item3/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item4/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item5/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item6/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item7/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item8/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item9/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item10/UsesText").GetComponent<TMP_Text>(),
+            canvas.Find("InventoryPanel/Grid/Item11/UsesText").GetComponent<TMP_Text>()
+        };
+
+        selectors = new Image[]
+        {
+            canvas.Find("InventoryPanel/Grid/Item0/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item1/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item2/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item3/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item4/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item5/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item6/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item7/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item8/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item9/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item10/Selector").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item11/Selector").GetComponent<Image>()
+        };
+
+        itemIcons = new Image[]
+        {
+            canvas.Find("InventoryPanel/Grid/Item0/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item1/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item2/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item3/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item4/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item5/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item6/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item7/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item8/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item9/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item10/Icon").GetComponent<Image>(),
+            canvas.Find("InventoryPanel/Grid/Item11/Icon").GetComponent<Image>()
         };
     }
 
@@ -84,7 +125,7 @@ public class InventoryMenu : MonoBehaviour
             }
         }
 
-        if (!menuOpen) return;
+        if (!menuOpen) return; else GameState.InMenu = true;
 
         Navigate();
         ChangeTab();
@@ -269,27 +310,44 @@ public class InventoryMenu : MonoBehaviour
             if (i >= count)
             {
                 itemTexts[i].gameObject.SetActive(false);
+                selectors[i].gameObject.SetActive(false);
+                itemIcons[i].gameObject.SetActive(false);
                 continue;
             }
 
             itemTexts[i].gameObject.SetActive(true);
+            itemIcons[i].gameObject.SetActive(true);
+            itemIcons[i].sprite = inventory.items[i].icon;
 
             string text;
 
             if (inventory.currentTab == Inventory.Tab.Items)
             {
-                string itemName = inventory.items[i].name;
+                //string itemName = inventory.items[i].name;
                 string uses = " x" + inventory.items[i].uses;
-                bool isEquipped = inventory.equippedItem == itemName;
-                text = (isEquipped ? "★ " : "") + itemName + uses;
+                text = uses;
             }
             else
                 text = "Pergamino " + (i + 1);
 
-            if (i == inventory.selectedIndex)
-                itemTexts[i].text = "<b>[" + text + "]</b>";
-            else
-                itemTexts[i].text = text;
+            //if (i == inventory.selectedIndex)
+            //    itemTexts[i].text = "<b>[" + text + "]</b>";
+            //else
+            //    itemTexts[i].text = text;
+
+            itemTexts[i].text = text;
+
+            bool isSelected = i == inventory.selectedIndex;
+            bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
+                              inventory.equippedItem == inventory.items[i].name;
+
+            selectors[i].gameObject.SetActive(isSelected || isEquipped);
+
+            // color según estado
+            if (isSelected || isEquipped)
+            {
+                selectors[i].color = isEquipped ? Color.white : Color.red;
+            }
         }
         UpdateDescription();
     }

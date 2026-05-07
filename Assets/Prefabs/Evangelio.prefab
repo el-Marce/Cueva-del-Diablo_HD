@@ -122,6 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Evangelio de Natanael
+  icon: {fileID: 21300000, guid: 746fd4796b10d0f4daf5ddc2e39cbeba, type: 3}
 --- !u!1001 &8907718660423061477
 PrefabInstance:
   m_ObjectHideFlags: 0

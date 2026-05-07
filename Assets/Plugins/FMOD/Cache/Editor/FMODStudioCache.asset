@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 77825
+--- !u!114 &-8845838389559134183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/RocaPick
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/RocaPick
+  Guid:
+    Data1: -712689084
+    Data2: 1307116821
+    Data3: 1539862923
+    Data4: 599201090
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-8387157460588358563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,6 +99,33 @@ MonoBehaviour:
   lastModified: 639124456585166938
   FileSizes: []
   Exists: 1
+--- !u!114 &-6169807202925566906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/RocaWind
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/RocaWind
+  Guid:
+    Data1: -1966502447
+    Data2: 1166094043
+    Data3: -1680547671
+    Data4: 885976116
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6078326942949849766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +144,33 @@ MonoBehaviour:
   lastModified: 639126179334655569
   FileSizes: []
   Exists: 1
+--- !u!114 &-5646325515399961548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambientes/Viento
+  m_EditorClassIdentifier: 
+  Path: event:/Ambientes/Viento
+  Guid:
+    Data1: 1265829917
+    Data2: 1202624026
+    Data3: 1731324816
+    Data4: 1733546191
+  Banks:
+  - {fileID: 3791001437229431716}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 55200
 --- !u!114 &-4247042192413012017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,7 +231,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639135825096636750
+  lastModified: 639136271921520547
   FileSizes: []
   Exists: 1
 --- !u!114 &-1634142530328707768
@@ -249,7 +330,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639135825097219744
+  lastModified: 639136271921788356
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -285,13 +366,19 @@ MonoBehaviour:
   - {fileID: -1407315786429920210}
   - {fileID: 2299121388873248599}
   - {fileID: 7850595472114368337}
+  - {fileID: -5646325515399961548}
+  - {fileID: 8950493101572582359}
+  - {fileID: 5652649349518874655}
+  - {fileID: -8845838389559134183}
+  - {fileID: 14881261692205809}
+  - {fileID: -6169807202925566906}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639135825097246192
+  cacheTime: 639136271921813990
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -311,6 +398,69 @@ MonoBehaviour:
     index: 7
   - key: event:/Player/Pasos
     index: 8
+  - key: event:/Ambientes/Viento
+    index: 9
+  - key: event:/Interacttions/PergaminoLectura
+    index: 10
+  - key: event:/Interacttions/PaloWind
+    index: 11
+  - key: event:/Interacttions/RocaPick
+    index: 12
+  - key: event:/Interacttions/PaloPick
+    index: 13
+  - key: event:/Interacttions/RocaWind
+    index: 14
+--- !u!114 &14881261692205809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PaloPick
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PaloPick
+  Guid:
+    Data1: -321690120
+    Data2: 1077822986
+    Data3: 484827025
+    Data4: -188117548
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &1017837893253896365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Pasos/Velocidad
+  m_EditorClassIdentifier: 
+  Name: Velocidad
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 1474993253
+    data2: 197410690
+  Type: 1
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &2299121388873248599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,8 +529,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
-  StudioPath: 
-  lastModified: 639124456585044096
+  StudioPath: bank:/Ambiente
+  lastModified: 639136216251862909
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -416,11 +566,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639135825097246192
+  lastModified: 639136271921813990
   FileSizes:
   - Name: 
-    Value: 1494
+    Value: 1848
   Exists: 1
+--- !u!114 &5652649349518874655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PaloWind
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PaloWind
+  Guid:
+    Data1: 894368778
+    Data2: 1216896951
+    Data3: 1455763336
+    Data4: -1025319714
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &6443872550757378877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,10 +639,11 @@ MonoBehaviour:
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
-  Parameters: []
+  Parameters:
+  - {fileID: 1017837893253896365}
   MinDistance: 1
   MaxDistance: 20
-  Length: 18500
+  Length: 18400
 --- !u!114 &7889449137568548799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,3 +662,30 @@ MonoBehaviour:
   lastModified: 639124456585119389
   FileSizes: []
   Exists: 1
+--- !u!114 &8950493101572582359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PergaminoLectura
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PergaminoLectura
+  Guid:
+    Data1: 1153737953
+    Data2: 1309905906
+    Data3: -1520193656
+    Data4: -888021403
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0

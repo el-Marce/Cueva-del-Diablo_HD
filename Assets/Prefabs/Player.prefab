@@ -131,6 +131,13 @@ MonoBehaviour:
   moveSpeed: 5
   sprintMultiplier: 2
   gravity: -9.81
+  pasosExt:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!114 &8934563051483889156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +216,34 @@ MonoBehaviour:
   stickCooldown: 0.8
   rockWindUp: 0.5
   rockCooldown: 1.2
+  recogerPaloSound:
+    Guid:
+      Data1: -321690120
+      Data2: 1077822986
+      Data3: 484827025
+      Data4: -188117548
+    Path: event:/Interacttions/PaloPick
+  ataquePaloSound:
+    Guid:
+      Data1: 894368778
+      Data2: 1216896951
+      Data3: 1455763336
+      Data4: -1025319714
+    Path: event:/Interacttions/PaloWind
+  recogerRocaSound:
+    Guid:
+      Data1: -712689084
+      Data2: 1307116821
+      Data3: 1539862923
+      Data4: 599201090
+    Path: event:/Interacttions/RocaPick
+  ataqueRocaSound:
+    Guid:
+      Data1: -1966502447
+      Data2: 1166094043
+      Data3: -1680547671
+      Data4: 885976116
+    Path: event:/Interacttions/RocaWind
   pushCooldown: 3
   fistDamage: 5
   stickDamage: 12

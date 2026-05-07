@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using FMODUnity;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat")]
@@ -20,6 +21,13 @@ public class PlayerCombat : MonoBehaviour
     public float rockCooldown = 1.2f;
 
     private bool isAttacking = false;
+
+    [Header("Sonidos")]
+    public EventReference recogerPaloSound;
+    public EventReference ataquePaloSound;
+
+    public EventReference recogerRocaSound;
+    public EventReference ataqueRocaSound;
 
     [Header("Push")]
     public float pushCooldown = 3f;
@@ -94,6 +102,11 @@ public class PlayerCombat : MonoBehaviour
 
         float windUp = GetWindUp();
         float cooldown = GetCooldown();
+
+        if (currentWeapon == WeaponType.Stick)
+            AudioManager.Instance.Play(ataquePaloSound);
+        if (currentWeapon == WeaponType.Rock)
+            AudioManager.Instance.Play(ataqueRocaSound);
 
         yield return new WaitForSeconds(windUp);
 
@@ -206,6 +219,10 @@ public class PlayerCombat : MonoBehaviour
         maxDurability = durability;
         currentDurability = durability;
 
+        if (currentWeapon == WeaponType.Stick)
+            AudioManager.Instance.Play(recogerPaloSound);
+        if (currentWeapon == WeaponType.Rock)
+            AudioManager.Instance.Play(recogerRocaSound);
         Debug.Log("Equipado: " + weapon + " | Durabilidad: " + durability);
     }
 

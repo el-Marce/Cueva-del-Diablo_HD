@@ -19,7 +19,7 @@ public class Inventory : MonoBehaviour
 
     public Tab currentTab = Tab.Items;
 
-    public void AddItem(string itemName, int uses = 1)
+    public void AddItem(string itemName, Sprite icon, int uses = 1)
     {
         // Si ya existe, suma usos en lugar de duplicar
         ItemData existing = items.Find(i => i.name == itemName);
@@ -29,7 +29,10 @@ public class Inventory : MonoBehaviour
             Debug.Log("Recogiste más " + itemName + ". Usos totales: " + existing.uses);
             return;
         }
-        items.Add(new ItemData(itemName, uses));
+        ItemData newItem = new ItemData(itemName, uses);
+        newItem.icon = icon;
+
+        items.Add(newItem);
         Debug.Log("Recogiste: " + itemName + " (" + uses + " usos). Pulsa TAB para ver tus objetos");
     }
 

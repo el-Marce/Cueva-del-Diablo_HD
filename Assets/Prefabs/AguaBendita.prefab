@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Agua Bendita
+  icon: {fileID: 21300000, guid: edc27568ceebcd84fbe73a394326cf33, type: 3}
 --- !u!114 &3562102867573041739
 MonoBehaviour:
   m_ObjectHideFlags: 0

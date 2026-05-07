@@ -5,12 +5,6 @@ using FMOD.Studio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-
-    [Header("Música")]
-    public EventReference musicaMenu;
-    public EventReference musicaNivel01;
-    public EventReference musicaNivel02;
-
     EventInstance musicaActual;
 
     void Awake()
@@ -57,16 +51,20 @@ public class AudioManager : MonoBehaviour
         if (eventRef.IsNull) return;
         RuntimeManager.PlayOneShot(eventRef, position);
     }
-
-    // --- Sonidos con instancia (loops) ---
-
-    public EventInstance CreateLoop(string eventPath, Vector3 position = default)
+    public EventInstance CreateLoop(EventReference eventRef) // <- sobrecarga nueva
     {
-        EventInstance instance = RuntimeManager.CreateInstance(eventPath);
-        instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+        if (eventRef.IsNull) return default;
+        EventInstance instance = RuntimeManager.CreateInstance(eventRef);
         instance.start();
         return instance;
     }
+    //public EventInstance CreateLoop(string eventPath, Vector3 position = default)
+    //{
+    //    EventInstance instance = RuntimeManager.CreateInstance(eventPath);
+    //    instance.set3DAttributes(RuntimeUtils.To3DAttributes(position));
+    //    instance.start();
+    //    return instance;
+    //}
 
     public void StopLoop(EventInstance instance, bool fadeOut = true)
     {

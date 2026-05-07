@@ -3,6 +3,7 @@ using UnityEngine;
 public class PickupItem : MonoBehaviour, IInteractable
 {
     public string itemName;
+    public Sprite icon;
 
     public void Interact()
     {
@@ -10,7 +11,7 @@ public class PickupItem : MonoBehaviour, IInteractable
 
         if (inventory != null)
         {
-            inventory.AddItem(itemName);
+            inventory.AddItem(itemName, icon);
         }
 
         Destroy(gameObject);

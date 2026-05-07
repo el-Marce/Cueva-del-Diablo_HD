@@ -8217,6 +8217,13 @@ MonoBehaviour:
     que solo el cielo sabe leer"
   scrollPanel: {fileID: 0}
   scrollText: {fileID: 0}
+  pergaminoSound:
+    Guid:
+      Data1: 1153737953
+      Data2: 1309905906
+      Data3: -1520193656
+      Data4: -888021403
+    Path: event:/Interacttions/PergaminoLectura
 --- !u!1001 &122996553025432532
 PrefabInstance:
   m_ObjectHideFlags: 0
