@@ -4,8 +4,8 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     //public List<string> items = new List<string>();
-    public List<ItemData> items = new List<ItemData>();
-    public List<string> scrolls = new List<string>();
+    public List<ItemData> items = new List<ItemData>(); 
+    public List<ScrollData> scrolls = new List<ScrollData>();
 
     public string equippedItem = null;
 
@@ -36,9 +36,9 @@ public class Inventory : MonoBehaviour
         Debug.Log("Recogiste: " + itemName + " (" + uses + " usos). Pulsa TAB para ver tus objetos");
     }
 
-    public void AddScroll(string scrollText)
+    public void AddScroll(string scrollText, Sprite icon)
     {
-        scrolls.Add(scrollText);
+        scrolls.Add(new ScrollData(scrollText, icon));
         Debug.Log("Pergamino guardado. Pulsa TAB para leerlo");
     }
 
@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
     {
         if (currentTab == Tab.Items)
             return items[selectedIndex].name;
-        return scrolls[selectedIndex];
+        return scrolls[selectedIndex].text;
     }
     public int GetCount()
     {

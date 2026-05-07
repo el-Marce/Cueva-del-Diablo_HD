@@ -315,20 +315,23 @@ public class InventoryMenu : MonoBehaviour
                 continue;
             }
 
-            itemTexts[i].gameObject.SetActive(true);
-            itemIcons[i].gameObject.SetActive(true);
-            itemIcons[i].sprite = inventory.items[i].icon;
-
             string text;
 
             if (inventory.currentTab == Inventory.Tab.Items)
             {
                 //string itemName = inventory.items[i].name;
-                string uses = " x" + inventory.items[i].uses;
+                string uses = "x" + inventory.items[i].uses;
                 text = uses;
+                itemIcons[i].gameObject.SetActive(true);
+                itemIcons[i].sprite = inventory.items[i].icon;
             }
             else
+            {
                 text = "Pergamino " + (i + 1);
+                itemIcons[i].gameObject.SetActive(true);
+                itemIcons[i].sprite = inventory.scrolls[i].icon;
+                //itemIcons[i].gameObject.SetActive(false);
+            }   
 
             //if (i == inventory.selectedIndex)
             //    itemTexts[i].text = "<b>[" + text + "]</b>";
@@ -339,7 +342,11 @@ public class InventoryMenu : MonoBehaviour
 
             bool isSelected = i == inventory.selectedIndex;
             bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
-                              inventory.equippedItem == inventory.items[i].name;
+                                i < inventory.items.Count &&
+                                inventory.equippedItem == inventory.items[i].name;
+
+            //bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
+            //                  inventory.equippedItem == inventory.items[i].name;
 
             selectors[i].gameObject.SetActive(isSelected || isEquipped);
 

@@ -8,7 +8,7 @@ public class Pergamino : MonoBehaviour, IInteractable
 
     public GameObject scrollPanel;
     public TMP_Text scrollText;
-
+    public Sprite icon;
     public EventReference pergaminoSound;
 
     public void Interact()
@@ -18,7 +18,7 @@ public class Pergamino : MonoBehaviour, IInteractable
         if (inventory != null)
         {
             AudioManager.Instance.Play(pergaminoSound);
-            inventory.AddScroll(text);
+            inventory.AddScroll(text, icon);
         }
 
         Destroy(gameObject);

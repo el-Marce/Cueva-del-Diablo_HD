@@ -8217,6 +8217,7 @@ MonoBehaviour:
     que solo el cielo sabe leer"
   scrollPanel: {fileID: 0}
   scrollText: {fileID: 0}
+  icon: {fileID: 21300000, guid: 77c787b49e8d1fa4aad9b7d00bf1981d, type: 3}
   pergaminoSound:
     Guid:
       Data1: 1153737953
