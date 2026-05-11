@@ -320,14 +320,15 @@ public class InventoryMenu : MonoBehaviour
             if (inventory.currentTab == Inventory.Tab.Items)
             {
                 //string itemName = inventory.items[i].name;
-                string uses = "x" + inventory.items[i].uses;
-                text = uses;
+                itemTexts[i].gameObject.SetActive(true);
+                itemTexts[i].text = "x" + inventory.items[i].uses;
+
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.items[i].icon;
             }
             else
             {
-                text = "Pergamino " + (i + 1);
+                itemTexts[i].gameObject.SetActive(false);
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.scrolls[i].icon;
                 //itemIcons[i].gameObject.SetActive(false);
@@ -338,7 +339,7 @@ public class InventoryMenu : MonoBehaviour
             //else
             //    itemTexts[i].text = text;
 
-            itemTexts[i].text = text;
+            //itemTexts[i].text = text;
 
             bool isSelected = i == inventory.selectedIndex;
             bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&

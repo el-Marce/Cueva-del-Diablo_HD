@@ -189,9 +189,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   descriptionText: {fileID: 0}
   lecturaPanel: {fileID: 0}
   columns: 4
+  selectors: []
+  itemIcons: []
 --- !u!114 &2295143409455369292
 MonoBehaviour:
   m_ObjectHideFlags: 0

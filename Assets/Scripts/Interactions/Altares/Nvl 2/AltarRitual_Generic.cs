@@ -76,10 +76,14 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         // Aquí tu cinemática / sonido
         yield return new WaitForSeconds(activationDelay);
 
-        door.isLocked = false;
-        door.OpenDoor();
+        if (door != null)
+        {
+            door.isLocked = false;
+            door.OpenDoor();
+        }
 
-        KillNearbyEntes();
+
+            KillNearbyEntes();
         LiberateNearbyPueblerinos();
 
         if (teleportTarget != null)
