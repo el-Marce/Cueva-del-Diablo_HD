@@ -17,13 +17,22 @@ public class TriggerInteriorCueva : MonoBehaviour
         {
             triggered = true;
 
-            door.CloseDoor();
+            if (door.gameObject.layer == LayerMask.NameToLayer("Piedras"))
+            {
+                //Transform childA = door.transform.GetChild(0);
+                Transform childB = door.transform.GetChild(1);
+
+                //childA.gameObject.SetActive(false);
+                childB.gameObject.SetActive(true);
+
+            }
+            else
+            {
+                door.CloseDoor();
+            }
+
             door.isLocked = true;
-
             Debug.Log("Jugador Detectado");
-            //companion.Possess();
-
-            //Debug.Log("Puerta sellada.");
         }
     }
 }
