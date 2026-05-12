@@ -79,12 +79,50 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         if (door != null)
         {
             door.isLocked = false;
-            door.OpenDoor();
+
+            if (door.gameObject.layer == LayerMask.NameToLayer("Piedras"))
+            {
+                Transform childA = door.transform.GetChild(0);
+                Transform childB = door.transform.GetChild(1);
+
+                childA.gameObject.SetActive(false);
+                childB.gameObject.SetActive(true);
+
+                StartCoroutine(FreezeChildrenRigidbodies(childB));
+            }
+            else
+            {
+                door.OpenDoor();
+            }
         }
 
 
-            KillNearbyEntes();
+        KillNearbyEntes();
         LiberateNearbyPueblerinos();
+
+        IEnumerator FreezeChildrenRigidbodies(Transform parent)
+        {
+            yield return new WaitForSeconds(10f);
+
+            Rigidbody[] rbs = parent.GetComponentsInChildren<Rigidbody>();
+
+            foreach (Rigidbody rb in rbs)
+            {
+                rb.drag = 5f;
+            }
+
+            // Espera mientras desaceleran
+            yield return new WaitForSeconds(1f);
+
+            // Congelado final
+            foreach (Rigidbody rb in rbs)
+            {
+                //rb.maxLinearVelocity = 0f;
+                //rb.angularVelocity = Vector3.zero;
+
+                rb.isKinematic = true;
+            }
+        }
 
         if (teleportTarget != null)
         {
