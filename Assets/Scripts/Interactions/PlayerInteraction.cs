@@ -52,13 +52,12 @@ public class PlayerInteraction : MonoBehaviour
         Vector3 origin = cam.transform.position;
         Vector3 forward = cam.transform.forward;
 
-        Collider[] hits = Physics.OverlapSphere(origin, interactDistance);
-
         IInteractable bestInteractable = null;
         Renderer bestRenderer = null;
-
         float bestAngle = 999f;
 
+        // OverlapSphere para objetos cercanos (puertas, objetos grandes)
+        Collider[] hits = Physics.OverlapSphere(origin, interactDistance);
         foreach (Collider col in hits)
         {
             IInteractable interactable = col.GetComponent<IInteractable>();
@@ -67,13 +66,24 @@ public class PlayerInteraction : MonoBehaviour
             Vector3 dirToTarget = (col.bounds.center - origin).normalized;
             float angle = Vector3.Angle(forward, dirToTarget);
 
-            if (angle < 35f)
+            if (angle < 60f && angle < bestAngle)
             {
-                if (angle < bestAngle)
+                bestAngle = angle;
+                bestInteractable = interactable;
+                bestRenderer = col.GetComponent<Renderer>();
+            }
+        }
+
+        // SphereCast como fallback para objetos pequeños o fuera del overlap
+        if (bestInteractable == null)
+        {
+            if (Physics.SphereCast(origin, 0.3f, forward, out RaycastHit hit, interactDistance))
+            {
+                IInteractable interactable = hit.collider.GetComponent<IInteractable>();
+                if (interactable != null)
                 {
-                    bestAngle = angle;
                     bestInteractable = interactable;
-                    bestRenderer = col.GetComponent<Renderer>();
+                    bestRenderer = hit.collider.GetComponent<Renderer>();
                 }
             }
         }
@@ -83,32 +93,16 @@ public class PlayerInteraction : MonoBehaviour
             currentInteractable = bestInteractable;
             interactUI.SetActive(true);
 
-            if (bestRenderer != null)
+            if (bestRenderer != null && currentRenderer != bestRenderer)
             {
-                Material[] mats = bestRenderer.materials;
-
-                if (mats.Length >= 1)
-                {
-                    if (currentRenderer != bestRenderer)
-                    {
-                        ClearOutline();
-
-                        currentRenderer = bestRenderer;
-
-                        originalMaterials = bestRenderer.materials;
-
-                        Material[] highlightArray = new Material[originalMaterials.Length];
-
-                        for (int i = 0; i < highlightArray.Length; i++)
-                        {
-                            highlightArray[i] = highlightMaterial;
-                        }
-
-                        bestRenderer.materials = highlightArray;
-                    }
-                }
+                ClearOutline();
+                currentRenderer = bestRenderer;
+                originalMaterials = bestRenderer.materials;
+                Material[] highlightArray = new Material[originalMaterials.Length];
+                for (int i = 0; i < highlightArray.Length; i++)
+                    highlightArray[i] = highlightMaterial;
+                bestRenderer.materials = highlightArray;
             }
-
             return;
         }
 

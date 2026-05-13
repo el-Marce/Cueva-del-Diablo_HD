@@ -64,6 +64,9 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     IEnumerator ActivationSequence()
     {
         activated = true;
+        GetComponent<Collider>().enabled = false;
+        Transform child = transform.GetChild(0);
+        child.gameObject.GetComponent<Collider>().enabled = true;
         //var enteCondition = GetComponent<AltarCondition_Entes>();
 
         foreach (var c in conditions)
@@ -128,8 +131,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         {
             TeleportPlayer();
         }
-
-        GetComponent<Collider>().enabled = false;
+                
         //Debug.Log("[Altar] Ritual completado.");
     }
     void KillNearbyEntes()

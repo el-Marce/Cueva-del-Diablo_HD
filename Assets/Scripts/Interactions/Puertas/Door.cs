@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 
 public class Door : MonoBehaviour, IInteractable
 {
@@ -10,13 +11,17 @@ public class Door : MonoBehaviour, IInteractable
     [Header("Animación")]
     public float openDuration = 1.5f;
     public float closeDuration = 0.5f;
+    Animator lockAnimator;
 
+    //public bool canInteract = true;
     bool isMoving = false;
     Quaternion closedRotation;
     Quaternion openRotation;
 
     void Start()
     {
+        lockAnimator = GetComponentInChildren<Animator>();
+
         if (!isOpen)
         {
             closedRotation = transform.rotation;
@@ -58,10 +63,30 @@ public class Door : MonoBehaviour, IInteractable
     public void OpenDoor()
     {
         if (isOpen || isMoving) return;
-        StartCoroutine(RotateDoor(openRotation, openDuration));
-        isOpen = true;
+        GetComponent<Collider>().enabled = false;
+
+        Transform child = transform.GetChild(1);
+        child.gameObject.GetComponent<Collider>().enabled = true;
+
+        StartCoroutine(OpenSequence());
     }
 
+    IEnumerator OpenSequence()
+    {
+        isMoving = true;
+
+        lockAnimator.SetTrigger("OpenLock");
+
+        yield return new WaitForSeconds(3f);
+
+        yield return StartCoroutine(
+            RotateDoor(openRotation, openDuration)
+        );
+
+        isOpen = true;
+
+        isMoving = false;
+    }
     public void CloseDoor()
     {
         if (!isOpen || isMoving) return;
@@ -71,7 +96,7 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator RotateDoor(Quaternion targetRotation, float duration)
     {
-        isMoving = true;
+        //isMoving = true;
 
         Quaternion startRotation = transform.rotation;
         float time = 0f;
@@ -86,7 +111,7 @@ public class Door : MonoBehaviour, IInteractable
 
         transform.rotation = targetRotation;
 
-        isMoving = false;
+        //isMoving = false;
     }
 
     public bool IsOpen()
