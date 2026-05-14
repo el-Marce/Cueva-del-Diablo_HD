@@ -64,6 +64,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     IEnumerator ActivationSequence()
     {
         activated = true;
+
         GetComponent<Collider>().enabled = false;
         Transform child = transform.GetChild(0);
         child.gameObject.GetComponent<Collider>().enabled = true;

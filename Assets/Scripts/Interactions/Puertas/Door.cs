@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 
@@ -12,6 +13,9 @@ public class Door : MonoBehaviour, IInteractable
     public float openDuration = 1.5f;
     public float closeDuration = 0.5f;
     Animator lockAnimator;
+
+    [Header("Sonido")]
+    public EventReference puertaVieja;
 
     //public bool canInteract = true;
     bool isMoving = false;
@@ -63,10 +67,15 @@ public class Door : MonoBehaviour, IInteractable
     public void OpenDoor()
     {
         if (isOpen || isMoving) return;
-        GetComponent<Collider>().enabled = false;
 
-        Transform child = transform.GetChild(1);
-        child.gameObject.GetComponent<Collider>().enabled = true;
+        Collider col = GetComponent<Collider>();
+        if (col != null) col.enabled = false;
+
+        if (transform.childCount > 1)
+        {
+            Collider childCol = transform.GetChild(1).GetComponent<Collider>();
+            if (childCol != null) childCol.enabled = true;
+        }
 
         StartCoroutine(OpenSequence());
     }
@@ -75,13 +84,14 @@ public class Door : MonoBehaviour, IInteractable
     {
         isMoving = true;
 
-        lockAnimator.SetTrigger("OpenLock");
+        if(lockAnimator != null)
+        {
+            lockAnimator.SetTrigger("OpenLock");
+            yield return new WaitForSeconds(3f);
+        }
 
-        yield return new WaitForSeconds(3f);
-
-        yield return StartCoroutine(
-            RotateDoor(openRotation, openDuration)
-        );
+        AudioManager.Instance.Play(puertaVieja);
+        yield return StartCoroutine(RotateDoor(openRotation, openDuration));
 
         isOpen = true;
 

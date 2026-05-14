@@ -49,19 +49,24 @@ public class PlayerMovement : MonoBehaviour
         Move();
         ApplyGravity();
     }
-
+    bool isPivoting = false;
     void Move()
     {
         if (Input.GetMouseButton(1)) return;
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        float mouseX = Input.GetAxis("Mouse X");
+
         Vector3 move = transform.right * x + transform.forward * z;
         controller.Move(move * speed * Time.deltaTime);
 
-        bool isMoving = move.magnitude > 0.1f;
+        bool isWalking = move.magnitude > 0.1f;
+        bool isPivotingNow = Mathf.Abs(mouseX) > 2f && !isWalking;
+        bool isMoving = isWalking || isPivotingNow;
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
+        // Iniciar o detener loop
         if (isMoving && !isPlayingPasos)
         {
             pasosInstance = AudioManager.Instance.CreateLoop(pasosExt);
@@ -72,8 +77,22 @@ public class PlayerMovement : MonoBehaviour
             AudioManager.Instance.StopLoop(pasosInstance);
             isPlayingPasos = false;
         }
+
+        // Actualizar parametro siempre que el loop este activo
         if (isPlayingPasos)
-            pasosInstance.setParameterByName("velocidad", isSprinting ? 1f : 0f);
+        {
+            float valorVelocidad;
+
+            if (isPivotingNow)
+                valorVelocidad = 2f;
+            else if (isSprinting)
+                valorVelocidad = 1f;
+            else
+                valorVelocidad = 0f;
+
+            pasosInstance.setParameterByName("Velocidad", valorVelocidad);
+            Debug.Log($"Velocidad enviada: {valorVelocidad} | isWalking: {isWalking} | isPivoting: {isPivotingNow}");
+        }
 
         if (isMoving && isSprinting)
             noiseEmitter.EmitNoise(1f);

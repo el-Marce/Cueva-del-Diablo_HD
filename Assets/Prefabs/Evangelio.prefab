@@ -123,6 +123,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Evangelio de Natanael
   icon: {fileID: 21300000, guid: 746fd4796b10d0f4daf5ddc2e39cbeba, type: 3}
+  clinkBotella:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  bolsa:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  genericItem:
+    Guid:
+      Data1: -690940543
+      Data2: 1210165275
+      Data3: -589264982
+      Data4: -1244842577
+    Path: event:/Interacttions/PickupItem
 --- !u!1001 &8907718660423061477
 PrefabInstance:
   m_ObjectHideFlags: 0

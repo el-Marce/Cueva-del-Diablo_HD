@@ -99,6 +99,33 @@ MonoBehaviour:
   lastModified: 639124456585166938
   FileSizes: []
   Exists: 1
+--- !u!114 &-7012013835402147296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/Cristal
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/Cristal
+  Guid:
+    Data1: -2055770524
+    Data2: 1125479849
+    Data3: 926928828
+    Data4: -484193103
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-6169807202925566906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +153,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6115438042403345045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambientes/CuevaViento
+  m_EditorClassIdentifier: 
+  Path: event:/Ambientes/CuevaViento
+  Guid:
+    Data1: -864114150
+    Data2: 1083428034
+    Data3: 1988864955
+    Data4: 269785064
+  Banks:
+  - {fileID: 3791001437229431716}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 164673
 --- !u!114 &-6078326942949849766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,9 +285,36 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639136271921520547
+  lastModified: 639143536485986030
   FileSizes: []
   Exists: 1
+--- !u!114 &-2905573912534201379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/DerrumbePiedras
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/DerrumbePiedras
+  Guid:
+    Data1: 414265724
+    Data2: 1272020300
+    Data3: -1847466837
+    Data4: -1329851436
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1634142530328707768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +411,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639136271921788356
+  lastModified: 639143510274713356
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -372,13 +453,20 @@ MonoBehaviour:
   - {fileID: -8845838389559134183}
   - {fileID: 14881261692205809}
   - {fileID: -6169807202925566906}
+  - {fileID: -7012013835402147296}
+  - {fileID: 32232346815679243}
+  - {fileID: -6115438042403345045}
+  - {fileID: 8774220879445218129}
+  - {fileID: -2905573912534201379}
+  - {fileID: 4930667526620227902}
+  - {fileID: 5834824363424043929}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639136271921813990
+  cacheTime: 639143536485986030
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -410,6 +498,20 @@ MonoBehaviour:
     index: 13
   - key: event:/Interacttions/RocaWind
     index: 14
+  - key: event:/Interacttions/Cristal
+    index: 15
+  - key: event:/Interacttions/Bolsa
+    index: 16
+  - key: event:/Ambientes/CuevaViento
+    index: 17
+  - key: event:/Interacttions/PuertaVieja
+    index: 18
+  - key: event:/Interacttions/DerrumbePiedras
+    index: 19
+  - key: event:/Interacttions/PickupItem
+    index: 20
+  - key: event:/Interacttions/CerrarPuertaViolent
+    index: 21
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +539,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &32232346815679243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/Bolsa
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/Bolsa
+  Guid:
+    Data1: -716264497
+    Data2: 1185419353
+    Data3: 404683938
+    Data4: 1973820902
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &1017837893253896365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +581,7 @@ MonoBehaviour:
   Name: Velocidad
   StudioPath: 
   Min: 0
-  Max: 1
+  Max: 2
   Default: 0
   ID:
     data1: 1474993253
@@ -530,7 +659,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639136216251862909
+  lastModified: 639143065297026969
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -566,11 +695,38 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639136271921813990
+  lastModified: 639143510274748520
   FileSizes:
   - Name: 
-    Value: 1848
+    Value: 2164
   Exists: 1
+--- !u!114 &4930667526620227902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PickupItem
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PickupItem
+  Guid:
+    Data1: -690940543
+    Data2: 1210165275
+    Data3: -589264982
+    Data4: -1244842577
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5652649349518874655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +745,33 @@ MonoBehaviour:
     Data2: 1216896951
     Data3: 1455763336
     Data4: -1025319714
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &5834824363424043929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/CerrarPuertaViolent
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/CerrarPuertaViolent
+  Guid:
+    Data1: -1584507080
+    Data2: 1080110236
+    Data3: -571442756
+    Data4: -828673338
   Banks:
   - {fileID: -2943633009321672613}
   IsStream: 0
@@ -662,6 +845,33 @@ MonoBehaviour:
   lastModified: 639124456585119389
   FileSizes: []
   Exists: 1
+--- !u!114 &8774220879445218129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PuertaVieja
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PuertaVieja
+  Guid:
+    Data1: 1671087785
+    Data2: 1158375564
+    Data3: -1935345268
+    Data4: -568939800
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8950493101572582359
 MonoBehaviour:
   m_ObjectHideFlags: 0

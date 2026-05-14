@@ -42297,6 +42297,13 @@ MonoBehaviour:
       Data3: 1731324816
       Data4: 1733546191
     Path: event:/Ambientes/Viento
+  cuevaAmbiente:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   musicaNivel01:
     Guid:
       Data1: 0

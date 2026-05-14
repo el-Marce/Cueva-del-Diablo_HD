@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 
 public class TriggerInteriorCueva : MonoBehaviour
 {
     public Door door;
     //public NPC_Controller companion;
-
     bool triggered = false;
-
+    [Header("Sonido")]
+    public EventReference derrumbePiedras;
+    public EventReference cerrarPuertaViolent;
     void OnTriggerEnter(Collider other)
     {
         if (triggered) return;
@@ -19,6 +21,7 @@ public class TriggerInteriorCueva : MonoBehaviour
 
             if (door.gameObject.layer == LayerMask.NameToLayer("Piedras"))
             {
+                AudioManager.Instance.Play(derrumbePiedras, door.transform.position);
                 //Transform childA = door.transform.GetChild(0);
                 Transform childB = door.transform.GetChild(1);
 
@@ -28,6 +31,7 @@ public class TriggerInteriorCueva : MonoBehaviour
             }
             else
             {
+                AudioManager.Instance.Play(cerrarPuertaViolent, door.transform.position);
                 door.CloseDoor();
             }
 

@@ -121,6 +121,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: Llave Amarilla
+  icon: {fileID: 0}
+  clinkBotella:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  bolsa:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  genericItem:
+    Guid:
+      Data1: -690940543
+      Data2: 1210165275
+      Data3: -589264982
+      Data4: -1244842577
+    Path: event:/Interacttions/PickupItem
 --- !u!114 &4113011339950770282
 MonoBehaviour:
   m_ObjectHideFlags: 0
