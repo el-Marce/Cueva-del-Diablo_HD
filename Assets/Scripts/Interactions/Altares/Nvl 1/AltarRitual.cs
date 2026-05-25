@@ -14,9 +14,9 @@ public class AltarRitual : MonoBehaviour, IInteractable
 
     public string GetNextItemName()
     {
-        if (!cocaEntregada) return "coca";
-        if (!alcoholEntregado) return "alcohol";
-        if (!sulluEntregado) return "sullu";
+        if (!cocaEntregada) return "Coca";
+        if (!alcoholEntregado) return "Alcohol";
+        if (!sulluEntregado) return "Sullu";
 
         return null;
     }
@@ -37,27 +37,27 @@ public class AltarRitual : MonoBehaviour, IInteractable
     public bool OfferNextItem()
     {
         // Coca
-        if (!cocaEntregada && inventory.HasItem("coca"))
+        if (!cocaEntregada && inventory.HasItem("Coca"))
         {
-            inventory.RemoveItem("coca");
+            inventory.RemoveItem("Coca");
             cocaEntregada = true;
             //Debug.Log("Entregaste coca");
             return false;
         }
 
         // Alcohol
-        if (!alcoholEntregado && inventory.HasItem("alcohol"))
+        if (!alcoholEntregado && inventory.HasItem("Alcohol"))
         {
-            inventory.RemoveItem("alcohol");
+            inventory.RemoveItem("Alcohol");
             alcoholEntregado = true;
             //Debug.Log("Entregaste alcohol");
             return false;
         }
 
         // Sullu
-        if (!sulluEntregado && inventory.HasItem("sullu"))
+        if (!sulluEntregado && inventory.HasItem("Sullu"))
         {
-            inventory.RemoveItem("sullu");
+            inventory.RemoveItem("Sullu");
             sulluEntregado = true;
             ritualCompleted = true;
             DisableInteraction();

@@ -14,10 +14,10 @@ public class AltarUI : MonoBehaviour
     public TMP_Text[] optionsText;
     string[] baseOptions = { "Ofrecer", "Cerrar" };
 
-    [Header("UI Items")]
-    public TMP_Text cocaText;
-    public TMP_Text alcoholText;
-    public TMP_Text sulluText;
+    //[Header("UI Items")]
+    //public TMP_Text cocaText;
+    //public TMP_Text alcoholText;
+    //public TMP_Text sulluText;
 
     [Header("Texto principal")]
     public TMP_Text titleText;
@@ -33,7 +33,7 @@ public class AltarUI : MonoBehaviour
         selectedIndex = 0;
 
         PrintMenu();
-        UpdateItemStatus();
+        //UpdateItemStatus();
         UpdateTitle();
     }
 
@@ -88,12 +88,12 @@ public class AltarUI : MonoBehaviour
         }
     }
 
-    void UpdateItemStatus()
-    {
-        cocaText.text = "Coca: " + (altar.cocaEntregada ? "1" : "0");
-        alcoholText.text = "Alcohol: " + (altar.alcoholEntregado ? "1" : "0");
-        sulluText.text = "Sullu: " + (altar.sulluEntregado ? "1" : "0");
-    }
+    //void UpdateItemStatus()
+    //{
+    //    cocaText.text = "Coca: " + (altar.cocaEntregada ? "1" : "0");
+    //    alcoholText.text = "Alcohol: " + (altar.alcoholEntregado ? "1" : "0");
+    //    sulluText.text = "Sullu: " + (altar.sulluEntregado ? "1" : "0");
+    //}
 
     void UpdateTitle()
     {
@@ -138,7 +138,7 @@ public class AltarUI : MonoBehaviour
 
         bool completed = altar.OfferNextItem();
 
-        UpdateItemStatus();
+        //UpdateItemStatus();
 
         altar.HideUI();
 
