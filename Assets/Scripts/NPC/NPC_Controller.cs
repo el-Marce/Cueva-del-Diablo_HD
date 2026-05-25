@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class NPC_Controller : MonoBehaviour
+public class NPC_Controller : MonoBehaviour, IInteractable
 {
     public Transform player;
     PlayerMovement playerMovement;
@@ -34,12 +34,22 @@ public class NPC_Controller : MonoBehaviour
     NavMeshAgent agent;
     float exploreTimer;
 
+    bool activated = false;
+
     Animator anim;
     enum State { Explore, Follow }
     State currentState;
 
     bool possessed = false;
 
+    public void Interact()
+    {
+        if (activated) return;
+
+        activated = true;
+
+        //DisableInteraction();
+    }
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -54,6 +64,7 @@ public class NPC_Controller : MonoBehaviour
 
     void Update()
     {
+        if (!activated) return;
         if (possessed) return;
 
         float distance = Vector3.Distance(transform.position, player.position);

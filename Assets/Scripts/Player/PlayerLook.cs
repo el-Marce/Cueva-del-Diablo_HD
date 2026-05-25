@@ -5,7 +5,7 @@ public class PlayerLook : MonoBehaviour
     public float mouseSensitivity = 100f;
     public Transform playerBody;
 
-    float xRotation = 0f;
+    float xRotation;
 
     void Update()
     {
