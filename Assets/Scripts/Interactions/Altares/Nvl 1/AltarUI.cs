@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 public class AltarUI : MonoBehaviour
 {
     public AltarRitual altar;
+    public GameObject[] selectors;
 
     [Header("Eventos")]
     public Door door;
@@ -82,9 +84,11 @@ public class AltarUI : MonoBehaviour
         for (int i = 0; i < optionsText.Length; i++)
         {
             if (i == selectedIndex)
-                optionsText[i].text = "<b>[ " + baseOptions[i] + " ]</b>";
+                selectors[i].SetActive(true);
+            //optionsText[i].text = "<b>[ " + baseOptions[i] + " ]</b>";
             else
-                optionsText[i].text = baseOptions[i];
+                selectors[i].SetActive(false);
+            //optionsText[i].text = baseOptions[i];
         }
     }
 

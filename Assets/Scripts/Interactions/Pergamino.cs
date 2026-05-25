@@ -25,7 +25,7 @@ public class Pergamino : MonoBehaviour, IInteractable
 
         scrollPanel.SetActive(true);
 
-        scrollText.text = text + "\n\n<i>Pergamino almacenado en inventario</i>";
+        scrollText.text = text;
 
         GameState.InMenu = true;
 

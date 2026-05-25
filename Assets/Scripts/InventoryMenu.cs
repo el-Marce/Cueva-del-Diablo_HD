@@ -251,7 +251,7 @@ public class InventoryMenu : MonoBehaviour
 
         if (inventory.currentTab == Inventory.Tab.Scrolls)
         {
-            descriptionText.text = selected;
+            descriptionText.text = "''" + selected + "''";
         }
         else
         {
@@ -314,8 +314,6 @@ public class InventoryMenu : MonoBehaviour
                 itemIcons[i].gameObject.SetActive(false);
                 continue;
             }
-
-            string text;
 
             if (inventory.currentTab == Inventory.Tab.Items)
             {
