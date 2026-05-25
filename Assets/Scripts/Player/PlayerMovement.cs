@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
                 valorVelocidad = 0f;
 
             pasosInstance.setParameterByName("Velocidad", valorVelocidad);
-            Debug.Log($"Velocidad enviada: {valorVelocidad} | isWalking: {isWalking} | isPivoting: {isPivotingNow}");
+            //Debug.Log($"Velocidad enviada: {valorVelocidad} | isWalking: {isWalking} | isPivoting: {isPivotingNow}");
         }
 
         if (isMoving && isSprinting)

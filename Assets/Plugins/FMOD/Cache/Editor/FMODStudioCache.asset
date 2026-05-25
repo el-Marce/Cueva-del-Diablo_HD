@@ -285,7 +285,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639143536485986030
+  lastModified: 639152697497759325
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -466,7 +466,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639143536485986030
+  cacheTime: 639152697497890434
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -659,7 +659,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639143065297026969
+  lastModified: 639152697497548284
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -695,7 +695,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639143510274748520
+  lastModified: 639152697497890434
   FileSizes:
   - Name: 
     Value: 2164
