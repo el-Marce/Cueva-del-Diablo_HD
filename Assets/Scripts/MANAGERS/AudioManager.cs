@@ -51,11 +51,17 @@ public class AudioManager : MonoBehaviour
         if (eventRef.IsNull) return;
         RuntimeManager.PlayOneShot(eventRef, position);
     }
-    public EventInstance CreateLoop(EventReference eventRef) // <- sobrecarga nueva
+    public EventInstance CreateLoop(EventReference eventRef, Transform follow = null)
     {
         if (eventRef.IsNull) return default;
+
         EventInstance instance = RuntimeManager.CreateInstance(eventRef);
+
+        if (follow != null)
+            instance.set3DAttributes(RuntimeUtils.To3DAttributes(follow));
+
         instance.start();
+
         return instance;
     }
     //public EventInstance CreateLoop(string eventPath, Vector3 position = default)

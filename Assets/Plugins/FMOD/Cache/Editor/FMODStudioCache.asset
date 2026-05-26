@@ -49,7 +49,7 @@ MonoBehaviour:
   - {fileID: -4247042192413012017}
   IsStream: 1
   Is3D: 1
-  IsOneShot: 1
+  IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
@@ -279,6 +279,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 55200
+--- !u!114 &-4466800778844766289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Fantasma/Alert_Fantasma
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Fantasma/Alert_Fantasma
+  Guid:
+    Data1: 1901600164
+    Data2: 1236680925
+    Data3: 67629731
+    Data4: -1618856151
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4650
 --- !u!114 &-4247042192413012017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +321,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639153924039268524
+  lastModified: 639154141695400534
   FileSizes: []
   Exists: 1
 --- !u!114 &-3346193204899738348
@@ -339,7 +366,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639153901939431365
+  lastModified: 639154050136327235
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -465,7 +492,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639153924044101863
+  lastModified: 639154045959764299
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -516,13 +543,17 @@ MonoBehaviour:
   - {fileID: 5834824363424043929}
   - {fileID: -8617521154788260698}
   - {fileID: -9152519160741799306}
+  - {fileID: -4466800778844766289}
+  - {fileID: 2671264782201284643}
+  - {fileID: 5233532729378125834}
+  - {fileID: 8193210427098052524}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639153924046137397
+  cacheTime: 639154141695400534
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -572,6 +603,14 @@ MonoBehaviour:
     index: 22
   - key: event:/Enemies/Fantasma/Idle_Fanstasma
     index: 23
+  - key: event:/Enemies/Fantasma/Alert_Fantasma
+    index: 24
+  - key: event:/Interacttions/AguaMaldita
+    index: 25
+  - key: event:/Enemies/Fantasma/AffectMind_Fantasma
+    index: 26
+  - key: event:/Enemies/Fantasma/Repelled_Fantasma
+    index: 27
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +716,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 257195
+--- !u!114 &2671264782201284643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/AguaMaldita
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/AguaMaldita
+  Guid:
+    Data1: -1548770618
+    Data2: 1098700916
+    Data3: 1259083195
+    Data4: -1908300187
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3587035075930067318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -755,10 +821,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639153924046137397
+  lastModified: 639154045959809470
   FileSizes:
   - Name: 
-    Value: 2274
+    Value: 2482
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:
@@ -787,6 +853,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &5233532729378125834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Fantasma/AffectMind_Fantasma
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Fantasma/AffectMind_Fantasma
+  Guid:
+    Data1: -1269873472
+    Data2: 1217658462
+    Data3: 1796951739
+    Data4: 7299082
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 19043
 --- !u!114 &5652649349518874655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -905,6 +998,33 @@ MonoBehaviour:
   lastModified: 639124456585119389
   FileSizes: []
   Exists: 1
+--- !u!114 &8193210427098052524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Fantasma/Repelled_Fantasma
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Fantasma/Repelled_Fantasma
+  Guid:
+    Data1: 1306558496
+    Data2: 1196798439
+    Data3: -1727871058
+    Data4: 277905248
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 5950
 --- !u!114 &8774220879445218129
 MonoBehaviour:
   m_ObjectHideFlags: 0

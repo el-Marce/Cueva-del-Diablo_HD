@@ -204,6 +204,48 @@ MonoBehaviour:
   repelDuration: 10
   shockwaveEffect: {fileID: 9169810840826366299, guid: b2fbe575419068f4dbd0a135e0d97b83,
     type: 3}
+  sfxAlert:
+    Guid:
+      Data1: 1901600164
+      Data2: 1236680925
+      Data3: 67629731
+      Data4: -1618856151
+    Path: event:/Enemies/Fantasma/Alert_Fantasma
+  sfxRepelled:
+    Guid:
+      Data1: 1306558496
+      Data2: 1196798439
+      Data3: -1727871058
+      Data4: 277905248
+    Path: event:/Enemies/Fantasma/Repelled_Fantasma
+  loopIdle:
+    Guid:
+      Data1: 1100452621
+      Data2: 1256830015
+      Data3: -1070967364
+      Data4: 1541418458
+    Path: event:/Enemies/Fantasma/Idle_Fanstasma
+  loopHuntSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  loopChase:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  loopAffectMind:
+    Guid:
+      Data1: -1269873472
+      Data2: 1217658462
+      Data3: 1796951739
+      Data4: 7299082
+    Path: event:/Enemies/Fantasma/AffectMind_Fantasma
 --- !u!114 &7648385654333686717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +261,8 @@ MonoBehaviour:
   health: 100
   damage: 10
   moveSpeed: 2.5
+  animationSpeed: 1
+  patrolSpeed: 0
 --- !u!114 &4657052600749082139
 MonoBehaviour:
   m_ObjectHideFlags: 0

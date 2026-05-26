@@ -29,6 +29,9 @@ public class PlayerCombat : MonoBehaviour
     public EventReference recogerRocaSound;
     public EventReference ataqueRocaSound;
 
+    public EventReference recogerAguaBendita;
+    public EventReference usarAguaBendita;
+
     [Header("Push")]
     public float pushCooldown = 3f;
     float pushTimer = 0f;
@@ -43,7 +46,7 @@ public class PlayerCombat : MonoBehaviour
         Fists,
         Stick,
         Rock,
-        HolyWater
+        AguaBendita
     }
 
     [Header("Weapon State")]
@@ -120,6 +123,12 @@ public class PlayerCombat : MonoBehaviour
 
     void PerformAttack()
     {
+        if (currentWeapon == WeaponType.AguaBendita)
+        {
+            UseAguaBendita();
+            return;
+        }
+
         float damage = GetCurrentDamage();
 
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
@@ -143,6 +152,25 @@ public class PlayerCombat : MonoBehaviour
                 ApplyForce(rb, hitForce * GetForceMultiplier());
             }
         }
+    }
+
+    void UseAguaBendita()
+    {
+        EntePsicologico[] entes = FindObjectsOfType<EntePsicologico>();
+        foreach (EntePsicologico ente in entes)
+            ente.Repel();
+
+        UseDurability(); // consume un uso
+
+        // Si se agotó, volver a puños
+        Inventory inv = FindObjectOfType<Inventory>();
+        if (inv != null && !inv.weapons.Exists(w => w.weaponType == WeaponType.AguaBendita))
+        {
+            EquipWeapon(WeaponType.Fists, 0);
+            if (inv != null) inv.equippedWeapon = null;
+        }
+
+        Debug.Log("Usaste Agua Bendita");
     }
 
     void Push()
@@ -224,6 +252,8 @@ public class PlayerCombat : MonoBehaviour
             AudioManager.Instance.Play(recogerPaloSound);
         if (currentWeapon == WeaponType.Rock)
             AudioManager.Instance.Play(recogerRocaSound);
+        if (currentWeapon == WeaponType.AguaBendita)
+            AudioManager.Instance.Play(recogerAguaBendita);
         Debug.Log("Equipado: " + weapon + " | Durabilidad: " + durability);
     }
 

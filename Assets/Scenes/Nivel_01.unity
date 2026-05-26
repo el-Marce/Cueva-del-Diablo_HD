@@ -2036,7 +2036,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2272151074559916740, guid: d1fafb62b03671a48b74a764d03d028a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -3322,10 +3323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0466f2ab4123c0e47baa3e22b848a455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
-  durability: 5
-  weaponName: Arma
-  icon: {fileID: 0}
+  weaponType: 3
+  durability: 1
+  weaponName: Agua Bendita
+  icon: {fileID: 21300000, guid: edc27568ceebcd84fbe73a394326cf33, type: 3}
 --- !u!1 &1222943320
 GameObject:
   m_ObjectHideFlags: 0
@@ -3821,6 +3822,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: recogerAguaBendita.Path
+      value: event:/Interacttions/AguaMaldita
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data1
+      value: -1548770618
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data2
+      value: 1098700916
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data3
+      value: 1259083195
+      objectReference: {fileID: 0}
+    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data4
+      value: -1908300187
       objectReference: {fileID: 0}
     - target: {fileID: 3575470178835784901, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}

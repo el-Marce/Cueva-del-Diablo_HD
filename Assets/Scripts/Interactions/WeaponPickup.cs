@@ -13,5 +13,12 @@ public class WeaponPickup : MonoBehaviour, IInteractable
         if (inventory != null)
             inventory.AddWeapon(weaponName, weaponType, icon, durability);
         Destroy(gameObject);
+
+        PlayerCombat player = FindObjectOfType<PlayerCombat>();
+
+        if (player != null)
+        {
+            player.EquipWeapon(weaponType, durability);
+        }
     }
 }
