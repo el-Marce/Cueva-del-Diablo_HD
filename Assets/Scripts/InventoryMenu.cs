@@ -43,7 +43,7 @@ public class InventoryMenu : MonoBehaviour
         lecturaPanel = canvas.Find("LecturaPanel").gameObject;
 
         tabText = canvas.Find("InventoryPanel/TabsText").GetComponent<TMP_Text>();
-        descriptionText = canvas.Find("InventoryPanel/DescripcionText").GetComponent<TMP_Text>();
+        descriptionText = canvas.Find("InventoryPanel/DescTextInvent").GetComponent<TMP_Text>();
 
         itemTexts = new TMP_Text[]
         {
