@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c25568a8cc438d46b370b52db244d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactDistance: 2
-  outlineDistance: 4
-  outlineMaxThickness: 0.015
+  interactDistance: 3
+  outlineDistance: 8
+  outlineMaxThickness: 0.18
   highlightMaterial: {fileID: 2100000, guid: 2725aa638718cc848acbed7fd98af6db, type: 2}
 --- !u!114 &772965691360533526
 MonoBehaviour:
@@ -168,6 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   scrolls: []
+  weapons: []
+  equippedWeapon: 
   equippedItem: 
   selectedIndex: 0
   currentTab: 0

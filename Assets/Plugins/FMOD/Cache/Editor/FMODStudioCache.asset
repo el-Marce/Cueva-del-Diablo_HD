@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 77825
+--- !u!114 &-9152519160741799306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Fantasma/Idle_Fanstasma
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Fantasma/Idle_Fanstasma
+  Guid:
+    Data1: 1100452621
+    Data2: 1256830015
+    Data3: -1070967364
+    Data4: 1541418458
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 176169
 --- !u!114 &-8845838389559134183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,6 +81,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8617521154788260698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Fuego
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Fuego
+  Guid:
+    Data1: 1894185521
+    Data2: 1240009276
+    Data3: 224899990
+    Data4: 1965986149
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 7523
 --- !u!114 &-8387157460588358563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +294,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639124456584988752
+  lastModified: 639153924039268524
   FileSizes: []
   Exists: 1
 --- !u!114 &-3346193204899738348
@@ -285,7 +339,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639152697497759325
+  lastModified: 639153901939431365
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -411,7 +465,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639143510274713356
+  lastModified: 639153924044101863
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -460,13 +514,15 @@ MonoBehaviour:
   - {fileID: -2905573912534201379}
   - {fileID: 4930667526620227902}
   - {fileID: 5834824363424043929}
+  - {fileID: -8617521154788260698}
+  - {fileID: -9152519160741799306}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639152697497890434
+  cacheTime: 639153924046137397
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -512,6 +568,10 @@ MonoBehaviour:
     index: 20
   - key: event:/Interacttions/CerrarPuertaViolent
     index: 21
+  - key: event:/Player/Fuego
+    index: 22
+  - key: event:/Enemies/Fantasma/Idle_Fanstasma
+    index: 23
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -659,7 +719,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639152697497548284
+  lastModified: 639153899928774393
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -695,10 +755,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639152697497890434
+  lastModified: 639153924046137397
   FileSizes:
   - Name: 
-    Value: 2164
+    Value: 2274
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:

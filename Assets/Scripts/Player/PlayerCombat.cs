@@ -42,7 +42,8 @@ public class PlayerCombat : MonoBehaviour
     {
         Fists,
         Stick,
-        Rock
+        Rock,
+        HolyWater
     }
 
     [Header("Weapon State")]

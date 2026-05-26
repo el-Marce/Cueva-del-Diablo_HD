@@ -218,22 +218,26 @@ public class InventoryMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (inventory.currentTab == Inventory.Tab.Items)
-                inventory.currentTab = Inventory.Tab.Scrolls;
-            else
-                inventory.currentTab = Inventory.Tab.Items;
-
+            inventory.currentTab = inventory.currentTab switch
+            {
+                Inventory.Tab.Items => Inventory.Tab.Scrolls,
+                Inventory.Tab.Scrolls => Inventory.Tab.Weapons,
+                Inventory.Tab.Weapons => Inventory.Tab.Items,
+                _ => Inventory.Tab.Items
+            };
             inventory.selectedIndex = 0;
             PrintMenu();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (inventory.currentTab == Inventory.Tab.Scrolls)
-                inventory.currentTab = Inventory.Tab.Items;
-            else
-                inventory.currentTab = Inventory.Tab.Scrolls;
-
+            inventory.currentTab = inventory.currentTab switch
+            {
+                Inventory.Tab.Items => Inventory.Tab.Weapons,
+                Inventory.Tab.Weapons => Inventory.Tab.Scrolls,
+                Inventory.Tab.Scrolls => Inventory.Tab.Items,
+                _ => Inventory.Tab.Items
+            };
             inventory.selectedIndex = 0;
             PrintMenu();
         }
@@ -279,9 +283,17 @@ public class InventoryMenu : MonoBehaviour
     void PrintMenu()
     {
         if (inventory.currentTab == Inventory.Tab.Items)
+        {
             tabText.text = "(Q) < Items > (E)";
-        else
+        }
+        else if (inventory.currentTab == Inventory.Tab.Scrolls)
+        {
             tabText.text = "(Q) < Pergaminos > (E)";
+        }
+        else
+        {
+            tabText.text = "(Q) < Armas > (E)";
+        }
 
         int count = inventory.GetCount();
 
@@ -324,14 +336,20 @@ public class InventoryMenu : MonoBehaviour
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.items[i].icon;
             }
-            else
+            else if (inventory.currentTab == Inventory.Tab.Scrolls)
             {
                 itemTexts[i].gameObject.SetActive(false);
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.scrolls[i].icon;
                 //itemIcons[i].gameObject.SetActive(false);
-            }   
-
+            }
+            else // Weapons
+            {
+                itemTexts[i].gameObject.SetActive(true);
+                itemTexts[i].text = "x" + inventory.weapons[i].durability;
+                itemIcons[i].gameObject.SetActive(true);
+                itemIcons[i].sprite = inventory.weapons[i].icon;
+            }
             //if (i == inventory.selectedIndex)
             //    itemTexts[i].text = "<b>[" + text + "]</b>";
             //else
@@ -340,20 +358,16 @@ public class InventoryMenu : MonoBehaviour
             //itemTexts[i].text = text;
 
             bool isSelected = i == inventory.selectedIndex;
-            bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
-                                i < inventory.items.Count &&
-                                inventory.equippedItem == inventory.items[i].name;
+            bool isEquipped = inventory.currentTab == Inventory.Tab.Weapons &&
+                              i < inventory.weapons.Count &&
+                              inventory.equippedWeapon == inventory.weapons[i].name;
 
             //bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
             //                  inventory.equippedItem == inventory.items[i].name;
 
             selectors[i].gameObject.SetActive(isSelected || isEquipped);
-
-            // color según estado
             if (isSelected || isEquipped)
-            {
                 selectors[i].color = isEquipped ? Color.white : Color.red;
-            }
         }
         UpdateDescription();
     }
