@@ -29,7 +29,7 @@ public class AltarUI : MonoBehaviour
 
     int selectedIndex = 0;
     bool ritualDone = false;
-
+    bool isOpen = false;
     void OnEnable()
     {
         selectedIndex = 0;
@@ -41,12 +41,23 @@ public class AltarUI : MonoBehaviour
 
     void Update()
     {
-        if (!gameObject.activeSelf) return;
-
+        //if (!gameObject.activeSelf) return;
+        if (!isOpen) return;
         Navigate();
         Select();
-    }   
+    }
+    public void OpenUI()
+    {
+        isOpen = true;
+        selectedIndex = 0;
+        PrintMenu();
+        UpdateTitle();
+    }
 
+    public void CloseUI()
+    {
+        isOpen = false;
+    }
     void Navigate()
     {
         if (Input.GetKeyDown(KeyCode.D))
@@ -180,6 +191,7 @@ public class AltarUI : MonoBehaviour
     {
         altar.HideUI();
         //gameObject.SetActive(false);
+        CloseUI();
         GameState.InMenu = false;
     }
 }

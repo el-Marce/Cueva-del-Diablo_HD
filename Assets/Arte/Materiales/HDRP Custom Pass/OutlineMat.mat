@@ -55,10 +55,10 @@ Material:
     - _CullModeForward: 1
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
-    - _DoubleSidedGIMode: 0
+    - _DoubleSidedGIMode: 2
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _Emissive: 0
+    - _Emissive: 5
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _ExcludeFromTUAndAA: 0
@@ -98,7 +98,7 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _OutlineColor: {r: 0, g: 1, b: 0.9703219, a: 1}
+    - _OutlineColor: {r: 1, g: 0.9972116, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3578663329038286274
 MonoBehaviour:

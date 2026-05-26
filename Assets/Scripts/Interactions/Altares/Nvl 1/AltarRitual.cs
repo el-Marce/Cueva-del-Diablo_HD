@@ -3,6 +3,7 @@ using UnityEngine;
 public class AltarRitual : MonoBehaviour, IInteractable
 {
     public GameObject altarUI;
+    public GameObject altarPanel;
     bool ritualCompleted = false;
 
     Inventory inventory;
@@ -29,8 +30,8 @@ public class AltarRitual : MonoBehaviour, IInteractable
     public void Interact()
     {
         if (ritualCompleted) return;
-
-        altarUI.SetActive(true);
+        altarPanel.SetActive(true);
+        altarUI.GetComponent<AltarUI>().OpenUI();
         GameState.InMenu = true;
     }
 
@@ -77,7 +78,8 @@ public class AltarRitual : MonoBehaviour, IInteractable
     }
     public void HideUI()
     {
-        altarUI.SetActive(false);
+        altarPanel.SetActive(false);
+        altarUI.GetComponent<AltarUI>().CloseUI();
     }
 
     public void ShowUI()
