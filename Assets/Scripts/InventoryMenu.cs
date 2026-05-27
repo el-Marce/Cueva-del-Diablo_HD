@@ -2,35 +2,23 @@
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+
 public class InventoryMenu : MonoBehaviour
 {
     Inventory inventory;
 
     public GameObject inventoryPanel;
-
     public TMP_Text tabText;
-
     public TMP_Text[] itemTexts;
-
     bool menuOpen = false;
-
     public TMP_Text descriptionText;
-
     public GameObject lecturaPanel;
-
     public int columns = 4;
-
     public Image[] selectors;
     public Image[] itemIcons;
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
 
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
+    void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
+    void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
@@ -41,7 +29,6 @@ public class InventoryMenu : MonoBehaviour
 
         inventoryPanel = canvas.Find("InventoryPanel").gameObject;
         lecturaPanel = canvas.Find("LecturaPanel").gameObject;
-
         tabText = canvas.Find("InventoryPanel/TabsText").GetComponent<TMP_Text>();
         descriptionText = canvas.Find("InventoryPanel/DescTextInvent").GetComponent<TMP_Text>();
 
@@ -101,9 +88,10 @@ public class InventoryMenu : MonoBehaviour
 
     void Update()
     {
+        if (lecturaPanel == null || inventoryPanel == null) return;
+
         if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
         {
-            // Si está leyendo pergamino → cerrar lectura
             if (lecturaPanel.activeSelf)
             {
                 lecturaPanel.SetActive(false);
@@ -111,21 +99,18 @@ public class InventoryMenu : MonoBehaviour
                 return;
             }
 
-            // Si inventario está abierto → cerrarlo
             if (menuOpen)
             {
                 ToggleMenu();
                 return;
             }
 
-            // Si no hay UI → abrir inventario SOLO con TAB
             if (Input.GetKeyDown(KeyCode.Tab) && !GameState.InMenu)
-            {
                 ToggleMenu();
-            }
         }
 
-        if (!menuOpen) return; else GameState.InMenu = true;
+        if (!menuOpen) return;
+        else GameState.InMenu = true;
 
         Navigate();
         ChangeTab();
@@ -135,80 +120,54 @@ public class InventoryMenu : MonoBehaviour
     void ToggleMenu()
     {
         menuOpen = !menuOpen;
-
         GameState.InMenu = menuOpen;
-
         inventoryPanel.SetActive(menuOpen);
-
-        if (menuOpen)
-        {
-            PrintMenu();
-        }
+        if (menuOpen) PrintMenu();
     }
 
     void Navigate()
     {
         int count = inventory.GetCount();
-
         int row = inventory.selectedIndex / columns;
         int col = inventory.selectedIndex % columns;
-
         int totalRows = Mathf.CeilToInt((float)count / columns);
 
-        // DERECHA
         if (Input.GetKeyDown(KeyCode.D))
         {
             col++;
-
-            if (col >= columns || row * columns + col >= count)
-                col = 0;
-
+            if (col >= columns || row * columns + col >= count) col = 0;
             inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
 
-        // IZQUIERDA
         if (Input.GetKeyDown(KeyCode.A))
         {
             col--;
-
             if (col < 0)
             {
                 col = columns - 1;
-
-                if (row * columns + col >= count)
-                    col = (count - 1) % columns;
+                if (row * columns + col >= count) col = (count - 1) % columns;
             }
-
             inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
 
-        // ABAJO
         if (Input.GetKeyDown(KeyCode.S))
         {
             row++;
-
-            if (row >= totalRows || row * columns + col >= count)
-                row = 0;
-
+            if (row >= totalRows || row * columns + col >= count) row = 0;
             inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
 
-        // ARRIBA
         if (Input.GetKeyDown(KeyCode.W))
         {
             row--;
-
             if (row < 0)
             {
                 row = totalRows - 1;
-
-                if (row * columns + col >= count)
-                    row--;
+                if (row * columns + col >= count) row--;
             }
-
             inventory.selectedIndex = row * columns + col;
             PrintMenu();
         }
@@ -254,14 +213,11 @@ public class InventoryMenu : MonoBehaviour
         string selected = inventory.GetSelected();
 
         if (inventory.currentTab == Inventory.Tab.Scrolls)
-        {
             descriptionText.text = "''" + selected + "''";
-        }
         else
-        {
             descriptionText.text = "Objeto: " + selected;
-        }
     }
+
     void Select()
     {
         if (Input.GetKeyDown(KeyCode.Return))
@@ -269,53 +225,31 @@ public class InventoryMenu : MonoBehaviour
             if (inventory.currentTab == Inventory.Tab.Scrolls)
             {
                 string selected = inventory.GetSelected();
-                Debug.Log("LEYENDO PERGAMINO:");
                 descriptionText.text = selected;
             }
             else
             {
                 inventory.EquipSelected();
-                PrintMenu(); // refresca para mostrar el equipado
+                PrintMenu();
             }
         }
     }
 
     void PrintMenu()
     {
-        if (inventory.currentTab == Inventory.Tab.Items)
+        if (itemTexts == null || itemTexts.Length == 0 || itemTexts[0] == null) return;
+        if (selectors == null || selectors.Length == 0 || selectors[0] == null) return;
+        if (itemIcons == null || itemIcons.Length == 0 || itemIcons[0] == null) return;
+
+        tabText.text = inventory.currentTab switch
         {
-            tabText.text = "(Q) < Items > (E)";
-        }
-        else if (inventory.currentTab == Inventory.Tab.Scrolls)
-        {
-            tabText.text = "(Q) < Pergaminos > (E)";
-        }
-        else
-        {
-            tabText.text = "(Q) < Armas > (E)";
-        }
+            Inventory.Tab.Items => "(Q) < Items > (E)",
+            Inventory.Tab.Scrolls => "(Q) < Pergaminos > (E)",
+            Inventory.Tab.Weapons => "(Q) < Armas > (E)",
+            _ => ""
+        };
 
         int count = inventory.GetCount();
-
-        //Debug.Log("------ INVENTARIO ------");
-        //Debug.Log("TAB: " + inventory.currentTab);
-
-
-
-        //for (int i = 0; i < count; i++)
-        //{
-        //    string text;
-
-        //    if (inventory.currentTab == Inventory.Tab.Items)
-        //        text = inventory.items[i];
-        //    else
-        //        text = "Pergamino " + (i + 1);
-
-        //    if (i == inventory.selectedIndex)
-        //        Debug.Log("> " + text);
-        //    else
-        //        Debug.Log(text);
-        //}
 
         for (int i = 0; i < itemTexts.Length; i++)
         {
@@ -329,10 +263,8 @@ public class InventoryMenu : MonoBehaviour
 
             if (inventory.currentTab == Inventory.Tab.Items)
             {
-                //string itemName = inventory.items[i].name;
                 itemTexts[i].gameObject.SetActive(true);
                 itemTexts[i].text = "x" + inventory.items[i].uses;
-
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.items[i].icon;
             }
@@ -341,34 +273,25 @@ public class InventoryMenu : MonoBehaviour
                 itemTexts[i].gameObject.SetActive(false);
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.scrolls[i].icon;
-                //itemIcons[i].gameObject.SetActive(false);
             }
-            else // Weapons
+            else
             {
                 itemTexts[i].gameObject.SetActive(true);
                 itemTexts[i].text = "x" + inventory.weapons[i].durability;
                 itemIcons[i].gameObject.SetActive(true);
                 itemIcons[i].sprite = inventory.weapons[i].icon;
             }
-            //if (i == inventory.selectedIndex)
-            //    itemTexts[i].text = "<b>[" + text + "]</b>";
-            //else
-            //    itemTexts[i].text = text;
-
-            //itemTexts[i].text = text;
 
             bool isSelected = i == inventory.selectedIndex;
             bool isEquipped = inventory.currentTab == Inventory.Tab.Weapons &&
                               i < inventory.weapons.Count &&
                               inventory.equippedWeapon == inventory.weapons[i].name;
 
-            //bool isEquipped = inventory.currentTab == Inventory.Tab.Items &&
-            //                  inventory.equippedItem == inventory.items[i].name;
-
             selectors[i].gameObject.SetActive(isSelected || isEquipped);
             if (isSelected || isEquipped)
                 selectors[i].color = isEquipped ? Color.white : Color.red;
         }
+
         UpdateDescription();
     }
 }

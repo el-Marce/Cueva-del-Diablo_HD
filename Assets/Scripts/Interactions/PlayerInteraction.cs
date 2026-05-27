@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class PlayerInteraction : MonoBehaviour
 {
     public float interactDistance = 1.5f;
-    public float outlineDistance = 4f;      // distancia a la que aparece el outline
+    public float outlineDistance = 4f;
     public float outlineMaxThickness = 0.015f;
 
     GameObject interactUI;
@@ -13,7 +13,6 @@ public class PlayerInteraction : MonoBehaviour
     Material[] originalMaterials;
     public Material highlightMaterial;
 
-    // Para outline gradual por distancia
     Renderer outlineRenderer;
     Material outlineMat;
 
@@ -22,15 +21,24 @@ public class PlayerInteraction : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        currentInteractable = null;
+        currentRenderer = null;
+        originalMaterials = null;
+        outlineRenderer = null;
+        outlineMat = null;
+
         GameObject ui = GameObject.Find("UI");
-        interactUI = ui.transform.Find("Canvas/InteractUI").gameObject;
+        if (ui == null) return;
+        Transform interactTransform = ui.transform.Find("Canvas/InteractUI");
+        if (interactTransform != null)
+            interactUI = interactTransform.gameObject;
     }
 
     void Update()
     {
         if (GameState.InMenu) return;
-        CheckProximityOutline(); // outline por distancia
-        CheckInteraction();      // interacción al acercarse
+        CheckProximityOutline();
+        CheckInteraction();
 
         if (Input.GetKeyDown(KeyCode.E) && currentInteractable != null)
         {
@@ -39,7 +47,6 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    // Detecta interactuables en radio amplio y aplica outline gradual
     void CheckProximityOutline()
     {
         Camera cam = Camera.main;
@@ -64,13 +71,11 @@ public class PlayerInteraction : MonoBehaviour
 
         if (closestRenderer != null)
         {
-            // Si cambió el objeto más cercano
             if (outlineRenderer != closestRenderer)
             {
                 ClearProximityOutline();
                 outlineRenderer = closestRenderer;
 
-                // Agrega el material de outline sin reemplazar los originales
                 Material[] mats = outlineRenderer.materials;
                 Material[] newMats = new Material[mats.Length + 1];
                 for (int i = 0; i < mats.Length; i++)
@@ -80,7 +85,6 @@ public class PlayerInteraction : MonoBehaviour
                 outlineRenderer.materials = newMats;
             }
 
-            // Escala el outline según distancia — más cerca más grueso
             float t = 1f - Mathf.Clamp01(closestDist / outlineDistance);
             float thickness = Mathf.Lerp(0f, outlineMaxThickness, t);
             if (outlineMat != null && outlineMat.HasProperty("_Thickness"))
@@ -96,7 +100,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (outlineRenderer == null) return;
 
-        // Restaura materiales originales sin el outline extra
         Material[] mats = outlineRenderer.materials;
         if (mats.Length > 1)
         {
@@ -112,6 +115,8 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckInteraction()
     {
+        if (interactUI == null) return;
+
         Camera cam = Camera.main;
         Vector3 origin = cam.transform.position;
         Vector3 forward = cam.transform.forward;
@@ -162,7 +167,7 @@ public class PlayerInteraction : MonoBehaviour
     void ClearInteraction()
     {
         currentInteractable = null;
-        interactUI.SetActive(false);
+        if (interactUI != null) interactUI.SetActive(false);
         ClearOutline();
     }
 

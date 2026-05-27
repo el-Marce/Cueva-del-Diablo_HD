@@ -1397,7 +1397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &211528889
 Transform:
   m_ObjectHideFlags: 0
@@ -22058,6 +22058,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1201084520831017153, guid: c2b8ccf3a426b914990480c89bc392e5,
+        type: 3}
+      propertyPath: m_Name
+      value: DescTextInvent
+      objectReference: {fileID: 0}
     - target: {fileID: 1557433822454070810, guid: c2b8ccf3a426b914990480c89bc392e5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -22237,6 +22242,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3171720420129182413, guid: c2b8ccf3a426b914990480c89bc392e5,
+        type: 3}
+      propertyPath: m_Name
+      value: DescTextLectura
       objectReference: {fileID: 0}
     - target: {fileID: 3376279462194336225, guid: c2b8ccf3a426b914990480c89bc392e5,
         type: 3}
