@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_04
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 5a337b2d61a13304b826d65fe2ae4d86, type: 3}
+  ilustracion: {fileID: 21300000, guid: e0be258d0a70a2b42980a05520cfcfdf, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Un grupo de jesuitas, bajo el nombre de \u201CLa Compa\xF1\xEDa de

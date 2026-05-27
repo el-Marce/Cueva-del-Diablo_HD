@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_10
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 1a2e58a6e12dacd4090c6be514e61c86, type: 3}
+  ilustracion: {fileID: 21300000, guid: 040220fde3b95ed4782527d60869bf70, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Los jesuitas de la \u201CCompa\xF1\xEDa de Jes\xFAs\u201D, dieron su
