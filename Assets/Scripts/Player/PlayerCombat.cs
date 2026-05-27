@@ -162,6 +162,7 @@ public class PlayerCombat : MonoBehaviour
 
         UseDurability(); // consume un uso
 
+        AudioManager.Instance.Play(usarAguaBendita);
         // Si se agotó, volver a puños
         Inventory inv = FindObjectOfType<Inventory>();
         if (inv != null && !inv.weapons.Exists(w => w.weaponType == WeaponType.AguaBendita))

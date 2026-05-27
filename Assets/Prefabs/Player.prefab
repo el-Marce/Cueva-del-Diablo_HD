@@ -255,6 +255,20 @@ MonoBehaviour:
       Data3: -1680547671
       Data4: 885976116
     Path: event:/Interacttions/RocaWind
+  recogerAguaBendita:
+    Guid:
+      Data1: -1548770618
+      Data2: 1098700916
+      Data3: 1259083195
+      Data4: -1908300187
+    Path: event:/Interacttions/AguaMaldita
+  usarAguaBendita:
+    Guid:
+      Data1: -1526216463
+      Data2: 1079843011
+      Data3: 1478456971
+      Data4: 1041077261
+    Path: event:/Interacttions/RomperCristal
   pushCooldown: 3
   fistDamage: 5
   stickDamage: 12

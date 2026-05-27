@@ -335,7 +335,7 @@ PrefabInstance:
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.85
+      value: 62.1
       objectReference: {fileID: 0}
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
@@ -345,7 +345,7 @@ PrefabInstance:
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.98
+      value: 112.46
       objectReference: {fileID: 0}
     - target: {fileID: 2828165602206186815, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
@@ -390,7 +390,7 @@ PrefabInstance:
     - target: {fileID: 4225220607834227586, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2549,7 +2549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &832575518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2598,7 +2598,7 @@ PrefabInstance:
     - target: {fileID: 3968043200976870209, guid: cae0a6d788c047e4b9a30a234db5adbb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4821561859990690140, guid: cae0a6d788c047e4b9a30a234db5adbb,
         type: 3}
@@ -3374,7 +3374,7 @@ PrefabInstance:
     - target: {fileID: 3968043200976870209, guid: cae0a6d788c047e4b9a30a234db5adbb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5475787151548173835, guid: cae0a6d788c047e4b9a30a234db5adbb,
         type: 3}
@@ -3448,7 +3448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1278501872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3822,31 +3822,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: recogerAguaBendita.Path
-      value: event:/Interacttions/AguaMaldita
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data1
-      value: -1548770618
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data2
-      value: 1098700916
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data3
-      value: 1259083195
-      objectReference: {fileID: 0}
-    - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data4
-      value: -1908300187
       objectReference: {fileID: 0}
     - target: {fileID: 3575470178835784901, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -47143,7 +47118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1905682238
 MonoBehaviour:
   m_ObjectHideFlags: 0

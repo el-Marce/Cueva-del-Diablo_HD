@@ -1,6 +1,8 @@
 using UnityEngine;
 using Cinemachine;
 using System.Collections;
+using FMODUnity;
+using FMOD.Studio;
 
 public class Pueblerino : MonoBehaviour
 {
@@ -20,7 +22,7 @@ public class Pueblerino : MonoBehaviour
     CinemachineImpulseSource impulseSource;
 
     Animator anim;
-    
+
     [Header("Combate")]
     public float attackDistance = 1.8f;
     public float attackCooldown = 2f;
@@ -79,6 +81,18 @@ public class Pueblerino : MonoBehaviour
     public float rotationSpeed = 8f;
     bool isDying = false;
 
+    [Header("Audio")]
+    public EventReference loopPatrol;
+    public EventReference loopAlert;
+    public EventReference loopInvestigate;
+    public EventReference loopChase;
+    public EventReference loopAttack;
+    public EventReference sfxHit;
+    public EventReference sfxAttackImpact;
+
+    EventInstance currentLoop;
+    State audioState = (State)(-1);
+
     enum AlertType { Vision, Sound }
     enum State { Patrol, Alert, Investigate, Chase, Attack }
 
@@ -116,13 +130,44 @@ public class Pueblerino : MonoBehaviour
             anim.speed = stats.animationSpeed;
     }
 
+    // --- Audio ---
+
+    void UpdateAudio()
+    {
+        if (currentState == audioState) return;
+        audioState = currentState;
+
+        AudioManager.Instance.StopLoop(currentLoop);
+        currentLoop = default;
+
+        switch (currentState)
+        {
+            case State.Patrol:
+                currentLoop = AudioManager.Instance.CreateLoop(loopPatrol, transform);
+                break;
+            case State.Alert:
+                currentLoop = AudioManager.Instance.CreateLoop(loopAlert, transform);
+                break;
+            case State.Investigate:
+                currentLoop = AudioManager.Instance.CreateLoop(loopInvestigate, transform);
+                break;
+            case State.Chase:
+                currentLoop = AudioManager.Instance.CreateLoop(loopChase, transform);
+                break;
+            case State.Attack:
+                currentLoop = AudioManager.Instance.CreateLoop(loopAttack, transform);
+                break;
+        }
+    }
+
+    // --- Update principal ---
+
     void Update()
     {
         if (stats.IsDead)
         {
             if (!isDying)
                 StartCoroutine(HandleDeath());
-
             return;
         }
         if (GameState.InMenu)
@@ -135,11 +180,8 @@ public class Pueblerino : MonoBehaviour
             navigation.Resume();
         }
 
-        //Debug.Log(currentState);
-
         if (isPreparingAttack && !wasPreparingAttack)
         {
-            //Debug.Log("ENTER WIND-UP");
             anim.ResetTrigger("IsPushed");
             anim.SetBool("Attack", true);
             rend.material = windUpMat;
@@ -147,41 +189,30 @@ public class Pueblerino : MonoBehaviour
 
         if (!isPreparingAttack && wasPreparingAttack)
         {
-            //Debug.Log("EXIT WIND-UP");
             rend.material = defaultMat;
             anim.SetBool("Attack", false);
         }
 
         wasPreparingAttack = isPreparingAttack;
 
+        UpdateAudio();
+
         switch (currentState)
         {
-
-            case State.Patrol:
-                UpdatePatrol();
-                break;
-
-            case State.Alert:
-                UpdateAlert();
-                break;
-
-            case State.Investigate:
-                UpdateInvestigate();
-                break;
-
-            case State.Chase:
-                UpdateChase();
-                break;
-
-            case State.Attack:
-                UpdateAttack();
-                break;
+            case State.Patrol: UpdatePatrol(); break;
+            case State.Alert: UpdateAlert(); break;
+            case State.Investigate: UpdateInvestigate(); break;
+            case State.Chase: UpdateChase(); break;
+            case State.Attack: UpdateAttack(); break;
         }
     }
 
     IEnumerator HandleDeath()
     {
         isDying = true;
+
+        AudioManager.Instance.StopLoop(currentLoop);
+        currentLoop = default;
 
         anim.SetTrigger("IsDead");
 
@@ -200,8 +231,10 @@ public class Pueblerino : MonoBehaviour
         vision.enabled = false;
         hearing.enabled = false;
     }
+
     void OnHit()
     {
+        AudioManager.Instance.Play(sfxHit, transform.position);
         staggerTimer = staggerDuration;
         if (currentState != State.Attack)
             ForceChase();
@@ -212,7 +245,6 @@ public class Pueblerino : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             if (currentState == State.Attack) return;
-            //Debug.Log("Contactu");
             ForceChase();
         }
     }
@@ -226,7 +258,6 @@ public class Pueblerino : MonoBehaviour
 
     void UpdatePatrol()
     {
-        //navigation.ResetSpeed();
         navigation.agent.speed = stats.patrolSpeed;
         if (navigation.agent.hasPath)
             RotateTowards(navigation.agent.steeringTarget);
@@ -234,14 +265,11 @@ public class Pueblerino : MonoBehaviour
         if (vision.CanSeePlayer())
         {
             nextState = State.Chase;
-
             float distanceDetect = Vector3.Distance(transform.position, player.position);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / vision.visionDistance);
-
             alertType = AlertType.Vision;
             anim.SetInteger("AlertType", 1);
             alertNoiseEmitted = false;
-
             currentState = State.Alert;
             return;
         }
@@ -250,7 +278,6 @@ public class Pueblerino : MonoBehaviour
         {
             currentTarget = hearing.GetSharedPlayerPosition();
             hasExactPlayerPosition = true;
-
             navigation.MoveTo(currentTarget);
             currentState = State.Investigate;
             return;
@@ -259,13 +286,10 @@ public class Pueblerino : MonoBehaviour
         if (hearing.HasHeardSomething())
         {
             nextState = State.Investigate;
-
             currentTarget = hearing.GetNoisePosition();
             hasExactPlayerPosition = false;
-
             float distanceDetect = Vector3.Distance(transform.position, currentTarget);
             alertTimer = Mathf.Lerp(0.2f, 2f, distanceDetect / hearing.hearingDistance);
-
             alertType = AlertType.Sound;
             anim.SetInteger("AlertType", 2);
             currentState = State.Alert;
@@ -273,7 +297,6 @@ public class Pueblerino : MonoBehaviour
         }
 
         wanderTimer -= Time.deltaTime;
-
         if (wanderTimer <= 0f)
         {
             navigation.MoveTo(GetRandomNavPoint(patrolRadius));
@@ -284,7 +307,6 @@ public class Pueblerino : MonoBehaviour
     void UpdateAlert()
     {
         navigation.ResetSpeed();
-
         navigation.StopMoving();
 
         if (staggerTimer > 0)
@@ -300,16 +322,13 @@ public class Pueblerino : MonoBehaviour
         }
 
         alertTimer -= Time.deltaTime;
-
         if (alertTimer <= 0f)
         {
-            anim.SetInteger("AlertType", 0); // <- resetear al salir
-
+            anim.SetInteger("AlertType", 0);
             if (nextState == State.Chase)
                 anim.SetBool("IsChasing", true);
             else if (nextState == State.Investigate)
                 anim.SetBool("IsInvestigating", true);
-
             currentState = nextState;
         }
     }
@@ -317,7 +336,6 @@ public class Pueblerino : MonoBehaviour
     void UpdateInvestigate()
     {
         navigation.SetSpeedMultiplier(investigateSpeedMultiplier);
-
         if (navigation.agent.hasPath)
             RotateTowards(navigation.agent.steeringTarget);
 
@@ -325,9 +343,7 @@ public class Pueblerino : MonoBehaviour
         {
             currentTarget = hearing.GetNoisePosition();
             hasExactPlayerPosition = false;
-
             navigation.MoveTo(currentTarget);
-
             return;
         }
 
@@ -335,14 +351,11 @@ public class Pueblerino : MonoBehaviour
         {
             currentTarget = hearing.GetSharedPlayerPosition();
             hasExactPlayerPosition = true;
-
             navigation.MoveTo(currentTarget);
-
             return;
         }
 
         navigation.MoveTo(currentTarget);
-
         float distance = Vector3.Distance(transform.position, currentTarget);
 
         if (distance < 1.5f)
@@ -369,7 +382,6 @@ public class Pueblerino : MonoBehaviour
         if (vision.CanSeePlayer())
         {
             lostPlayerTimer = lostPlayerDuration;
-
             navigation.MoveTo(player.position);
 
             shareTimer -= Time.deltaTime;
@@ -382,7 +394,6 @@ public class Pueblerino : MonoBehaviour
         else
         {
             lostPlayerTimer -= Time.deltaTime;
-
             if (lostPlayerTimer > 0f)
             {
                 navigation.MoveTo(player.position);
@@ -410,40 +421,25 @@ public class Pueblerino : MonoBehaviour
         if (!isPreparingAttack)
         {
             attackTimer -= Time.deltaTime;
-            //Debug.Log("Cooldown: " + attackTimer);
-
             if (attackTimer <= 0f)
-            {                
+            {
                 isPreparingAttack = true;
                 attackWindUpTimer = attackWindUp;
-                //Debug.Log("Wind-up iniciado. attackWindUp vale: " + attackWindUp);
             }
         }
 
         navigation.ResetSpeed();
-
         navigation.StopMoving();
 
         if (isLookingAtPlayer)
         {
-            Vector3 target = player.position;
-
-            // mantener el "cabezazo", NO limites el eje Y
-            // solo rotación horizontal, descomenta la siguiente línea:
-            // target.y = transform.position.y;
-
             RotateTowardsPlayer();
-
             lookAtTimer -= Time.deltaTime;
-
             if (lookAtTimer <= 0f)
-            {
                 isLookingAtPlayer = false;
-            }
         }
 
         float distance = Vector3.Distance(transform.position, player.position);
-
         anim.SetFloat("AttackDistance", distance);
 
         if (distance > attackDistance)
@@ -457,7 +453,7 @@ public class Pueblerino : MonoBehaviour
 
         if (isPreparingAttack)
         {
-            if (distance > attackDistance)  // <- añadir
+            if (distance > attackDistance)
             {
                 isPreparingAttack = false;
                 currentState = State.Chase;
@@ -465,27 +461,22 @@ public class Pueblerino : MonoBehaviour
             }
 
             attackWindUpTimer -= Time.deltaTime;
-            //Debug.Log("WindUp timer: " + attackWindUpTimer);
             if (attackWindUpTimer <= 0f)
             {
-
                 attackTimer = attackCooldown;
-                //Debug.Log("Nuevo Timer: " + attackTimer);
                 Attack();
-
                 isPreparingAttack = false;
-
                 isLookingAtPlayer = true;
                 lookAtTimer = lookAtDuration;
-
-                return; 
+                return;
             }
         }
     }
 
-
     void Attack()
     {
+        AudioManager.Instance.Play(sfxAttackImpact, transform.position);
+
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(stats.damage);
@@ -493,26 +484,19 @@ public class Pueblerino : MonoBehaviour
         }
 
         Rigidbody playerRb = player.GetComponent<Rigidbody>();
-
         if (playerRb != null)
         {
             Vector3 dir = (player.position - transform.position).normalized;
             dir.y = 0f;
-
             Vector3 force = dir * hitPushForce + Vector3.up * upwardForce;
-
             playerRb.AddForce(force, ForceMode.Impulse);
         }
 
         if (impulseSource != null)
         {
             Vector3 hitDir = (player.position - transform.position).normalized;
-
             Vector3 sideDir = Vector3.Cross(Vector3.up, hitDir).normalized;
-
-            if (Random.value > 0.5f)
-                sideDir *= -1f;
-
+            if (Random.value > 0.5f) sideDir *= -1f;
             impulseSource.GenerateImpulse(sideDir * cameraShakeIntensity);
         }
     }
@@ -520,24 +504,19 @@ public class Pueblerino : MonoBehaviour
     void GeneratePatrolPoints(Vector3 center)
     {
         patrolPoints = new Vector3[patrolPointsAmount];
-
         int createdPoints = 0;
         int attempts = 0;
 
         while (createdPoints < patrolPointsAmount && attempts < 30)
         {
             attempts++;
-
             Vector2 randomCircle = Random.insideUnitCircle * patrolRadius;
             Vector3 candidatePoint = center + new Vector3(randomCircle.x, 0, randomCircle.y);
-
             bool valid = true;
 
             for (int i = 0; i < createdPoints; i++)
             {
-                float dist = Vector3.Distance(candidatePoint, patrolPoints[i]);
-
-                if (dist < minDistanceBetweenPoints)
+                if (Vector3.Distance(candidatePoint, patrolPoints[i]) < minDistanceBetweenPoints)
                 {
                     valid = false;
                     break;
@@ -557,44 +536,33 @@ public class Pueblerino : MonoBehaviour
     Vector3 GetRandomNavPoint(float radius)
     {
         Vector3 random = Random.insideUnitSphere * radius + transform.position;
-
         if (UnityEngine.AI.NavMesh.SamplePosition(random, out var hit, radius, UnityEngine.AI.NavMesh.AllAreas))
             return hit.position;
-
         return transform.position;
     }
-
 
     void ForceChase()
     {
         anim.SetBool("IsInvestigating", false);
-        anim.SetBool("IsChasing", true); 
+        anim.SetBool("IsChasing", true);
         anim.SetInteger("AlertType", 0);
-
         alertType = AlertType.Vision;
         nextState = State.Chase;
-
         alertTimer = 0.1f;
         alertNoiseEmitted = false;
-
         navigation.StopMoving();
-
         isPreparingAttack = false;
-
         currentState = State.Alert;
     }
 
     void OnDrawGizmos()
     {
         if (patrolPoints == null) return;
-
         Gizmos.color = Color.green;
-
         foreach (Vector3 point in patrolPoints)
-        {
             Gizmos.DrawSphere(point, 0.3f);
-        }
     }
+
     void RotateTowardsPlayer()
     {
         Vector3 dir = (player.position - transform.position);
@@ -603,6 +571,7 @@ public class Pueblerino : MonoBehaviour
         Quaternion targetRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
     }
+
     void RotateTowards(Vector3 target)
     {
         Vector3 dir = (target - transform.position);
@@ -611,8 +580,11 @@ public class Pueblerino : MonoBehaviour
         Quaternion targetRot = Quaternion.LookRotation(dir);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * rotationSpeed);
     }
+
     public void Freeze()
     {
+        AudioManager.Instance.StopLoop(currentLoop);
+        currentLoop = default;
         currentState = State.Patrol;
         navigation.Pause();
         hearing.enabled = false;

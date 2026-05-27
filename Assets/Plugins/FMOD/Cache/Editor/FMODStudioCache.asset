@@ -366,7 +366,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639154050136327235
+  lastModified: 639154158292716710
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -492,7 +492,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154045959764299
+  lastModified: 639154158293835034
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -547,13 +547,14 @@ MonoBehaviour:
   - {fileID: 2671264782201284643}
   - {fileID: 5233532729378125834}
   - {fileID: 8193210427098052524}
+  - {fileID: 5618001725306022868}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639154141695400534
+  cacheTime: 639154158293860349
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -611,6 +612,8 @@ MonoBehaviour:
     index: 26
   - key: event:/Enemies/Fantasma/Repelled_Fantasma
     index: 27
+  - key: event:/Interacttions/RomperCristal
+    index: 28
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,10 +824,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154045959809470
+  lastModified: 639154158293860349
   FileSizes:
   - Name: 
-    Value: 2482
+    Value: 2536
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:
@@ -880,6 +883,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 19043
+--- !u!114 &5618001725306022868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/RomperCristal
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/RomperCristal
+  Guid:
+    Data1: -1526216463
+    Data2: 1079843011
+    Data3: 1478456971
+    Data4: 1041077261
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &5652649349518874655
 MonoBehaviour:
   m_ObjectHideFlags: 0
