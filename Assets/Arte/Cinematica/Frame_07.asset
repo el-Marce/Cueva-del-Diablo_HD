@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_07
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 3b6f829d46749d8448a815bcecb6bcee, type: 3}
+  ilustracion: {fileID: 21300000, guid: eb43cb10c79f168469308b693cff621f, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Una figura oscura e imponente, sin poder soportar la presencia de la

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_03
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 945f0adb960151744b12ac74bf59ffe5, type: 3}
+  ilustracion: {fileID: 21300000, guid: 24d748a622c5a1a4aa1af0b67b0884f3, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Con la llegada de los espa\xF1oles aquella narrativa no hizo m\xE1s
