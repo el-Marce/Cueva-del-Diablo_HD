@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using FMODUnity;
 
 public class RitualDoor : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class RitualDoor : MonoBehaviour
 
     bool opened = false;
     bool sequenceStarted = false;
+
+    public EventReference abrirPuerta;
 
     void Update()
     {
@@ -45,7 +48,7 @@ public class RitualDoor : MonoBehaviour
 
         door.isLocked = false;
         door.OpenDoor();
-
+        AudioManager.Instance.Play(abrirPuerta);
         opened = true;
 
         yield return new WaitForSeconds(2f);

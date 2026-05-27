@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class AltarUI : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class AltarUI : MonoBehaviour
     [Header("Eventos")]
     public Door door;
     public NPC_Controller NPC;
+    public EventReference cerrarPuerta;
 
     [Header("UI Opciones")]
     public TMP_Text[] optionsText;
@@ -181,6 +183,7 @@ public class AltarUI : MonoBehaviour
     {
         door.CloseDoor();
         door.isLocked = true;
+        AudioManager.Instance.Play(cerrarPuerta);
         NPC.PrepareForPossession();
         NPC.Possess();
 

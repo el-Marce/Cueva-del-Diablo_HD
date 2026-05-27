@@ -4269,6 +4269,13 @@ MonoBehaviour:
   item3: Sullu
   openDelay: 2
   cinematicCamera: {fileID: 919186039}
+  abrirPuerta:
+    Guid:
+      Data1: 1671087785
+      Data2: 1158375564
+      Data3: -1935345268
+      Data4: -568939800
+    Path: event:/Interacttions/PuertaVieja
 --- !u!4 &468091248
 Transform:
   m_ObjectHideFlags: 0
@@ -59944,6 +59951,13 @@ MonoBehaviour:
   - {fileID: 415688808}
   door: {fileID: 1677594150}
   NPC: {fileID: 2658984277630788928}
+  cerrarPuerta:
+    Guid:
+      Data1: -1584507080
+      Data2: 1080110236
+      Data3: -571442756
+      Data4: -828673338
+    Path: event:/Interacttions/CerrarPuertaViolent
   optionsText:
   - {fileID: 831038415}
   - {fileID: 489511246}
