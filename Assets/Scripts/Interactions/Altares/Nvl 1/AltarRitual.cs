@@ -1,11 +1,9 @@
 using UnityEngine;
-
 public class AltarRitual : MonoBehaviour, IInteractable
 {
     public GameObject altarUI;
     public GameObject altarPanel;
     bool ritualCompleted = false;
-
     Inventory inventory;
 
     [Header("Estado del ritual")]
@@ -18,7 +16,6 @@ public class AltarRitual : MonoBehaviour, IInteractable
         if (!cocaEntregada) return "Coca";
         if (!alcoholEntregado) return "Alcohol";
         if (!sulluEntregado) return "Sullu";
-
         return null;
     }
 
@@ -37,36 +34,26 @@ public class AltarRitual : MonoBehaviour, IInteractable
 
     public bool OfferNextItem()
     {
-        // Coca
         if (!cocaEntregada && inventory.HasItem("Coca"))
         {
             inventory.RemoveItem("Coca");
             cocaEntregada = true;
-            //Debug.Log("Entregaste coca");
             return false;
         }
-
-        // Alcohol
         if (!alcoholEntregado && inventory.HasItem("Alcohol"))
         {
             inventory.RemoveItem("Alcohol");
             alcoholEntregado = true;
-            //Debug.Log("Entregaste alcohol");
             return false;
         }
-
-        // Sullu
         if (!sulluEntregado && inventory.HasItem("Sullu"))
         {
             inventory.RemoveItem("Sullu");
             sulluEntregado = true;
             ritualCompleted = true;
             DisableInteraction();
-            //Debug.Log("Entregaste sullu");
             return true;
-        }        
-
-        //Debug.Log("No tienes el siguiente objeto requerido");
+        }
         return false;
     }
 
@@ -76,6 +63,7 @@ public class AltarRitual : MonoBehaviour, IInteractable
         if (col != null)
             col.enabled = false;
     }
+
     public void HideUI()
     {
         altarPanel.SetActive(false);
@@ -84,6 +72,7 @@ public class AltarRitual : MonoBehaviour, IInteractable
 
     public void ShowUI()
     {
-        altarUI.SetActive(true);
+        altarPanel.SetActive(true);
+        altarUI.GetComponent<AltarUI>().OpenUI();
     }
 }
