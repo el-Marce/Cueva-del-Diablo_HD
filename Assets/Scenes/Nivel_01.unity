@@ -66072,16 +66072,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AguaMaldita
       objectReference: {fileID: 0}
-    - target: {fileID: 947680161281891148, guid: bec603a565f9b3e46852f4579ae55e3a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: fa09e8cfd2ded66468dcbbf987661395, type: 2}
-    - target: {fileID: 947680161281891148, guid: bec603a565f9b3e46852f4579ae55e3a,
-        type: 3}
-      propertyPath: m_Materials.Array.data[2]
-      value: 
-      objectReference: {fileID: 2100000, guid: fa09e8cfd2ded66468dcbbf987661395, type: 2}
     - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
         type: 3}
       propertyPath: m_LocalPosition.x
