@@ -833,7 +833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9e4ed5a6f56fb4ebd693e39684f36f, type: 3}
   m_Name: VolumetricClouds
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   enable:
     m_OverrideState: 1
     m_Value: 1
@@ -1064,7 +1064,7 @@ MonoBehaviour:
     m_Value: 0.5
   densityMultiplier:
     m_OverrideState: 1
-    m_Value: 0.322
+    m_Value: 0.1
   shapeFactor:
     m_OverrideState: 1
     m_Value: 0.85
@@ -1093,14 +1093,14 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.1
   globalWindSpeed:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       mode: 0
       customValue: 200
       additiveValue: 0
       multiplyValue: 1
   orientation:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value:
       mode: 1
       customValue: 0
@@ -1134,13 +1134,13 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 1
   shadows:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   shadowResolution:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 256
   shadowPlaneHeightOffset:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 0
   shadowDistance:
     m_OverrideState: 0
