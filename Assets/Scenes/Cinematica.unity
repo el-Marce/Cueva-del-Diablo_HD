@@ -872,17 +872,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: "Al momento de su llegada, la reacci\xF3n fue casi inmediata, gritos inhumanos,
+    bramidos, ruido implacable, nada que las personas alrededor del lugar pudiesen
+    reconocer como algo familiar.\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a197a63697d4e42438e5f2fdabfdcf99, type: 2}
+  m_sharedMaterial: {fileID: -2419057055637893996, guid: a197a63697d4e42438e5f2fdabfdcf99,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278190215
+  m_fontColor: {r: 0.5283019, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -935,7 +938,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 4.697693, y: 0, z: -3.1138608, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -976,8 +979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -152}
-  m_SizeDelta: {x: 0, y: -222.5052}
+  m_AnchoredPosition: {x: 0.000061035156, y: -152.8212}
+  m_SizeDelta: {x: 0, y: -71.508}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1225621250
 MonoBehaviour:
@@ -992,15 +995,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 0.392}
+  m_Color: {r: 0.99215686, g: 0.89411765, b: 0.69803923, a: 0.8627451}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e426d26c359419c4d88b51a933f57a07, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1097,6 +1100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ilustracionImage: {fileID: 930159770}
   subtituloText: {fileID: 1154649878}
+  subtituloPanel: {fileID: 1225621250}
   skipPrompt: {fileID: 333690315}
   frames:
   - {fileID: 11400000, guid: a5db04a37c5b7da45b3fc070e2644ed6, type: 2}
@@ -1114,7 +1118,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 53cffb6ef64d78d4fa043bc5bbfe72e4, type: 2}
   - {fileID: 11400000, guid: b8c37173ccacc684c933371df316953e, type: 2}
   - {fileID: 11400000, guid: 1c6bd5a0c9c10e8439e6a67c01bc74a2, type: 2}
-  fadeDuration: 0.5
+  fadeDuration: 0.3
+  panelFadeInDuration: 0.3
+  delayTextAfterPanelFadeIn: 0.2
+  delayTextFadeOut: 0
+  textFadeOutDuration: 0.3
+  delayPanelFadeOutAfterText: 0.15
+  panelFadeOutDuration: 0.2
   escenaSiguiente: Nivel_01
 --- !u!4 &1522833632
 Transform:

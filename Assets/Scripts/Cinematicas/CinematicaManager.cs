@@ -8,16 +8,31 @@ public class CinematicaManager : MonoBehaviour
 {
     [Header("Referencias")]
     public Image ilustracionImage;
-    //public VideoPlayer videoPlayer;
     public TMP_Text subtituloText;
+    public Image subtituloPanel;
     public GameObject skipPrompt;
-    //public AudioSource audioSource;
 
     [Header("Frames")]
     public CinematicaFrame[] frames;
 
-    [Header("Transición")]
+    [Header("Transición - Ilustración")]
     public float fadeDuration = 0.5f;
+
+    [Header("Transición - Panel de Subtítulo (Fade IN)")]
+    public float panelFadeInDuration = 0.3f;
+    [Tooltip("Segundos de espera tras el fade in del panel antes de empezar a escribir el texto")]
+    public float delayTextAfterPanelFadeIn = 0.2f;
+
+    [Header("Transición - Texto (Fade OUT)")]
+    [Tooltip("Segundos de espera antes de iniciar el fade out del texto al avanzar frame")]
+    public float delayTextFadeOut = 0f;
+    public float textFadeOutDuration = 0.3f;
+
+    [Header("Transición - Panel de Subtítulo (Fade OUT)")]
+    [Tooltip("Segundos de espera tras el inicio del fade out del texto antes de iniciar el fade out del panel")]
+    public float delayPanelFadeOutAfterText = 0.1f;
+    public float panelFadeOutDuration = 0.3f;
+
     public string escenaSiguiente = "Nivel_01";
 
     int currentFrame = 0;
@@ -28,21 +43,14 @@ public class CinematicaManager : MonoBehaviour
 
     void Start()
     {
-        // Carga el primer frame directamente
         CinematicaFrame frame = frames[0];
         AudioManager.Instance.PlayMusica("event:/Cinematicas/MusicBack");
-        if (frame.videoAnimado != null)
-        {
-            //videoPlayer.clip = frame.videoAnimado;
-            //videoPlayer.Play();
-            ilustracionImage.enabled = false;
-        }
-        else
-        {
-            //videoPlayer.Stop();
-            ilustracionImage.enabled = true;
-            ilustracionImage.sprite = frame.ilustracion;
-        }
+
+        SetPanelAlpha(0f);
+        SetTextAlpha(0f);
+
+        ilustracionImage.enabled = true;
+        ilustracionImage.sprite = frame.ilustracion;
 
         StartCoroutine(MostrarFrame(0));
     }
@@ -54,15 +62,9 @@ public class CinematicaManager : MonoBehaviour
         if (Input.anyKeyDown)
         {
             if (!subtituloCompleto)
-            {
-                // Primer skip — completa el subtítulo inmediatamente
                 SkipEscritura();
-            }
             else
-            {
-                // Segundo skip — avanza al siguiente frame
                 StartCoroutine(AvanzarFrame());
-            }
         }
     }
 
@@ -72,34 +74,35 @@ public class CinematicaManager : MonoBehaviour
         subtituloCompleto = false;
         puedeAvanzar = false;
         subtituloText.text = "";
+        SetTextAlpha(1f);
 
         CinematicaFrame frame = frames[index];
 
-        // Fade in con el contenido ya asignado por AvanzarFrame
         yield return StartCoroutine(FadeIlustracion(0f, 1f));
-
-        // Narración
-        //if (frame.narracion != null)
-        //{
-        //    audioSource.clip = frame.narracion;
-        //    audioSource.Play();
-        //}
 
         yield return new WaitForSeconds(0.75f);
         puedeAvanzar = true;
         saltando = false;
 
-        escrituraCoroutine = StartCoroutine(EscribirSubtitulo(frame));
+        escrituraCoroutine = StartCoroutine(EscribirSubtituloConPanel(frame));
     }
 
-    IEnumerator EscribirSubtitulo(CinematicaFrame frame)
+    IEnumerator EscribirSubtituloConPanel(CinematicaFrame frame)
     {
         subtituloText.text = "";
+
+        yield return StartCoroutine(FadePanel(0f, 1f, panelFadeInDuration));
+
+        // Espera configurable antes de empezar a escribir
+        if (delayTextAfterPanelFadeIn > 0f)
+            yield return new WaitForSeconds(delayTextAfterPanelFadeIn);
+
         foreach (char c in frame.subtitulo)
         {
             subtituloText.text += c;
             yield return new WaitForSeconds(frame.velocidadEscritura);
         }
+
         subtituloCompleto = true;
     }
 
@@ -109,13 +112,24 @@ public class CinematicaManager : MonoBehaviour
             StopCoroutine(escrituraCoroutine);
 
         subtituloText.text = frames[currentFrame].subtitulo;
+        SetPanelAlpha(1f);
+        SetTextAlpha(1f);
         subtituloCompleto = true;
     }
 
     IEnumerator AvanzarFrame()
     {
         saltando = true;
-        //audioSource.Stop();
+
+        // Espera antes de iniciar el fade out del texto
+        if (delayTextFadeOut > 0f)
+            yield return new WaitForSeconds(delayTextFadeOut);
+
+        // Fade out del texto y, tras el delay configurable, fade out del panel
+        yield return StartCoroutine(FadeOutTextoYPanel());
+
+        subtituloText.text = "";
+        SetTextAlpha(1f); // reset para el siguiente frame
 
         yield return StartCoroutine(FadeIlustracion(1f, 0f));
 
@@ -123,44 +137,43 @@ public class CinematicaManager : MonoBehaviour
 
         if (currentFrame >= frames.Length)
         {
-
             AudioManager.Instance.StopMusica();
             if (SceneTransition.Instance != null)
-            {
-                Debug.Log("Transición hecha con SceneTransition");
                 SceneTransition.Instance.TransitionTo(escenaSiguiente, holdDuration: 3f);
-            }
             else
-            {
-                Debug.Log("Transición hecha con Fallback");
                 UnityEngine.SceneManagement.SceneManager.LoadScene(escenaSiguiente);
-            }
             yield break;
         }
 
-        // Cambia el contenido MIENTRAS está en negro
         CinematicaFrame frame = frames[currentFrame];
+        ilustracionImage.enabled = true;
+        ilustracionImage.sprite = frame.ilustracion;
 
-        if (frame.videoAnimado != null)
-        {
-            //videoPlayer.clip = frame.videoAnimado;
-            //videoPlayer.Play();
-            ilustracionImage.enabled = false;
-        }
-        else
-        {
-            //videoPlayer.Stop();
-            ilustracionImage.enabled = true;
-            ilustracionImage.sprite = frame.ilustracion;
-        }
         StartCoroutine(MostrarFrame(currentFrame));
+    }
+
+    // Fade out del texto primero, luego el panel con delay configurable
+    IEnumerator FadeOutTextoYPanel()
+    {
+        // Lanzamos el fade out del texto
+        Coroutine fadeTexto = StartCoroutine(FadeText(1f, 0f, textFadeOutDuration));
+
+        // Esperamos el delay antes de iniciar el fade out del panel
+        if (delayPanelFadeOutAfterText > 0f)
+            yield return new WaitForSeconds(delayPanelFadeOutAfterText);
+
+        // Iniciamos el fade out del panel (puede solaparse con el del texto o empezar después)
+        Coroutine fadePanel = StartCoroutine(FadePanel(1f, 0f, panelFadeOutDuration));
+
+        // Esperamos a que ambos terminen
+        yield return fadeTexto;
+        yield return fadePanel;
     }
 
     IEnumerator FadeIlustracion(float from, float to)
     {
         float elapsed = 0f;
         Color c = ilustracionImage.color;
-
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
@@ -168,8 +181,49 @@ public class CinematicaManager : MonoBehaviour
             ilustracionImage.color = c;
             yield return null;
         }
-
         c.a = to;
         ilustracionImage.color = c;
+    }
+
+    IEnumerator FadePanel(float from, float to, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            SetPanelAlpha(Mathf.Lerp(from, to, elapsed / duration));
+            yield return null;
+        }
+        SetPanelAlpha(to);
+    }
+
+    IEnumerator FadeText(float from, float to, float duration)
+    {
+        float elapsed = 0f;
+        Color c = subtituloText.color;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            c.a = Mathf.Lerp(from, to, elapsed / duration);
+            subtituloText.color = c;
+            yield return null;
+        }
+        c.a = to;
+        subtituloText.color = c;
+    }
+
+    void SetPanelAlpha(float alpha)
+    {
+        if (subtituloPanel == null) return;
+        Color c = subtituloPanel.color;
+        c.a = alpha;
+        subtituloPanel.color = c;
+    }
+
+    void SetTextAlpha(float alpha)
+    {
+        Color c = subtituloText.color;
+        c.a = alpha;
+        subtituloText.color = c;
     }
 }
