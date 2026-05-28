@@ -33,6 +33,9 @@ public class MicrophoneInput : MonoBehaviour
     {
         breathingSystem = GetComponent<BreathingSystem>();
         noiseEmitter = GetComponent<NoiseEmitter>();
+
+        sensitivity = AudioSettings.MicSensitivity;
+
         if (Microphone.devices.Length > 0)
         {
             selectedDevice = Microphone.devices[0];

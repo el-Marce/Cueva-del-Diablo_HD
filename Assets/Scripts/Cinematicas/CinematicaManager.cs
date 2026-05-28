@@ -1,8 +1,9 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using TMPro;
-using System.Collections;
 
 public class CinematicaManager : MonoBehaviour
 {
@@ -58,6 +59,12 @@ public class CinematicaManager : MonoBehaviour
     void Update()
     {
         if (saltando || !puedeAvanzar) return;
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            AudioManager.Instance.StopMusica();
+        }
 
         if (Input.anyKeyDown)
         {

@@ -6,6 +6,10 @@ public class PlayerLook : MonoBehaviour
     public Transform playerBody;
 
     float xRotation;
+        void Start()
+    {
+        mouseSensitivity = AudioSettings.MouseSensitivity;
+    }
 
     void Update()
     {
