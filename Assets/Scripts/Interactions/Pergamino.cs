@@ -19,6 +19,7 @@ public class Pergamino : MonoBehaviour, IInteractable
         {
             AudioManager.Instance.Play(pergaminoSound);
             inventory.AddScroll(text, icon);
+            TutorialManager.Instance.CompletarTrigger("pergamino_recogido");
         }
 
         Destroy(gameObject);

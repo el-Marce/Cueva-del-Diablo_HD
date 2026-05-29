@@ -671,7 +671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0043e138e68b5264ba17a1719ff65844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseIntensity: 50
+  baseIntensity: 600
   flickerAmount: 10
   speed: 5
 --- !u!1 &4726091405804414649

@@ -1119,12 +1119,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8c37173ccacc684c933371df316953e, type: 2}
   - {fileID: 11400000, guid: 1c6bd5a0c9c10e8439e6a67c01bc74a2, type: 2}
   fadeDuration: 0.3
-  panelFadeInDuration: 0.3
-  delayTextAfterPanelFadeIn: 0.2
+  panelFadeInDuration: 0.5
+  delayTextAfterPanelFadeIn: 0.35
   delayTextFadeOut: 0
-  textFadeOutDuration: 0.3
-  delayPanelFadeOutAfterText: 0.15
-  panelFadeOutDuration: 0.2
+  textFadeOutDuration: 0.5
+  delayPanelFadeOutAfterText: 0.2
+  panelFadeOutDuration: 0.5
   escenaSiguiente: Nivel_01
 --- !u!4 &1522833632
 Transform:

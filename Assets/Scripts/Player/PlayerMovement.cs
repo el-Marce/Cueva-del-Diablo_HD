@@ -105,4 +105,12 @@ public class PlayerMovement : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.CompareTag("TutorialBarrier"))
+        {
+            if (TutorialManager.Instance != null)
+                TutorialManager.Instance.NotificarContactoBarrera(hit.point);
+        }
+    }
 }

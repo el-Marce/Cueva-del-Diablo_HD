@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
+  m_Name: TUT_RecogerPergamino
+  m_EditorClassIdentifier: 
+  mensaje: "Los pergaminos muestran informaci\xF3n narrativa, estan indicados como
+    luces en partes del mapa\nPulsa \"E\" para recoger el pergamino"
+  icono: {fileID: 21300000, guid: 77c787b49e8d1fa4aad9b7d00bf1981d, type: 3}
+  bloqueaAvance: 1
+  triggerDeDesbloqueo: pergamino_recogido
+  posicionAnclaje: {x: 0.5, y: 0.8}

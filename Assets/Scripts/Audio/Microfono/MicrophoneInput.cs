@@ -116,16 +116,16 @@ public class MicrophoneInput : MonoBehaviour
         }
     }
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(20, 50, 300, 20), "Loudness: " + smoothedLoudness);
-        //GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
-        //GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
-        //GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
-        //GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
+    //void OnGUI()
+    //{
+    //    GUI.Label(new Rect(20, 50, 300, 20), "Loudness: " + smoothedLoudness);
+    //    //GUI.Label(new Rect(20, 40, 300, 20), "Min Threshold: " + minThreshold);
+    //    //GUI.Label(new Rect(20, 60, 300, 20), "Max Threshold: " + maxThreshold);
+    //    //GUI.Label(new Rect(20, 80, 300, 20), "Breath Timer: " + breathTimer);
+    //    //GUI.Label(new Rect(20, 100, 300, 20), "Change: " + loudnessChange);
 
-        GUI.Box(new Rect(20, 70, smoothedLoudness * 300, 20), "");
-    }
+    //    GUI.Box(new Rect(20, 70, smoothedLoudness * 300, 20), "");
+    //}
 
     float GetLoudnessFromMicrophone()
     {
@@ -162,11 +162,11 @@ public class MicrophoneInput : MonoBehaviour
         }
     }
 
-    public void PrintDebugs()
-    {
-        Debug.Log(
-    " | Smooth: " + smoothedLoudness +
-    " | BreathTimer: " + breathTimer +
-    " | Change: " + loudnessChange);
-    }
+    //public void PrintDebugs()
+    //{
+    //    Debug.Log(
+    //" | Smooth: " + smoothedLoudness +
+    //" | BreathTimer: " + breathTimer +
+    //" | Change: " + loudnessChange);
+    //}
 }

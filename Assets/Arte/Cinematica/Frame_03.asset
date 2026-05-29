@@ -15,10 +15,8 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 24d748a622c5a1a4aa1af0b67b0884f3, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Con la llegada de los espa\xF1oles aquella narrativa no hizo m\xE1s
-    que intensificarse, a medida que m\xE1s gente se quedaba a vivir en el lugar,
-    aumentaban los relatos relacionados a fen\xF3menos alrededor de la cueva. gente
-    que desde adentro era llamada por su nombre, otos desaparec\xEDan, otros que
-    enloquec\xEDan, algunos restos hac\xEDan parecer que sus propios animales perd\xEDan
-    el control y los mataban, o que los cerros se cerraban sobre ellos apl\xE1standolos."
+  subtitulo: "Con la llegada de los espa\xF1oles, los relatos sobre la cueva se intensificaron.
+    La gente hablaba de voces que llamaban desde el interior, desapariciones, hombres
+    que enloquec\xEDan y animales fuera de control que mataban a sus due\xF1os, adem\xE1s
+    de cerros que parec\xEDan cerrarse sobre ellos aplast\xE1ndolos."
   velocidadEscritura: 0.04

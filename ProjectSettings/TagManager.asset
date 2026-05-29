@@ -7,6 +7,7 @@ TagManager:
   - Piso
   - Enemigo
   - EnemigoEnte
+  - TutorialBarrier
   layers:
   - Default
   - TransparentFX

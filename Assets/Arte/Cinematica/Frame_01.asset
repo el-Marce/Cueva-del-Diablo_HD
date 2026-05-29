@@ -15,9 +15,8 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 60dc7d6a615d56f439f1a1ef48759886, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Siglo XVI, en las afueras de la ciudad de Potos\xED, una quebrada llamada
-    en ese entonces como \"Mullu Punku\", sol\xEDa ser lugar de adoroci\xF3n para
-    los nativos del lugar, debido a las dif\xEDciles condiciones de vida que llevaban,
-    ven\xEDan en busca de protecci\xF3n y fortaleza para los duros trabajos que desarrollaban,
-    especialmente en el interior de la mina."
+  subtitulo: "Siglo XVI. En las afueras de la ciudad de Potos\xED, una quebrada conocida
+    como \u201CMullu Punku\u201D era un lugar de adoraci\xF3n para los nativos, quienes
+    acud\xEDan en busca de protecci\xF3n y fortaleza ante las duras condiciones de
+    vida y trabajo, especialmente dentro de la mina."
   velocidadEscritura: 0.04
