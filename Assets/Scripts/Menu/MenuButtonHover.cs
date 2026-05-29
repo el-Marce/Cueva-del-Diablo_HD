@@ -15,13 +15,15 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public Image hoverImage;
     public float imageFadeDuration = 0.15f;
 
-    [Header("Fade color (opcional — para botones sin texto)")]
+    [Header("Fade color (opcional)")]
     public Image fadeImage;
-    public float fadeTargetAlpha = 1f;      // alpha en hover
+    public float fadeTargetAlpha = 1f;
+
     float fadeOriginalAlpha;
-
     Coroutine imageFadeCoroutine;
+    bool isHovered = false;
 
+    bool ready = false;
     void Start()
     {
         if (tmpTexts == null || tmpTexts.Count == 0)
@@ -34,9 +36,23 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
             hoverImage.color = c;
         }
 
-        // Guarda el alpha original del fadeImage
         if (fadeImage != null)
             fadeOriginalAlpha = fadeImage.color.a;
+        ForceReset();
+        StartCoroutine(EnableAfterFrame());
+    }
+
+    IEnumerator EnableAfterFrame()
+    {
+        yield return null; // espera un frame
+        yield return null; // por si acaso, dos frames
+        ready = true;
+    }
+
+    void OnDisable()
+    {
+        // Al desactivarse fuerza el reset visual
+        ForceReset();
     }
 
     void SetOutline(float value)
@@ -46,8 +62,36 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 tmp.fontMaterial.SetFloat(ShaderUtilities.ID_OutlineWidth, value);
     }
 
+    public void ForceReset()
+    {
+        isHovered = false;
+        SetOutline(0f);
+
+        if (imageFadeCoroutine != null)
+        {
+            StopCoroutine(imageFadeCoroutine);
+            imageFadeCoroutine = null;
+        }
+
+        if (hoverImage != null)
+        {
+            Color c = hoverImage.color;
+            c.a = 0f;
+            hoverImage.color = c;
+        }
+
+        if (fadeImage != null)
+        {
+            Color c = fadeImage.color;
+            c.a = fadeOriginalAlpha;
+            fadeImage.color = c;
+        }
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (!enabled || !ready) return;
+        isHovered = true;
         SetOutline(outlineThickness);
         UIAudio.Instance?.PlayHover();
 
@@ -66,6 +110,7 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        isHovered = false;
         SetOutline(0f);
 
         if (hoverImage != null)
@@ -85,7 +130,6 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
     {
         float elapsed = 0f;
         float startAlpha = img.color.a;
-
         while (elapsed < imageFadeDuration)
         {
             elapsed += Time.deltaTime;
@@ -94,7 +138,6 @@ public class MenuButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExit
             img.color = c;
             yield return null;
         }
-
         Color final = img.color;
         final.a = targetAlpha;
         img.color = final;

@@ -26,6 +26,9 @@ public class MenuPrincipal : MonoBehaviour
 
     void Start()
     {
+        foreach (var hover in FindObjectsOfType<MenuButtonHover>())
+            hover.ForceReset();
+
         VolverAlMenu();
         StartCoroutine(EntradaSequence());
     }
@@ -76,9 +79,13 @@ public class MenuPrincipal : MonoBehaviour
 
     IEnumerator NuevoJuegoRoutine()
     {
+        // Desactivar todos los hovers antes de transicionar
+        foreach (var hover in FindObjectsOfType<MenuButtonHover>())
+            hover.enabled = false;
 
         if (btnNuevoJuegoHover != null)
             yield return StartCoroutine(btnNuevoJuegoHover.BlinkOutline(blinkTimes, blinkSpeed));
+        
 
         GameManager.Instance.NuevoJuego();
     }
@@ -103,5 +110,8 @@ public class MenuPrincipal : MonoBehaviour
         panelMenu.SetActive(true);
         panelOpciones.SetActive(false);
         panelCargar.SetActive(false);
+
+        foreach (var hover in FindObjectsOfType<MenuButtonHover>())
+            hover.ForceReset();
     }
 }
