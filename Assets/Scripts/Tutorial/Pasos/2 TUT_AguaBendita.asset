@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
-  m_Name: TUT_RecogerPergamino
+  m_Name: 2 TUT_AguaBendita
   m_EditorClassIdentifier: 
-  mensaje: "Los pergaminos muestran informaci\xF3n narrativa, estan indicados como
-    luces en partes del mapa\nPulsa \"E\" para recoger el pergamino"
-  icono: {fileID: 21300000, guid: 77c787b49e8d1fa4aad9b7d00bf1981d, type: 3}
+  mensaje: "Recogiste \"Agua Bendita\" \nAbre tu inventario con TAB, navega hasta
+    la pesta\xF1a Armas con Q/E y equipa el Agua Bendita con Enter para enfrentarte
+    a enemigos tipo \"Ente\""
+  icono: {fileID: 0}
   bloqueaAvance: 1
-  triggerDeDesbloqueo: pergamino_recogido
+  triggerDeDesbloqueo: equipar_aguabendita
   posicionAnclaje: {x: 0.5, y: 0.8}
+  toastMensaje: 
+  toastIcono: {fileID: 0}

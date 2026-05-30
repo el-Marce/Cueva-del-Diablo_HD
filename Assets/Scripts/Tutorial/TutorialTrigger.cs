@@ -19,6 +19,5 @@ public class TutorialTrigger : MonoBehaviour
 
         activado = true;
         TutorialManager.Instance.MostrarPaso(paso, barrera);
-        Debug.Log("Trigger Detectado");
     }
 }

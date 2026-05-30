@@ -1,3 +1,4 @@
+// TutorialBarrier.cs
 using UnityEngine;
 using System.Collections;
 
@@ -16,28 +17,46 @@ public class TutorialBarrier : MonoBehaviour
     public float pulseMaxAlpha = 0.6f;
 
     [Header("Partículas")]
-    public ParticleSystem contactParticles; // opcional
+    public ParticleSystem contactParticles;
+
+    public bool estaActiva = false;
+
+    [Header("Comportamiento")]
+    public bool activarAlInicio = false;
+
+    [Header("Toast de contacto")]
+    public TutorialUnlockToast barreraToast;
 
     Material barrierMat;
     Coroutine pulseCoroutine;
     Coroutine fadeCoroutine;
+    bool jugadorEnContacto = false;
 
     void Awake()
     {
         if (barrierRenderer != null)
         {
-            // Instancia propia para no afectar el material original
             barrierMat = new Material(barrierRenderer.material);
             barrierRenderer.material = barrierMat;
         }
 
         SetAlpha(0f);
+
         if (barrierCollider != null)
             barrierCollider.enabled = false;
     }
 
+    void Start()
+    {
+        if (activarAlInicio)
+            Activar();
+    }
+
     public void Activar()
     {
+        estaActiva = true;
+        jugadorEnContacto = false;
+
         if (barrierCollider != null)
             barrierCollider.enabled = true;
 
@@ -50,6 +69,9 @@ public class TutorialBarrier : MonoBehaviour
 
     public void Desactivar()
     {
+        estaActiva = false;
+        jugadorEnContacto = false;
+
         if (pulseCoroutine != null)
         {
             StopCoroutine(pulseCoroutine);
@@ -64,7 +86,26 @@ public class TutorialBarrier : MonoBehaviour
         }));
     }
 
-    // Llamar desde PlayerMovement al chocar con la barrera
+    public void NotificarContacto(Vector3 contactPoint)
+    {
+        if (!estaActiva) return;
+
+        ReaccionarAlContacto(contactPoint);
+
+        if (!jugadorEnContacto)
+        {
+            jugadorEnContacto = true;
+            barreraToast?.MostrarPersistente();
+        }
+    }
+
+    public void NotificarSeparacion()
+    {
+        if (!jugadorEnContacto) return;
+        jugadorEnContacto = false;
+        barreraToast?.Ocultar();
+    }
+
     public void ReaccionarAlContacto(Vector3 contactPoint)
     {
         if (contactParticles != null)
@@ -73,7 +114,6 @@ public class TutorialBarrier : MonoBehaviour
             contactParticles.Play();
         }
 
-        // Flash rápido de alpha
         if (pulseCoroutine != null) StopCoroutine(pulseCoroutine);
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         fadeCoroutine = StartCoroutine(Flash());

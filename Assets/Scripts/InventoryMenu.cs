@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// InventoryMenu.cs
+using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -10,12 +11,13 @@ public class InventoryMenu : MonoBehaviour
     public GameObject inventoryPanel;
     public TMP_Text tabText;
     public TMP_Text[] itemTexts;
-    bool menuOpen = false;
     public TMP_Text descriptionText;
     public GameObject lecturaPanel;
     public int columns = 4;
     public Image[] selectors;
     public Image[] itemIcons;
+
+    bool menuOpen = false;
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -110,8 +112,8 @@ public class InventoryMenu : MonoBehaviour
         }
 
         if (!menuOpen) return;
-        else GameState.InMenu = true;
 
+        GameState.InMenu = true;
         Navigate();
         ChangeTab();
         Select();
@@ -122,7 +124,18 @@ public class InventoryMenu : MonoBehaviour
         menuOpen = !menuOpen;
         GameState.InMenu = menuOpen;
         inventoryPanel.SetActive(menuOpen);
-        if (menuOpen) PrintMenu();
+
+        if (menuOpen)
+            PrintMenu();
+        else
+            OnInventarioCerrado();
+    }
+
+    void OnInventarioCerrado()
+    {
+        if (string.IsNullOrEmpty(inventory.equippedWeapon)) return;
+        string trigger = "equipar_" + inventory.equippedWeapon.ToLower().Replace(" ", "");
+        TutorialManager.Instance?.CompletarTrigger(trigger);
     }
 
     void Navigate()
@@ -202,6 +215,19 @@ public class InventoryMenu : MonoBehaviour
         }
     }
 
+    void Select()
+    {
+        if (!Input.GetKeyDown(KeyCode.Return)) return;
+
+        if (inventory.currentTab == Inventory.Tab.Scrolls)
+            descriptionText.text = inventory.GetSelected();
+        else
+        {
+            inventory.EquipSelected();
+            PrintMenu();
+        }
+    }
+
     void UpdateDescription()
     {
         if (inventory.GetCount() == 0)
@@ -211,28 +237,9 @@ public class InventoryMenu : MonoBehaviour
         }
 
         string selected = inventory.GetSelected();
-
-        if (inventory.currentTab == Inventory.Tab.Scrolls)
-            descriptionText.text = "''" + selected + "''";
-        else
-            descriptionText.text = "Objeto: " + selected;
-    }
-
-    void Select()
-    {
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (inventory.currentTab == Inventory.Tab.Scrolls)
-            {
-                string selected = inventory.GetSelected();
-                descriptionText.text = selected;
-            }
-            else
-            {
-                inventory.EquipSelected();
-                PrintMenu();
-            }
-        }
+        descriptionText.text = inventory.currentTab == Inventory.Tab.Scrolls
+            ? "''" + selected + "''"
+            : "Objeto: " + selected;
     }
 
     void PrintMenu()
@@ -283,9 +290,9 @@ public class InventoryMenu : MonoBehaviour
             }
 
             bool isSelected = i == inventory.selectedIndex;
-            bool isEquipped = inventory.currentTab == Inventory.Tab.Weapons &&
-                              i < inventory.weapons.Count &&
-                              inventory.equippedWeapon == inventory.weapons[i].name;
+            bool isEquipped = inventory.currentTab == Inventory.Tab.Weapons
+                && i < inventory.weapons.Count
+                && inventory.equippedWeapon == inventory.weapons[i].name;
 
             selectors[i].gameObject.SetActive(isSelected || isEquipped);
             if (isSelected || isEquipped)

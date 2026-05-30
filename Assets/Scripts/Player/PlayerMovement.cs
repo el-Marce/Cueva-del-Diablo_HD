@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     EventInstance pasosInstance;
     bool isPlayingPasos = false;
 
+    TutorialBarrier barreraActual = null;
+    float tiempoUltimoContacto = -999f;
+    const float separacionTimeout = 0.15f;
+
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable()
     {
@@ -48,7 +52,19 @@ public class PlayerMovement : MonoBehaviour
         if (GameState.InMenu) return;
         Move();
         ApplyGravity();
+        CheckSeparacionBarrera();
     }
+    void CheckSeparacionBarrera()
+    {
+        if (barreraActual == null) return;
+
+        if (Time.time - tiempoUltimoContacto > separacionTimeout)
+        {
+            barreraActual.NotificarSeparacion();
+            barreraActual = null;
+        }
+    }
+
     bool isPivoting = false;
     void Move()
     {
@@ -107,10 +123,14 @@ public class PlayerMovement : MonoBehaviour
     }
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.gameObject.CompareTag("TutorialBarrier"))
-        {
-            if (TutorialManager.Instance != null)
-                TutorialManager.Instance.NotificarContactoBarrera(hit.point);
-        }
+        TutorialBarrier barrera = hit.gameObject.GetComponent<TutorialBarrier>();
+        if (barrera == null) return;
+
+        tiempoUltimoContacto = Time.time;
+
+        if (barreraActual != barrera)
+            barreraActual = barrera;
+
+        barrera.NotificarContacto(hit.point);
     }
 }

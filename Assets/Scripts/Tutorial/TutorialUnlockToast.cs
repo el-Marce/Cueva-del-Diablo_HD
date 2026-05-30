@@ -15,16 +15,17 @@ public class TutorialUnlockToast : MonoBehaviour
     public string mensajePorDefecto = "¡Camino despejado!";
     public Sprite iconoPorDefecto;
 
+    [Header("Posición de reposo (se lee automático del RectTransform)")]
+    // No tocar, se asigna en Awake desde la posición que pongas en el editor
+
     [Header("Animación - Entrada")]
     public SlideDirection direccionEntrada = SlideDirection.Bottom;
     public float slideDistance = 80f;
     public float slideInDuration = 0.35f;
-    public AnimationCurve slideInCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     [Header("Animación - Salida")]
-    public float displayDuration = 2.5f;
+    public float displayDuration = 2.5f; // ignorado si se llama OcultarManual()
     public float slideOutDuration = 0.25f;
-    public AnimationCurve slideOutCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     public enum SlideDirection { Top, Bottom, Left, Right }
 
@@ -35,84 +36,98 @@ public class TutorialUnlockToast : MonoBehaviour
     {
         anchoredOrigin = panelRect.anchoredPosition;
         canvasGroup.alpha = 0f;
-        panelRect.anchoredPosition = anchoredOrigin + GetSlideOffset();
-        gameObject.SetActive(false);
+        panelRect.anchoredPosition = anchoredOrigin + GetOffset();
     }
 
-    // Muestra el toast con contenido por defecto
-    public void Mostrar()
+    // Aparece y desaparece solo tras displayDuration
+    public void Mostrar(string mensaje = null, Sprite icono = null)
     {
-        Mostrar(mensajePorDefecto, iconoPorDefecto);
+        if (toastCoroutine != null) StopCoroutine(toastCoroutine);
+        AplicarContenido(mensaje, icono);
+        toastCoroutine = StartCoroutine(Routine_AutoHide());
     }
 
-    // Muestra el toast con contenido personalizado por step
-    public void Mostrar(string mensaje, Sprite icono)
+    // Aparece y se queda hasta que llames Ocultar()
+    public void MostrarPersistente(string mensaje = null, Sprite icono = null)
     {
-        if (toastCoroutine != null)
-            StopCoroutine(toastCoroutine);
+        if (toastCoroutine != null) StopCoroutine(toastCoroutine);
+        AplicarContenido(mensaje, icono);
+        toastCoroutine = StartCoroutine(Routine_SlideIn());
+    }
 
-        mensajeText.text = mensaje;
+    public void Ocultar()
+    {
+        if (toastCoroutine != null) StopCoroutine(toastCoroutine);
+        toastCoroutine = StartCoroutine(Routine_SlideOut());
+    }
+
+    void AplicarContenido(string mensaje, Sprite icono)
+    {
+        mensajeText.text = string.IsNullOrEmpty(mensaje) ? mensajePorDefecto : mensaje;
 
         if (iconoImage != null)
         {
-            iconoImage.sprite = icono != null ? icono : iconoPorDefecto;
-            iconoImage.gameObject.SetActive(iconoImage.sprite != null);
+            Sprite spriteAUsar = icono != null ? icono : iconoPorDefecto;
+            iconoImage.sprite = spriteAUsar;
+            iconoImage.gameObject.SetActive(spriteAUsar != null);
         }
 
-        toastCoroutine = StartCoroutine(ToastRoutine());
+        // Fuerza recálculo inmediato del layout para que texto e ícono queden centrados
+        UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(panelRect);
+    }
+    IEnumerator Routine_AutoHide()
+    {
+        yield return Routine_SlideIn();
+        yield return new WaitForSeconds(displayDuration);
+        yield return Routine_SlideOut();
     }
 
-    IEnumerator ToastRoutine()
+    IEnumerator Routine_SlideIn()
     {
-        // Reset estado inicial
-        gameObject.SetActive(true);
-        canvasGroup.alpha = 0f;
-        panelRect.anchoredPosition = anchoredOrigin + GetSlideOffset();
-
-        // Slide in
         float elapsed = 0f;
-        Vector2 offsetInicio = GetSlideOffset();
+        Vector2 desde = anchoredOrigin + GetOffset();
+        canvasGroup.alpha = 0f;
+        panelRect.anchoredPosition = desde;
 
         while (elapsed < slideInDuration)
         {
             elapsed += Time.deltaTime;
-            float t = slideInCurve.Evaluate(elapsed / slideInDuration);
+            float t = elapsed / slideInDuration;
             canvasGroup.alpha = t;
-            panelRect.anchoredPosition = Vector2.Lerp(anchoredOrigin + offsetInicio, anchoredOrigin, t);
+            panelRect.anchoredPosition = Vector2.Lerp(desde, anchoredOrigin, t);
             yield return null;
         }
 
         canvasGroup.alpha = 1f;
         panelRect.anchoredPosition = anchoredOrigin;
+    }
 
-        // Espera visible
-        yield return new WaitForSeconds(displayDuration);
-
-        // Slide out (sale hacia el mismo borde por el que entró)
-        elapsed = 0f;
+    IEnumerator Routine_SlideOut()
+    {
+        float elapsed = 0f;
+        Vector2 hasta = anchoredOrigin + GetOffset();
 
         while (elapsed < slideOutDuration)
         {
             elapsed += Time.deltaTime;
-            float t = slideOutCurve.Evaluate(elapsed / slideOutDuration);
+            float t = elapsed / slideOutDuration;
             canvasGroup.alpha = 1f - t;
-            panelRect.anchoredPosition = Vector2.Lerp(anchoredOrigin, anchoredOrigin + offsetInicio, t);
+            panelRect.anchoredPosition = Vector2.Lerp(anchoredOrigin, hasta, t);
             yield return null;
         }
 
         canvasGroup.alpha = 0f;
-        panelRect.anchoredPosition = anchoredOrigin + offsetInicio;
-        gameObject.SetActive(false);
+        panelRect.anchoredPosition = anchoredOrigin + GetOffset();
     }
 
-    Vector2 GetSlideOffset()
+    Vector2 GetOffset()
     {
         return direccionEntrada switch
         {
-            SlideDirection.Top => new Vector2(0f, slideDistance),
-            SlideDirection.Bottom => new Vector2(0f, -slideDistance),
-            SlideDirection.Left => new Vector2(-slideDistance, 0f),
-            SlideDirection.Right => new Vector2(slideDistance, 0f),
+            SlideDirection.Top => new Vector2(0, slideDistance),
+            SlideDirection.Bottom => new Vector2(0, -slideDistance),
+            SlideDirection.Left => new Vector2(-slideDistance, 0),
+            SlideDirection.Right => new Vector2(slideDistance, 0),
             _ => Vector2.zero
         };
     }

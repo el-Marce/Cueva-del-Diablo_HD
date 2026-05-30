@@ -108,17 +108,18 @@ public class Inventory : MonoBehaviour
     public void EquipWeaponSelected()
     {
         if (currentTab != Tab.Weapons || weapons.Count == 0) return;
+
         string selected = weapons[selectedIndex].name;
         equippedWeapon = (equippedWeapon == selected) ? null : selected;
 
-        // Sincronizar con PlayerCombat
         PlayerCombat combat = FindObjectOfType<PlayerCombat>();
         if (combat == null) return;
 
         if (equippedWeapon != null)
         {
             WeaponData w = weapons.Find(x => x.name == equippedWeapon);
-            if (w != null) combat.EquipWeapon(w.weaponType, w.durability);
+            if (w != null)
+                combat.EquipWeapon(w.weaponType, w.durability);
         }
         else
         {
