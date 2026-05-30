@@ -28,8 +28,7 @@ public class TutorialBarrier : MonoBehaviour
     public TutorialUnlockToast barreraToast;
 
     Material barrierMat;
-    Coroutine pulseCoroutine;
-    Coroutine fadeCoroutine;
+    bool debePulsar = false;          // <-- flag central
     bool jugadorEnContacto = false;
 
     void Awake()
@@ -39,47 +38,44 @@ public class TutorialBarrier : MonoBehaviour
             barrierMat = new Material(barrierRenderer.material);
             barrierRenderer.material = barrierMat;
         }
-
         SetAlpha(0f);
-
         if (barrierCollider != null)
             barrierCollider.enabled = false;
     }
 
     void Start()
     {
-        if (activarAlInicio)
-            Activar();
+        if (activarAlInicio) Activar();
+    }
+
+    // Un solo loop que vive toda la vida del objeto
+    void Update()
+    {
+        if (debePulsar)
+        {
+            float t = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f;
+            SetAlpha(Mathf.Lerp(pulseMinAlpha, pulseMaxAlpha, t));
+        }
     }
 
     public void Activar()
     {
         estaActiva = true;
         jugadorEnContacto = false;
+        debePulsar = true;
 
         if (barrierCollider != null)
             barrierCollider.enabled = true;
-
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        fadeCoroutine = StartCoroutine(FadeTo(pulseMinAlpha, fadeDuration, () =>
-        {
-            pulseCoroutine = StartCoroutine(Pulsar());
-        }));
     }
 
     public void Desactivar()
     {
         estaActiva = false;
         jugadorEnContacto = false;
+        debePulsar = false;           // apaga el pulso sin importar nada más
 
-        if (pulseCoroutine != null)
-        {
-            StopCoroutine(pulseCoroutine);
-            pulseCoroutine = null;
-        }
-
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        fadeCoroutine = StartCoroutine(FadeTo(0f, fadeDuration, () =>
+        StopAllCoroutines();          // cancela cualquier fade en curso
+        StartCoroutine(FadeTo(0f, fadeDuration, () =>
         {
             if (barrierCollider != null)
                 barrierCollider.enabled = false;
@@ -89,9 +85,7 @@ public class TutorialBarrier : MonoBehaviour
     public void NotificarContacto(Vector3 contactPoint)
     {
         if (!estaActiva) return;
-
         ReaccionarAlContacto(contactPoint);
-
         if (!jugadorEnContacto)
         {
             jugadorEnContacto = true;
@@ -114,40 +108,28 @@ public class TutorialBarrier : MonoBehaviour
             contactParticles.Play();
         }
 
-        if (pulseCoroutine != null) StopCoroutine(pulseCoroutine);
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        fadeCoroutine = StartCoroutine(Flash());
-    }
-
-    IEnumerator Pulsar()
-    {
-        while (true)
-        {
-            float t = (Mathf.Sin(Time.time * pulseSpeed) + 1f) / 2f;
-            SetAlpha(Mathf.Lerp(pulseMinAlpha, pulseMaxAlpha, t));
-            yield return null;
-        }
+        StopAllCoroutines();
+        StartCoroutine(Flash());
     }
 
     IEnumerator Flash()
     {
+        debePulsar = false;
         yield return StartCoroutine(FadeTo(pulseMaxAlpha, 0.08f, null));
         yield return StartCoroutine(FadeTo(pulseMinAlpha, 0.2f, null));
-        pulseCoroutine = StartCoroutine(Pulsar());
+        if (estaActiva) debePulsar = true;    // solo reactiva si sigue activa
     }
 
     IEnumerator FadeTo(float targetAlpha, float duration, System.Action onComplete)
     {
         float startAlpha = GetAlpha();
         float elapsed = 0f;
-
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             SetAlpha(Mathf.Lerp(startAlpha, targetAlpha, elapsed / duration));
             yield return null;
         }
-
         SetAlpha(targetAlpha);
         onComplete?.Invoke();
     }

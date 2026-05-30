@@ -173,6 +173,27 @@ MonoBehaviour:
   equippedItem: 
   selectedIndex: 0
   currentTab: 0
+  recogerPaloSound:
+    Guid:
+      Data1: -321690120
+      Data2: 1077822986
+      Data3: 484827025
+      Data4: -188117548
+    Path: event:/Interacttions/PaloPick
+  recogerRocaSound:
+    Guid:
+      Data1: -712689084
+      Data2: 1307116821
+      Data3: 1539862923
+      Data4: 599201090
+    Path: event:/Interacttions/RocaPick
+  recogerAguaBendita:
+    Guid:
+      Data1: -2055770524
+      Data2: 1125479849
+      Data3: 926928828
+      Data4: -484193103
+    Path: event:/Interacttions/Cristal
 --- !u!114 &7348819158839489651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,13 +248,6 @@ MonoBehaviour:
   stickCooldown: 0.8
   rockWindUp: 0.5
   rockCooldown: 1.2
-  recogerPaloSound:
-    Guid:
-      Data1: -321690120
-      Data2: 1077822986
-      Data3: 484827025
-      Data4: -188117548
-    Path: event:/Interacttions/PaloPick
   ataquePaloSound:
     Guid:
       Data1: 894368778
@@ -241,13 +255,6 @@ MonoBehaviour:
       Data3: 1455763336
       Data4: -1025319714
     Path: event:/Interacttions/PaloWind
-  recogerRocaSound:
-    Guid:
-      Data1: -712689084
-      Data2: 1307116821
-      Data3: 1539862923
-      Data4: 599201090
-    Path: event:/Interacttions/RocaPick
   ataqueRocaSound:
     Guid:
       Data1: -1966502447
@@ -255,13 +262,13 @@ MonoBehaviour:
       Data3: -1680547671
       Data4: 885976116
     Path: event:/Interacttions/RocaWind
-  recogerAguaBendita:
+  windAguaBendita:
     Guid:
-      Data1: -1548770618
-      Data2: 1098700916
-      Data3: 1259083195
-      Data4: -1908300187
-    Path: event:/Interacttions/AguaMaldita
+      Data1: 597198877
+      Data2: 1281833001
+      Data3: -399179349
+      Data4: -1403653981
+    Path: event:/Interacttions/WindSimple
   usarAguaBendita:
     Guid:
       Data1: -1526216463
@@ -273,6 +280,10 @@ MonoBehaviour:
   fistDamage: 5
   stickDamage: 12
   rockDamage: 20
+  aguaBenditaModel: {fileID: 3747928679435533745}
+  punchDistance: 0.3
+  punchDuration: 0.1
+  returnDuration: 0.2
   currentWeapon: 0
 --- !u!114 &4332087294220951615
 MonoBehaviour:
@@ -348,6 +359,7 @@ Transform:
   m_Children:
   - {fileID: 6618217808701029092}
   - {fileID: 3214722747143707282}
+  - {fileID: 4459642468087891619}
   m_Father: {fileID: 3096755433197964904}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7865965504305212451
@@ -743,6 +755,38 @@ MonoBehaviour:
   CameraRadius: 0.2
   DampingIntoCollision: 0
   DampingFromCollision: 2
+--- !u!1 &5063902827414505184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4459642468087891619}
+  m_Layer: 0
+  m_Name: ArmaHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4459642468087891619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063902827414505184}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000005587935, y: 0.000000014901159, z: -0.10396294, w: 0.99458116}
+  m_LocalPosition: {x: 0.287, y: -0.252, z: 0.558}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 924073701528553223}
+  m_Father: {fileID: 7236949807668828051}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -11.935}
 --- !u!1 &5157457900681231244
 GameObject:
   m_ObjectHideFlags: 0
@@ -5875,4 +5919,110 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2054edfd97921d4f83bdd1ab8d6a50a,
     type: 3}
   m_PrefabInstance: {fileID: 3104743979428822393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4454701412129505865
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4459642468087891619}
+    m_Modifications:
+    - target: {fileID: 707370891078139896, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_Name
+      value: AguaMaldita (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.18243106
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.000000010988324
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98321867
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0000000020388258
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749213572876934936, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: tutorialStep
+      value: 
+      objectReference: {fileID: 11400000, guid: 234ce19530310cd46aa8d9ed9b18be7b,
+        type: 2}
+    - target: {fileID: 6749213572876934936, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: barreraTutorial
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bec603a565f9b3e46852f4579ae55e3a, type: 3}
+--- !u!4 &924073701528553223 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4454701412129505865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3747928679435533745 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 707370891078139896, guid: bec603a565f9b3e46852f4579ae55e3a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4454701412129505865}
   m_PrefabAsset: {fileID: 0}

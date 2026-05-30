@@ -150,7 +150,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Nivel02.bank
   Name: Nivel02
   StudioPath: bank:/Nivel02
-  lastModified: 639124456585166938
+  lastModified: 639154035332141160
   FileSizes: []
   Exists: 1
 --- !u!114 &-7012013835402147296
@@ -249,7 +249,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/UI.bank
   Name: UI
   StudioPath: bank:/UI
-  lastModified: 639126179334655569
+  lastModified: 639154035332153252
   FileSizes: []
   Exists: 1
 --- !u!114 &-5646325515399961548
@@ -321,7 +321,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639154141695400534
+  lastModified: 639154144567823503
   FileSizes: []
   Exists: 1
 --- !u!114 &-3346193204899738348
@@ -366,7 +366,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639154158292716710
+  lastModified: 639157609940690882
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -492,7 +492,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639154158293835034
+  lastModified: 639154035331796376
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -548,13 +548,14 @@ MonoBehaviour:
   - {fileID: 5233532729378125834}
   - {fileID: 8193210427098052524}
   - {fileID: 5618001725306022868}
+  - {fileID: 3673544413005633525}
   EditorParameters: []
   MasterBanks:
   - {fileID: -365857060993439915}
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639155592344743378
+  cacheTime: 639157609940690882
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -614,6 +615,8 @@ MonoBehaviour:
     index: 27
   - key: event:/Interacttions/RomperCristal
     index: 28
+  - key: event:/Interacttions/WindSimple
+    index: 29
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -773,6 +776,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3673544413005633525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/WindSimple
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/WindSimple
+  Guid:
+    Data1: 597198877
+    Data2: 1281833001
+    Data3: -399179349
+    Data4: -1403653981
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3791001437229431716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -788,7 +818,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639153899928774393
+  lastModified: 639154035331534049
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -806,7 +836,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Cinematica.bank
   Name: Cinematica
   StudioPath: bank:/Cinematica
-  lastModified: 639124456585217858
+  lastModified: 639154035331534049
   FileSizes: []
   Exists: 1
 --- !u!114 &4336407426305081004
@@ -824,10 +854,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639154158293860349
+  lastModified: 639157590953512300
   FileSizes:
   - Name: 
-    Value: 2536
+    Value: 2578
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:
@@ -979,7 +1009,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Musica.bank
   Name: Musica
   StudioPath: bank:/Musica
-  lastModified: 639155592344743378
+  lastModified: 639154035332118497
   FileSizes: []
   Exists: 1
 --- !u!114 &7850595472114368337
@@ -1025,7 +1055,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Nivel01.bank
   Name: Nivel01
   StudioPath: bank:/Nivel01
-  lastModified: 639124456585119389
+  lastModified: 639154035332118497
   FileSizes: []
   Exists: 1
 --- !u!114 &8193210427098052524

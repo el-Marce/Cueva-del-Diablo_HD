@@ -1,5 +1,7 @@
+using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerCombat;
 
 public class Inventory : MonoBehaviour
 {
