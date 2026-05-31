@@ -5910,6 +5910,81 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Path
+      value: event:/Interacttions/PaloPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Path
+      value: event:/Interacttions/RocaPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Path
+      value: event:/Interacttions/Cristal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data1
+      value: -321690120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data2
+      value: 1077822986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data3
+      value: 484827025
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data4
+      value: -188117548
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data1
+      value: -712689084
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data2
+      value: 1307116821
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data3
+      value: 1539862923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data4
+      value: 599201090
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data1
+      value: -2055770524
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data2
+      value: 1125479849
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data3
+      value: 926928828
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data4
+      value: -484193103
+      objectReference: {fileID: 0}
     - target: {fileID: 7615428991986390586, guid: ee13d33d13761d1429defde2cb8a5a51,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -16157,6 +16232,56 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.038
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.057
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.091
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.07420762
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.19458419
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.73994416
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.63961935
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 257.277
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 39.166
+      objectReference: {fileID: 0}
+    - target: {fileID: 81889462005190274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 118.783005
+      objectReference: {fileID: 0}
     - target: {fileID: 1473348665417721412, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_Name
@@ -16172,15 +16297,60 @@ PrefabInstance:
       propertyPath: mouseSensitivity
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 2062197305105867274, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076341755781186949, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2076341755781186949, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 7000
+      objectReference: {fileID: 0}
     - target: {fileID: 2295143409455369292, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: roturaParticles
       value: 
       objectReference: {fileID: 972565332}
+    - target: {fileID: 2740704851667720308, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2971406301079440918, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_Intensity
       value: 7703.626
+      objectReference: {fileID: 0}
+    - target: {fileID: 3120250880677712059, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3218152770934378545, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3385188781628556356, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439971285391490651, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439971285391490651, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 7000
       objectReference: {fileID: 0}
     - target: {fileID: 3521782044308057889, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -16195,7 +16365,32 @@ PrefabInstance:
     - target: {fileID: 3747928679435533745, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058192891394795596, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4459521204938157765, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063902827414505184, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5567960420068056233, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6221346609630147071, guid: b49c8089cb89298438c78be398f39f45,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6951379319654063441, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -16205,7 +16400,7 @@ PrefabInstance:
     - target: {fileID: 7236949807668828051, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000074505806
+      value: -0.0000017036995
       objectReference: {fileID: 0}
     - target: {fileID: 7236949807668828051, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -16215,7 +16410,7 @@ PrefabInstance:
     - target: {fileID: 7236949807668828051, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.18000084
+      value: -0.18000154
       objectReference: {fileID: 0}
     - target: {fileID: 7348819158839489651, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -16386,7 +16581,9 @@ PrefabInstance:
     - {fileID: 6951379319654063441, guid: b49c8089cb89298438c78be398f39f45, type: 3}
     - {fileID: 8240746117593559509, guid: b49c8089cb89298438c78be398f39f45, type: 3}
     - {fileID: 4146900556655534905, guid: b49c8089cb89298438c78be398f39f45, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4511006639959537308, guid: b49c8089cb89298438c78be398f39f45, type: 3}
+    - {fileID: 7701589616879811331, guid: b49c8089cb89298438c78be398f39f45, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2870813740325797928, guid: b49c8089cb89298438c78be398f39f45,
@@ -66384,6 +66581,81 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Path
+      value: event:/Interacttions/PaloPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Path
+      value: event:/Interacttions/RocaPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Path
+      value: event:/Interacttions/Cristal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data1
+      value: -321690120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data2
+      value: 1077822986
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data3
+      value: 484827025
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data4
+      value: -188117548
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data1
+      value: -712689084
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data2
+      value: 1307116821
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data3
+      value: 1539862923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data4
+      value: 599201090
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data1
+      value: -2055770524
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data2
+      value: 1125479849
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data3
+      value: 926928828
+      objectReference: {fileID: 0}
+    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data4
+      value: -484193103
+      objectReference: {fileID: 0}
     - target: {fileID: 7615428991986390586, guid: ee13d33d13761d1429defde2cb8a5a51,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -66679,7 +66951,7 @@ PrefabInstance:
     - target: {fileID: 3060718690187980656, guid: 050067934e46b7545a9f468c462c53e7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 141.832
+      value: 110.62
       objectReference: {fileID: 0}
     - target: {fileID: 3060718690187980656, guid: 050067934e46b7545a9f468c462c53e7,
         type: 3}
@@ -66715,6 +66987,81 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerPaloSound.Path
+      value: event:/Interacttions/PaloPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerRocaSound.Path
+      value: event:/Interacttions/RocaPick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerAguaBendita.Path
+      value: event:/Interacttions/Cristal
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data1
+      value: -321690120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data2
+      value: 1077822986
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data3
+      value: 484827025
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerPaloSound.Guid.Data4
+      value: -188117548
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data1
+      value: -712689084
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data2
+      value: 1307116821
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data3
+      value: 1539862923
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerRocaSound.Guid.Data4
+      value: 599201090
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data1
+      value: -2055770524
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data2
+      value: 1125479849
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data3
+      value: 926928828
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
+        type: 3}
+      propertyPath: recogerAguaBendita.Guid.Data4
+      value: -484193103
       objectReference: {fileID: 0}
     - target: {fileID: 9011030644879429645, guid: 050067934e46b7545a9f468c462c53e7,
         type: 3}

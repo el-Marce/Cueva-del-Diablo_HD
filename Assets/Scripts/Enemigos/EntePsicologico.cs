@@ -249,6 +249,8 @@ public class EntePsicologico : MonoBehaviour
 
         if (vision.CanSeePlayer())
             currentState = State.Chase;
+
+        RotarHaciaObjetivo(currentTarget);
     }
 
     void UpdateChase()
@@ -303,6 +305,8 @@ public class EntePsicologico : MonoBehaviour
         float distance = Vector3.Distance(transform.position, player.position);
         if (distance <= effectDistance)
             currentState = State.AffectMind;
+
+        RotarHaciaObjetivo(currentTarget);
     }
 
     void UpdateAffectMind()
@@ -328,7 +332,13 @@ public class EntePsicologico : MonoBehaviour
             Debug.Log("Jugador recibe daño psicologico, Vida restante: " + playerSanity.currentSanity);
         }
     }
-
+    void RotarHaciaObjetivo(Vector3 target)
+    {
+        Vector3 dir = new Vector3(target.x, transform.position.y, target.z) - transform.position;
+        if (dir.sqrMagnitude < 0.01f) return;
+        Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, Time.deltaTime * 8f);
+    }
     Vector3 GetRandomNavPoint(float radius)
     {
         Vector3 randomDirection = Random.insideUnitSphere * radius;
@@ -346,16 +356,23 @@ public class EntePsicologico : MonoBehaviour
 
         Vector3 bestPoint = transform.position;
         float bestDistance = 0f;
-        for (int i = 0; i < 20; i++)
+
+        // Radio ampliado al doble para buscar puntos más lejanos
+        for (int i = 0; i < 40; i++)
         {
-            Vector3 candidate = GetRandomNavPoint(wanderRadius);
-            float distFromPlayer = Vector3.Distance(candidate, player.position);
+            Vector3 candidate = GetRandomNavPoint(wanderRadius * 2f);
+
+            Vector3 candidateFlat = new Vector3(candidate.x, 0f, candidate.z);
+            Vector3 playerFlat = new Vector3(player.position.x, 0f, player.position.z);
+            float distFromPlayer = Vector3.Distance(candidateFlat, playerFlat);
+
             if (distFromPlayer > bestDistance)
             {
                 bestDistance = distFromPlayer;
                 bestPoint = candidate;
             }
         }
+
         currentTarget = bestPoint;
         navigation.MoveTo(currentTarget);
     }
@@ -365,6 +382,9 @@ public class EntePsicologico : MonoBehaviour
         navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
         floatMotion.SetOffset(5f);
         floatMotion.EnableOscillation(true);
+
+        // Rotar hacia el punto de huida, no hacia el jugador
+        RotarHaciaObjetivo(currentTarget);
 
         repelTimer -= Time.deltaTime;
         if (repelTimer <= 0f)
@@ -376,14 +396,32 @@ public class EntePsicologico : MonoBehaviour
         float distanceToTarget = Vector3.Distance(transform.position, currentTarget);
         if (distanceToTarget < 2f)
         {
-            Vector3 newPoint = GetRandomNavPoint(wanderRadius);
-            float distFromPlayer = Vector3.Distance(newPoint, player.position);
-            if (distFromPlayer > Vector3.Distance(transform.position, player.position))
-                currentTarget = newPoint;
+            Vector3 playerFlat = new Vector3(player.position.x, 0f, player.position.z);
+            Vector3 selfFlat = new Vector3(transform.position.x, 0f, transform.position.z);
+            float currentDistFromPlayer = Vector3.Distance(selfFlat, playerFlat);
+
+            Vector3 bestPoint = transform.position;
+            float bestDistance = 0f;
+
+            for (int i = 0; i < 20; i++)
+            {
+                Vector3 candidate = GetRandomNavPoint(wanderRadius * 4f);
+                Vector3 candidateFlat = new Vector3(candidate.x, 0f, candidate.z);
+                float distFromPlayer = Vector3.Distance(candidateFlat, playerFlat);
+
+                if (distFromPlayer > bestDistance)
+                {
+                    bestDistance = distFromPlayer;
+                    bestPoint = candidate;
+                }
+            }
+
+            if (bestDistance > currentDistFromPlayer)
+                currentTarget = bestPoint;
+
             navigation.MoveTo(currentTarget);
         }
     }
-
     public void Die()
     {
         AudioManager.Instance.StopLoop(currentLoop);

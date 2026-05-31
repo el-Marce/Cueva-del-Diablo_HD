@@ -44,6 +44,10 @@ public class PlayerCombat : MonoBehaviour
 
     [Header("Agua Bendita Visual")]
     public GameObject aguaBenditaModel;
+    [Header("Stick Visual")]
+    public GameObject stickModel;
+    [Header("Rock Visual")]
+    public GameObject rockModel;
 
     [Header("Agua Bendita Ataque")]
     public float punchDistance = 0.3f;  // cuánto avanza hacia adelante
@@ -123,14 +127,18 @@ public class PlayerCombat : MonoBehaviour
         if (currentWeapon == WeaponType.Rock)
             AudioManager.Instance.Play(ataqueRocaSound);
 
-        yield return new WaitForSeconds(windUp);
-
-        bool conecto = false;
+        // Animación arranca inmediatamente, sin esperar el windUp
         if (currentWeapon == WeaponType.AguaBendita)
         {
-            conecto = HayEnteAlFrente(); // chequea sin aplicar efecto todavía
+            bool conecto = HayEnteAlFrente();
             StartCoroutine(AnimarGolpeAguaBendita(conecto));
         }
+        else if (currentWeapon == WeaponType.Stick || currentWeapon == WeaponType.Rock)
+        {
+            StartCoroutine(AnimarGolpeMelee());
+        }
+
+        yield return new WaitForSeconds(windUp);
 
         PerformAttack();
 
@@ -138,7 +146,6 @@ public class PlayerCombat : MonoBehaviour
 
         isAttacking = false;
     }
-
     void PerformAttack()
     {
         if (currentWeapon == WeaponType.AguaBendita)
@@ -282,6 +289,96 @@ public class PlayerCombat : MonoBehaviour
         aguaBenditaModel.transform.localPosition = localOriginal;
         aguaBenditaModel.transform.localRotation = rotOriginal;
     }
+    IEnumerator AnimarGolpeMelee()
+    {
+        GameObject model = currentWeapon == WeaponType.Stick ? stickModel : rockModel;
+        if (model == null) yield break;
+
+        Vector3 localOriginal = model.transform.localPosition;
+        Quaternion rotOriginal = model.transform.localRotation;
+
+        Vector3 localArriba = localOriginal + new Vector3(-0.1f, 0.4f, 0.05f);
+        Vector3 localImpacto = localOriginal + new Vector3(0.1f, -0.25f, 0.5f);
+
+        // Sube con peso, punta hacia atrás
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / (punchDuration * 2f);
+            model.transform.localPosition = Vector3.Lerp(localOriginal, localArriba, t);
+            model.transform.localRotation = rotOriginal * Quaternion.Euler(
+                Mathf.Lerp(0f, 30f, t), 0f, 0f
+            );
+            yield return null;
+        }
+
+        // Baja golpeando, punta cae violentamente hacia adelante
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / (punchDuration * 0.4f);
+            float curva = t * t;
+            model.transform.localPosition = Vector3.Lerp(localArriba, localImpacto, curva);
+            model.transform.localRotation = rotOriginal * Quaternion.Euler(
+                Mathf.Lerp(30f, -40f, curva), 0f, 0f
+            );
+            yield return null;
+        }
+
+        // Chequear rotura
+        Inventory inv = FindObjectOfType<Inventory>();
+        WeaponData w = inv?.weapons.Find(x => x.name == inv.equippedWeapon);
+        bool seRompe = (w == null);
+
+        if (seRompe)
+        {
+            float shakeDuration = 0.1f;
+            t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime / shakeDuration;
+                float angulo = Mathf.Sin(t * Mathf.PI * 6f) * Mathf.Lerp(35f, 0f, t);
+                model.transform.localRotation = rotOriginal * Quaternion.Euler(angulo, angulo * 0.5f, 0f);
+                yield return null;
+            }
+
+            Vector3 posActual = model.transform.localPosition;
+            Vector3 posTirada = localOriginal + new Vector3(0.2f, -0.7f, 0.3f);
+            t = 0f;
+            while (t < 1f)
+            {
+                t += Time.deltaTime / 0.25f;
+                model.transform.localPosition = Vector3.Lerp(posActual, posTirada, t * t);
+                model.transform.localRotation = rotOriginal * Quaternion.Euler(
+                    Mathf.Lerp(0f, -80f, t), 0f, Mathf.Lerp(0f, -50f, t)
+                );
+                yield return null;
+            }
+
+            MeshRenderer mr = model.GetComponent<MeshRenderer>();
+            if (mr != null) mr.enabled = false;
+            model.transform.localPosition = localOriginal;
+            model.transform.localRotation = rotOriginal;
+        }
+        else
+        {
+            // Retorno suave con ease out
+            t = 0f;
+            Vector3 posImpacto = model.transform.localPosition;
+            while (t < 1f)
+            {
+                t += Time.deltaTime / returnDuration;
+                float curva = 1f - Mathf.Pow(1f - t, 3f);
+                model.transform.localPosition = Vector3.Lerp(posImpacto, localOriginal, curva);
+                model.transform.localRotation = Quaternion.Slerp(
+                    model.transform.localRotation, rotOriginal, curva
+                );
+                yield return null;
+            }
+            model.transform.localPosition = localOriginal;
+            model.transform.localRotation = rotOriginal;
+        }
+    }
     void Push()
     {
         if (pushTimer > 0f) return;
@@ -357,22 +454,49 @@ public class PlayerCombat : MonoBehaviour
         maxDurability = durability;
         currentDurability = durability;
 
-        if (currentWeapon == WeaponType.Stick)
-            {
+        if (aguaBenditaModel != null) aguaBenditaModel.SetActive(currentWeapon == WeaponType.AguaBendita);
+        if (stickModel != null) stickModel.SetActive(currentWeapon == WeaponType.Stick);
+        if (rockModel != null) rockModel.SetActive(currentWeapon == WeaponType.Rock);
 
-            }
-            
-        if (currentWeapon == WeaponType.Rock)
-            {
+        // Animar la entrada del arma equipada
+        GameObject modelEquipado = weapon switch
+        {
+            WeaponType.AguaBendita => aguaBenditaModel,
+            WeaponType.Stick => stickModel,
+            WeaponType.Rock => rockModel,
+            _ => null
+        };
 
-            }
-        if (currentWeapon == WeaponType.AguaBendita && aguaBenditaModel != null)
-            aguaBenditaModel.SetActive(true);
-        else if (aguaBenditaModel != null)
-            aguaBenditaModel.SetActive(false);
+        if (modelEquipado != null)
+            StartCoroutine(AnimarEquipar(modelEquipado));
 
         Debug.Log("Equipado: " + weapon + " | Durabilidad: " + durability);
+    }
 
+    IEnumerator AnimarEquipar(GameObject model)
+    {
+        // Resetear mesh por si quedó oculto de un uso anterior
+        MeshRenderer mr = model.GetComponent<MeshRenderer>();
+        if (mr != null) mr.enabled = true;
+
+        Vector3 localOriginal = model.transform.localPosition;
+        Quaternion rotOriginal = model.transform.localRotation;
+
+        // Arranca desde abajo como sacándolo del bolsillo
+        Vector3 posBolsillo = localOriginal + new Vector3(0f, -0.4f, 0f);
+        model.transform.localPosition = posBolsillo;
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / returnDuration;
+            float curva = 1f - Mathf.Pow(1f - t, 3f);
+            model.transform.localPosition = Vector3.Lerp(posBolsillo, localOriginal, curva);
+            yield return null;
+        }
+
+        model.transform.localPosition = localOriginal;
+        model.transform.localRotation = rotOriginal;
     }
     void UseDurability()
     {
@@ -395,18 +519,19 @@ public class PlayerCombat : MonoBehaviour
     {
         Debug.Log(currentWeapon + " se rompió");
 
-        // Apagar modelo del agua bendita si estaba equipada
         if (currentWeapon == WeaponType.AguaBendita && aguaBenditaModel != null)
             aguaBenditaModel.SetActive(false);
+        if (currentWeapon == WeaponType.Stick && stickModel != null)
+            stickModel.SetActive(false);
+        if (currentWeapon == WeaponType.Rock && rockModel != null)
+            rockModel.SetActive(false);
 
         currentWeapon = WeaponType.Fists;
         currentDurability = 0;
         maxDurability = 0;
 
-        // Limpiar el equipado en el Inventory
         Inventory inv = FindObjectOfType<Inventory>();
-        if (inv != null)
-            inv.equippedWeapon = null;
+        if (inv != null) inv.equippedWeapon = null;
     }
 
     float GetCurrentDamage()
