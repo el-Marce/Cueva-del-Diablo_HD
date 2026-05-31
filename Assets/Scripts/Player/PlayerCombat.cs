@@ -362,12 +362,13 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            // Retorno suave con ease out
+            // Retorno suave usando el cooldown del arma actual como duración
+            float duracionRetorno = GetCooldown();
             t = 0f;
             Vector3 posImpacto = model.transform.localPosition;
             while (t < 1f)
             {
-                t += Time.deltaTime / returnDuration;
+                t += Time.deltaTime / duracionRetorno;
                 float curva = 1f - Mathf.Pow(1f - t, 3f);
                 model.transform.localPosition = Vector3.Lerp(posImpacto, localOriginal, curva);
                 model.transform.localRotation = Quaternion.Slerp(

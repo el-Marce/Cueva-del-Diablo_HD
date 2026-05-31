@@ -55,6 +55,7 @@ public class EntePsicologico : MonoBehaviour
 
     [Header("Repulsión")]
     public float repelDuration = 10f;
+    public float repelSpeedMultiplier = 3f;
     float repelTimer = 0f;
 
     [Header("Muerte")]
@@ -201,6 +202,7 @@ public class EntePsicologico : MonoBehaviour
             alertType = AlertType.Sound;
             currentState = State.Alert;
         }
+        RotarHaciaObjetivo(currentTarget);
     }
 
     void UpdateAlert()
@@ -379,7 +381,7 @@ public class EntePsicologico : MonoBehaviour
 
     void UpdateRepelled()
     {
-        navigation.SetSpeedMultiplier(chaseSpeedMultiplier);
+        navigation.SetSpeedMultiplier(repelSpeedMultiplier);
         floatMotion.SetOffset(5f);
         floatMotion.EnableOscillation(true);
 
