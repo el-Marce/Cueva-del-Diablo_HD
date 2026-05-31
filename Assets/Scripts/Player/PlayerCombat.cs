@@ -31,7 +31,7 @@ public class PlayerCombat : MonoBehaviour
     public EventReference usarAguaBendita;
 
     [Header("Agua Bendita Rotura")]
-    public ParticleSystem roturaParticles;
+    public ParticleSystem[] roturaParticles;
 
     [Header("Push")]
     public float pushCooldown = 3f;
@@ -184,15 +184,11 @@ public class PlayerCombat : MonoBehaviour
     IEnumerator AnimarGolpeAguaBendita(bool golpeoEnemigo)
     {
         if (aguaBenditaModel == null) yield break;
-
         Vector3 localOriginal = aguaBenditaModel.transform.localPosition;
         Quaternion rotOriginal = aguaBenditaModel.transform.localRotation;
-
         Vector3 localArriba = localOriginal + new Vector3(0f, 0.2f, 0.1f);
         Vector3 localImpacto = localOriginal + new Vector3(0f, -0.15f, 0.35f);
-
         AudioManager.Instance.Play(windAguaBendita);
-
         // Sube
         float t = 0f;
         while (t < 1f)
@@ -201,7 +197,6 @@ public class PlayerCombat : MonoBehaviour
             aguaBenditaModel.transform.localPosition = Vector3.Lerp(localOriginal, localArriba, t);
             yield return null;
         }
-
         // Baja golpeando
         t = 0f;
         while (t < 1f)
@@ -210,7 +205,6 @@ public class PlayerCombat : MonoBehaviour
             aguaBenditaModel.transform.localPosition = Vector3.Lerp(localArriba, localImpacto, t * t);
             yield return null;
         }
-
         if (!golpeoEnemigo)
         {
             // Animación original: retorno suave
@@ -223,18 +217,18 @@ public class PlayerCombat : MonoBehaviour
                 yield return null;
             }
             aguaBenditaModel.transform.localPosition = localOriginal;
-            yield break; // termina acá
+            yield break;
         }
-
         // --- FASE ROTURA (solo si conectó) ---
-        // OPCIÓN A - Partículas (activa)
-        if (roturaParticles != null)
+        if (roturaParticles != null && roturaParticles.Length > 0)
         {
-            roturaParticles.transform.position = aguaBenditaModel.transform.position;
-            roturaParticles.Play();
-            //yield return new WaitForSeconds(roturaParticles.main.duration);
+            foreach (ParticleSystem ps in roturaParticles)
+            {
+                if (ps == null) continue;
+                ps.transform.position = aguaBenditaModel.transform.position;
+                ps.Play();
+            }
         }
-
         float shakeDuration = 0.07f;
         t = 0f;
         while (t < 1f)
@@ -244,7 +238,6 @@ public class PlayerCombat : MonoBehaviour
             aguaBenditaModel.transform.localRotation = rotOriginal * Quaternion.Euler(angulo, angulo * 0.5f, 0f);
             yield return null;
         }
-
         Vector3 posActual = aguaBenditaModel.transform.localPosition;
         Vector3 posTirada = localOriginal + new Vector3(0.1f, -0.5f, 0.2f);
         t = 0f;
@@ -258,20 +251,26 @@ public class PlayerCombat : MonoBehaviour
             yield return null;
         }
 
-        aguaBenditaModel.SetActive(false);
+        // Oculta solo el mesh, el GameObject sigue activo
+        MeshRenderer mr = aguaBenditaModel.GetComponent<MeshRenderer>();
+        if (mr != null) mr.enabled = false;
+        aguaBenditaModel.transform.localPosition = localOriginal;
+        aguaBenditaModel.transform.localRotation = rotOriginal;
 
         Inventory inv = FindObjectOfType<Inventory>();
         WeaponData w = inv?.weapons.Find(x => x.weaponType == WeaponType.AguaBendita);
-        if (w == null || w.durability <= 0) yield break;
 
+        if (roturaParticles != null)
+            yield return new WaitForSeconds(roturaParticles[0].main.duration);
+
+        if (w == null || w.durability <= 0) yield break;
         yield return new WaitForSeconds(0.3f);
 
-        aguaBenditaModel.SetActive(true);
+        // Reactiva el mesh al sacar la siguiente
+        if (mr != null) mr.enabled = true;
         aguaBenditaModel.transform.localRotation = rotOriginal;
-
         Vector3 posBolsillo = localOriginal + new Vector3(0f, -0.4f, 0f);
         aguaBenditaModel.transform.localPosition = posBolsillo;
-
         t = 0f;
         while (t < 1f)
         {
@@ -280,7 +279,6 @@ public class PlayerCombat : MonoBehaviour
             aguaBenditaModel.transform.localPosition = Vector3.Lerp(posBolsillo, localOriginal, curva);
             yield return null;
         }
-
         aguaBenditaModel.transform.localPosition = localOriginal;
         aguaBenditaModel.transform.localRotation = rotOriginal;
     }

@@ -7,11 +7,14 @@ public class GameManager : MonoBehaviour
 
     public int savedSceneIndex = -1; // -1 = sin partida guardada
 
+    public GameObject UI;
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        UI.SetActive(true);
     }
 
     public void NuevoJuego()
