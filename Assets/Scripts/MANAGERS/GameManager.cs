@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        UI.SetActive(true);
+        if(UI != null)
+            UI.SetActive(true);
     }
 
     public void NuevoJuego()

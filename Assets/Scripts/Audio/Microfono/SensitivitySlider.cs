@@ -5,7 +5,12 @@ using TMPro;
 
 public class SensitivitySlider : MonoBehaviour
 {
-    public enum SensitivityTarget { Mouse, Microphone }
+    public enum SensitivityTarget
+    {
+        Mouse,
+        Microphone,
+        MasterVolume
+    }
 
     [Header("Referencias")]
     public Slider slider;
@@ -21,9 +26,20 @@ public class SensitivitySlider : MonoBehaviour
         slider.minValue = minValue;
         slider.maxValue = maxValue;
 
-        slider.value = target == SensitivityTarget.Mouse
-            ? AudioSettings.MouseSensitivity
-            : AudioSettings.MicSensitivity;
+        switch (target)
+        {
+            case SensitivityTarget.Mouse:
+                slider.value = AudioSettings.MouseSensitivity;
+                break;
+
+            case SensitivityTarget.Microphone:
+                slider.value = AudioSettings.MicSensitivity;
+                break;
+
+            case SensitivityTarget.MasterVolume:
+                slider.value = AudioSettings.MasterVolume;
+                break;
+        }
 
         UpdateLabel(slider.value);
         slider.onValueChanged.AddListener(OnSliderChanged);
@@ -31,10 +47,20 @@ public class SensitivitySlider : MonoBehaviour
 
     void OnSliderChanged(float value)
     {
-        if (target == SensitivityTarget.Mouse)
-            AudioSettings.MouseSensitivity = value;
-        else
-            AudioSettings.MicSensitivity = value;
+        switch (target)
+        {
+            case SensitivityTarget.Mouse:
+                AudioSettings.MouseSensitivity = value;
+                break;
+
+            case SensitivityTarget.Microphone:
+                AudioSettings.MicSensitivity = value;
+                break;
+
+            case SensitivityTarget.MasterVolume:
+                AudioSettings.MasterVolume = value;
+                break;
+        }
 
         UpdateLabel(value);
     }

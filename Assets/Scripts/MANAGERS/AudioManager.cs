@@ -1,21 +1,31 @@
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using FMOD;
+using Unity.VisualScripting;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     EventInstance musicaActual;
+    VCA masterVCA;
 
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        masterVCA = RuntimeManager.GetVCA("vca:/Master");
+        SetMasterVolume(AudioSettings.MasterVolume);
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        masterVCA.setVolume(volume / 100f);
     }
 
     // --- Música adaptativa ---
-
     public void PlayMusica(string eventPath)
     {
         if (musicaActual.isValid())
