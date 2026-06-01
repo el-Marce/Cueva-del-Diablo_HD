@@ -79,7 +79,10 @@ public class TutorialBarrier : MonoBehaviour
         {
             if (barrierCollider != null)
                 barrierCollider.enabled = false;
+
         }));
+
+        gameObject.SetActive(false);
     }
 
     public void NotificarContacto(Vector3 contactPoint)

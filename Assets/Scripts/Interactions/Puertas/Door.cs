@@ -22,6 +22,8 @@ public class Door : MonoBehaviour, IInteractable
     Quaternion closedRotation;
     Quaternion openRotation;
 
+    public bool debeDesactivarCollider = true;
+
     void Start()
     {
         lockAnimator = GetComponentInChildren<Animator>();
@@ -71,7 +73,7 @@ public class Door : MonoBehaviour, IInteractable
         Collider col = GetComponent<Collider>();
         if (col != null) col.enabled = false;
 
-        if (transform.childCount > 1)
+        if (transform.childCount > 1 && debeDesactivarCollider)
         {
             Collider childCol = transform.GetChild(1).GetComponent<Collider>();
             if (childCol != null) childCol.enabled = true;

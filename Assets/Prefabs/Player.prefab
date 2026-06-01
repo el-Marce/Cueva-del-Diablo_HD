@@ -20251,7 +20251,21 @@ MonoBehaviour:
   breathWindow: 5
   damagePerSecond: 10
   breatheCooldown: 1
-  breathWarningText: {fileID: 0}
+  breathRoot: {fileID: 0}
+  breathText: {fileID: 0}
+  breathImage: {fileID: 0}
+  fadeInDuration: 0.5
+  delayFadeOut: 1
+  fadeOutDuration: 0.8
+  blinkSpeed: 1
+  blinkMinAlpha: 0.2
+  pulseSpeed: 1.5
+  pulseMinScale: 0.9
+  pulseMaxScale: 1.1
+  mensajeAdvertencia: "NIVEL DE OX\xCDGENO BAJO \xA1\xA1RESPIRA AHORA!!"
+  mensajeCorrecto: "RESPIRACI\xD3N CORRECTA"
+  colorAdvertencia: {r: 1, g: 0, b: 0, a: 1}
+  colorCorrecto: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &5697650769045682279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20295,10 +20309,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedDevice: 
   sensitivity: 100
+  noiseFloor: 0.05
+  gainAboveFloor: 0.075
+  signalCap: 1
+  smoothUpSpeed: 25
+  smoothDownSpeed: 5
+  smoothedLoudness: 0
+  peakLoudness: 0
   minThreshold: 0.02
   maxThreshold: 0.15
   requiredDuration: 0.25
-  smoothedLoudness: 0
   rhythmThreshold: 0.75
   rhythmCondition: {fileID: 0}
   pulseCooldown: 0.3

@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
-  m_Name: 2 TUT_AguaBendita
+  m_Name: 0 TUT_Inicio
   m_EditorClassIdentifier: 
-  mensaje: "Recogiste \"Agua Bendita\" \nAbre tu inventario con TAB, navega hasta
-    la pesta\xF1a Armas con Q/E y equipa el Agua Bendita con Enter para repeler temporalmente
-    a enemigos tipo \"Ente\"."
+  mensaje: "Bienvenido a la quebrada de San Bartolom\xE9, en este lugar se encuentra
+    la llamada \"Cueva de Diablo\"\n\n\n"
   icono: {fileID: 0}
-  bloqueaAvance: 1
-  triggerDeDesbloqueo: equipar_aguabendita
+  mensajesSecuencia:
+  - "Para moverte usa las teclas \"WASD\".\n\nMant\xE9n presionado \"Shift\" para
+    correr, pero hazlo con cuidado porque puede llamar la atenci\xF3n de los enemigos.\n\n\n"
+  bloqueaAvance: 0
+  triggerDeDesbloqueo: 
+  delayInicio: 1
   posicionAnclaje: {x: 0.5, y: 0.8}
   toastMensaje: 
   toastIcono: {fileID: 0}

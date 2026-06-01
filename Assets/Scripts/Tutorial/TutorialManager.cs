@@ -1,5 +1,5 @@
-// TutorialManager.cs
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class TutorialManager : MonoBehaviour
@@ -30,6 +30,15 @@ public class TutorialManager : MonoBehaviour
             return;
         }
 
+        if (paso.delayInicio > 0f)
+            StartCoroutine(MostrarConDelay(paso, barrera));
+        else
+            ActivarPaso(paso, barrera);
+    }
+
+    IEnumerator MostrarConDelay(TutorialStep paso, TutorialBarrier barrera)
+    {
+        yield return new WaitForSeconds(paso.delayInicio);
         ActivarPaso(paso, barrera);
     }
 
@@ -41,11 +50,24 @@ public class TutorialManager : MonoBehaviour
         if (paso.bloqueaAvance && barreraActiva != null)
             barreraActiva.Activar();
 
-        tutorialPanel.Mostrar(paso.mensaje, paso.icono);
+        tutorialPanel.Mostrar(paso.mensaje, paso.icono, paso.mensajesSecuencia);
     }
 
     public void OnPanelConfirmado()
     {
+        // Si el paso requiere una acción externa para completarse,
+        // no limpiar pasoActual — CompletarTrigger lo hará cuando corresponda
+        if (pasoActual != null && pasoActual.bloqueaAvance)
+            return;
+
+        pasoActual = null;
+        barreraActiva = null;
+
+        if (colaPasos.Count > 0)
+        {
+            var siguiente = colaPasos.Dequeue();
+            MostrarPaso(siguiente.paso, siguiente.barrera);
+        }
     }
 
     public void CompletarTrigger(string trigger)
@@ -55,7 +77,6 @@ public class TutorialManager : MonoBehaviour
 
         if (barreraActiva != null)
         {
-            //barreraActiva.barreraToast?.Ocultar();
             barreraActiva.Desactivar();
             barreraActiva = null;
         }
@@ -77,7 +98,7 @@ public class TutorialManager : MonoBehaviour
         if (colaPasos.Count > 0)
         {
             var siguiente = colaPasos.Dequeue();
-            ActivarPaso(siguiente.paso, siguiente.barrera);
+            MostrarPaso(siguiente.paso, siguiente.barrera);
         }
     }
 }

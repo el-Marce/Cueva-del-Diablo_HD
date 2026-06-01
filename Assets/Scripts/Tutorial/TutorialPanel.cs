@@ -9,11 +9,13 @@ public class TutorialPanel : MonoBehaviour
     public CanvasGroup canvasGroup;
     public TMP_Text mensajeText;
     public Image iconoImage;
-    public Button botonEntendido; // botón "Entendido" en la UI
+    public Button botonEntendido;
 
     [Header("Animación")]
     public float fadeDuration = 0.3f;
 
+    string[] secuencia;
+    int indiceSecuencia = 0;
     Coroutine fadeCoroutine;
 
     void Awake()
@@ -22,17 +24,64 @@ public class TutorialPanel : MonoBehaviour
         gameObject.SetActive(false);
 
         if (botonEntendido != null)
-            botonEntendido.onClick.AddListener(Ocultar);
+            botonEntendido.onClick.AddListener(Confirmar);
     }
 
     void Update()
     {
-        // Enter cierra el panel si está visible
         if (canvasGroup.alpha >= 1f && Input.GetKeyDown(KeyCode.Return))
-            Ocultar();
+            Confirmar();
     }
 
-    public void Mostrar(string mensaje, Sprite icono = null)
+    public void Mostrar(string mensaje, Sprite icono = null, string[] mensajesExtra = null)
+    {
+        // Armar secuencia completa: primer mensaje + extras
+        if (mensajesExtra != null && mensajesExtra.Length > 0)
+        {
+            secuencia = new string[1 + mensajesExtra.Length];
+            secuencia[0] = mensaje;
+            for (int i = 0; i < mensajesExtra.Length; i++)
+                secuencia[i + 1] = mensajesExtra[i];
+        }
+        else
+        {
+            secuencia = new string[] { mensaje };
+        }
+
+        indiceSecuencia = 0;
+
+        AplicarContenido(secuencia[0], icono);
+
+        GameState.InMenu = true;
+
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        gameObject.SetActive(true);
+        fadeCoroutine = StartCoroutine(FadeTo(1f, fadeDuration));
+    }
+
+    void Confirmar()
+    {
+        indiceSecuencia++;
+
+        if (indiceSecuencia < secuencia.Length)
+        {
+            if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+            fadeCoroutine = StartCoroutine(TransicionSecuencia(secuencia[indiceSecuencia]));
+        }
+        else
+        {
+            if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+            fadeCoroutine = StartCoroutine(FadeYDesactivar());
+        }
+    }
+
+    IEnumerator TransicionSecuencia(string nuevoMensaje)
+    {
+        yield return FadeTo(0f, fadeDuration);
+        mensajeText.text = nuevoMensaje;
+        yield return FadeTo(1f, fadeDuration);
+    }
+    void AplicarContenido(string mensaje, Sprite icono)
     {
         mensajeText.text = mensaje;
 
@@ -41,24 +90,13 @@ public class TutorialPanel : MonoBehaviour
             iconoImage.sprite = icono;
             iconoImage.gameObject.SetActive(icono != null);
         }
-
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        gameObject.SetActive(true);
-        fadeCoroutine = StartCoroutine(FadeTo(1f, fadeDuration));
-    }
-
-    public void Ocultar()
-    {
-        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-        fadeCoroutine = StartCoroutine(FadeYDesactivar());
     }
 
     IEnumerator FadeYDesactivar()
     {
         yield return FadeTo(0f, fadeDuration);
         gameObject.SetActive(false);
-
-        // Avisa al TutorialManager que el jugador confirmó
+        GameState.InMenu = false;
         TutorialManager.Instance?.OnPanelConfirmado();
     }
 
