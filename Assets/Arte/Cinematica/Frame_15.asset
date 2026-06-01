@@ -15,7 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 10acfb5a63aa67e44877f8b3f262cfc2, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "En compa\xF1\xEDa mutua, ambos hombres emprenden una nueva peregrinaci\xF3n
-    hacia la cueva, una prueba de su f\xE9, de fortaleza, con una misi\xF3n que marcar\xEDa
-    sus vidas para siempre "
+  subtitulo: "Guiado por su f\xE9, iniciar\xEDa una nueva peregrinaci\xF3n hacia
+    la cueva. Una prueba de fortaleza y convicci\xF3n cuya misi\xF3n marcar\xEDa
+    su vida para siempre."
   velocidadEscritura: 0.04

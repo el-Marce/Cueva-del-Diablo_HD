@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
   m_Name: 3 TUT_IrNPC
   m_EditorClassIdentifier: 
-  mensaje: Encuentra al Sacerdote en el Santuaro de la puerta y habla con el sacerdote.
+  mensaje: "Encuentra el Santuaro de la puerta: all\xED busca la botella de <b>Alcohol</b>
+    y  habla con el <b>Sacerdote</b>."
   icono: {fileID: 21300000, guid: 7d7f5d7710000ea4ab315dd928a9c423, type: 3}
   mensajesSecuencia: []
-  bloqueaAvance: 1
-  triggerDeDesbloqueo: npc_interactuado
+  bloqueaAvance: 0
+  silencioso: 0
+  triggerDeDesbloqueo: 
   delayInicio: 0
+  triggersRequeridos: []
   posicionAnclaje: {x: 0.5, y: 0.8}
   toastMensaje: 
   toastIcono: {fileID: 0}

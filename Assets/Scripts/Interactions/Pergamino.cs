@@ -11,9 +11,6 @@ public class Pergamino : MonoBehaviour, IInteractable
     public Sprite icon;
     public EventReference pergaminoSound;
 
-    [Header("Tutorial (opcional)")]
-    public TutorialStep tutorialStep;
-    public TutorialBarrier barreraTutorial;
     public void Interact()
     {
         Inventory inventory = FindObjectOfType<Inventory>();
@@ -35,9 +32,5 @@ public class Pergamino : MonoBehaviour, IInteractable
 
         Destroy(gameObject);
 
-
-        // Activar tutorial al recoger
-        if (tutorialStep != null)
-            TutorialManager.Instance?.MostrarPaso(tutorialStep, barreraTutorial);
     }
 }

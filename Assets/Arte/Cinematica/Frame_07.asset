@@ -16,6 +16,6 @@ MonoBehaviour:
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Una figura oscura e imponente, sin poder soportar la presencia de la
-    divinidad frente a \xE9l, sali\xF3 huyendo violentamente de la cueva, incluso
-    llegando a chocar con una de las paredes del lugar."
+    divinidad frente a \xE9l, sali\xF3 huyendo violentamente de la cueva, llegando
+    a chocar con una de las paredes del lugar."
   velocidadEscritura: 0.04

@@ -15,6 +15,6 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 51817976edbef554eb0f8ac96181e707, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "El sello se romper\xEDa, el muro que se hab\xEDa construido cay\xF3,
-    aquella presencia se negaba a ser derrotada."
+  subtitulo: "El sello se romper\xEDa, el muro habr\xEDa de caer, y aquella fuerza
+    volver\xEDa a extender su sombra sobre ese lugar."
   velocidadEscritura: 0.04

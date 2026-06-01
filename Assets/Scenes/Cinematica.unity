@@ -876,8 +876,8 @@ MonoBehaviour:
     bramidos, ruido implacable, nada que las personas alrededor del lugar pudiesen
     reconocer como algo familiar.\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: a197a63697d4e42438e5f2fdabfdcf99, type: 2}
-  m_sharedMaterial: {fileID: -2419057055637893996, guid: a197a63697d4e42438e5f2fdabfdcf99,
+  m_fontAsset: {fileID: 11400000, guid: 555afea4fba0c17419f400ce24eb3fb4, type: 2}
+  m_sharedMaterial: {fileID: 1092243277564987068, guid: 555afea4fba0c17419f400ce24eb3fb4,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -902,19 +902,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 8
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_wordSpacing: 20
+  m_lineSpacing: 10
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

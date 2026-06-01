@@ -16,7 +16,7 @@ MonoBehaviour:
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "El \u201CDiablo\u201D hab\xEDa vuelto, y eliminar\xEDa a casi todos
-    los jesuitas en se\xF1al de venganza, uno de los pocos que quedaba de aquella
-    primera expedici\xF3n \u201CDiego de Samaniego\u201D con su \xFAltima fuerza
-    encomendar\xEDa su misi\xF3n a los mas nuevos de la orden."
+    los jesuitas de la Orden de Jes\xFAs en venganza, uno de los pocos que quedaba
+    de aquella primera expedici\xF3n \u201CDiego de Samaniego\u201D con su \xFAltima
+    fuerza encomendar\xEDa su misi\xF3n al miembro m\xE1s joven."
   velocidadEscritura: 0.04

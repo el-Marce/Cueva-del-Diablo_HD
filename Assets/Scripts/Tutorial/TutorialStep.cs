@@ -12,8 +12,12 @@ public class TutorialStep : ScriptableObject
 
     [Header("Comportamiento")]
     public bool bloqueaAvance = false;
+    public bool silencioso = false;
     public string triggerDeDesbloqueo; // nombre del evento que desbloquea este paso
     public float delayInicio = 0f;
+
+    [Header("Triggers múltiples (si se usan, ignorar triggerDeDesbloqueo)")]
+    public string[] triggersRequeridos;
 
     [Header("Posición del panel")]
     public Vector2 posicionAnclaje = new Vector2(0.5f, 0.8f); // posición en pantalla
@@ -22,4 +26,5 @@ public class TutorialStep : ScriptableObject
     [Tooltip("Dejar vacío para usar el mensaje por defecto del toast")]
     public string toastMensaje;
     public Sprite toastIcono;
+
 }

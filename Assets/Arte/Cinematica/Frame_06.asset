@@ -15,7 +15,7 @@ MonoBehaviour:
   ilustracion: {fileID: 21300000, guid: 4d66d38ec39f14c4b9855f69ac7a7f18, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
-  subtitulo: "Al momento de su llegada, la reacci\xF3n fue casi inmediata, gritos
-    inhumanos, bramidos, ruido implacable, nada que las personas alrededor del lugar
-    pudiesen reconocer como algo familiar."
+  subtitulo: "Al momento de su llegada, la reacci\xF3n fue inmediata: gritos inhumanos,
+    bramidos, ruido implacable, nada que las personas alrededor del lugar pudiesen
+    reconocer como algo familiar."
   velocidadEscritura: 0.04

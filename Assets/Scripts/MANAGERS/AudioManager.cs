@@ -8,7 +8,6 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
     EventInstance musicaActual;
-    VCA masterVCA;
 
     void Awake()
     {
@@ -16,15 +15,16 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        masterVCA = RuntimeManager.GetVCA("vca:/Master");
         SetMasterVolume(AudioSettings.MasterVolume);
     }
 
     public void SetMasterVolume(float volume)
     {
-        masterVCA.setVolume(volume / 100f);
+        RuntimeManager.StudioSystem.setParameterByName(
+            "Master",
+            volume / 100f
+        );
     }
-
     // --- Música adaptativa ---
     public void PlayMusica(string eventPath)
     {

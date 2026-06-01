@@ -12,6 +12,8 @@ public class WeaponPickup : MonoBehaviour, IInteractable
     [Header("Tutorial (opcional)")]
     public TutorialStep tutorialStep;
     public TutorialBarrier barreraTutorial;
+    public TutorialStep stepSilencioso;        // Step_NPC_Item_Completar
+    public TutorialBarrier barreraEncolada;  // barreraNPC
 
     [Header("Sonidos")]
 
@@ -42,5 +44,8 @@ public class WeaponPickup : MonoBehaviour, IInteractable
         // Activar tutorial al recoger
         if(tutorialStep != null)
             TutorialManager.Instance?.MostrarPaso(tutorialStep, barreraTutorial);
+
+        if (stepSilencioso != null)
+            TutorialManager.Instance?.MostrarPaso(stepSilencioso, barreraEncolada);
     }
 }

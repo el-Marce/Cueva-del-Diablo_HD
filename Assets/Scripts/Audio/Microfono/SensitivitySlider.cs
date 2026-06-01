@@ -1,7 +1,8 @@
 // SensitivitySlider.cs
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class SensitivitySlider : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class SensitivitySlider : MonoBehaviour
 
             case SensitivityTarget.MasterVolume:
                 AudioSettings.MasterVolume = value;
+                AudioManager.Instance.SetMasterVolume(AudioSettings.MasterVolume);
                 break;
         }
 

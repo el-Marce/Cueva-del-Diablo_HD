@@ -47,7 +47,7 @@ public class NPC_Controller : MonoBehaviour, IInteractable
         if (activated) return;
 
         activated = true;
-        TutorialManager.Instance?.CompletarTrigger("npc_interactuado");
+        TutorialManager.Instance?.CompletarTriggerParcial("npc_interactuado");
         //DisableInteraction();
     }
     void Start()

@@ -31,8 +31,7 @@ public class PickupItem : MonoBehaviour, IInteractable
                     break;
             }
         }
-
-        TutorialManager.Instance?.CompletarTrigger("Alcohol" + itemName.ToLower().Replace(" ", ""));
+        TutorialManager.Instance?.CompletarTriggerParcial("item_" + itemName.ToLower().Replace(" ", ""));
         Destroy(gameObject);
     }
 }

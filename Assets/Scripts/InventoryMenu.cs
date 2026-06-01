@@ -17,6 +17,12 @@ public class InventoryMenu : MonoBehaviour
     public Image[] selectors;
     public Image[] itemIcons;
 
+    [Header("Tutorial (opcional)")]
+    public TutorialStep stepAlCerrarLectura;
+    public TutorialBarrier barreraAlCerrarLectura;
+    public TutorialStep stepEncolado;        // Step 3: NPC/item, se encola tras el step 2
+    public TutorialBarrier barreraEncolada;
+
     bool menuOpen = false;
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -98,6 +104,15 @@ public class InventoryMenu : MonoBehaviour
             {
                 lecturaPanel.SetActive(false);
                 GameState.InMenu = false;
+
+                if (stepAlCerrarLectura != null)
+                {
+                    TutorialManager.Instance?.MostrarPaso(stepAlCerrarLectura, barreraAlCerrarLectura);
+                    if (stepEncolado != null)
+                        TutorialManager.Instance?.MostrarPaso(stepEncolado, barreraEncolada);
+                    stepAlCerrarLectura = null;
+                    stepEncolado = null;
+                }
                 return;
             }
 
