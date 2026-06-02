@@ -17,6 +17,8 @@ public class InventoryMenu : MonoBehaviour
     public Image[] selectors;
     public Image[] itemIcons;
 
+    public TMP_Text scrollText;
+
     [Header("Tutorial (opcional)")]
     public TutorialStep stepAlCerrarLectura;
     public TutorialBarrier barreraAlCerrarLectura;
@@ -233,16 +235,20 @@ public class InventoryMenu : MonoBehaviour
     void Select()
     {
         if (!Input.GetKeyDown(KeyCode.Return)) return;
-
         if (inventory.currentTab == Inventory.Tab.Scrolls)
-            descriptionText.text = inventory.GetSelected();
+        {
+            // Abrir panel de lectura completa reutilizando el existente
+            string textoCompleto = inventory.scrolls[inventory.selectedIndex].text;
+            scrollText.text = textoCompleto;
+            lecturaPanel.SetActive(true);
+            GameState.InMenu = true;
+        }
         else
         {
             inventory.EquipSelected();
             PrintMenu();
         }
     }
-
     void UpdateDescription()
     {
         if (inventory.GetCount() == 0)
@@ -251,12 +257,19 @@ public class InventoryMenu : MonoBehaviour
             return;
         }
 
-        string selected = inventory.GetSelected();
-        descriptionText.text = inventory.currentTab == Inventory.Tab.Scrolls
-            ? "''" + selected + "''"
-            : "Objeto: " + selected;
+        if (inventory.currentTab == Inventory.Tab.Scrolls)
+        {
+            string texto = inventory.scrolls[inventory.selectedIndex].text;
+            // Truncar a 120 caracteres con indicador de que hay más
+            descriptionText.text = texto.Length > 120
+                ? texto.Substring(0, 200) + "...\n<align=right>[Enter para leer]"
+                : texto;
+        }
+        else
+        {
+            descriptionText.text = "Objeto: " + inventory.GetSelected();
+        }
     }
-
     void PrintMenu()
     {
         if (itemTexts == null || itemTexts.Length == 0 || itemTexts[0] == null) return;

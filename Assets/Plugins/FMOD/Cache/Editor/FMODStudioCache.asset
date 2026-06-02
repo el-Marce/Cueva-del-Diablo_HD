@@ -366,7 +366,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639158591789001460
+  lastModified: 639159412993339660
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -443,6 +443,33 @@ MonoBehaviour:
     Data4: -897090860
   Banks:
   - {fileID: -365857060993439915}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-1151283928990138657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/PuertaCerradaAcero
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/PuertaCerradaAcero
+  Guid:
+    Data1: 249130876
+    Data2: 1157918069
+    Data3: -739384130
+    Data4: 1846178178
+  Banks:
+  - {fileID: -2943633009321672613}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -550,6 +577,7 @@ MonoBehaviour:
   - {fileID: 5618001725306022868}
   - {fileID: 3673544413005633525}
   - {fileID: 572498344485133473}
+  - {fileID: -1151283928990138657}
   EditorParameters:
   - {fileID: 786976340801035014}
   MasterBanks:
@@ -557,7 +585,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639159145755227221
+  cacheTime: 639159412993359869
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -621,6 +649,8 @@ MonoBehaviour:
     index: 29
   - key: event:/Interacttions/PuertaMadera
     index: 30
+  - key: event:/Interacttions/PuertaCerradaAcero
+    index: 31
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,10 +939,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639159145755227221
+  lastModified: 639159412993359869
   FileSizes:
   - Name: 
-    Value: 2718
+    Value: 2760
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:

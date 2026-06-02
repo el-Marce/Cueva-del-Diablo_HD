@@ -16,6 +16,7 @@ public class Door : MonoBehaviour, IInteractable
 
     [Header("Sonido")]
     public EventReference puertaVieja;
+    public EventReference puertaCerrada;
 
     //public bool canInteract = true;
     bool isMoving = false;
@@ -44,6 +45,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (isLocked)
         {
+            AudioManager.Instance.Play(puertaCerrada);
             Debug.Log("La puerta está bloqueada.");
             return;
         }
@@ -62,6 +64,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
+            AudioManager.Instance.Play(puertaCerrada);
             Debug.Log("Puerta cerrada. Necesitas: " + requiredKey);
         }
     }

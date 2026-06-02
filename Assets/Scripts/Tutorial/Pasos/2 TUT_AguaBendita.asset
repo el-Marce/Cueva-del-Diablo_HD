@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mensaje: "Recogiste \"Agua Bendita\" \nAbre tu inventario con TAB, navega hasta
     la pesta\xF1a Armas con Q/E y equipa el Agua Bendita con Enter para repeler temporalmente
-    a enemigos tipo \"Ente\"."
+    a enemigos tipo \"Ente\".\n\n"
   icono: {fileID: 0}
+  mensajesSecuencia: []
   bloqueaAvance: 1
+  silencioso: 0
   triggerDeDesbloqueo: equipar_aguabendita
+  delayInicio: 0
+  triggersRequeridos: []
   posicionAnclaje: {x: 0.5, y: 0.8}
   toastMensaje: 
   toastIcono: {fileID: 0}

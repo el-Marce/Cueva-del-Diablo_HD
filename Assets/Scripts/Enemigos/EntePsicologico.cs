@@ -362,7 +362,7 @@ public class EntePsicologico : MonoBehaviour
         // Radio ampliado al doble para buscar puntos más lejanos
         for (int i = 0; i < 40; i++)
         {
-            Vector3 candidate = GetRandomNavPoint(wanderRadius * 2f);
+            Vector3 candidate = GetRandomNavPoint(wanderRadius * 10f);
 
             Vector3 candidateFlat = new Vector3(candidate.x, 0f, candidate.z);
             Vector3 playerFlat = new Vector3(player.position.x, 0f, player.position.z);
