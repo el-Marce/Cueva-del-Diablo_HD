@@ -17,7 +17,7 @@ public class Door : MonoBehaviour, IInteractable
     [Header("Sonido")]
     public EventReference puertaVieja;
     public EventReference puertaCerrada;
-
+    public EventReference slideLock;
     //public bool canInteract = true;
     bool isMoving = false;
     Quaternion closedRotation;
@@ -61,6 +61,10 @@ public class Door : MonoBehaviour, IInteractable
         if (inventory.HasItem(requiredKey))
         {
             OpenDoor();
+            if (!slideLock.IsNull)
+            {
+                AudioManager.Instance.Play(slideLock);
+            }
         }
         else
         {

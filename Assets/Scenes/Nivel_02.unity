@@ -3363,6 +3363,13 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  slideLock:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   debeDesactivarCollider: 1
 --- !u!4 &371001385
 Transform:
@@ -43726,6 +43733,13 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  slideLock:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   debeDesactivarCollider: 1
 --- !u!4 &1566399026
 Transform:
@@ -44218,7 +44232,7 @@ PrefabInstance:
     - target: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.4999994
+      value: 1.4999993
       objectReference: {fileID: 0}
     - target: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -44228,7 +44242,7 @@ PrefabInstance:
     - target: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.4999994
+      value: 1.4999993
       objectReference: {fileID: 0}
     - target: {fileID: 8565350585085730176, guid: b49c8089cb89298438c78be398f39f45,
         type: 3}
@@ -45507,6 +45521,13 @@ MonoBehaviour:
       Data3: 0
       Data4: 0
     Path: 
+  slideLock:
+    Guid:
+      Data1: -452496233
+      Data2: 1279325257
+      Data3: 1292053659
+      Data4: -1684594770
+    Path: event:/Interacttions/SlideLock
   debeDesactivarCollider: 1
 --- !u!1001 &1783500937
 PrefabInstance:
