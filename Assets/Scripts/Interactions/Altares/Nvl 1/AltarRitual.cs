@@ -18,6 +18,25 @@ public class AltarRitual : MonoBehaviour, IInteractable
     public GameObject modeloAlcohol;
     public GameObject modeloSullu;
 
+    [System.Serializable]
+    public class OfrendaConfig
+    {
+        public Vector3 offsetPosicion = new Vector3(0.3f, -0.25f, 0.5f);
+        public float offsetBolsillo = 0.4f;
+        public float offsetCaida = 0.6f;
+        public float offsetCaidaZ = 0.05f;
+        public float anguloVertido = 80f;   // solo usado por Alcohol
+    }
+
+    [Header("Configuración Coca")]
+    public OfrendaConfig configCoca;
+
+    [Header("Configuración Alcohol")]
+    public OfrendaConfig configAlcohol;
+
+    [Header("Configuración Sullu")]
+    public OfrendaConfig configSullu;
+
     PlayerCombat playerCombat;
 
     public string GetNextItemName()
@@ -76,10 +95,18 @@ public class AltarRitual : MonoBehaviour, IInteractable
             _ => null
         };
 
-        Vector3 destino = transform.position + Vector3.up * 0.5f;
-        yield return StartCoroutine(AnimarOfrenda(modelo, destino));
+        OfrendaConfig config = item switch
+        {
+            "Coca" => configCoca,
+            "Alcohol" => configAlcohol,
+            "Sullu" => configSullu,
+            _ => new OfrendaConfig()
+        };
 
-        // Procesar entrega después de la animación
+        yield return StartCoroutine(item == "Alcohol"
+            ? AnimarVertido(modelo, config)
+            : AnimarCaida(modelo, config));
+
         switch (item)
         {
             case "Coca":
@@ -99,22 +126,23 @@ public class AltarRitual : MonoBehaviour, IInteractable
         }
     }
 
-    IEnumerator AnimarOfrenda(GameObject modelo, Vector3 posicionFinal)
+    IEnumerator AnimarCaida(GameObject modelo, OfrendaConfig cfg)
     {
         if (modelo == null) yield break;
 
         OcultarArmaActual();
 
-        // Posición inicial frente a la cámara, donde aparecen las armas
         Transform cam = Camera.main.transform;
-        Vector3 posInicial = cam.position + cam.right * 0.3f + cam.up * -0.25f + cam.forward * 0.5f;
-        Vector3 posBolsillo = posInicial + Vector3.down * 0.4f;
+        Vector3 posInicial = cam.position
+            + cam.right * cfg.offsetPosicion.x
+            + cam.up * cfg.offsetPosicion.y
+            + cam.forward * cfg.offsetPosicion.z;
+        Vector3 posBolsillo = posInicial + Vector3.down * cfg.offsetBolsillo;
 
         modelo.SetActive(true);
         modelo.transform.position = posBolsillo;
         modelo.transform.rotation = cam.rotation;
 
-        // Sube desde abajo como sacándolo del bolsillo
         float t = 0f;
         while (t < 1f)
         {
@@ -124,20 +152,20 @@ public class AltarRitual : MonoBehaviour, IInteractable
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.3f); // pausa sosteniendo el objeto
+        yield return new WaitForSeconds(0.2f);
 
-        // Se lanza hacia el altar
+        Vector3 posDestino = posInicial + Vector3.down * cfg.offsetCaida + cam.forward * cfg.offsetCaidaZ;
         Quaternion rotInicial = cam.rotation;
         Quaternion rotFinal = Quaternion.Euler(
-            cam.rotation.eulerAngles + new Vector3(180f, 0f, 0f)
+            cam.rotation.eulerAngles + new Vector3(160f, 20f, 30f)
         );
 
         t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime / 0.5f;
+            t += Time.deltaTime / 0.4f;
             float curva = t * t;
-            modelo.transform.position = Vector3.Lerp(posInicial, posicionFinal, curva);
+            modelo.transform.position = Vector3.Lerp(posInicial, posDestino, curva);
             modelo.transform.rotation = Quaternion.Slerp(rotInicial, rotFinal, curva);
             yield return null;
         }
@@ -146,6 +174,69 @@ public class AltarRitual : MonoBehaviour, IInteractable
         RestaurarArmaActual();
     }
 
+    IEnumerator AnimarVertido(GameObject modelo, OfrendaConfig cfg)
+    {
+        if (modelo == null) yield break;
+
+        OcultarArmaActual();
+
+        Transform cam = Camera.main.transform;
+        Vector3 posInicial = cam.position
+            + cam.right * cfg.offsetPosicion.x
+            + cam.up * cfg.offsetPosicion.y
+            + cam.forward * cfg.offsetPosicion.z;
+        Vector3 posBolsillo = posInicial + Vector3.down * cfg.offsetBolsillo;
+
+        modelo.SetActive(true);
+        modelo.transform.position = posBolsillo;
+        modelo.transform.rotation = cam.rotation;
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 0.3f;
+            float curva = 1f - Mathf.Pow(1f - t, 3f);
+            modelo.transform.position = Vector3.Lerp(posBolsillo, posInicial, curva);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.05f);
+
+        Quaternion rotInicial = modelo.transform.rotation;
+        Quaternion rotVertido = rotInicial * Quaternion.Euler(cfg.anguloVertido, 0f, 0f);
+
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 0.4f;
+            float curva = 1f - Mathf.Pow(1f - t, 3f);
+            modelo.transform.rotation = Quaternion.Slerp(rotInicial, rotVertido, curva);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.4f);
+
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 0.3f;
+            float curva = 1f - Mathf.Pow(1f - t, 3f);
+            modelo.transform.rotation = Quaternion.Slerp(rotVertido, rotInicial, curva);
+            yield return null;
+        }
+
+        Vector3 posActual = modelo.transform.position;
+        t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 0.3f;
+            modelo.transform.position = Vector3.Lerp(posActual, posBolsillo, t * t);
+            yield return null;
+        }
+
+        modelo.SetActive(false);
+        RestaurarArmaActual();
+    }
     void OcultarArmaActual()
     {
         if (playerCombat == null) return;
