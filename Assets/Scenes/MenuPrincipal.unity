@@ -7828,7 +7828,7 @@ MonoBehaviour:
   slider: {fileID: 1674113125}
   valueLabel: {fileID: 1577702297}
   target: 2
-  minValue: 10
+  minValue: 0
   maxValue: 100
 --- !u!114 &1674113125
 MonoBehaviour:

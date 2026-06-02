@@ -47,22 +47,26 @@ public class PlayerMovement : MonoBehaviour
         noiseEmitter = GetComponent<NoiseEmitter>();
     }
 
+    bool wasInMenu = false;
+
     void Update()
     {
+        // Detectar entrada al menú
+        if (GameState.InMenu && !wasInMenu)
+        {
+            if (isPlayingPasos)
+            {
+                AudioManager.Instance.StopLoop(pasosInstance, true); // true = fadeout
+                isPlayingPasos = false;
+            }
+        }
+        wasInMenu = GameState.InMenu;
+
         if (GameState.InMenu) return;
+
         Move();
         ApplyGravity();
-        CheckSeparacionBarrera();
-    }
-    void CheckSeparacionBarrera()
-    {
-        if (barreraActual == null) return;
-
-        if (Time.time - tiempoUltimoContacto > separacionTimeout)
-        {
-            barreraActual.NotificarSeparacion();
-            barreraActual = null;
-        }
+        //CheckSeparacionBarrera();
     }
 
     bool isPivoting = false;

@@ -209,8 +209,6 @@ public class Pueblerino : MonoBehaviour
             case State.Chase: UpdateChase(); break;
             case State.Attack: UpdateAttack(); break;
         }
-
-        Debug.Log(currentState);
     }
 
     IEnumerator HandleDeath()

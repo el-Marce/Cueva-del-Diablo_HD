@@ -348,7 +348,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639159594151591670
+  lastModified: 639160077031693883
   FileSizes: []
   Exists: 1
 --- !u!114 &-3808675675243787937
@@ -420,7 +420,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639159630259123070
+  lastModified: 639160077031784140
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -573,7 +573,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 639159145755217199
+  lastModified: 639160077031784140
   FileSizes: []
   Exists: 1
 --- !u!114 &11400000
@@ -641,6 +641,8 @@ MonoBehaviour:
   - {fileID: 8710282210519268495}
   - {fileID: 3741609041641935671}
   - {fileID: -7798943622188446313}
+  - {fileID: 8022090150233319298}
+  - {fileID: 8003441958226035906}
   EditorParameters:
   - {fileID: 786976340801035014}
   MasterBanks:
@@ -648,7 +650,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639159630259123070
+  cacheTime: 639160077031830265
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -1011,7 +1013,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639159621994282198
+  lastModified: 639160077031445615
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -1074,10 +1076,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639159621994364205
+  lastModified: 639160077031830265
   FileSizes:
   - Name: 
-    Value: 3152
+    Value: 3242
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:
@@ -1359,6 +1361,60 @@ MonoBehaviour:
   lastModified: 639154035332118497
   FileSizes: []
   Exists: 1
+--- !u!114 &8003441958226035906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interacttions/SlideLock
+  m_EditorClassIdentifier: 
+  Path: event:/Interacttions/SlideLock
+  Guid:
+    Data1: -452496233
+    Data2: 1279325257
+    Data3: 1292053659
+    Data4: -1684594770
+  Banks:
+  - {fileID: -2943633009321672613}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4277
+--- !u!114 &8022090150233319298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambientes/Campana
+  m_EditorClassIdentifier: 
+  Path: event:/Ambientes/Campana
+  Guid:
+    Data1: -1276494558
+    Data2: 1077989254
+    Data3: 1366532531
+    Data4: 371578728
+  Banks:
+  - {fileID: 3791001437229431716}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2018
 --- !u!114 &8193210427098052524
 MonoBehaviour:
   m_ObjectHideFlags: 0
