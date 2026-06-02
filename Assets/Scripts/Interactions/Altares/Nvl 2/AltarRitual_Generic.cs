@@ -195,7 +195,10 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         Destroy(pueblerino.gameObject);
 
         if (npcPrefab != null)
-            Instantiate(npcPrefab, spawnPos, spawnRot);
+        {
+            GameObject npc = Instantiate(npcPrefab, spawnPos, spawnRot);
+            npc.transform.localScale = new Vector3(1.3f, 1.88f, 1.15f);
+        }
     }
     void TeleportPlayer()
     {

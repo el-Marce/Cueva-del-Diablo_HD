@@ -9,7 +9,7 @@ public class AltarUI_Generic : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text titleText;
-    public TMP_Text conditionsText;
+    //public TMP_Text conditionsText;
     public TMP_Text[] optionsText;
 
     [Header("Ritmo")]
@@ -19,6 +19,9 @@ public class AltarUI_Generic : MonoBehaviour
     int selectedIndex = 0;
     AltarRitual_Generic currentAltar;
     bool busy = false;
+
+    [Header("Condition Icons")]
+    public AltarConditionIcon[] conditionIcons;
 
     void OnEnable() { selectedIndex = 0; }
 
@@ -76,22 +79,52 @@ public class AltarUI_Generic : MonoBehaviour
         {
             if (!c.IsMet())
             {
-                titleText.text = "¿" + c.GetStatusText() + "?";
+                titleText.text = "Items requeridos";
                 return;
             }
         }
         titleText.text = "Todo listo. ¿Ofrecer?";
     }
 
+    //void RefreshConditions()
+    //{
+    //    if (currentAltar == null) return;
+    //    string result = "";
+    //    foreach (var c in currentAltar.conditions)
+    //        result += c.GetStatusText() + "\n";
+    //    conditionsText.text = result.TrimEnd();
+    //}
     void RefreshConditions()
     {
         if (currentAltar == null) return;
-        string result = "";
-        foreach (var c in currentAltar.conditions)
-            result += c.GetStatusText() + "\n";
-        conditionsText.text = result.TrimEnd();
-    }
 
+        System.Collections.Generic.List<AltarCondition> visualConditions =
+            new System.Collections.Generic.List<AltarCondition>();
+
+        foreach (var c in currentAltar.conditions)
+        {
+            if (c.showIcon)
+                visualConditions.Add(c);
+        }
+
+        for (int i = 0; i < conditionIcons.Length; i++)
+        {
+            if (i >= visualConditions.Count)
+            {
+                conditionIcons[i].gameObject.SetActive(false);
+                continue;
+            }
+
+            conditionIcons[i].gameObject.SetActive(true);
+
+            AltarCondition condition = visualConditions[i];
+
+            conditionIcons[i].image.sprite =
+                condition.IsMet()
+                ? condition.activeIcon
+                : condition.inactiveIcon;
+        }
+    }
     void PrintOptions()
     {
         for (int i = 0; i < optionsText.Length; i++)

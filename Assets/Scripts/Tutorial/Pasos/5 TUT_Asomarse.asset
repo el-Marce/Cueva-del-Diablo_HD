@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
+  m_Name: 5 TUT_Asomarse
+  m_EditorClassIdentifier: 
+  mensaje: "Ojeada\n\ncuando estes tras de una pared, presiona \"Clic derecho + A/D\"
+    para asomar la mirada. as\xED puedes ver el \xE1rea sin exponerte a ser visto\n\n\n"
+  icono: {fileID: 0}
+  mensajesSecuencia:
+  - "recuerda guardar silencio, pues a\xFAn pueden escucharte\n\n\n"
+  bloqueaAvance: 0
+  silencioso: 0
+  triggerDeDesbloqueo: 
+  delayInicio: 0
+  triggersRequeridos: []
+  posicionAnclaje: {x: 0.5, y: 0.8}
+  toastMensaje: 
+  toastIcono: {fileID: 0}
