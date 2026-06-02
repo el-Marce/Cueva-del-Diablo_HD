@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b175ea28c7c4345b3f1e78c7c7eceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 35
+  mouseSensitivity: 50
   playerBody: {fileID: 8565350585085730176}
 --- !u!1 &1003831543317176556
 GameObject:
@@ -4963,11 +4963,11 @@ MonoBehaviour:
   gravity: -9.81
   pasosExt:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -546651521
+      Data2: 1172026867
+      Data3: 1323888294
+      Data4: -1244199808
+    Path: event:/Player/Pasos
 --- !u!114 &8934563051483889156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5285,7 +5285,7 @@ GameObject:
   - component: {fileID: 3021075728910091870}
   - component: {fileID: 2076341755781186949}
   - component: {fileID: 3506105202987392806}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10150,7 +10150,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 80.54513
+  m_Intensity: 613.03503
   m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -10212,7 +10212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Intensity: 1012.16
+  m_Intensity: 7703.626
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -10416,7 +10416,7 @@ GameObject:
   - component: {fileID: 595591759013041869}
   - component: {fileID: 3439971285391490651}
   - component: {fileID: 1199583308966347598}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44620,6 +44620,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AguaMaldita (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 707370891078139896, guid: bec603a565f9b3e46852f4579ae55e3a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3531032628491371854, guid: bec603a565f9b3e46852f4579ae55e3a,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -44802,8 +44807,49 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3030326211824922328}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2054edfd97921d4f83bdd1ab8d6a50a,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5685425658481629653}
   m_SourcePrefab: {fileID: 100100000, guid: a2054edfd97921d4f83bdd1ab8d6a50a, type: 3}
+--- !u!1 &2870813740325797928 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a2054edfd97921d4f83bdd1ab8d6a50a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3104743979428822393}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5685425658481629653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870813740325797928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1894185521
+      Data2: 1240009276
+      Data3: 224899990
+      Data4: 1965986149
+    Path: event:/Player/Fuego
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &3214722747143707282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a2054edfd97921d4f83bdd1ab8d6a50a,

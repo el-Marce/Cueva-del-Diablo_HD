@@ -16,7 +16,9 @@ MonoBehaviour:
     la pesta\xF1a Armas con Q/E y equipa el Agua Bendita con Enter para repeler temporalmente
     a enemigos tipo \"Ente\".\n\n"
   icono: {fileID: 0}
-  mensajesSecuencia: []
+  mensajesSecuencia:
+  - "Todos los objetos que recojas en el camino se guardan en tu inventario.\n\nDependiendo
+    de si son \xEDtems, armas o pergaminos son asignados a su respectivo lugar.\n\n\n"
   bloqueaAvance: 1
   silencioso: 0
   triggerDeDesbloqueo: equipar_aguabendita
