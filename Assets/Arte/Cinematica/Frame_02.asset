@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_02
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 1138ef74b3233a5408fcbe83c538dcd9, type: 3}
-  videoAnimado: {fileID: 0}
+  ilustracion: {fileID: 0}
+  videoAnimado: {fileID: 32900000, guid: 64094b1492f27ff469c750445f88a96f, type: 3}
   narracion: {fileID: 0}
   subtitulo: "All\xED exist\xEDa una caverna la cual se cre\xEDa que era una puerta
     de conexi\xF3n con fuerzas del m\xE1s all\xE1, que presencias sobrenaturales

@@ -9,6 +9,8 @@ public class CinematicaManager : MonoBehaviour
 {
     [Header("Referencias")]
     public Image ilustracionImage;
+    public RawImage videoRawImage;
+    public VideoPlayer videoPlayer;
     public TMP_Text subtituloText;
     public Image subtituloPanel;
     public GameObject skipPrompt;
@@ -41,18 +43,53 @@ public class CinematicaManager : MonoBehaviour
     bool puedeAvanzar = false;
     bool saltando = false;
     Coroutine escrituraCoroutine;
+    void MostrarVisual(CinematicaFrame frame)
+    {
+        bool esVideo = frame.videoAnimado != null;
 
+        if (esVideo)
+        {
+            ilustracionImage.gameObject.SetActive(false);
+            videoRawImage.gameObject.SetActive(true);
+
+            videoPlayer.Stop();
+            videoPlayer.clip = null;
+            videoPlayer.targetTexture.Release();
+
+            videoPlayer.clip = frame.videoAnimado;
+            videoPlayer.Prepare();
+
+            StartCoroutine(PlayPreparedVideo());
+        }
+        else
+        {
+            videoPlayer.Stop();
+
+            videoRawImage.gameObject.SetActive(false);
+            ilustracionImage.gameObject.SetActive(true);
+
+            ilustracionImage.sprite = frame.ilustracion;
+        }
+    }
+    IEnumerator PlayPreparedVideo()
+    {
+        while (!videoPlayer.isPrepared)
+            yield return null;
+
+        videoPlayer.Play();
+    }
     void Start()
     {
         CinematicaFrame frame = frames[0];
         AudioManager.Instance.PlayMusica("event:/Cinematicas/MusicBack");
 
+
+        //ilustracionImage.enabled = true;
+        //ilustracionImage.sprite = frame.ilustracion;
+        MostrarVisual(frame);
+
         SetPanelAlpha(0f);
         SetTextAlpha(0f);
-
-        ilustracionImage.enabled = true;
-        ilustracionImage.sprite = frame.ilustracion;
-
         StartCoroutine(MostrarFrame(0));
     }
 
@@ -144,6 +181,7 @@ public class CinematicaManager : MonoBehaviour
 
         if (currentFrame >= frames.Length)
         {
+            videoPlayer.Stop();
             AudioManager.Instance.StopMusica();
             if (SceneTransition.Instance != null)
                 SceneTransition.Instance.TransitionTo(escenaSiguiente, holdDuration: 3f);
@@ -153,9 +191,9 @@ public class CinematicaManager : MonoBehaviour
         }
 
         CinematicaFrame frame = frames[currentFrame];
-        ilustracionImage.enabled = true;
-        ilustracionImage.sprite = frame.ilustracion;
-
+        //ilustracionImage.enabled = true;
+        //ilustracionImage.sprite = frame.ilustracion;
+        MostrarVisual(frame);
         StartCoroutine(MostrarFrame(currentFrame));
     }
 

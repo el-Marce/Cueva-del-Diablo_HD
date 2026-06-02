@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd732e6d613b35b4080d53ee799e7e32, type: 3}
   m_Name: Frame_15
   m_EditorClassIdentifier: 
-  ilustracion: {fileID: 21300000, guid: 10acfb5a63aa67e44877f8b3f262cfc2, type: 3}
+  ilustracion: {fileID: 21300000, guid: e1e4eaa39be4b2243bb024f9f7d566ad, type: 3}
   videoAnimado: {fileID: 0}
   narracion: {fileID: 0}
   subtitulo: "Guiado por su f\xE9, iniciar\xEDa una nueva peregrinaci\xF3n hacia
