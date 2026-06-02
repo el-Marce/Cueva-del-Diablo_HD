@@ -89,6 +89,8 @@ public class Pueblerino : MonoBehaviour
     public EventReference loopAttack;
     public EventReference sfxHit;
     public EventReference sfxAttackImpact;
+    public EventReference sfxWindUp;
+    public EventReference sfxDeath;
 
     EventInstance currentLoop;
     State audioState = (State)(-1);
@@ -185,6 +187,8 @@ public class Pueblerino : MonoBehaviour
             anim.ResetTrigger("IsPushed");
             anim.SetBool("Attack", true);
             rend.material = windUpMat;
+
+            AudioManager.Instance.Play(sfxWindUp, transform.position);
         }
 
         if (!isPreparingAttack && wasPreparingAttack)
@@ -205,6 +209,8 @@ public class Pueblerino : MonoBehaviour
             case State.Chase: UpdateChase(); break;
             case State.Attack: UpdateAttack(); break;
         }
+
+        Debug.Log(currentState);
     }
 
     IEnumerator HandleDeath()
@@ -215,7 +221,7 @@ public class Pueblerino : MonoBehaviour
         currentLoop = default;
 
         anim.SetTrigger("IsDead");
-
+        AudioManager.Instance.Play(sfxDeath, transform.position);
         yield return null;
 
         float deathDuration = anim.GetCurrentAnimatorStateInfo(0).length;
@@ -441,7 +447,6 @@ public class Pueblerino : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, player.position);
         anim.SetFloat("AttackDistance", distance);
-
         if (distance > attackDistance)
         {
             anim.SetBool("Attack", false);

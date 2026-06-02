@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fa6d97092778a40a7a6fe7f5bff207, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hearingDistance: 25
+  hearingDistance: 30
 --- !u!114 &4031590060862678822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +399,69 @@ MonoBehaviour:
   investigateSpeedMultiplier: 1.3
   staggerDuration: 0.5
   rotationSpeed: 8
+  loopPatrol:
+    Guid:
+      Data1: 1873920962
+      Data2: 1167990809
+      Data3: -141159029
+      Data4: 55725590
+    Path: event:/Enemies/Zombie/Patrulla_Zombie
+  loopAlert:
+    Guid:
+      Data1: 1958242461
+      Data2: 1129024923
+      Data3: -154497862
+      Data4: -1339058508
+    Path: event:/Enemies/Zombie/Alert_Zombie
+  loopInvestigate:
+    Guid:
+      Data1: -1521999806
+      Data2: 1123148510
+      Data3: 230541235
+      Data4: 1575765717
+    Path: event:/Enemies/Zombie/Investigate_Zombie
+  loopChase:
+    Guid:
+      Data1: 112881057
+      Data2: 1159898804
+      Data3: -1151944801
+      Data4: 2074751959
+    Path: event:/Enemies/Zombie/Chase_Zombie
+  loopAttack:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  sfxHit:
+    Guid:
+      Data1: 1635999254
+      Data2: 1232977906
+      Data3: 1132173735
+      Data4: 1652932340
+    Path: event:/Enemies/Zombie/Hit
+  sfxAttackImpact:
+    Guid:
+      Data1: -1245730475
+      Data2: 1161920796
+      Data3: -2058951275
+      Data4: 900369139
+    Path: event:/Enemies/Zombie/Golpe
+  sfxWindUp:
+    Guid:
+      Data1: -1613817435
+      Data2: 1113564608
+      Data3: 1775953835
+      Data4: 1075138824
+    Path: event:/Enemies/Zombie/Wind
+  sfxDeath:
+    Guid:
+      Data1: -514857047
+      Data2: 1288365929
+      Data3: 986080415
+      Data4: 49453530
+    Path: event:/Enemies/Zombie/Death
 --- !u!114 &1671393138883461010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +500,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &-8457870191847442677
 MonoBehaviour:

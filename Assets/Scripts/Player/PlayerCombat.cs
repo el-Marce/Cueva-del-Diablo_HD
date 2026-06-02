@@ -53,6 +53,12 @@ public class PlayerCombat : MonoBehaviour
     public float punchDistance = 0.3f;  // cuánto avanza hacia adelante
     public float punchDuration = 0.1f;  // velocidad del golpe
     public float returnDuration = 0.2f;
+
+    [Header("Stick Ataque")]
+    public float stickPunchDuration = 0.1f;
+
+    [Header("Rock Ataque")]
+    public float rockPunchDuration = 0.18f; // más lento que el stick
     public enum WeaponType
     {
         Fists,
@@ -294,9 +300,11 @@ public class PlayerCombat : MonoBehaviour
         GameObject model = currentWeapon == WeaponType.Stick ? stickModel : rockModel;
         if (model == null) yield break;
 
+        // Duración según arma
+        float duracionGolpe = currentWeapon == WeaponType.Stick ? stickPunchDuration : rockPunchDuration;
+
         Vector3 localOriginal = model.transform.localPosition;
         Quaternion rotOriginal = model.transform.localRotation;
-
         Vector3 localArriba = localOriginal + new Vector3(-0.1f, 0.4f, 0.05f);
         Vector3 localImpacto = localOriginal + new Vector3(0.1f, -0.25f, 0.5f);
 
@@ -304,7 +312,7 @@ public class PlayerCombat : MonoBehaviour
         float t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime / (punchDuration * 2f);
+            t += Time.deltaTime / (duracionGolpe * 2f);
             model.transform.localPosition = Vector3.Lerp(localOriginal, localArriba, t);
             model.transform.localRotation = rotOriginal * Quaternion.Euler(
                 Mathf.Lerp(0f, 30f, t), 0f, 0f
@@ -316,7 +324,7 @@ public class PlayerCombat : MonoBehaviour
         t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime / (punchDuration * 0.4f);
+            t += Time.deltaTime / (duracionGolpe * 0.4f);
             float curva = t * t;
             model.transform.localPosition = Vector3.Lerp(localArriba, localImpacto, curva);
             model.transform.localRotation = rotOriginal * Quaternion.Euler(
@@ -362,7 +370,6 @@ public class PlayerCombat : MonoBehaviour
         }
         else
         {
-            // Retorno suave usando el cooldown del arma actual como duración
             float duracionRetorno = GetCooldown();
             t = 0f;
             Vector3 posImpacto = model.transform.localPosition;

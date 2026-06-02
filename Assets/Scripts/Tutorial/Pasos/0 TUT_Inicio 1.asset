@@ -14,21 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mensaje: "Los enemigos utilizan el sonido de tu micr\xF3fono para ubicarte as\xED
     que guarda silencio.\n\nEn la parte inferior defecha tienes un medidor de volumen
-    con tres marcadores.\n\n"
+    con tres marcadores.\n\n\n"
   icono: {fileID: 0}
   mensajesSecuencia:
   - "- El primero es el umbral de respiraci\xF3n, mantente dentro del umbral para
     reconocer tu respiraci\xF3n,\n\n- El \xFAtimo significa que est\xE1s haciendo
-    demasiado ruido, controla tu volumen.\n\n- El 2do lo veremos m\xE1s adelante.\n\n\n"
-  - 'Ve con cuidado
-
-
-
-
-'
+    demasiado ruido, controla tu volumen.\n\n- El 2do te ser\xE1 \xFAtil m\xE1s adelante.\n\n\n"
+  - "En la parte superior tienes dos sistemas de salud:\n\n- La l\xEDnea roja es
+    tu salud f\xEDsica, se ve directamente afectada en combate directo con enemigos
+    tipo Zombie.\n\n\n"
+  - "- La l\xEDnea blanca es tu salud mental, se ve afectada por la cercan\xEDa de
+    enemigos tipo Ente, ante el desgaste sentir\xE1s sus efectos durante el juego.\n\nAmbas
+    son importantes as\xED que ve con cuidado.\n\n\n"
   bloqueaAvance: 0
+  silencioso: 0
   triggerDeDesbloqueo: 
   delayInicio: 1
+  triggersRequeridos: []
   posicionAnclaje: {x: 0.5, y: 0.8}
   toastMensaje: 
   toastIcono: {fileID: 0}

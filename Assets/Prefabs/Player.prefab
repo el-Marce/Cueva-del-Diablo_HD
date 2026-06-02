@@ -5103,6 +5103,8 @@ MonoBehaviour:
   punchDistance: 0.3
   punchDuration: 0.1
   returnDuration: 0.2
+  stickPunchDuration: 0.15
+  rockPunchDuration: 0.25
   currentWeapon: 0
 --- !u!114 &4332087294220951615
 MonoBehaviour:

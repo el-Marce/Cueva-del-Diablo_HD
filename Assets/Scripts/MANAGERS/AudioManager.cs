@@ -1,8 +1,9 @@
-using UnityEngine;
-using FMODUnity;
-using FMOD.Studio;
 using FMOD;
+using FMOD.Studio;
+using FMODUnity;
 using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -17,7 +18,25 @@ public class AudioManager : MonoBehaviour
 
         SetMasterVolume(AudioSettings.MasterVolume);
     }
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StopAllSounds();
+    }
+    public void StopAllSounds()
+    {
+        FMODUnity.RuntimeManager.StudioSystem.getBus("bus:/", out FMOD.Studio.Bus masterBus);
+        masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.IMMEDIATE);
+    }
     public void SetMasterVolume(float volume)
     {
         RuntimeManager.StudioSystem.setParameterByName(

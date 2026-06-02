@@ -153,6 +153,33 @@ MonoBehaviour:
   lastModified: 639154035332141160
   FileSizes: []
   Exists: 1
+--- !u!114 &-7798943622188446313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Ambientes/RisaEvil
+  m_EditorClassIdentifier: 
+  Path: event:/Ambientes/RisaEvil
+  Guid:
+    Data1: 1328670071
+    Data2: 1222405154
+    Data3: 1921832606
+    Data4: -1118221468
+  Banks:
+  - {fileID: 3791001437229431716}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7012013835402147296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,9 +348,36 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639154144567823503
+  lastModified: 639159594151591670
   FileSizes: []
   Exists: 1
+--- !u!114 &-3808675675243787937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Patrulla_Zombie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Patrulla_Zombie
+  Guid:
+    Data1: 1873920962
+    Data2: 1167990809
+    Data3: -141159029
+    Data4: 55725590
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18200
 --- !u!114 &-3346193204899738348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +420,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Gameplay.bank
   Name: Gameplay
   StudioPath: bank:/Gameplay
-  lastModified: 639159412993339660
+  lastModified: 639159630259123070
   FileSizes: []
   Exists: 1
 --- !u!114 &-2905573912534201379
@@ -578,6 +632,15 @@ MonoBehaviour:
   - {fileID: 3673544413005633525}
   - {fileID: 572498344485133473}
   - {fileID: -1151283928990138657}
+  - {fileID: 7587498310910578795}
+  - {fileID: 3895022509395348260}
+  - {fileID: 7752726398835342200}
+  - {fileID: -3808675675243787937}
+  - {fileID: 6710225430112371625}
+  - {fileID: 8555026150355226976}
+  - {fileID: 8710282210519268495}
+  - {fileID: 3741609041641935671}
+  - {fileID: -7798943622188446313}
   EditorParameters:
   - {fileID: 786976340801035014}
   MasterBanks:
@@ -585,7 +648,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639159412993359869
+  cacheTime: 639159630259123070
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -651,6 +714,24 @@ MonoBehaviour:
     index: 30
   - key: event:/Interacttions/PuertaCerradaAcero
     index: 31
+  - key: event:/Enemies/Zombie/Investigate_Zombie
+    index: 32
+  - key: event:/Enemies/Zombie/Alert_Zombie
+    index: 33
+  - key: event:/Enemies/Zombie/Chase_Zombie
+    index: 34
+  - key: event:/Enemies/Zombie/Patrulla_Zombie
+    index: 35
+  - key: event:/Enemies/Zombie/Golpe
+    index: 36
+  - key: event:/Enemies/Zombie/Wind
+    index: 37
+  - key: event:/Enemies/Zombie/Death
+    index: 38
+  - key: event:/Enemies/Zombie/Hit
+    index: 39
+  - key: event:/Ambientes/RisaEvil
+    index: 40
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +969,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &3741609041641935671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Hit
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Hit
+  Guid:
+    Data1: 1635999254
+    Data2: 1232977906
+    Data3: 1132173735
+    Data4: 1652932340
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &3791001437229431716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,7 +1011,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639154035331534049
+  lastModified: 639159621994282198
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
@@ -924,6 +1032,33 @@ MonoBehaviour:
   lastModified: 639154035331534049
   FileSizes: []
   Exists: 1
+--- !u!114 &3895022509395348260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Alert_Zombie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Alert_Zombie
+  Guid:
+    Data1: 1958242461
+    Data2: 1129024923
+    Data3: -154497862
+    Data4: -1339058508
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &4336407426305081004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,10 +1074,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639159412993359869
+  lastModified: 639159621994364205
   FileSizes:
   - Name: 
-    Value: 2760
+    Value: 3152
   Exists: 1
 --- !u!114 &4930667526620227902
 MonoBehaviour:
@@ -1097,6 +1232,87 @@ MonoBehaviour:
   lastModified: 639154035332118497
   FileSizes: []
   Exists: 1
+--- !u!114 &6710225430112371625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Golpe
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Golpe
+  Guid:
+    Data1: -1245730475
+    Data2: 1161920796
+    Data3: -2058951275
+    Data4: 900369139
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &7587498310910578795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Investigate_Zombie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Investigate_Zombie
+  Guid:
+    Data1: -1521999806
+    Data2: 1123148510
+    Data3: 230541235
+    Data4: 1575765717
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 18200
+--- !u!114 &7752726398835342200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Chase_Zombie
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Chase_Zombie
+  Guid:
+    Data1: 112881057
+    Data2: 1159898804
+    Data3: -1151944801
+    Data4: 2074751959
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 12502
 --- !u!114 &7850595472114368337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1170,6 +1386,60 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5950
+--- !u!114 &8555026150355226976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Wind
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Wind
+  Guid:
+    Data1: -1613817435
+    Data2: 1113564608
+    Data3: 1775953835
+    Data4: 1075138824
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8710282210519268495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Enemies/Zombie/Death
+  m_EditorClassIdentifier: 
+  Path: event:/Enemies/Zombie/Death
+  Guid:
+    Data1: -514857047
+    Data2: 1288365929
+    Data3: 986080415
+    Data4: 49453530
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &8774220879445218129
 MonoBehaviour:
   m_ObjectHideFlags: 0

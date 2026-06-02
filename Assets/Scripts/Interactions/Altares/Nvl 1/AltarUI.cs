@@ -13,6 +13,7 @@ public class AltarUI : MonoBehaviour
     public Door door;
     public NPC_Controller NPC;
     public EventReference cerrarPuerta;
+    public EventReference evilLaugh;
 
     [Header("UI Opciones")]
     public TMP_Text[] optionsText;
@@ -181,6 +182,7 @@ public class AltarUI : MonoBehaviour
     }
     void StartRitual()
     {
+        AudioManager.Instance.Play(evilLaugh);
         door.CloseDoor();
         door.isLocked = true;
         AudioManager.Instance.Play(cerrarPuerta);
