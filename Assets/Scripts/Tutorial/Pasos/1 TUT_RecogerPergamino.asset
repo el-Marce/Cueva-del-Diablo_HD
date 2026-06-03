@@ -16,8 +16,16 @@ MonoBehaviour:
     historia, estan indicados de forma iluminada en diferentes partes del mapa.\nPara
     recogerlo acercate al objeto y pulsa \"E\"."
   icono: {fileID: 21300000, guid: 77c787b49e8d1fa4aad9b7d00bf1981d, type: 3}
+  mensajesSecuencia: []
   bloqueaAvance: 1
+  silencioso: 0
   triggerDeDesbloqueo: pergamino_recogido
+  delayInicio: 0
+  triggersRequeridos: []
   posicionAnclaje: {x: 0.5, y: 0.8}
-  toastMensaje: 
+  "tama\xF1oPanel": {x: 600, y: 300}
+  "tama\xF1oTexto": {x: 560, y: 260}
+  toastMensaje: Recoge el pergamino
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 0

@@ -16,11 +16,11 @@ public class PickupItem : MonoBehaviour, IInteractable
         if (inventory != null)
         {
             inventory.AddItem(itemName, icon);
-
             switch (itemName)
             {
                 case "Agua Bendita":
                     AudioManager.Instance.Play(clinkBotella);
+                    FindObjectOfType<HealthSystem>()?.Heal(15f);
                     break;
                 case "Coca":
                     AudioManager.Instance.Play(bolsa);

@@ -27,15 +27,12 @@ public class WeaponSelector : MonoBehaviour
             return;
         }
 
-        // Encuentra el índice del arma equipada actualmente
         int currentIndex = inventory.weapons.FindIndex(w => w.name == inventory.equippedWeapon);
 
-        // Avanza al siguiente, o vuelve a puños si estaba en la última
         if (currentIndex >= inventory.weapons.Count - 1)
         {
             inventory.equippedWeapon = null;
             combat.EquipWeapon(PlayerCombat.WeaponType.Fists, 0);
-            Debug.Log("Equipado: Puños");
         }
         else
         {
@@ -43,7 +40,7 @@ public class WeaponSelector : MonoBehaviour
             WeaponData next = inventory.weapons[nextIndex];
             inventory.equippedWeapon = next.name;
             combat.EquipWeapon(next.weaponType, next.durability);
-            Debug.Log("Equipado: " + next.name);
+            inventory.NotificarArmaEquipada(next.name); // notifica al tutorial
         }
     }
 }

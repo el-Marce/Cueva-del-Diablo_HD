@@ -11,7 +11,7 @@ public class HealthSystem : MonoBehaviour
     public event Action<float> OnHealthChanged;
     public event Action OnPlayerDeath;
 
-    void Start()
+    void Awake()
     {
         currentHealth = maxHealth;
     }

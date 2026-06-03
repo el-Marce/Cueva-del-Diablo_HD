@@ -128,6 +128,14 @@ public class Inventory : MonoBehaviour
             combat.EquipWeapon(PlayerCombat.WeaponType.Fists, 0);
         }
     }
+
+    // Añade este método que centraliza la notificación al tutorial
+    public void NotificarArmaEquipada(string weaponName)
+    {
+        if (string.IsNullOrEmpty(weaponName)) return;
+        string trigger = "equipar_" + weaponName.ToLower().Replace(" ", "");
+        TutorialManager.Instance?.CompletarTrigger(trigger);
+    }
     public void EquipSelected()
     {
         if (currentTab == Tab.Weapons)

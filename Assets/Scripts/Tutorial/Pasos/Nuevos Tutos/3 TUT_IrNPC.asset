@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
+  m_Name: 3 TUT_IrNPC
+  m_EditorClassIdentifier: 
+  mensaje: "Encuentra el Santuaro de la puerta: all\xED busca la botella de Alcohol
+    y habla con el Sacerdote."
+  icono: {fileID: 21300000, guid: 7d7f5d7710000ea4ab315dd928a9c423, type: 3}
+  mensajesSecuencia: []
+  bloqueaAvance: 0
+  silencioso: 0
+  triggerDeDesbloqueo: 
+  delayInicio: 0
+  triggersRequeridos: []
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1630, y: 742}
+  "tama\xF1oTexto": {x: 1180, y: 361}
+  toastMensaje: Habla con el sacerdote y recoge el alcohol
+  toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 5

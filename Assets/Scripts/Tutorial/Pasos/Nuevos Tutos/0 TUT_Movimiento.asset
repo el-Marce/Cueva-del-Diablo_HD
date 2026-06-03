@@ -10,17 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
-  m_Name: 3 TUT_IrNPC
+  m_Name: 0 TUT_Movimiento
   m_EditorClassIdentifier: 
-  mensaje: "Encuentra el Santuaro de la puerta: all\xED busca la botella de Alcohol
-    y  habla con el Sacerdote."
-  icono: {fileID: 21300000, guid: 7d7f5d7710000ea4ab315dd928a9c423, type: 3}
+  mensaje: 'Presiona las teclas WASD para moverte
+
+    Presiona Shift para correr
+
+
+
+
+'
+  icono: {fileID: 0}
   mensajesSecuencia: []
   bloqueaAvance: 0
   silencioso: 0
   triggerDeDesbloqueo: 
   delayInicio: 0
   triggersRequeridos: []
-  posicionAnclaje: {x: 0.5, y: 0.8}
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1074, y: 446}
+  "tama\xF1oTexto": {x: 1150, y: 290}
   toastMensaje: 
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 77000000610000007300000064000000
+  tiempoAutoCierre: 0

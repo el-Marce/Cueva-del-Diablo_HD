@@ -12,20 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
   m_Name: 4 TUT_Combate
   m_EditorClassIdentifier: 
-  mensaje: "Los enemigos tipo Zombie pueden ser muy agresivos y peligrosos, pero
-    tienen un punto d\xE9bil:\nSon vulnerables cuando est\xE1n a punto de lanzar
-    un ataque."
+  mensaje: Los enemigos tipo Zombie pueden ser muy agresivos y peligrosos
   icono: {fileID: 21300000, guid: 9896e5f99a52fc3428dcf445b88c9bad, type: 3}
   mensajesSecuencia:
-  - "Espera el momento exacto cuando est\xE9 preparando un golpe para empujarlo pulsando
-    \"clic derecho\", aprovecha el momento para golpearlo.\n\n"
-  - "Pero si fallas toma distancia, pues deber\xE1s esperar un tiempo para volver
-    a empujarlo.\n\n"
+  - mensaje: Presiona clic derecho cuando este lanzando un ataque para empujarlo,
+      aprovecha ese instante para atacaar
+    teclas: 44010000
+    tiempoAutoCierre: 0
   bloqueaAvance: 0
   silencioso: 0
   triggerDeDesbloqueo: 
   delayInicio: 0
   triggersRequeridos: []
-  posicionAnclaje: {x: 0.5, y: 0.8}
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1630, y: 742}
+  "tama\xF1oTexto": {x: 1180, y: 361}
   toastMensaje: 
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 3

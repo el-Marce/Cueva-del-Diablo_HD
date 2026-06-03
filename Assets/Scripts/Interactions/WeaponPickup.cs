@@ -14,7 +14,6 @@ public class WeaponPickup : MonoBehaviour, IInteractable
     public TutorialBarrier barreraTutorial;
     public TutorialStep stepSilencioso;        // Step_NPC_Item_Completar
     public TutorialBarrier barreraEncolada;  // barreraNPC
-
     [Header("Sonidos")]
 
     public EventReference recogerPaloSound;
@@ -47,5 +46,7 @@ public class WeaponPickup : MonoBehaviour, IInteractable
 
         if (stepSilencioso != null)
             TutorialManager.Instance?.MostrarPaso(stepSilencioso, barreraEncolada);
+
+
     }
 }

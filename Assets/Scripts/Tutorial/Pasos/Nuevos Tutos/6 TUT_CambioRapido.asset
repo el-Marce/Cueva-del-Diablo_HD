@@ -10,20 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
-  m_Name: 2 TUT_AguaBendita
+  m_Name: 6 TUT_CambioRapido
   m_EditorClassIdentifier: 
-  mensaje: "Recogiste \"Agua Bendita\" \nAbre tu inventario con TAB, navega hasta
-    la pesta\xF1a Armas con Q/E y equipa el Agua Bendita con Enter para repeler temporalmente
-    a enemigos tipo \"Ente\".\n\n"
+  mensaje: 'Los altares son tu principal camino para encontrar la salida.
+
+
+
+'
   icono: {fileID: 0}
   mensajesSecuencia:
-  - "Todos los objetos que recojas en el camino se guardan en tu inventario.\n\nDependiendo
-    de si son \xEDtems, armas o pergaminos son asignados a su respectivo lugar.\n\n\n"
-  bloqueaAvance: 1
+  - mensaje: 'Junta los items requeridos y atrae a los enemigos para activarlos
+
+
+
+'
+    teclas: 
+    tiempoAutoCierre: 3
+  bloqueaAvance: 0
   silencioso: 0
-  triggerDeDesbloqueo: equipar_aguabendita
+  triggerDeDesbloqueo: 
   delayInicio: 0
   triggersRequeridos: []
-  posicionAnclaje: {x: 0.5, y: 0.8}
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1500, y: 600}
+  "tama\xF1oTexto": {x: 1200, y: 290}
   toastMensaje: 
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 3

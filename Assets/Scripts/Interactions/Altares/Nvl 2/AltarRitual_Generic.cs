@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 public class AltarRitual_Generic : MonoBehaviour, IInteractable
 {
+    [Header("Cambio de escena (opcional)")]
+    public string escenaDestino;
+
     [Header("Puerta")]
     public Door door;
 
@@ -36,11 +39,40 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         // Recoge automáticamente todas las condiciones en este GameObject
         conditions.AddRange(GetComponents<AltarCondition>());
     }
+    //void Start()
+    //{
+    //    //enteCondition = GetComponent<AltarCondition_Entes>();
+    //}
+    //// Campo nuevo
+    Transform playerTransform;
+
     void Start()
     {
-        //enteCondition = GetComponent<AltarCondition_Entes>();
+        playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
+    void TeleportPlayer()
+    {
+        if (teleportTarget == null) return;
+
+        if (playerTransform == null)
+            playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        if (playerTransform == null)
+        {
+            Debug.LogError("[Altar] No se encontró al jugador para teleportar");
+            return;
+        }
+
+        // CharacterController debe desactivarse antes de mover al jugador
+        CharacterController cc = playerTransform.GetComponent<CharacterController>();
+        if (cc != null) cc.enabled = false;
+
+        playerTransform.position = teleportTarget.position;
+        playerTransform.rotation = teleportTarget.rotation;
+
+        if (cc != null) cc.enabled = true;
+    }
     public void Interact()
     {
         if (activated) return;
@@ -128,11 +160,15 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
             }
         }
 
-        if (teleportTarget != null)
+        if (!string.IsNullOrEmpty(escenaDestino))
+        {
+            yield return new WaitForSeconds(1f); // pequeña pausa antes de cambiar
+            UnityEngine.SceneManagement.SceneManager.LoadScene(escenaDestino);
+        }
+        else if (teleportTarget != null)
         {
             TeleportPlayer();
         }
-                
         //Debug.Log("[Altar] Ritual completado.");
     }
     void KillNearbyEntes()
@@ -198,16 +234,6 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         {
             GameObject npc = Instantiate(npcPrefab, spawnPos, spawnRot);
             npc.transform.localScale = new Vector3(1.3f, 1.88f, 1.15f);
-        }
-    }
-    void TeleportPlayer()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        if (player != null)
-        {
-            player.transform.position = teleportTarget.position;
-            player.transform.rotation = teleportTarget.rotation;
         }
     }
 }

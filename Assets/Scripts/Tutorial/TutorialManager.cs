@@ -16,6 +16,7 @@ public class TutorialManager : MonoBehaviour
     TutorialBarrier barreraActiva;
     Queue<(TutorialStep paso, TutorialBarrier barrera)> colaPasos = new();
     List<string> triggersCompletados = new();
+    static HashSet<string> pasosVistos = new HashSet<string>();
 
     void Awake()
     {
@@ -23,8 +24,21 @@ public class TutorialManager : MonoBehaviour
         Instance = this;
     }
 
+    static bool YaVisto(TutorialStep paso) => pasosVistos.Contains(paso.name);
+    static void MarcarVisto(TutorialStep paso) => pasosVistos.Add(paso.name);
+
+    [ContextMenu("Resetear tutoriales vistos")]
+    public void ResetearTutorialesVistos() => pasosVistos.Clear();
+
     public void MostrarPaso(TutorialStep paso, TutorialBarrier barrera = null)
     {
+        if (YaVisto(paso))
+        {
+            if (paso.bloqueaAvance && barrera != null)
+                barrera.Activar();
+            return;
+        }
+
         if (pasoActual != null)
         {
             colaPasos.Enqueue((paso, barrera));
@@ -50,13 +64,26 @@ public class TutorialManager : MonoBehaviour
         triggersCompletados.Clear();
 
         if (paso.bloqueaAvance && barreraActiva != null)
+        {
             barreraActiva.Activar();
+            barreraActiva.SetMensajeToast(paso.toastMensaje);
+        }
 
         if (!paso.silencioso)
-            tutorialPanel.Mostrar(paso.mensaje, paso.icono, paso.mensajesSecuencia);
-        else
-            OnPanelConfirmado(); // si no hay panel, avanza automáticamente si no bloquea
+            tutorialPanel.Mostrar(
+                paso.mensaje,
+                paso.icono,
+                paso.mensajesSecuencia,
+                paso.teclasConfirmacion,
+                paso.tiempoAutoCierre,
+                paso.posicionAnclaje,
+                paso.tamañoPanel,
+                paso.tamañoTexto
+            );
+
+        MarcarVisto(paso);
     }
+
     public void OnPanelConfirmado()
     {
         if (pasoActual != null && pasoActual.bloqueaAvance)
@@ -72,14 +99,13 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Para steps con un solo trigger
     public void CompletarTrigger(string trigger)
     {
         if (pasoActual == null) return;
         if (pasoActual.triggerDeDesbloqueo != trigger) return;
 
         DesactivarBarreraActual();
-        unlockToast?.Mostrar();  // siempre
+        unlockToast?.Mostrar();
         pasoActual = null;
 
         if (colaPasos.Count > 0)
@@ -89,7 +115,6 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Para steps que requieren múltiples acciones
     public void CompletarTriggerParcial(string trigger)
     {
         if (pasoActual == null) return;
@@ -126,16 +151,21 @@ public class TutorialManager : MonoBehaviour
         else
         {
             foreach (TutorialBarrier b in FindObjectsByType<TutorialBarrier>(FindObjectsSortMode.None))
-                if (b.estaActiva) {/* b.barreraToast?.Ocultar(); */b.Desactivar(); }
+                if (b.estaActiva) b.Desactivar();
         }
     }
 
-    public void MostrarToastInfo(string mensaje)
-    {
-        unlockToast?.Mostrar(mensaje);
-    }
+    public void MostrarToastInfo(string mensaje) => unlockToast?.Mostrar(mensaje);
+
     public void ActivarPasoSilencioso(TutorialStep paso, TutorialBarrier barrera = null)
     {
+        if (YaVisto(paso))
+        {
+            if (paso.bloqueaAvance && barrera != null)
+                barrera.Activar();
+            return;
+        }
+
         if (pasoActual != null)
         {
             colaPasos.Enqueue((paso, barrera));
@@ -148,6 +178,7 @@ public class TutorialManager : MonoBehaviour
 
         if (paso.bloqueaAvance && barrera != null)
             barrera.Activar();
-        // No llama a tutorialPanel.Mostrar()
+
+        MarcarVisto(paso);
     }
 }

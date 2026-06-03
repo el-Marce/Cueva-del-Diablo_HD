@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: 5 TUT_Asomarse
   m_EditorClassIdentifier: 
   mensaje: "Ojeada\n\ncuando estes tras de una pared, presiona \"Clic derecho + A/D\"
-    para asomar la mirada. as\xED puedes ver el \xE1rea sin exponerte a ser visto\n\n\n"
+    para asomar la mirada. as\xED puedes ver el \xE1rea sin exponerte a ser visto\n\n"
   icono: {fileID: 0}
-  mensajesSecuencia:
-  - "recuerda guardar silencio, pues a\xFAn pueden escucharte\n\n\n"
+  mensajesSecuencia: []
   bloqueaAvance: 0
   silencioso: 0
   triggerDeDesbloqueo: 
   delayInicio: 0
   triggersRequeridos: []
-  posicionAnclaje: {x: 0.5, y: 0.8}
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1600, y: 740}
+  "tama\xF1oTexto": {x: 1124.2, y: 260}
   toastMensaje: 
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 3

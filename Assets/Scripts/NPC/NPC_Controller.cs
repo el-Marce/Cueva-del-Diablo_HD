@@ -48,7 +48,7 @@ public class NPC_Controller : MonoBehaviour, IInteractable
 
         activated = true;
         TutorialManager.Instance?.CompletarTriggerParcial("npc_interactuado");
-        //DisableInteraction();
+        gameObject.GetComponent<Collider>().enabled = false;
     }
     void Start()
     {

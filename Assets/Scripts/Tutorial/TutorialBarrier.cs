@@ -85,24 +85,37 @@ public class TutorialBarrier : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    string mensajeToastActual = "";
+
+    public void SetMensajeToast(string mensaje)
+    {
+        mensajeToastActual = string.IsNullOrEmpty(mensaje) ? "" : mensaje;
+    }
+    float cooldownContacto = 0f;
+    float tiempoRefresco = 1f; // ajustable en Inspector
+
     public void NotificarContacto(Vector3 contactPoint)
     {
         if (!estaActiva) return;
         ReaccionarAlContacto(contactPoint);
-        if (!jugadorEnContacto)
+
+        cooldownContacto -= Time.deltaTime;
+        if (cooldownContacto <= 0f)
         {
-            jugadorEnContacto = true;
-            barreraToast?.MostrarPersistente();
+            cooldownContacto = tiempoRefresco;
+            if (barreraToast != null)
+            {
+                string mensaje = TutorialManager.Instance?.pasoActual?.toastMensaje;
+                Debug.Log("Mensaje: " + mensaje);
+                barreraToast.Mostrar(string.IsNullOrEmpty(mensaje) ? null : mensaje);
+            }
         }
     }
 
     public void NotificarSeparacion()
     {
-        if (!jugadorEnContacto) return;
         jugadorEnContacto = false;
-        barreraToast?.Ocultar();
     }
-
     public void ReaccionarAlContacto(Vector3 contactPoint)
     {
         if (contactParticles != null)
@@ -150,4 +163,11 @@ public class TutorialBarrier : MonoBehaviour
         if (barrierMat == null) return 0f;
         return barrierMat.color.a;
     }
+    //public void SetMensajeToast(string mensaje)
+    //{
+    //    if (barreraToast != null)
+    //        barreraToast.mensajePorDefecto = string.IsNullOrEmpty(mensaje)
+    //            ? barreraToast.mensajePorDefecto
+    //            : mensaje;
+    //}
 }

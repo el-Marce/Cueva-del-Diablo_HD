@@ -23,5 +23,9 @@ MonoBehaviour:
   - npc_interactuado
   - item_alcohol
   posicionAnclaje: {x: 0.5, y: 0.8}
-  toastMensaje: 
+  "tama\xF1oPanel": {x: 600, y: 300}
+  "tama\xF1oTexto": {x: 560, y: 260}
+  toastMensaje: Habla con el sacerdote y recoge el alcohol
   toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 0

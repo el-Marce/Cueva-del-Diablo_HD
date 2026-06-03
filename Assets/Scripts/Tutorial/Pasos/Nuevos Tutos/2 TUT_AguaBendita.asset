@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
+  m_Name: 2 TUT_AguaBendita
+  m_EditorClassIdentifier: 
+  mensaje: "Recogiste \"Agua Maldita\" \nAbre tu inventario, navega hasta la pesta\xF1a
+    Armas para equiparlo:"
+  icono: {fileID: 0}
+  mensajesSecuencia:
+  - mensaje: 'Presiona Tab para abrir tu inventario
+
+
+'
+    teclas: 09000000
+    tiempoAutoCierre: 0
+  - mensaje: "Navega con q y e para explorar las pesta\xF1as, ve hasta la pesta\xF1a
+      de armas\n\n"
+    teclas: 7100000065000000
+    tiempoAutoCierre: 0
+  - mensaje: 'Equipa el arma con Enter, para usarla en combate
+
+
+'
+    teclas: 0d000000
+    tiempoAutoCierre: 0
+  - mensaje: 'Usa el Agua Maldita para ahuyentar a enemigos tipo "ente"
+
+
+'
+    teclas: 0d000000
+    tiempoAutoCierre: 3
+  bloqueaAvance: 1
+  silencioso: 0
+  triggerDeDesbloqueo: equipar_aguamaldita
+  delayInicio: 0
+  triggersRequeridos: []
+  posicionAnclaje: {x: 0, y: 0}
+  "tama\xF1oPanel": {x: 1237, y: 541}
+  "tama\xF1oTexto": {x: 846, y: 150}
+  toastMensaje: Equipa el Agua Bendita
+  toastIcono: {fileID: 0}
+  teclasConfirmacion: 
+  tiempoAutoCierre: 3

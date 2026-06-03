@@ -151,8 +151,7 @@ public class InventoryMenu : MonoBehaviour
     void OnInventarioCerrado()
     {
         if (string.IsNullOrEmpty(inventory.equippedWeapon)) return;
-        string trigger = "equipar_" + inventory.equippedWeapon.ToLower().Replace(" ", "");
-        TutorialManager.Instance?.CompletarTrigger(trigger);
+        inventory.NotificarArmaEquipada(inventory.equippedWeapon);
     }
 
     void Navigate()

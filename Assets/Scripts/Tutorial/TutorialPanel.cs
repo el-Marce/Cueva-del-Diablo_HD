@@ -9,69 +9,136 @@ public class TutorialPanel : MonoBehaviour
     public CanvasGroup canvasGroup;
     public TMP_Text mensajeText;
     public Image iconoImage;
-    public Button botonEntendido;
+    public RectTransform panelRect;
+    public RectTransform textoRect;
 
     [Header("Animación")]
     public float fadeDuration = 0.3f;
 
-    string[] secuencia;
-    int indiceSecuencia = 0;
+    // Mensaje principal
+    string mensajePrincipal;
+    Sprite iconoPrincipal;
+    KeyCode[] teclasPrincipal;
+    float timerPrincipal;
+    bool autoCierrePrincipal;
+
+    // Secuencia
+    MensajeSecuencia[] secuencia;
+    int indiceSecuencia = -1; // -1 = estamos en el mensaje principal
+
+    // Estado actual
+    KeyCode[] teclasActuales;
+    float timerActual;
+    bool usaAutoCierre;
+
     Coroutine fadeCoroutine;
 
     void Awake()
     {
         canvasGroup.alpha = 0f;
         gameObject.SetActive(false);
-
-        if (botonEntendido != null)
-            botonEntendido.onClick.AddListener(Confirmar);
     }
 
     void Update()
     {
-        if (canvasGroup.alpha >= 1f && Input.GetKeyDown(KeyCode.Return))
-            Confirmar();
-    }
+        if (canvasGroup.alpha < 1f) return;
 
-    public void Mostrar(string mensaje, Sprite icono = null, string[] mensajesExtra = null)
-    {
-        // Armar secuencia completa: primer mensaje + extras
-        if (mensajesExtra != null && mensajesExtra.Length > 0)
+        if (usaAutoCierre)
         {
-            secuencia = new string[1 + mensajesExtra.Length];
-            secuencia[0] = mensaje;
-            for (int i = 0; i < mensajesExtra.Length; i++)
-                secuencia[i + 1] = mensajesExtra[i];
+            timerActual -= Time.deltaTime;
+            if (timerActual <= 0f)
+                Confirmar();
         }
         else
         {
-            secuencia = new string[] { mensaje };
+            if (teclasActuales == null || teclasActuales.Length == 0) return;
+            foreach (KeyCode key in teclasActuales)
+            {
+                if (Input.GetKeyDown(key))
+                {
+                    Confirmar();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Mostrar(string mensaje, Sprite icono = null, MensajeSecuencia[] mensajesExtra = null,
+                        KeyCode[] teclas = null, float autoCierre = 0f,
+                        Vector2? anclaje = null, Vector2? tamaño = null,
+                        Vector2? tamañoTexto = null)
+    {
+        mensajePrincipal = mensaje;
+        iconoPrincipal = icono;
+        teclasPrincipal = teclas;
+        timerPrincipal = autoCierre;
+        autoCierrePrincipal = autoCierre > 0f;
+
+        secuencia = mensajesExtra;
+        indiceSecuencia = -1;
+
+        AplicarContenido(mensaje, icono);
+        AplicarComportamiento(autoCierre > 0f, teclas, autoCierre);
+
+        // Posición y tamaño del panel
+        if (panelRect != null)
+        {
+            if (anclaje.HasValue)
+            {
+                panelRect.anchorMin = anclaje.Value;
+                panelRect.anchorMax = anclaje.Value;
+                panelRect.anchoredPosition = Vector2.zero;
+            }
+            if (tamaño.HasValue)
+                panelRect.sizeDelta = tamaño.Value;
         }
 
-        indiceSecuencia = 0;
-
-        AplicarContenido(secuencia[0], icono);
-
-        GameState.InMenu = true;
+        if (textoRect != null && tamañoTexto.HasValue)
+            textoRect.sizeDelta = tamañoTexto.Value;
 
         if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
         gameObject.SetActive(true);
         fadeCoroutine = StartCoroutine(FadeTo(1f, fadeDuration));
     }
 
+    // Aplica teclas o timer según el mensaje actual
+    void AplicarComportamiento(bool esAutoCierre, KeyCode[] teclas, float timer)
+    {
+        usaAutoCierre = esAutoCierre;
+        teclasActuales = esAutoCierre ? null : teclas;
+        timerActual = esAutoCierre ? timer : 0f;
+    }
+
     void Confirmar()
     {
         indiceSecuencia++;
 
-        if (indiceSecuencia < secuencia.Length)
+        bool haySecuencia = secuencia != null && secuencia.Length > 0;
+
+        if (haySecuencia && indiceSecuencia < secuencia.Length)
         {
+            MensajeSecuencia actual = secuencia[indiceSecuencia];
+            bool esAuto = actual.tiempoAutoCierre > 0f;
+
+            AplicarComportamiento(esAuto, actual.teclas, actual.tiempoAutoCierre);
+
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-            fadeCoroutine = StartCoroutine(TransicionSecuencia(secuencia[indiceSecuencia]));
+            fadeCoroutine = StartCoroutine(TransicionSecuencia(actual.mensaje));
         }
         else
         {
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
             fadeCoroutine = StartCoroutine(FadeYDesactivar());
+        }
+    }
+
+    void AplicarContenido(string mensaje, Sprite icono)
+    {
+        mensajeText.text = mensaje;
+        if (iconoImage != null)
+        {
+            iconoImage.sprite = icono;
+            iconoImage.gameObject.SetActive(icono != null);
         }
     }
 
@@ -81,22 +148,11 @@ public class TutorialPanel : MonoBehaviour
         mensajeText.text = nuevoMensaje;
         yield return FadeTo(1f, fadeDuration);
     }
-    void AplicarContenido(string mensaje, Sprite icono)
-    {
-        mensajeText.text = mensaje;
-
-        if (iconoImage != null)
-        {
-            iconoImage.sprite = icono;
-            iconoImage.gameObject.SetActive(icono != null);
-        }
-    }
 
     IEnumerator FadeYDesactivar()
     {
         yield return FadeTo(0f, fadeDuration);
         gameObject.SetActive(false);
-        GameState.InMenu = false;
         TutorialManager.Instance?.OnPanelConfirmado();
     }
 
