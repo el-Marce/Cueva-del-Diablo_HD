@@ -27,6 +27,9 @@ public class TutorialBarrier : MonoBehaviour
     [Header("Toast de contacto")]
     public TutorialUnlockToast barreraToast;
 
+    [Header("Persistencia")]
+    public string barrierID;
+
     Material barrierMat;
     bool debePulsar = false;          // <-- flag central
     bool jugadorEnContacto = false;
@@ -45,9 +48,16 @@ public class TutorialBarrier : MonoBehaviour
 
     void Start()
     {
-        if (activarAlInicio) Activar();
-    }
+        // Si fue desactivada en una vida anterior, no activar
+        if (!string.IsNullOrEmpty(barrierID) && TutorialBarrierState.EstaDesactivada(barrierID))
+        {
+            estaActiva = false;
+            return;
+        }
 
+        if (activarAlInicio)
+            Activar();
+    }
     // Un solo loop que vive toda la vida del objeto
     void Update()
     {
@@ -73,7 +83,8 @@ public class TutorialBarrier : MonoBehaviour
         estaActiva = false;
         jugadorEnContacto = false;
         debePulsar = false;           // apaga el pulso sin importar nada más
-
+        if (!string.IsNullOrEmpty(barrierID))
+            TutorialBarrierState.RegistrarDesactivada(barrierID);
         StopAllCoroutines();          // cancela cualquier fade en curso
         StartCoroutine(FadeTo(0f, fadeDuration, () =>
         {
