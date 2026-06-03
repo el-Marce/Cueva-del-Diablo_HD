@@ -650,7 +650,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639160649689139768
+  cacheTime: 639160676388833528
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -1017,7 +1017,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Ambiente.bank
   Name: Ambiente
   StudioPath: bank:/Ambiente
-  lastModified: 639160649689139768
+  lastModified: 639160676388833528
   FileSizes: []
   Exists: 1
 --- !u!114 &3822517588516723737
