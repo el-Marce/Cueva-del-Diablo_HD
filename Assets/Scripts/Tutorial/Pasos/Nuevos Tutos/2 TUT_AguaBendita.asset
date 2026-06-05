@@ -44,7 +44,7 @@ MonoBehaviour:
   delayInicio: 0
   triggersRequeridos: []
   posicionAnclaje: {x: 0, y: 0}
-  "tama\xF1oPanel": {x: 1237, y: 541}
+  "tama\xF1oPanel": {x: 1237, y: 370}
   "tama\xF1oTexto": {x: 846, y: 150}
   toastMensaje: Equipa el Agua Bendita
   toastIcono: {fileID: 0}

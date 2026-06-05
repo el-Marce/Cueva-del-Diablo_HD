@@ -259,14 +259,17 @@ public class InventoryMenu : MonoBehaviour
         if (inventory.currentTab == Inventory.Tab.Scrolls)
         {
             string texto = inventory.scrolls[inventory.selectedIndex].text;
-            // Truncar a 120 caracteres con indicador de que hay más
             descriptionText.text = texto.Length > 120
                 ? texto.Substring(0, 200) + "...\n<align=right>[Enter para leer]"
                 : texto;
         }
         else
         {
-            descriptionText.text = "Objeto: " + inventory.GetSelected();
+            string nombre = inventory.GetSelected();
+            bool esArmaEquipada = inventory.currentTab == Inventory.Tab.Weapons
+                && inventory.equippedWeapon == nombre;
+
+            descriptionText.text = (esArmaEquipada ? "Equipado: " : "Objeto: ") + nombre;
         }
     }
     void PrintMenu()

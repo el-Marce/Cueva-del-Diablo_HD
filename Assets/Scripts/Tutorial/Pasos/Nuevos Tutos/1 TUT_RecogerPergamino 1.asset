@@ -21,7 +21,7 @@ MonoBehaviour:
   triggerDeDesbloqueo: pergamino_recogido
   delayInicio: 0
   triggersRequeridos: []
-  posicionAnclaje: {x: 0, y: 0}
+  posicionAnclaje: {x: 0, y: 0.35}
   "tama\xF1oPanel": {x: 1300, y: 700}
   "tama\xF1oTexto": {x: 900, y: 600}
   toastMensaje: Recoge el pergamino

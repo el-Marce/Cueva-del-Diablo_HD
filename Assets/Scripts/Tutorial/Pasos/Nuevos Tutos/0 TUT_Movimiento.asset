@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
   m_Name: 0 TUT_Movimiento
   m_EditorClassIdentifier: 
-  mensaje: 'Presiona las teclas WASD para moverte
+  mensaje: 'Presiona las teclas W,A,S,D para moverte
 
     Presiona Shift para correr
 
 
 
-
 '
   icono: {fileID: 0}
-  mensajesSecuencia: []
+  mensajesSecuencia:
+  - mensaje: "Los enemigos utilizan el sonido de tu micr\xF3fono para ubicarte as\xED
+      que guarda silencio.\n\n\n"
+    teclas: 
+    tiempoAutoCierre: 1.69
   bloqueaAvance: 0
   silencioso: 0
   triggerDeDesbloqueo: 
@@ -29,7 +32,7 @@ MonoBehaviour:
   triggersRequeridos: []
   posicionAnclaje: {x: 0, y: 0}
   "tama\xF1oPanel": {x: 1074, y: 446}
-  "tama\xF1oTexto": {x: 1150, y: 290}
+  "tama\xF1oTexto": {x: 911, y: 290}
   toastMensaje: 
   toastIcono: {fileID: 0}
   teclasConfirmacion: 77000000610000007300000064000000

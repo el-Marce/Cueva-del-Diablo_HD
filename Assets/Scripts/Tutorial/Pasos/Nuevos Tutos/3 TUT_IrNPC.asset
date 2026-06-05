@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ea59747508ac34695041bd948b4b4e, type: 3}
   m_Name: 3 TUT_IrNPC
   m_EditorClassIdentifier: 
-  mensaje: "Encuentra el Santuaro de la puerta: all\xED busca la botella de Alcohol
-    y habla con el Sacerdote."
+  mensaje: "Encuentra el Santuaro de la puerta, all\xED debes:\n\n\t- buscar la botella
+    de Alcohol\n\t- hablar con el Sacerdote."
   icono: {fileID: 21300000, guid: 7d7f5d7710000ea4ab315dd928a9c423, type: 3}
   mensajesSecuencia: []
   bloqueaAvance: 0
