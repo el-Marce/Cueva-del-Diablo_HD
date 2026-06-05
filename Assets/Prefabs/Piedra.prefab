@@ -116,6 +116,31 @@ MonoBehaviour:
   durability: 10
   weaponName: Roca
   icon: {fileID: 21300000, guid: 11ebcc6570f68484ba0df8bc35c96836, type: 3}
+  tutorialStep: {fileID: 0}
+  barreraTutorial: {fileID: 0}
+  stepSilencioso: {fileID: 0}
+  barreraEncolada: {fileID: 0}
+  recogerPaloSound:
+    Guid:
+      Data1: -321690120
+      Data2: 1077822986
+      Data3: 484827025
+      Data4: -188117548
+    Path: event:/Interacttions/PaloPick
+  recogerRocaSound:
+    Guid:
+      Data1: -712689084
+      Data2: 1307116821
+      Data3: 1539862923
+      Data4: 599201090
+    Path: event:/Interacttions/RocaPick
+  recogerAguaBendita:
+    Guid:
+      Data1: -2055770524
+      Data2: 1125479849
+      Data3: 926928828
+      Data4: -484193103
+    Path: event:/Interacttions/Cristal
 --- !u!64 &1815443669049616572
 MeshCollider:
   m_ObjectHideFlags: 0

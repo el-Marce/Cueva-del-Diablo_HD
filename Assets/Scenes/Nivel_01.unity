@@ -2357,17 +2357,17 @@ PrefabInstance:
     - target: {fileID: 2158147708595912585, guid: c04e6e53383e87e468bc54aaec2f16fd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.523
+      value: 13.812
       objectReference: {fileID: 0}
     - target: {fileID: 2158147708595912585, guid: c04e6e53383e87e468bc54aaec2f16fd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 2158147708595912585, guid: c04e6e53383e87e468bc54aaec2f16fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 129.266
+      value: 130.871
       objectReference: {fileID: 0}
     - target: {fileID: 2158147708595912585, guid: c04e6e53383e87e468bc54aaec2f16fd,
         type: 3}
@@ -96443,6 +96443,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1929016063351307605, guid: c2b8ccf3a426b914990480c89bc392e5,
+        type: 3}
+      propertyPath: m_text
+      value: Salud mental restaurada
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929016063351307605, guid: c2b8ccf3a426b914990480c89bc392e5,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 46
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929016063351307605, guid: c2b8ccf3a426b914990480c89bc392e5,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 46
+      objectReference: {fileID: 0}
     - target: {fileID: 2171227161069916554, guid: c2b8ccf3a426b914990480c89bc392e5,
         type: 3}
       propertyPath: m_Color.a
@@ -99166,81 +99181,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerPaloSound.Path
-      value: event:/Interacttions/PaloPick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerRocaSound.Path
-      value: event:/Interacttions/RocaPick
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerAguaBendita.Path
-      value: event:/Interacttions/Cristal
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data1
-      value: -321690120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data2
-      value: 1077822986
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data3
-      value: 484827025
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data4
-      value: -188117548
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data1
-      value: -712689084
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data2
-      value: 1307116821
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data3
-      value: 1539862923
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data4
-      value: 599201090
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data1
-      value: -2055770524
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data2
-      value: 1125479849
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data3
-      value: 926928828
-      objectReference: {fileID: 0}
-    - target: {fileID: 6255959349893930531, guid: ee13d33d13761d1429defde2cb8a5a51,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data4
-      value: -484193103
-      objectReference: {fileID: 0}
     - target: {fileID: 7615428991986390586, guid: ee13d33d13761d1429defde2cb8a5a51,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -99453,11 +99393,6 @@ PrefabInstance:
       propertyPath: mensajeCruz
       value: 
       objectReference: {fileID: 1988271837}
-    - target: {fileID: 6010666828257264992, guid: 6973d45eff455f94e8d2852b626f0b69,
-        type: 3}
-      propertyPath: cooldownSegundos
-      value: 60
-      objectReference: {fileID: 0}
     - target: {fileID: 8075820231081913520, guid: 6973d45eff455f94e8d2852b626f0b69,
         type: 3}
       propertyPath: m_Name
@@ -99665,81 +99600,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerPaloSound.Path
-      value: event:/Interacttions/PaloPick
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerRocaSound.Path
-      value: event:/Interacttions/RocaPick
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerAguaBendita.Path
-      value: event:/Interacttions/Cristal
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data1
-      value: -321690120
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data2
-      value: 1077822986
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data3
-      value: 484827025
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerPaloSound.Guid.Data4
-      value: -188117548
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data1
-      value: -712689084
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data2
-      value: 1307116821
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data3
-      value: 1539862923
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerRocaSound.Guid.Data4
-      value: 599201090
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data1
-      value: -2055770524
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data2
-      value: 1125479849
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data3
-      value: 926928828
-      objectReference: {fileID: 0}
-    - target: {fileID: 5264490018492156484, guid: 050067934e46b7545a9f468c462c53e7,
-        type: 3}
-      propertyPath: recogerAguaBendita.Guid.Data4
-      value: -484193103
       objectReference: {fileID: 0}
     - target: {fileID: 9011030644879429645, guid: 050067934e46b7545a9f468c462c53e7,
         type: 3}

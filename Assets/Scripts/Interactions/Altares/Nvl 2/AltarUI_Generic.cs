@@ -44,6 +44,12 @@ public class AltarUI_Generic : MonoBehaviour
     {
         if (currentAltar == null || busy) return;
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            Close();
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             selectedIndex = (selectedIndex + 1) % optionsText.Length;

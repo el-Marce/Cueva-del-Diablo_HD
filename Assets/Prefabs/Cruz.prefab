@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sanityAmount: 20
-  cooldownSegundos: 120
+  cooldownSegundos: 60
   mensajeCruz: {fileID: 0}
   mensaje: {fileID: 0}
 --- !u!4 &2305003209465334826 stripped

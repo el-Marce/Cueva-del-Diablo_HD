@@ -21,7 +21,19 @@ public class RitmoUI : MonoBehaviour
     AltarCondition_RhythmChallenge rhythmCondition;
     AltarRitual_Generic altar;
     int currentStep = 0;
+    void Update()
+    {
+        if (!ritmoPanel.activeSelf) return;
 
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            currentStep = 0;
+            ResetCirculos();
+            if (statusText != null)
+                statusText.text = "Escucha y repite...";
+            Close();
+        }
+    }
     public void Open(AltarRitual_Generic _altar, AltarCondition_RhythmChallenge _rhythm)
     {
         altar = _altar;
