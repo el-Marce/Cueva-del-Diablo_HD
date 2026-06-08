@@ -30,11 +30,23 @@ public class TutorialManager : MonoBehaviour
     [ContextMenu("Resetear tutoriales vistos")]
     public void ResetearTutorialesVistos() => pasosVistos.Clear();
 
+    // Comprueba si la barrera asociada a un paso ya fue desactivada de forma permanente.
+    // Si tiene ID, usa TutorialBarrierState. Si se pasó la instancia directamente, la consulta.
+    static bool BarreraYaDesactivada(TutorialStep paso, TutorialBarrier barrera)
+    {
+        if (barrera == null) return false;
+        if (!string.IsNullOrEmpty(barrera.barrierID))
+            return TutorialBarrierState.EstaDesactivada(barrera.barrierID);
+        return false;
+    }
+
     public void MostrarPaso(TutorialStep paso, TutorialBarrier barrera = null)
     {
         if (YaVisto(paso))
         {
-            if (paso.bloqueaAvance && barrera != null)
+            // Solo reactivar la barrera si el paso bloquea el avance
+            // Y la barrera NO fue desactivada previamente en esta sesión.
+            if (paso.bloqueaAvance && barrera != null && !BarreraYaDesactivada(paso, barrera))
                 barrera.Activar();
             return;
         }
@@ -63,7 +75,7 @@ public class TutorialManager : MonoBehaviour
         barreraActiva = barrera;
         triggersCompletados.Clear();
 
-        if (paso.bloqueaAvance && barreraActiva != null)
+        if (paso.bloqueaAvance && barreraActiva != null && !BarreraYaDesactivada(paso, barreraActiva))
         {
             barreraActiva.Activar();
             barreraActiva.SetMensajeToast(paso.toastMensaje);
@@ -161,7 +173,8 @@ public class TutorialManager : MonoBehaviour
     {
         if (YaVisto(paso))
         {
-            if (paso.bloqueaAvance && barrera != null)
+            // Mismo fix: respetar TutorialBarrierState antes de reactivar.
+            if (paso.bloqueaAvance && barrera != null && !BarreraYaDesactivada(paso, barrera))
                 barrera.Activar();
             return;
         }
@@ -176,7 +189,7 @@ public class TutorialManager : MonoBehaviour
         barreraActiva = barrera;
         triggersCompletados.Clear();
 
-        if (paso.bloqueaAvance && barrera != null)
+        if (paso.bloqueaAvance && barrera != null && !BarreraYaDesactivada(paso, barrera))
             barrera.Activar();
 
         MarcarVisto(paso);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
@@ -9,8 +10,13 @@ public class AltarUI_Generic : MonoBehaviour
 
     [Header("UI")]
     public TMP_Text titleText;
-    //public TMP_Text conditionsText;
     public TMP_Text[] optionsText;
+
+    // Botones opcionales: asignar en el Inspector los Button components
+    // que envuelven cada opción (índice 0 = Ofrecer, índice 1 = Cerrar).
+    // Si no se asignan, el panel funciona solo con teclado.
+    [Header("Botones (opcional)")]
+    public Button[] optionButtons;
 
     [Header("Ritmo")]
     public RitmoUI ritmoUI;
@@ -30,6 +36,7 @@ public class AltarUI_Generic : MonoBehaviour
         currentAltar = altar;
         altarPanel.SetActive(true);
         GameState.InMenu = true;
+        ShowCursor(true);
         Refresh();
     }
 
@@ -37,8 +44,29 @@ public class AltarUI_Generic : MonoBehaviour
     {
         altarPanel.SetActive(false);
         GameState.InMenu = false;
+        ShowCursor(false);
         currentAltar = null;
     }
+
+    // --- Métodos públicos para asignar a los Button.onClick desde el Inspector ---
+
+    public void OnClickOffer()
+    {
+        if (currentAltar == null || busy) return;
+        selectedIndex = 0;
+        PrintOptions();
+        StartCoroutine(OfferRoutine());
+    }
+
+    public void OnClickClose()
+    {
+        if (currentAltar == null || busy) return;
+        selectedIndex = 1;
+        PrintOptions();
+        Close();
+    }
+
+    // -------------------------------------------------------------------------
 
     void Update()
     {
@@ -66,7 +94,6 @@ public class AltarUI_Generic : MonoBehaviour
             else Close();
         }
 
-        // Refresca condiciones dinámicas (entes moviéndose, etc.)
         RefreshConditions();
     }
 
@@ -80,7 +107,6 @@ public class AltarUI_Generic : MonoBehaviour
     void PrintTitle()
     {
         if (currentAltar.conditions.Count == 0) return;
-        // El título muestra la primera condición pendiente
         foreach (var c in currentAltar.conditions)
         {
             if (!c.IsMet())
@@ -92,14 +118,6 @@ public class AltarUI_Generic : MonoBehaviour
         titleText.text = "Todo listo. ¿Ofrecer?";
     }
 
-    //void RefreshConditions()
-    //{
-    //    if (currentAltar == null) return;
-    //    string result = "";
-    //    foreach (var c in currentAltar.conditions)
-    //        result += c.GetStatusText() + "\n";
-    //    conditionsText.text = result.TrimEnd();
-    //}
     void RefreshConditions()
     {
         if (currentAltar == null) return;
@@ -131,6 +149,7 @@ public class AltarUI_Generic : MonoBehaviour
                 : condition.inactiveIcon;
         }
     }
+
     void PrintOptions()
     {
         for (int i = 0; i < optionsText.Length; i++)
@@ -141,6 +160,13 @@ public class AltarUI_Generic : MonoBehaviour
         }
     }
 
+    // Centraliza toda la lógica del cursor en un solo lugar.
+    void ShowCursor(bool show)
+    {
+        Cursor.visible = show;
+        Cursor.lockState = show ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+
     IEnumerator OfferRoutine()
     {
         busy = true;
@@ -149,11 +175,10 @@ public class AltarUI_Generic : MonoBehaviour
         AltarCondition_RhythmChallenge rhythm =
             currentAltar.GetComponent<AltarCondition_RhythmChallenge>();
 
-        // Verifica condiciones no-ritmo primero
         bool previasCumplidas = true;
         foreach (var c in currentAltar.conditions)
         {
-            if (c == rhythm) continue; // ignora el ritmo en esta evaluación
+            if (c == rhythm) continue;
             if (!c.IsMet())
             {
                 previasCumplidas = false;
@@ -163,24 +188,23 @@ public class AltarUI_Generic : MonoBehaviour
 
         if (!previasCumplidas)
         {
-            //Debug.Log("[AltarUI] Condiciones previas no cumplidas.");
             altarPanel.SetActive(true);
             busy = false;
             yield break;
         }
 
-        // Previas cumplidas — abre ritmo si existe y no está resuelto
         if (rhythm != null && !rhythm.IsMet() && ritmoUI != null)
         {
             MicrophoneInput mic = FindObjectOfType<MicrophoneInput>();
             if (mic != null) mic.rhythmCondition = rhythm;
 
+            // Al abrir el ritmo el panel del altar se oculta; el cursor
+            // queda visible para que ritmoUI lo gestione si lo necesita.
             ritmoUI.Open(currentAltar, rhythm);
             busy = false;
             yield break;
         }
 
-        // Todo cumplido incluyendo ritmo
         if (!currentAltar.AllConditionsMet())
         {
             altarPanel.SetActive(true);
@@ -188,6 +212,8 @@ public class AltarUI_Generic : MonoBehaviour
             yield break;
         }
 
+        // Cierra limpiamente (oculta cursor) antes de activar el altar.
+        ShowCursor(false);
         currentAltar.TryActivate();
         busy = false;
     }

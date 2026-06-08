@@ -31,7 +31,7 @@ public class TutorialBarrier : MonoBehaviour
     public string barrierID;
 
     Material barrierMat;
-    bool debePulsar = false;          // <-- flag central
+    bool debePulsar = false;
     bool jugadorEnContacto = false;
 
     void Awake()
@@ -48,17 +48,19 @@ public class TutorialBarrier : MonoBehaviour
 
     void Start()
     {
-        // Si fue desactivada en una vida anterior, no activar
+        // CORRECCIÓN: el check de persistencia va PRIMERO.
+        // Si esta barrera fue desactivada en esta sesión, no activar bajo ningún concepto.
         if (!string.IsNullOrEmpty(barrierID) && TutorialBarrierState.EstaDesactivada(barrierID))
         {
             estaActiva = false;
             return;
         }
 
+        // Solo después del check de persistencia, activar si corresponde.
         if (activarAlInicio)
             Activar();
     }
-    // Un solo loop que vive toda la vida del objeto
+
     void Update()
     {
         if (debePulsar)
@@ -82,15 +84,14 @@ public class TutorialBarrier : MonoBehaviour
     {
         estaActiva = false;
         jugadorEnContacto = false;
-        debePulsar = false;           // apaga el pulso sin importar nada más
+        debePulsar = false;
         if (!string.IsNullOrEmpty(barrierID))
             TutorialBarrierState.RegistrarDesactivada(barrierID);
-        StopAllCoroutines();          // cancela cualquier fade en curso
+        StopAllCoroutines();
         StartCoroutine(FadeTo(0f, fadeDuration, () =>
         {
             if (barrierCollider != null)
                 barrierCollider.enabled = false;
-
         }));
 
         gameObject.SetActive(false);
@@ -102,8 +103,9 @@ public class TutorialBarrier : MonoBehaviour
     {
         mensajeToastActual = string.IsNullOrEmpty(mensaje) ? "" : mensaje;
     }
+
     float cooldownContacto = 0f;
-    float tiempoRefresco = 1f; // ajustable en Inspector
+    float tiempoRefresco = 1f;
 
     public void NotificarContacto(Vector3 contactPoint)
     {
@@ -127,6 +129,7 @@ public class TutorialBarrier : MonoBehaviour
     {
         jugadorEnContacto = false;
     }
+
     public void ReaccionarAlContacto(Vector3 contactPoint)
     {
         if (contactParticles != null)
@@ -144,7 +147,7 @@ public class TutorialBarrier : MonoBehaviour
         debePulsar = false;
         yield return StartCoroutine(FadeTo(pulseMaxAlpha, 0.08f, null));
         yield return StartCoroutine(FadeTo(pulseMinAlpha, 0.2f, null));
-        if (estaActiva) debePulsar = true;    // solo reactiva si sigue activa
+        if (estaActiva) debePulsar = true;
     }
 
     IEnumerator FadeTo(float targetAlpha, float duration, System.Action onComplete)
@@ -174,11 +177,4 @@ public class TutorialBarrier : MonoBehaviour
         if (barrierMat == null) return 0f;
         return barrierMat.color.a;
     }
-    //public void SetMensajeToast(string mensaje)
-    //{
-    //    if (barreraToast != null)
-    //        barreraToast.mensajePorDefecto = string.IsNullOrEmpty(mensaje)
-    //            ? barreraToast.mensajePorDefecto
-    //            : mensaje;
-    //}
 }

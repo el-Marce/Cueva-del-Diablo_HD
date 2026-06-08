@@ -19,11 +19,6 @@ public class AltarUI : MonoBehaviour
     public TMP_Text[] optionsText;
     string[] baseOptions = { "Ofrecer", "Cerrar" };
 
-    //[Header("UI Items")]
-    //public TMP_Text cocaText;
-    //public TMP_Text alcoholText;
-    //public TMP_Text sulluText;
-
     [Header("Texto principal")]
     public TMP_Text titleText;
 
@@ -33,26 +28,26 @@ public class AltarUI : MonoBehaviour
     int selectedIndex = 0;
     bool ritualDone = false;
     bool isOpen = false;
+
     void OnEnable()
     {
         selectedIndex = 0;
-
         PrintMenu();
-        //UpdateItemStatus();
         UpdateTitle();
     }
 
     void Update()
     {
-        //if (!gameObject.activeSelf) return;
         if (!isOpen) return;
         Navigate();
         Select();
     }
+
     public void OpenUI()
     {
         isOpen = true;
         selectedIndex = 0;
+        ShowCursor(true);
         PrintMenu();
         UpdateTitle();
     }
@@ -60,24 +55,40 @@ public class AltarUI : MonoBehaviour
     public void CloseUI()
     {
         isOpen = false;
+        ShowCursor(false);
     }
+
+    // --- Métodos públicos para asignar a los Button.onClick desde el Inspector ---
+
+    public void OnClickOffer()
+    {
+        if (!isOpen || ritualDone) return;
+        selectedIndex = 0;
+        PrintMenu();
+        Offer();
+    }
+
+    public void OnClickClose()
+    {
+        if (!isOpen) return;
+        selectedIndex = 1;
+        PrintMenu();
+        Close();
+    }
+
+    // -------------------------------------------------------------------------
+
     void Navigate()
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            selectedIndex++;
-            if (selectedIndex >= optionsText.Length)
-                selectedIndex = 0;
-
+            selectedIndex = (selectedIndex + 1) % optionsText.Length;
             PrintMenu();
         }
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            selectedIndex--;
-            if (selectedIndex < 0)
-                selectedIndex = optionsText.Length - 1;
-
+            selectedIndex = (selectedIndex - 1 + optionsText.Length) % optionsText.Length;
             PrintMenu();
         }
     }
@@ -86,88 +97,45 @@ public class AltarUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (selectedIndex == 0)
-                Offer();
-            else
-                Close();
+            if (selectedIndex == 0) Offer();
+            else Close();
         }
     }
 
     void PrintMenu()
     {
         for (int i = 0; i < optionsText.Length; i++)
-        {
-            if (i == selectedIndex)
-                selectors[i].SetActive(true);
-            //optionsText[i].text = "<b>[ " + baseOptions[i] + " ]</b>";
-            else
-                selectors[i].SetActive(false);
-            //optionsText[i].text = baseOptions[i];
-        }
+            selectors[i].SetActive(i == selectedIndex);
     }
-
-    //void UpdateItemStatus()
-    //{
-    //    cocaText.text = "Coca: " + (altar.cocaEntregada ? "1" : "0");
-    //    alcoholText.text = "Alcohol: " + (altar.alcoholEntregado ? "1" : "0");
-    //    sulluText.text = "Sullu: " + (altar.sulluEntregado ? "1" : "0");
-    //}
 
     void UpdateTitle()
     {
         string nextItem = altar.GetNextItemName();
-
-        if (nextItem != null)
-            titleText.text = "¿Ofrecer " + nextItem + "?";
-        else
-            titleText.text = "";
+        titleText.text = nextItem != null ? "¿Ofrecer " + nextItem + "?" : "";
     }
 
     void Offer()
     {
         if (ritualDone) return;
-
         StartCoroutine(OfferRoutine());
-
-        //bool completed = altar.OfferNextItem();
-
-        //UpdateItemStatus();
-
-        //if (completed)
-        //{
-        //    ritualDone = true;
-
-        //    gameObject.SetActive(false);
-        //    GameState.InMenu = false;
-
-        //    StartRitual();
-        //    return;
-        //}
-
-        //UpdateTitle();
     }
 
     IEnumerator OfferRoutine()
     {
         if (ritualDone) yield break;
 
-        // Bloquear input mientras ocurre el evento
         enabled = false;
 
         bool completed = altar.OfferNextItem();
 
-        //UpdateItemStatus();
-
         altar.HideUI();
 
-        //AQUÍ METES TU CINEMÁTICA / SONIDO / ANIMACIÓN
         yield return new WaitForSeconds(offerDelay);
-        //yield return new WaitUntil(() => cinematicFinished);
 
         if (completed)
         {
             ritualDone = true;
-
+            ShowCursor(false);
             StartRitual();
             gameObject.SetActive(false);
             GameState.InMenu = false;
@@ -175,11 +143,11 @@ public class AltarUI : MonoBehaviour
         else
         {
             altar.ShowUI();
-
             UpdateTitle();
-            enabled = true; // volver a permitir input
+            enabled = true;
         }
     }
+
     void StartRitual()
     {
         AudioManager.Instance.Play(evilLaugh);
@@ -191,12 +159,17 @@ public class AltarUI : MonoBehaviour
 
         Debug.Log("RITUAL ACTIVADO");
     }
-    
+
     void Close()
     {
         altar.HideUI();
-        //gameObject.SetActive(false);
         CloseUI();
         GameState.InMenu = false;
+    }
+
+    void ShowCursor(bool show)
+    {
+        Cursor.visible = show;
+        Cursor.lockState = show ? CursorLockMode.None : CursorLockMode.Locked;
     }
 }
