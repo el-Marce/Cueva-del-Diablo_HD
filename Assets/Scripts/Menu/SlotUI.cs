@@ -21,6 +21,7 @@ public class SlotUI : MonoBehaviour
     }
     public void Setup(int index, PanelCargar panel)
     {
+        Debug.Log($"[SlotUI] Setup() llamado para slot {index} en frame {Time.frameCount}");
         slotIndex = index;
         panelCargar = panel;
 
@@ -30,7 +31,7 @@ public class SlotUI : MonoBehaviour
         Button btn = GetComponent<Button>();
         if (btn != null)
         {
-            btn.onClick.RemoveAllListeners();
+            btn.onClick.RemoveListener(OnSlotClick);
             btn.onClick.AddListener(OnSlotClick);
         }
 
@@ -39,6 +40,7 @@ public class SlotUI : MonoBehaviour
 
     void OnSlotClick()
     {
+        Debug.Log($"[SlotUI] OnSlotClick() disparado para slot {slotIndex} en frame {Time.frameCount}");
         panelCargar.AbrirSlotPanel(slotIndex);
     }
 

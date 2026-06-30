@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -12,11 +12,16 @@ public class SlotPanel : MonoBehaviour
 
     PanelCargar panelCargar;
     int selectedSlot = -1;
+    CanvasGroup canvasGroup;
 
     void Awake()
     {
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+
         btnCerrar.onClick.AddListener(Cerrar);
-        gameObject.SetActive(false);
+        OcultarPanel();
     }
 
     public void Abrir(int slotIndex, PanelCargar panel)
@@ -26,17 +31,16 @@ public class SlotPanel : MonoBehaviour
 
         titleText.text = "Ranura " + (slotIndex + 1) + " seleccionada";
 
-        // Configura botones según si tiene datos
         SaveSlot data = SaveSystem.GetSlot(slotIndex);
         btnCargar.interactable = data.hasData;
 
-        btnCargar.onClick.RemoveAllListeners();
-        btnBorrar.onClick.RemoveAllListeners();
+        btnCargar.onClick.RemoveListener(OnCargar);
+        btnBorrar.onClick.RemoveListener(OnBorrar);
 
         btnCargar.onClick.AddListener(OnCargar);
         btnBorrar.onClick.AddListener(OnBorrar);
 
-        gameObject.SetActive(true);
+        MostrarPanel();
     }
 
     void OnCargar()
@@ -54,6 +58,20 @@ public class SlotPanel : MonoBehaviour
     void Cerrar()
     {
         selectedSlot = -1;
-        gameObject.SetActive(false);
+        OcultarPanel();
+    }
+
+    void MostrarPanel()
+    {
+        canvasGroup.alpha = 1f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+
+    void OcultarPanel()
+    {
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 }

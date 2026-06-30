@@ -27,6 +27,7 @@ public class PanelCargar : MonoBehaviour
 
     public void AbrirSlotPanel(int slotIndex)
     {
+        Debug.Log($"[PanelCargar] AbrirSlotPanel({slotIndex}) llamado en frame {Time.frameCount}");
         slotPanel.Abrir(slotIndex, this);
     }
 
