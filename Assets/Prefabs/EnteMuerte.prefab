@@ -374,6 +374,13 @@ MonoBehaviour:
     type: 3}
   riseDuration: 1.8
   riseHeight: 4
+  sfxRepelled:
+    Guid:
+      Data1: -1321702360
+      Data2: 1260216253
+      Data3: -649750883
+      Data4: -989095274
+    Path: event:/EnteMuerte
 --- !u!1 &4575460693215110928
 GameObject:
   m_ObjectHideFlags: 0

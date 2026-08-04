@@ -161,7 +161,21 @@ public class Pueblerino : MonoBehaviour
                 break;
         }
     }
+    // --- Audio ---
 
+    void OnDestroy()
+    {
+        DetenerTodosLosSonidos();
+    }
+
+    public void DetenerTodosLosSonidos()
+    {
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.StopLoop(currentLoop);
+
+        currentLoop = default;
+        audioState = (State)(-1);
+    }
     // --- Update principal ---
 
     void Update()

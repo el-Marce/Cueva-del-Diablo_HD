@@ -176,11 +176,11 @@ MonoBehaviour:
   sanityRestore: 7
   thankEvent:
     Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
+      Data1: -332808595
+      Data2: 1220779900
+      Data3: -522210117
+      Data4: 151776543
+    Path: event:/NPC/GraciasPadre
   disappearDelay: 2
 --- !u!1001 &5930317891401008001
 PrefabInstance:

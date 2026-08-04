@@ -102854,6 +102854,13 @@ MonoBehaviour:
   reactionTime: 0.3
   rotationSpeed: 0.5
   rotationThreshold: 10
+  llegaste:
+    Guid:
+      Data1: 445921752
+      Data2: 1154638805
+      Data3: -524825928
+      Data4: 1619937753
+    Path: event:/NPC/Llegaste
   zombiePrefab: {fileID: 4225220607834227586, guid: 2b8d9cdcf9377bd47b4274e2deb8dcfc,
     type: 3}
 --- !u!1001 &2807626120875339000

@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
-
+using FMODUnity;
+using FMOD.Studio;
 public class EnteMuerte : MonoBehaviour
 {
     public GameObject shockwaveEffect;
     public float riseDuration = 1.8f;
     public float riseHeight = 4f;
+
+
+    public EventReference sfxRepelled;
 
     void Start()
     {
@@ -14,6 +18,7 @@ public class EnteMuerte : MonoBehaviour
 
     IEnumerator DeathSequence()
     {
+        AudioManager.Instance.Play(sfxRepelled);
         float elapsed = 0f;
         Vector3 startPos = transform.position;
         Vector3 endPos = startPos + Vector3.up * riseHeight;
@@ -44,6 +49,7 @@ public class EnteMuerte : MonoBehaviour
             Renderer main = GetComponentInChildren<Renderer>();
             Vector3 spawnPos = main != null ? main.bounds.center : transform.position;
             Instantiate(shockwaveEffect, spawnPos, Quaternion.identity);
+
         }
 
         Destroy(gameObject);

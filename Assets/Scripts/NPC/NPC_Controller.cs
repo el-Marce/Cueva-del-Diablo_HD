@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using FMODUnity;
 
 public class NPC_Controller : MonoBehaviour, IInteractable
 {
@@ -36,6 +37,7 @@ public class NPC_Controller : MonoBehaviour, IInteractable
 
     bool activated = false;
 
+    public EventReference llegaste;
     Animator anim;
     enum State { Explore, Follow }
     State currentState;
@@ -47,6 +49,7 @@ public class NPC_Controller : MonoBehaviour, IInteractable
         if (activated) return;
 
         activated = true;
+        AudioManager.Instance.Play(llegaste);
         TutorialManager.Instance?.CompletarTriggerParcial("npc_interactuado");
         gameObject.GetComponent<Collider>().enabled = false;
     }

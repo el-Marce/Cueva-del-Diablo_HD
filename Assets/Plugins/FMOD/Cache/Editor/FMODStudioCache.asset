@@ -348,7 +348,7 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Enemigos.bank
   Name: Enemigos
   StudioPath: bank:/Enemigos
-  lastModified: 639167495636367546
+  lastModified: 639214543869119744
   FileSizes: []
   Exists: 1
 --- !u!114 &-3808675675243787937
@@ -645,6 +645,7 @@ MonoBehaviour:
   - {fileID: 8003441958226035906}
   - {fileID: 4306504491217715695}
   - {fileID: 4908145832208969291}
+  - {fileID: 7112202002739992175}
   EditorParameters:
   - {fileID: 786976340801035014}
   MasterBanks:
@@ -652,7 +653,7 @@ MonoBehaviour:
   StringsBanks:
   - {fileID: 4336407426305081004}
   cacheVersion: 131849
-  cacheTime: 639213744792141644
+  cacheTime: 639214543869119744
   SerializableEventsDict:
   - key: event:/UI/hover
     index: 0
@@ -744,6 +745,8 @@ MonoBehaviour:
     index: 43
   - key: event:/NPC/Llegaste
     index: 44
+  - key: event:/EnteMuerte
+    index: 45
 --- !u!114 &14881261692205809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,10 +1116,10 @@ MonoBehaviour:
   Path: Assets/Plugins/FMOD/Banks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 639213744792141644
+  lastModified: 639214540320253678
   FileSizes:
   - Name: 
-    Value: 3340
+    Value: 3390
   Exists: 1
 --- !u!114 &4908145832208969291
 MonoBehaviour:
@@ -1325,6 +1328,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &7112202002739992175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/EnteMuerte
+  m_EditorClassIdentifier: 
+  Path: event:/EnteMuerte
+  Guid:
+    Data1: -1321702360
+    Data2: 1260216253
+    Data3: -649750883
+    Data4: -989095274
+  Banks:
+  - {fileID: -4247042192413012017}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4911
 --- !u!114 &7587498310910578795
 MonoBehaviour:
   m_ObjectHideFlags: 0
