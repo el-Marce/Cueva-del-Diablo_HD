@@ -6,7 +6,7 @@ using static PlayerCombat;
 public class Inventory : MonoBehaviour
 {
     //public List<string> items = new List<string>();
-    public List<ItemData> items = new List<ItemData>(); 
+    public List<ItemData> items = new List<ItemData>();
     public List<ScrollData> scrolls = new List<ScrollData>();
     public List<WeaponData> weapons = new List<WeaponData>();
     public string equippedWeapon = null;
@@ -40,9 +40,9 @@ public class Inventory : MonoBehaviour
         Debug.Log("Recogiste: " + itemName + " (" + uses + " usos). Pulsa TAB para ver tus objetos");
     }
 
-    public void AddScroll(string scrollText, Sprite icon)
+    public void AddScroll(string scrollText, Sprite icon, string name = "")
     {
-        scrolls.Add(new ScrollData(scrollText, icon));
+        scrolls.Add(new ScrollData(scrollText, icon, name));
         Debug.Log("Pergamino guardado. Pulsa TAB para leerlo");
     }
     public void AddWeapon(string weaponName, PlayerCombat.WeaponType type, Sprite icon, int durability)

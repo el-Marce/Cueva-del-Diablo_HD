@@ -5,48 +5,35 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public int savedSceneIndex = -1; // -1 = sin partida guardada
-
-    //public GameObject UI;
     void Awake()
     {
         if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        //if(UI != null)
-        //    UI.SetActive(true);
     }
 
     public void NuevoJuego()
     {
+        // Buscar el primer slot vacío para asignarlo como slot activo.
+        // Si todos están ocupados, usa el slot 0 como fallback.
+        int slotParaUsar = 0;
+        for (int i = 0; i < SaveSystem.SlotCount; i++)
+        {
+            if (!SaveSystem.GetSlot(i).hasData)
+            {
+                slotParaUsar = i;
+                break;
+            }
+        }
+
+        CheckpointManager.Instance?.SetActiveSlot(slotParaUsar);
+
         if (SceneTransition.Instance != null)
             SceneTransition.Instance.TransitionTo("Cinematica", holdDuration: 5f);
         else
             SceneManager.LoadScene("Cinematica");
     }
 
-    public void CargarPartida(int sceneIndex)
-    {
-        SceneManager.LoadScene(sceneIndex);
-    }
-
-    public void GuardarPartida()
-    {
-        PlayerPrefs.SetInt("SavedScene", SceneManager.GetActiveScene().buildIndex);
-        PlayerPrefs.Save();
-        Debug.Log("[GameManager] Partida guardada en escena: " + SceneManager.GetActiveScene().name);
-    }
-
-    public bool TienePartidaGuardada()
-    {
-        return PlayerPrefs.HasKey("SavedScene");
-    }
-
-    public int GetSavedSceneIndex()
-    {
-        return PlayerPrefs.GetInt("SavedScene", 2); // 2 = Nivel_01 como fallback
-    }
 
     public void Salir()
     {

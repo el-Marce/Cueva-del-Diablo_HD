@@ -20,10 +20,10 @@ public class TriggerNivelDos : MonoBehaviour
 
     IEnumerator TransicionNivelDos()
     {
-        yield return new WaitForSeconds(5f); // ajusta según duración de la animación de muerte
+        yield return new WaitForSeconds(4f); // ajusta según duración de la animación de muerte
 
         if (SceneTransition.Instance != null)
-            SceneTransition.Instance.TransitionTo("Nivel_02");
+            SceneTransition.Instance.TransitionTo("Cinematica1al2");
         else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

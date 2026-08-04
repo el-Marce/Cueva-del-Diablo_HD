@@ -331,7 +331,6 @@ public class EntePsicologico : MonoBehaviour
         if (damageDelayTimer >= damageDelay)
         {
             playerSanity.DecreaseSanity(sanityDamagePerSecond * Time.deltaTime);
-            Debug.Log("Jugador recibe daño psicologico, Vida restante: " + playerSanity.currentSanity);
         }
     }
     void RotarHaciaObjetivo(Vector3 target)

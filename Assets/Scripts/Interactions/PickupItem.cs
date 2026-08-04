@@ -1,5 +1,6 @@
 using UnityEngine;
 using FMODUnity;
+
 public class PickupItem : MonoBehaviour, IInteractable
 {
     public string itemName;
@@ -9,10 +10,13 @@ public class PickupItem : MonoBehaviour, IInteractable
     public EventReference clinkBotella;
     public EventReference bolsa;
     public EventReference genericItem;
+
     public void Interact()
     {
-        Inventory inventory = FindObjectOfType<Inventory>();
+        // Registrar pickup ANTES de destruir el objeto
+        CheckpointManager.Instance?.RegistrarPickup(transform.GetFullPath());
 
+        Inventory inventory = FindObjectOfType<Inventory>();
         if (inventory != null)
         {
             inventory.AddItem(itemName, icon);
@@ -31,6 +35,7 @@ public class PickupItem : MonoBehaviour, IInteractable
                     break;
             }
         }
+
         TutorialManager.Instance?.CompletarTriggerParcial("item_" + itemName.ToLower().Replace(" ", ""));
         Destroy(gameObject);
     }

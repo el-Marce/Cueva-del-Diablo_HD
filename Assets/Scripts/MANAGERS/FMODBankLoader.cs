@@ -46,7 +46,6 @@ public class FMODBankLoader : MonoBehaviour
             {
                 RuntimeManager.LoadBank(bankName, true);
                 loadedBanks.Add(bankName);
-                Debug.Log("[FMOD] Cargado: " + bankName);
             }
         }
     }
@@ -56,7 +55,6 @@ public class FMODBankLoader : MonoBehaviour
         foreach (var bankName in loadedBanks)
         {
             RuntimeManager.UnloadBank(bankName);
-            Debug.Log("[FMOD] Descargado: " + bankName);
         }
         loadedBanks.Clear();
     }

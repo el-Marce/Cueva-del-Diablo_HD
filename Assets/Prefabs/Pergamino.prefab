@@ -8425,6 +8425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df509b6fa3aff9f46a384005e78c2c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scrollName: Pergamino
   text: "El que desea cruzar el umbral, tres ofrendas le son requeridas:\n\n- La
     hoja pura y sagrada que la tierra provee.\n- El esp\xEDritu que se derrama en
     copa de cristal, embriaga la carne pero no sacia el alma\n- La bestia que cae

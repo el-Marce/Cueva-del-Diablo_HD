@@ -25,25 +25,27 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
     [Header("Radio de efecto")]
     public float effectRadius = 10f;
     public LayerMask enteLayer;
-    //AltarCondition_Entes enteCondition;
 
     [HideInInspector] public List<AltarCondition> conditions = new List<AltarCondition>();
 
     [Header("Teletransporte")]
     public Transform teleportTarget;
 
+    [Header("Emisión del Altar")]
+    [SerializeField] private Renderer[] emissiveRenderers; // si lo dejas vacío, se busca automáticamente
+    [SerializeField] private string emissionProperty = "_EmissiveIntensity"; // verifica en modo Debug del material
+    [SerializeField] private float emissionFadeDuration = 1.5f;
+
     bool activated = false;
 
     void Awake()
     {
-        // Recoge automáticamente todas las condiciones en este GameObject
         conditions.AddRange(GetComponents<AltarCondition>());
+
+        if (emissiveRenderers == null || emissiveRenderers.Length == 0)
+            emissiveRenderers = GetComponentsInChildren<Renderer>();
     }
-    //void Start()
-    //{
-    //    //enteCondition = GetComponent<AltarCondition_Entes>();
-    //}
-    //// Campo nuevo
+
     Transform playerTransform;
 
     void Start()
@@ -64,7 +66,6 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
             return;
         }
 
-        // CharacterController debe desactivarse antes de mover al jugador
         CharacterController cc = playerTransform.GetComponent<CharacterController>();
         if (cc != null) cc.enabled = false;
 
@@ -73,6 +74,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
         if (cc != null) cc.enabled = true;
     }
+
     public void Interact()
     {
         if (activated) return;
@@ -88,7 +90,6 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
     public void TryActivate()
     {
-        //Debug.Log("[Altar] TryActivate - activated: " + activated + " | AllMet: " + AllConditionsMet());
         if (activated || !AllConditionsMet()) return;
         StartCoroutine(ActivationSequence());
     }
@@ -100,7 +101,6 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         GetComponent<Collider>().enabled = false;
         Transform child = transform.GetChild(0);
         child.gameObject.GetComponent<Collider>().enabled = true;
-        //var enteCondition = GetComponent<AltarCondition_Entes>();
 
         foreach (var c in conditions)
             c.OnFulfill();
@@ -109,7 +109,8 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
 
         FreezeNearbyEnemies();
 
-        // Aquí tu cinemática / sonido
+        StartCoroutine(FadeEmissionToZero()); // <- apaga la emisión permanentemente
+
         yield return new WaitForSeconds(activationDelay);
 
         if (door != null)
@@ -132,7 +133,6 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
             }
         }
 
-
         KillNearbyEntes();
         LiberateNearbyPueblerinos();
 
@@ -143,34 +143,65 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
             Rigidbody[] rbs = parent.GetComponentsInChildren<Rigidbody>();
 
             foreach (Rigidbody rb in rbs)
-            {
                 rb.drag = 5f;
-            }
 
-            // Espera mientras desaceleran
             yield return new WaitForSeconds(1f);
 
-            // Congelado final
             foreach (Rigidbody rb in rbs)
-            {
-                //rb.maxLinearVelocity = 0f;
-                //rb.angularVelocity = Vector3.zero;
-
                 rb.isKinematic = true;
-            }
         }
 
         if (!string.IsNullOrEmpty(escenaDestino))
         {
-            yield return new WaitForSeconds(1f); // pequeña pausa antes de cambiar
+            yield return new WaitForSeconds(1f);
             UnityEngine.SceneManagement.SceneManager.LoadScene(escenaDestino);
         }
         else if (teleportTarget != null)
         {
             TeleportPlayer();
         }
-        //Debug.Log("[Altar] Ritual completado.");
     }
+
+    IEnumerator FadeEmissionToZero()
+    {
+        MaterialPropertyBlock mpb = new MaterialPropertyBlock();
+        int colorPropId = Shader.PropertyToID("_EmissiveColor");
+
+        Color[] startColors = new Color[emissiveRenderers.Length];
+        for (int i = 0; i < emissiveRenderers.Length; i++)
+        {
+            if (emissiveRenderers[i] == null) continue;
+            startColors[i] = emissiveRenderers[i].sharedMaterial.GetColor(colorPropId);
+        }
+
+        float t = 0f;
+        while (t < emissionFadeDuration)
+        {
+            t += Time.deltaTime;
+            float lerpT = t / emissionFadeDuration;
+
+            for (int i = 0; i < emissiveRenderers.Length; i++)
+            {
+                if (emissiveRenderers[i] == null) continue;
+                Color value = Color.Lerp(startColors[i], Color.black, lerpT);
+
+                emissiveRenderers[i].GetPropertyBlock(mpb);
+                mpb.SetColor(colorPropId, value);
+                emissiveRenderers[i].SetPropertyBlock(mpb);
+            }
+
+            yield return null;
+        }
+
+        foreach (var r in emissiveRenderers)
+        {
+            if (r == null) continue;
+            r.GetPropertyBlock(mpb);
+            mpb.SetColor(colorPropId, Color.black);
+            r.SetPropertyBlock(mpb);
+        }
+    }
+
     void KillNearbyEntes()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, effectRadius, enteLayer);
@@ -223,10 +254,7 @@ public class AltarRitual_Generic : MonoBehaviour, IInteractable
         Quaternion spawnRot = pueblerino.transform.rotation;
 
         if (entePrefab != null)
-        {
-            if (entePrefab!= null)
-                Instantiate(entePrefab, spawnPos, spawnRot);
-        }
+            Instantiate(entePrefab, spawnPos, spawnRot);
 
         Destroy(pueblerino.gameObject);
 

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0476943bb6c5fc540ad02f524e0a9bb8, type: 3}
+  m_Name: ItemIconDatabase
+  m_EditorClassIdentifier: 
+  entries:
+  - itemName: Coca
+    icon: {fileID: 21300000, guid: 0ca2301a2aec34f439d4d339f1791e20, type: 3}
+  - itemName: Agua Bendita
+    icon: {fileID: 21300000, guid: edc27568ceebcd84fbe73a394326cf33, type: 3}
+  - itemName: Daga de San Bartolome
+    icon: {fileID: 21300000, guid: 2f065ed71f9de2848ad3e45aa05135e5, type: 3}
+  - itemName: Medallon N24
+    icon: {fileID: 21300000, guid: df4b2973903d6814b96032c70c38f335, type: 3}
+  - itemName: Evangelio de Natanael
+    icon: {fileID: 21300000, guid: 746fd4796b10d0f4daf5ddc2e39cbeba, type: 3}
+  - itemName: Libro Azul
+    icon: {fileID: 21300000, guid: c0916df15de967b4ab57932e742c6bbe, type: 3}
+  - itemName: Libro Rojo
+    icon: {fileID: 21300000, guid: c42836c61c35b0349aca0c3006a18bbf, type: 3}
+  - itemName: Palo
+    icon: {fileID: 21300000, guid: 29da88d6909450843a8b6bc7a080672d, type: 3}
+  - itemName: Roca
+    icon: {fileID: 21300000, guid: 11ebcc6570f68484ba0df8bc35c96836, type: 3}
+  - itemName: Agua Maldita
+    icon: {fileID: 21300000, guid: 1ad00f8292b1cbf49a88aa5e42951e90, type: 3}
+  - itemName: Sullu
+    icon: {fileID: 21300000, guid: ac2030d965a6bbe43873764beb897542, type: 3}
+  - itemName: Pergamino
+    icon: {fileID: 21300000, guid: 77c787b49e8d1fa4aad9b7d00bf1981d, type: 3}

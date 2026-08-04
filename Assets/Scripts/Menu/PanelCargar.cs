@@ -34,8 +34,12 @@ public class PanelCargar : MonoBehaviour
     public void CargarSlot(int slot)
     {
         SaveSlot data = SaveSystem.GetSlot(slot);
-        if (data.hasData)
-            SceneManager.LoadScene(data.sceneIndex);
+        if (!data.hasData) return;
+
+        // Notifica al CheckpointManager qué slot está activo ANTES de cargar
+        // la escena, para que restaure el estado al terminar de cargar.
+        CheckpointManager.Instance?.PrepararCargaDesdeSlot(slot);
+        SceneManager.LoadScene(data.sceneIndex);
     }
 
     public void BorrarSlot(int slot)
