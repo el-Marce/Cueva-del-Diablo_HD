@@ -7,11 +7,23 @@ using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-
     EventInstance musicaActual;
 
+    [System.Serializable]
+    public struct TransicionExcepcion
+    {
+        public string escenaOrigen;
+        public string escenaDestino;
+    }
+
     [Header("Excepciones de StopAllSounds")]
-    public string[] escenasExcluidas = { "MenuPrincipal" }; // escenas donde NO se detienen los sonidos
+    [Tooltip("Solo se preserva el audio si la transición coincide EXACTAMENTE con origen -> destino")]
+    public TransicionExcepcion[] transicionesExcluidas =
+    {
+        new TransicionExcepcion { escenaOrigen = "PantallaPortada", escenaDestino = "MenuPrincipal" }
+    };
+
+    private string escenaAnterior = "";
 
     void Awake()
     {
@@ -19,6 +31,9 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SetMasterVolume(AudioSettings.MasterVolume);
+
+        // Registramos la escena activa al inicio (por si el AudioManager nace en la primera escena)
+        escenaAnterior = SceneManager.GetActiveScene().name;
     }
 
     void OnEnable()
@@ -33,12 +48,22 @@ public class AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // No detener sonidos si la escena destino está en la lista de excepciones
-        foreach (string excluida in escenasExcluidas)
+        bool esExcepcion = false;
+
+        foreach (var transicion in transicionesExcluidas)
         {
-            if (scene.name == excluida) return;
+            if (escenaAnterior == transicion.escenaOrigen && scene.name == transicion.escenaDestino)
+            {
+                esExcepcion = true;
+                break;
+            }
         }
-        StopAllSounds();
+
+        if (!esExcepcion)
+            StopAllSounds();
+
+        // Actualizamos SIEMPRE la referencia, para la próxima transición
+        escenaAnterior = scene.name;
     }
 
     public void StopAllSounds()

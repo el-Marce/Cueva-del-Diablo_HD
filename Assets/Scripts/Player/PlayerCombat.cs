@@ -79,14 +79,34 @@ public class PlayerCombat : MonoBehaviour
 
     Camera cam;
 
+    [Header("Escenas de Combate")]
+    [Tooltip("Solo en estas escenas el jugador puede atacar/empujar")]
+    public string[] escenasDeCombate = { "Nivel1", "Nivel2", "Nivel3" };
+
+    private bool combatePermitido = false;
+
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
     void OnDisable() => SceneManager.sceneLoaded -= OnSceneLoaded;
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode) => cam = Camera.main;
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        cam = Camera.main;
+        combatePermitido = EsEscenaDeCombate(scene.name);
+    }
+
+    bool EsEscenaDeCombate(string nombreEscena)
+    {
+        foreach (string escena in escenasDeCombate)
+        {
+            if (nombreEscena == escena) return true;
+        }
+        return false;
+    }
 
     void Start()
     {
         cam = Camera.main;
+        combatePermitido = EsEscenaDeCombate(SceneManager.GetActiveScene().name);
 
         if (fistsModel != null) fistsModel.SetActive(currentWeapon == WeaponType.Fists);
         if (aguaBenditaModel != null) aguaBenditaModel.SetActive(currentWeapon == WeaponType.AguaBendita);
@@ -97,6 +117,7 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         if (GameState.InMenu) return;
+        if (!combatePermitido) return;
 
         pushTimer -= Time.deltaTime;
 

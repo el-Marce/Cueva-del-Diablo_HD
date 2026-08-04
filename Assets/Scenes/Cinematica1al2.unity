@@ -1179,9 +1179,7 @@ MonoBehaviour:
   frames:
   - {fileID: 11400000, guid: ad4bdb7e22a090b47b0a07faf99dfbbc, type: 2}
   - {fileID: 11400000, guid: e2a95a0a38fa0924f8e0336563015f1c, type: 2}
-  - {fileID: 11400000, guid: 2607931caed848c42a4805b0870f2dbe, type: 2}
   - {fileID: 11400000, guid: 87eb173254a060249873c2fffc33ee05, type: 2}
-  - {fileID: 11400000, guid: 1c83392b26a2cdf4eaa342a1715d1111, type: 2}
   - {fileID: 11400000, guid: 00c1a9a5b12d52d4a94d0f326f5bd86e, type: 2}
   fadeDuration: 0.3
   panelFadeInDuration: 0.5
@@ -1358,7 +1356,7 @@ VideoPlayer:
   m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []

@@ -5109,6 +5109,10 @@ MonoBehaviour:
   stickPunchDuration: 0.15
   rockPunchDuration: 0.25
   currentWeapon: 0
+  escenasDeCombate:
+  - Nivel_01
+  - Nivel_02
+  - Nivel3
 --- !u!114 &4332087294220951615
 MonoBehaviour:
   m_ObjectHideFlags: 0
